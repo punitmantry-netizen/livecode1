@@ -800,6 +800,183 @@
 
   <!-- JAVASCRIPT ENGINE -->
   <script>
+      <script>
+    // Live Cloudflare Tunnel endpoint connected to your Tally machine
+    const TALLY_ENDPOINT = 'https://sender-world-hospital-fool.trycloudflare.com/api/stock';
+
+    let tallyStock = [];
+    let rates = {};
+
+    function switchTab(tab) {
+      if (tab === 'rooms') {
+        document.getElementById('tab-rooms').style.display = 'block';
+        document.getElementById('tab-rates').style.display = 'none';
+        document.getElementById('btnTabRooms').classList.add('active');
+        document.getElementById('btnTabRates').classList.remove('active');
+      } else {
+        document.getElementById('tab-rooms').style.display = 'none';
+        document.getElementById('tab-rates').style.display = 'block';
+        document.getElementById('btnTabRooms').classList.remove('active');
+        document.getElementById('btnTabRates').classList.add('active');
+        renderBill();
+      }
+    }
+
+    function togglePanel(id, show) {
+      document.getElementById(id).style.display = show ? 'block' : 'none';
+      calculate();
+    }
+
+    function calculate() {
+      const wRft = parseFloat(document.getElementById('wRft').value) || 0;
+      const wHt = parseFloat(document.getElementById('wHt').value) || 0;
+      const totalWallArea = wRft * wHt;
+
+      const chkHl = document.getElementById('chkHl').checked;
+      const chkDk = document.getElementById('chkDk').checked;
+
+      const hlArea = chkHl ? (parseFloat(document.getElementById('hlRft').value) || 0) * (parseFloat(document.getElementById('hlHt').value) || wHt) : 0;
+      const dkArea = chkDk ? (parseFloat(document.getElementById('dkRft').value) || 0) * (parseFloat(document.getElementById('dkHt').value) || 0) : 0;
+      const ltArea = Math.max(0, totalWallArea - hlArea - dkArea);
+
+      const fLen = parseFloat(document.getElementById('fLen').value) || 0;
+      const fWid = parseFloat(document.getElementById('fWid').value) || 0;
+      const floorArea = fLen * fWid;
+
+      const bHl = Math.ceil(hlArea / 16);
+      const bDk = Math.ceil(dkArea / 16);
+      const bLt = Math.ceil(ltArea / 16);
+      const bFl = Math.ceil(floorArea / 16);
+
+      document.getElementById('boxCardHl').style.display = chkHl ? 'flex' : 'none';
+      document.getElementById('boxCardDk').style.display = chkDk ? 'flex' : 'none';
+
+      document.getElementById('outHl').innerText = bHl;
+      document.getElementById('outDk').innerText = bDk;
+      document.getElementById('outLt').innerText = bLt;
+      document.getElementById('outFl').innerText = bFl;
+
+      const totalBoxes = bHl + bDk + bLt + bFl;
+      document.getElementById('barTotalBoxes').innerText = totalBoxes + " Boxes";
+
+      window.calcState = { bHl, bDk, bLt, bFl, totalBoxes };
+      renderBill();
+    }
+
+    function renderBill() {
+      if (!window.calcState) return;
+      const { bHl, bDk, bLt, bFl } = window.calcState;
+      const tbody = document.getElementById('billItems');
+      const items = [];
+
+      if (document.getElementById('chkHl').checked && bHl > 0) {
+        items.push({ id: 'hl', name: document.getElementById('hlName').value || 'Highlighter Tile', qty: bHl });
+      }
+      if (document.getElementById('chkDk').checked && bDk > 0) {
+        items.push({ id: 'dk', name: document.getElementById('dkName').value || 'Dark Tile', qty: bDk });
+      }
+      if (bLt > 0) {
+        items.push({ id: 'lt', name: document.getElementById('ltName').value || 'Light (Main) Tile', qty: bLt });
+      }
+      if (bFl > 0) {
+        items.push({ id: 'fl', name: document.getElementById('flName').value || 'Floor Tile', qty: bFl });
+      }
+
+      let html = '';
+      let grandTotal = 0;
+
+      items.forEach(item => {
+        const rate = rates[item.id] !== undefined ? rates[item.id] : '';
+        const sub = (parseFloat(rate) || 0) * item.qty;
+        grandTotal += sub;
+
+        html += `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.qty} bx</td>
+            <td>
+              <input type="number" value="${rate}" placeholder="Rate" oninput="updateRate('${item.id}', this.value)" />
+            </td>
+            <td style="text-align: right;">₹ ${sub.toLocaleString('en-IN')}</td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html;
+      document.getElementById('billTotal').innerText = '₹ ' + grandTotal.toLocaleString('en-IN');
+    }
+
+    function updateRate(id, val) {
+      rates[id] = val;
+      renderBill();
+    }
+
+    function sendWhatsApp() {
+      const name = document.getElementById('custName').value || 'Customer';
+      const totalBoxes = window.calcState ? window.calcState.totalBoxes : 0;
+      const grandTotal = document.getElementById('billTotal').innerText;
+
+      let msg = `*Tile Estimate for ${name}*\n`;
+      msg += `Total Quantity: ${totalBoxes} Boxes (4x2)\n`;
+      msg += `*Grand Total: ${grandTotal}*\n\nGenerated via Tile Estimator Pro`;
+
+      const phone = document.getElementById('custPhone').value.replace(/[^0-9]/g, '');
+      const url = phone ? `https://wa.me/91${phone}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    // --- Tally Live Sync Integration ---
+    async function syncTallyStock() {
+      try {
+        const res = await fetch(TALLY_ENDPOINT);
+        if (!res.ok) throw new Error('Network error from Tally tunnel');
+        tallyStock = await res.json();
+        populateDatalists();
+      } catch (err) {
+        console.warn('Tally Bridge unavailable:', err);
+      }
+    }
+
+    function populateDatalists() {
+      let datalist = document.getElementById('tallyItemList');
+      if (!datalist) {
+        datalist = document.createElement('datalist');
+        datalist.id = 'tallyItemList';
+        document.body.appendChild(datalist);
+      }
+
+      datalist.innerHTML = tallyStock
+        .map(i => `<option value="${i.name}">${i.stockBoxes} Boxes Available (₹${i.rate}/bx)</option>`)
+        .join('');
+
+      const tileInputs = [
+        { id: 'hlName', key: 'hl' },
+        { id: 'dkName', key: 'dk' },
+        { id: 'ltName', key: 'lt' },
+        { id: 'flName', key: 'fl' }
+      ];
+
+      tileInputs.forEach(({ id, key }) => {
+        const input = document.getElementById(id);
+        if (input) {
+          input.setAttribute('list', 'tallyItemList');
+          input.addEventListener('input', (e) => {
+            const selected = tallyStock.find(item => item.name.toLowerCase() === e.target.value.trim().toLowerCase());
+            if (selected && selected.rate) {
+              rates[key] = selected.rate;
+              renderBill();
+            }
+          });
+        }
+      });
+    }
+
+    // Initialize calculations and fetch live Tally stock
+    calculate();
+    window.addEventListener('DOMContentLoaded', syncTallyStock);
+    window.addEventListener('focus', syncTallyStock);
+  </script>
+
     const SafeStorage = {
       memoryStore: {},
       isSupported: (function() {

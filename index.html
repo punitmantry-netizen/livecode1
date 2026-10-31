@@ -1,9 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Tile Estimator Pro</title>
+  
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Tile Calc" />
+  <meta name="theme-color" content="#1e293b" />
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --surface: #ffffff;
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --hl-color: #d97706;
+      --dk-color: #4338ca;
+      --lt-color: #0284c7;
+      --fl-color: #059669;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding: 16px; padding-bottom: 90px; }
+    .container { max-width: 680px; margin: 0 auto; }
+
+    .app-header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: #fff;
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .app-header h1 { font-size: 18px; font-weight: 800; }
+    .app-header p { font-size: 12px; color: #94a3b8; }
+
+    .badge-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #facc15;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .status-badge:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+    .status-badge:active {
+      transform: scale(0.96);
+    }
+
+    .btn-gear {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-gear:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(45deg);
+    }
+
+    .nav-tabs { display: flex; background: #e2e8f0; padding: 4px; border-radius: 10px; margin-bottom: 16px; }
+    .tab-btn { flex: 1; padding: 10px; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; color: var(--text-muted); background: transparent; cursor: pointer; }
+    .tab-btn.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+
+    .card { background: var(--surface); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 14px; }
+    .card-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; }
+
+    .field-group { margin-bottom: 12px; }
+    label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px; }
+    input { width: 100%; height: 44px; padding: 0 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 15px; font-weight: 600; color: #0f172a; background: #fff; }
+    input:focus { outline: none; border-color: var(--primary); }
+
+    .tile-meta {
+      font-size: 12px;
+      font-weight: 600;
+      color: #1e40af;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 5px 10px;
+      margin-top: 6px;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .toggle-card { background: #f8fafc; border: 1.5px dashed var(--border); border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+    .chk-label { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .chk-label input { width: 20px; height: 20px; }
+    .sub-panel { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); display: none; }
+
+    .summary-badge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+    .badge-card { padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 600; display: flex; flex-direction: column; gap: 2px; }
+    .badge-card .num { font-size: 18px; font-weight: 800; }
+    .badge-hl { background: #fef3c7; color: var(--hl-color); }
+    .badge-dk { background: #e0e7ff; color: var(--dk-color); }
+    .badge-lt { background: #e0f2fe; color: var(--lt-color); }
+    .badge-fl { background: #d1fae5; color: var(--fl-color); }
+
+    table { width: 100%; border-collapse: collapse; }
+    th { background: #f1f5f9; padding: 10px 8px; font-size: 12px; text-transform: uppercase; color: var(--text-muted); text-align: left; }
+    td { padding: 8px; font-size: 13px; border-bottom: 1px solid var(--border); font-weight: 600; }
+    td input { height: 36px; padding: 0 8px; }
+
+    .floating-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.96); border-top: 1px solid var(--border); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+    .bar-total span:first-child { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
+    .bar-total span:last-child { font-size: 18px; font-weight: 900; color: var(--primary); }
+    .btn { padding: 10px 16px; border-radius: 8px; font-size: 14px; font-weight: 700; border: none; cursor: pointer; }
+    .btn-wa { background: #25d366; color: #fff; }
+    .btn-primary { background: var(--primary); color: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- Shared Datalist for instant type-ahead filtering -->
+  <datalist id="tallyList"></datalist>
+
+  <div class="container">
+    <header class="app-header">
+      <div>
+        <h1>Tile Estimator Pro</h1>
+        <p>4×2 Tiles • 16 sq.ft / Box</p>
+      </div>
+      <div class="badge-actions">
+        <span class="status-badge" id="syncStatus" onclick="handleBadgeClick()" title="Click to refresh stock from Tally">🔄 Connecting...</span>
+        <button type="button" class="btn-gear" onclick="configureTallyUrl()" title="Configure Tally Bridge / Cloudflare URL">⚙️</button>
+      </div>
+    </header>
+
+    <nav class="nav-tabs">
+      <button class="tab-btn active" id="btnTabRooms" onclick="switchTab('rooms')">1. Tile Dimensions</button>
+      <button class="tab-btn" id="btnTabRates" onclick="switchTab('rates')">2. Rates & Invoice</button>
+    </nav>
+
+    <!-- TAB 1: DIMENSIONS -->
+    <div id="tab-rooms">
+      <div class="card">
+        <div class="card-title">Client Details</div>
+        <div class="grid-2">
+          <div class="field-group">
+            <label>Customer Name</label>
+            <input type="text" id="custName" placeholder="Rajesh Kumar" />
+          </div>
+          <div class="field-group">
+            <label>Mobile Number</label>
+            <input type="tel" id="custPhone" placeholder="Mobile Number" />
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Wall Dimensions</div>
+        <div class="grid-2">
+          <div class="field-group">
+            <label>Wall Running Feet (RFT)</label>
+            <input type="number" id="wRft" placeholder="e.g. 30" oninput="calculate()" />
+          </div>
+          <div class="field-group">
+            <label>Wall Height (Feet)</label>
+            <input type="number" id="wHt" placeholder="e.g. 7" oninput="calculate()" />
+          </div>
+        </div>
+
+        <!-- Highlighter -->
+        <div class="toggle-card">
+          <label class="chk-label">
+            <input type="checkbox" id="chkHl" onchange="togglePanel('hlPanel', this.checked)" />
+            Highlighter (HL) Accent Wall
+          </label>
+          <div id="hlPanel" class="sub-panel">
+            <div class="field-group">
+              <label>Highlighter Tile (Type to auto-populate)</label>
+              <input type="text" id="hlInput" list="tallyList" placeholder="🔍 Type tile or group name..." oninput="handleTileInput('hl', this.value)" autocomplete="off" />
+              <div id="hlDetails" class="tile-meta" style="display:none;"></div>
+            </div>
+            <div class="grid-2">
+              <div class="field-group">
+                <label>HL Running Ft</label>
+                <input type="number" id="hlRft" placeholder="RFT" oninput="calculate()" />
+              </div>
+              <div class="field-group">
+                <label>HL Height (Ft)</label>
+                <input type="number" id="hlHt" placeholder="Height" oninput="calculate()" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dark Accent -->
+        <div class="toggle-card">
+          <label class="chk-label">
+            <input type="checkbox" id="chkDk" onchange="togglePanel('dkPanel', this.checked)" />
+            Dark Color Accent / Dado
+          </label>
+          <div id="dkPanel" class="sub-panel">
+            <div class="field-group">
+              <label>Dark Tile (Type to auto-populate)</label>
+              <input type="text" id="dkInput" list="tallyList" placeholder="🔍 Type tile or group name..." oninput="handleTileInput('dk', this.value)" autocomplete="off" />
+              <div id="dkDetails" class="tile-meta" style="display:none;"></div>
+            </div>
+            <div class="grid-2">
+              <div class="field-group">
+                <label>Dark Running Ft</label>
+                <input type="number" id="dkRft" placeholder="RFT" oninput="calculate()" />
+              </div>
+              <div class="field-group">
+                <label>Dark Height (Ft)</label>
+                <input type="number" id="dkHt" placeholder="Height" oninput="calculate()" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Light Main -->
+        <div class="field-group" style="margin-top: 10px;">
+          <label>Main Light Tile (Type to auto-populate)</label>
+          <input type="text" id="ltInput" list="tallyList" placeholder="🔍 Type tile or group name..." oninput="handleTileInput('lt', this.value)" autocomplete="off" />
+          <div id="ltDetails" class="tile-meta" style="display:none;"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Floor Dimensions</div>
+        <div class="grid-2">
+          <div class="field-group">
+            <label>Length (Feet)</label>
+            <input type="number" id="fLen" placeholder="Length" oninput="calculate()" />
+          </div>
+          <div class="field-group">
+            <label>Width (Feet)</label>
+            <input type="number" id="fWid" placeholder="Width" oninput="calculate()" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Floor Tile (Type to auto-populate)</label>
+          <input type="text" id="flInput" list="tallyList" placeholder="🔍 Type tile or group name..." oninput="handleTileInput('fl', this.value)" autocomplete="off" />
+          <div id="flDetails" class="tile-meta" style="display:none;"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Required Boxes (16 sq.ft/box)</div>
+        <div class="summary-badge-grid">
+          <div class="badge-card badge-hl" id="boxCardHl" style="display:none;">
+            <span>Highlighter</span>
+            <span class="num"><span id="outHl">0</span> Boxes</span>
+          </div>
+          <div class="badge-card badge-dk" id="boxCardDk" style="display:none;">
+            <span>Dark Tile</span>
+            <span class="num"><span id="outDk">0</span> Boxes</span>
+          </div>
+          <div class="badge-card badge-lt">
+            <span>Light Main</span>
+            <span class="num"><span id="outLt">0</span> Boxes</span>
+          </div>
+          <div class="badge-card badge-fl">
+            <span>Floor Tile</span>
+            <span class="num"><span id="outFl">0</span> Boxes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: RATES -->
+    <div id="tab-rates" style="display: none;">
+      <div class="card">
+        <div class="card-title">Billing & Quotation (₹)</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th style="width:70px;">Qty</th>
+              <th style="width:90px;">Rate (₹)</th>
+              <th style="width:80px; text-align:right;">Total</th>
+            </tr>
+          </thead>
+          <tbody id="billItems"></tbody>
+        </table>
+
+        <div style="margin-top:16px; padding-top:12px; border-top:1.5px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-weight:800; font-size:16px;">Grand Total</span>
+          <span style="font-weight:900; font-size:20px; color:var(--primary);" id="billTotal">₹ 0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="floating-bar">
+    <div class="bar-total">
+      <span>Total Boxes</span>
+      <span id="barTotalBoxes">0 Boxes</span>
+    </div>
+    <div>
+      <button class="btn btn-primary" onclick="switchTab('rates')">Bill →</button>
+    </div>
+  </div>
+
+  <script>
+    const LOCAL_ENDPOINT = 'http://localhost:3001/api/stock';
+    const CLOUDFLARE_ENDPOINT = 'https://gamma-induced-rate-recorded.trycloudflare.com/api/stock';
+
+    let tallyStock = [];
+    let rates = {};
+    let selectedNames = { hl: '', dk: '', lt: '', fl: '' };
+    let selectedItems = { hl: null, dk: null, lt: null, fl: null };
+    let isConnected = false;
+    let autoRefreshTimer = null;
+
+    // Badge click handler: If online -> instant refresh; if offline -> open URL setup
+    function handleBadgeClick() {
+      if (!isConnected) {
+        configureTallyUrl();
+      } else {
+        syncTallyStock(false);
+      }
+    }
+
+    // Configure or change custom Tally Tunnel URL
+    function configureTallyUrl() {
+      const current = localStorage.getItem('tally_url') || CLOUDFLARE_ENDPOINT;
+      const input = prompt(
+        'Configure Tally Bridge / Cloudflare URL:\n(Enter your live endpoint or leave blank to reset)',
+        current
+      );
+      if (input !== null) {
+        if (input.trim()) {
+          localStorage.setItem('tally_url', input.trim());
+        } else {
+          localStorage.removeItem('tally_url');
+        }
+        syncTallyStock(false);
+      }
+    }
+
+    // Auto-refresh periodically every 30 seconds
+    function startAutoRefresh() {
+      if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+      autoRefreshTimer = setInterval(() => {
+        syncTallyStock(true); // silent background refresh
+      }, 30000);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function switchTab(tab) {
+      if (tab === 'rooms') {
+        document.getElementById('tab-rooms').style.display = 'block';
+        document.getElementById('tab-rates').style.display = 'none';
+        document.getElementById('btnTabRooms').classList.add('active');
+        document.getElementById('btnTabRates').classList.remove('active');
+      } else {
+        document.getElementById('tab-rooms').style.display = 'none';
+        document.getElementById('tab-rates').style.display = 'block';
+        document.getElementById('btnTabRooms').classList.remove('active');
+        document.getElementById('btnTabRates').classList.add('active');
+        renderBill();
+      }
+    }
+
+    function togglePanel(id, show) {
+      document.getElementById(id).style.display = show ? 'block' : 'none';
+      calculate();
+    }
+
+    function calculate() {
+      const wRft = parseFloat(document.getElementById('wRft').value) || 0;
+      const wHt = parseFloat(document.getElementById('wHt').value) || 0;
+      const totalWallArea = wRft * wHt;
+
+      const chkHl = document.getElementById('chkHl').checked;
+      const hlRft = parseFloat(document.getElementById('hlRft').value) || 0;
+      const hlHt = parseFloat(document.getElementById('hlHt').value) || 0;
+      const hlArea = chkHl ? (hlRft * hlHt) : 0;
+
+      const chkDk = document.getElementById('chkDk').checked;
+      const dkRft = parseFloat(document.getElementById('dkRft').value) || 0;
+      const dkHt = parseFloat(document.getElementById('dkHt').value) || 0;
+      const dkArea = chkDk ? (dkRft * dkHt) : 0;
+
+      const ltArea = Math.max(0, totalWallArea - hlArea - dkArea);
+
+      const fLen = parseFloat(document.getElementById('fLen').value) || 0;
+      const fWid = parseFloat(document.getElementById('fWid').value) || 0;
+      const floorArea = fLen * fWid;
+
+      const bHl = Math.ceil(hlArea / 16);
+      const bDk = Math.ceil(dkArea / 16);
+      const bLt = Math.ceil(ltArea / 16);
+      const bFl = Math.ceil(floorArea / 16);
+
+      document.getElementById('boxCardHl').style.display = chkHl ? 'flex' : 'none';
+      document.getElementById('boxCardDk').style.display = chkDk ? 'flex' : 'none';
+
+      document.getElementById('outHl').innerText = bHl;
+      document.getElementById('outDk').innerText = bDk;
+      document.getElementById('outLt').innerText = bLt;
+      document.getElementById('outFl').innerText = bFl;
+
+      const totalBoxes = bHl + bDk + bLt + bFl;
+      document.getElementById('barTotalBoxes').innerText = totalBoxes + " Boxes";
+
+      window.calcState = { bHl, bDk, bLt, bFl, totalBoxes };
+      renderBill();
+    }
+
+    // AUTO-POPULATE ON TYPING
+    function handleTileInput(key, val) {
+      const query = (val || '').trim();
+      selectedNames[key] = query;
+      const detailsEl = document.getElementById(key + 'Details');
+
+      // Find item by name (case-insensitive)
+      const item = tallyStock.find(i => i.name.toLowerCase() === query.toLowerCase());
+
+      if (item) {
+        selectedItems[key] = item;
+        if (item.rate && item.rate > 0) {
+          rates[key] = item.rate;
+        }
+        if (detailsEl) {
+          detailsEl.style.display = 'block';
+          detailsEl.innerHTML = `📁 <b>${escapeHtml(item.parent || 'General')}</b> &bull; Stock: <b>${item.stockBoxes}</b> ${escapeHtml(item.unit || 'bx')} &bull; Rate: <b>₹${item.rate}</b>`;
+        }
+      } else {
+        selectedItems[key] = null;
+        if (detailsEl) detailsEl.style.display = 'none';
+      }
+
+      renderBill();
+    }
+
+    function renderBill() {
+      if (!window.calcState) return;
+      const { bHl, bDk, bLt, bFl } = window.calcState;
+      const tbody = document.getElementById('billItems');
+      const items = [];
+
+      if (document.getElementById('chkHl').checked && bHl > 0) {
+        const itemObj = selectedItems.hl;
+        const displayName = itemObj ? `${itemObj.name} ${itemObj.parent ? '(' + itemObj.parent + ')' : ''}` : (selectedNames.hl || 'Highlighter Tile');
+        items.push({ id: 'hl', name: displayName, qty: bHl });
+      }
+      if (document.getElementById('chkDk').checked && bDk > 0) {
+        const itemObj = selectedItems.dk;
+        const displayName = itemObj ? `${itemObj.name} ${itemObj.parent ? '(' + itemObj.parent + ')' : ''}` : (selectedNames.dk || 'Dark Tile');
+        items.push({ id: 'dk', name: displayName, qty: bDk });
+      }
+      if (bLt > 0) {
+        const itemObj = selectedItems.lt;
+        const displayName = itemObj ? `${itemObj.name} ${itemObj.parent ? '(' + itemObj.parent + ')' : ''}` : (selectedNames.lt || 'Light Main Tile');
+        items.push({ id: 'lt', name: displayName, qty: bLt });
+      }
+      if (bFl > 0) {
+        const itemObj = selectedItems.fl;
+        const displayName = itemObj ? `${itemObj.name} ${itemObj.parent ? '(' + itemObj.parent + ')' : ''}` : (selectedNames.fl || 'Floor Tile');
+        items.push({ id: 'fl', name: displayName, qty: bFl });
+      }
+
+      let html = '';
+      let grandTotal = 0;
+
+      items.forEach(item => {
+        const rate = rates[item.id] !== undefined ? rates[item.id] : '';
+        const sub = (parseFloat(rate) || 0) * item.qty;
+        grandTotal += sub;
+
+        html += `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.qty} bx</td>
+            <td>
+              <input type="number" value="${rate}" placeholder="Rate" oninput="rates['${item.id}'] = this.value; renderBill();" />
+            </td>
+            <td style="text-align: right;">₹ ${sub.toLocaleString('en-IN')}</td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html;
+      document.getElementById('billTotal').innerText = '₹ ' + grandTotal.toLocaleString('en-IN');
+    }
+
+    // Smart Multi-Candidate Sync: tries local bridge first, then custom, then Cloudflare
+    async function syncTallyStock(isSilent = false) {
+      const status = document.getElementById('syncStatus');
+      if (!isSilent) {
+        status.innerText = '🔄 Syncing...';
+        status.style.color = '#facc15';
+      }
+
+      const endpointsToTry = [];
+      const customUrl = localStorage.getItem('tally_url');
+      if (customUrl) endpointsToTry.push(customUrl);
+
+      // If running on local machine, try localhost:3001 first
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:') {
+        endpointsToTry.push(LOCAL_ENDPOINT);
+        endpointsToTry.push('/api/stock');
+      }
+
+      // Always include Cloudflare endpoint as fallback
+      endpointsToTry.push(CLOUDFLARE_ENDPOINT);
+      if (!endpointsToTry.includes(LOCAL_ENDPOINT)) endpointsToTry.push(LOCAL_ENDPOINT);
+
+      let data = null;
+      let connectedUrl = null;
+
+      for (const ep of endpointsToTry) {
+        try {
+          const sep = ep.includes('?') ? '&' : '?';
+          const url = ep + sep + 't=' + Date.now();
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), 3000);
+          const res = await fetch(url, { signal: controller.signal });
+          clearTimeout(timer);
+          if (res.ok) {
+            data = await res.json();
+            connectedUrl = ep;
+            break;
+          }
+        } catch (e) {
+          // Try next candidate
+        }
+      }
+
       if (data && Array.isArray(data)) {
         tallyStock = data;
         isConnected = true;
         status.innerText = `🟢 Live: ${tallyStock.length} items`;
         status.style.color = '#4ade80';
         status.title = `Connected to Tally!\nVia: ${connectedUrl}\nClick to refresh`;
+
         // Populate datalist suggestions
         const datalist = document.getElementById('tallyList');
         if (datalist) {
@@ -11,6 +571,7 @@
             `<option value="${escapeHtml(i.name)}">${escapeHtml(i.parent ? `[${i.parent}] ` : '')}${i.stockBoxes} ${i.unit || 'bx'} • ₹${i.rate}</option>`
           ).join('');
         }
+
         // Re-evaluate any already entered items
         ['hl', 'dk', 'lt', 'fl'].forEach(key => {
           if (selectedNames[key]) handleTileInput(key, selectedNames[key]);
@@ -22,6 +583,7 @@
         status.title = 'Tally is offline • Click to enter URL';
       }
     }
+
     calculate();
     syncTallyStock(false);
     startAutoRefresh();

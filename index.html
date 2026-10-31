@@ -800,7 +800,7 @@
 
   <!-- JAVASCRIPT ENGINE -->
   <script>
-      <script>
+      
     // Live Cloudflare Tunnel endpoint connected to your Tally machine
     const TALLY_ENDPOINT = 'https://sender-world-hospital-fool.trycloudflare.com/api/stock';
 
@@ -975,7 +975,7 @@
     calculate();
     window.addEventListener('DOMContentLoaded', syncTallyStock);
     window.addEventListener('focus', syncTallyStock);
-  </script>
+  
 
     const SafeStorage = {
       memoryStore: {},
@@ -1195,6 +1195,7 @@
         card.className = 'card';
         card.id = `card_${room.id}`;
         const isCollapsed = room.collapsed;
+        </script>
 
         card.innerHTML = `
           <div class="room-header" onclick="toggleRoomCollapse('${room.id}')">

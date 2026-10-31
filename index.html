@@ -44,13 +44,51 @@
     .app-header h1 { font-size: 18px; font-weight: 800; }
     .app-header p { font-size: 12px; color: #94a3b8; }
 
+    .badge-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     .status-badge {
       font-size: 11px;
       font-weight: 700;
-      padding: 6px 10px;
+      padding: 6px 12px;
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.15);
       color: #facc15;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .status-badge:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+    .status-badge:active {
+      transform: scale(0.96);
+    }
+
+    .btn-gear {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-gear:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(45deg);
     }
 
     .nav-tabs { display: flex; background: #e2e8f0; padding: 4px; border-radius: 10px; margin-bottom: 16px; }
@@ -62,8 +100,19 @@
 
     .field-group { margin-bottom: 12px; }
     label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px; }
-    input, select { width: 100%; height: 44px; padding: 0 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 15px; font-weight: 600; color: #0f172a; background: #fff; }
-    input:focus, select:focus { outline: none; border-color: var(--primary); }
+    input { width: 100%; height: 44px; padding: 0 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 15px; font-weight: 600; color: #0f172a; background: #fff; }
+    input:focus { outline: none; border-color: var(--primary); }
+
+    .tile-meta {
+      font-size: 12px;
+      font-weight: 600;
+      color: #1e40af;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 5px 10px;
+      margin-top: 6px;
+    }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .toggle-card { background: #f8fafc; border: 1.5px dashed var(--border); border-radius: 10px; padding: 12px; margin-bottom: 10px; }
@@ -94,13 +143,19 @@
 </head>
 <body>
 
+  <!-- Shared Datalist for instant type-ahead filtering -->
+  <datalist id="tallyList"></datalist>
+
   <div class="container">
     <header class="app-header">
       <div>
         <h1>Tile Estimator Pro</h1>
         <p>4×2 Tiles • 16 sq.ft / Box</p>
       </div>
-      <span class="status-badge" id="syncStatus">🔄 Connecting Tally...</span>
+      <div class="badge-actions">
+        <span class="status-badge" id="syncStatus" onclick="handleBadgeClick()" title="Click to refresh stock from Tally">🔄 Connecting...</span>
+        <button type="button" class="btn-gear" onclick="configureTallyUrl()" title="Configure Tally Bridge / Cloudflare URL">⚙️</button>
+      </div>
     </header>
 
     <nav class="nav-tabs">
@@ -145,8 +200,9 @@
           </label>
           <div id="hlPanel" class="sub-panel">
             <div class="field-group">
-              <label>Select Highlighter Tile (From Tally)</label>
-              <select id="hlSelect" onchange="selectTileFromDropdown('hl', this.value)"></select>
+              <label>Highlighter Tile (Type to auto-populate)</label>
+              <input type="text" id="hlInput" list="tallyList" placeholder="🔍 Type tile or group name..." oninput="handleTileInput('hl', this.value)" autocomplete="off" />
+              <div id="hlDetails" class="tile-meta" style="display:none;"></div>
             </div>
             <div class="grid-2">
               <div class="field-group">
@@ -169,8 +225,9 @@
           </label>
           <div id="dkPanel" class="sub-panel">
             <div class="field-group">
-              <label>Select Dark Tile (From Tally)</label>
-              <select id="dkSelect" onchange="selectTileFromDropdown('dk', this.value)"></select>
+              <label>Dark Tile (Type to auto-populate)</label>
+              <input type="text" id="dkInput" list="tallyList" placeholder="🔍 Type tile or group name..." oninput="handleTileInput('dk', this.value)" autocomplete="off" />
+              <div id="dkDetails" class="tile-meta" style="display:none;"></div>
             </div>
             <div class="grid-2">
               <div class="field-group">
@@ -187,8 +244,9 @@
 
         <!-- Light Main -->
         <div class="field-group" style="margin-top: 10px;">
-          <label>Select Main Light Tile (From Tally)</label>
-          <select id="ltSelect" onchange="selectTileFromDropdown('lt', this.value)"></select>
+          <label>Main Light Tile (Type to auto-populate)</label>
+          <input type="text" id="ltInput" list="tallyList" placeholder="🔍 Type tile or group name..." oninput="handleTileInput('lt', this.value)" autocomplete="off" />
+          <div id="ltDetails" class="tile-meta" style="display:none;"></div>
         </div>
       </div>
 
@@ -205,8 +263,9 @@
           </div>
         </div>
         <div class="field-group">
-          <label>Select Floor Tile (From Tally)</label>
-          <select id="flSelect" onchange="selectTileFromDropdown('fl', this.value)"></select>
+          <label>Floor Tile (Type to auto-populate)</label>
+          <input type="text" id="flInput" list="tallyList" placeholder="🔍 Type tile or group name..." oninput="handleTileInput('fl', this.value)" autocomplete="off" />
+          <div id="flDetails" class="tile-meta" style="display:none;"></div>
         </div>
       </div>
 
@@ -268,11 +327,53 @@
   </div>
 
   <script>
-    const TALLY_ENDPOINT = 'https://gamma-induced-rate-recorded.trycloudflare.com/api/stock';
+    const defaultEndpoint = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+      ? '/api/stock'
+      : 'https://gamma-induced-rate-recorded.trycloudflare.com/api/stock';
+
+    let TALLY_ENDPOINT = localStorage.getItem('tally_url') || defaultEndpoint;
 
     let tallyStock = [];
     let rates = {};
     let selectedNames = { hl: '', dk: '', lt: '', fl: '' };
+    let selectedItems = { hl: null, dk: null, lt: null, fl: null };
+    let isConnected = false;
+    let autoRefreshTimer = null;
+
+    // Badge click handler: If online -> instant refresh; if offline -> open URL setup
+    function handleBadgeClick() {
+      if (!isConnected) {
+        configureTallyUrl();
+      } else {
+        syncTallyStock(false);
+      }
+    }
+
+    // Configure or change the Tally Tunnel URL
+    function configureTallyUrl() {
+      const input = prompt(
+        'Configure Tally Bridge / Cloudflare URL:\n(Enter your current live endpoint)',
+        TALLY_ENDPOINT
+      );
+      if (input && input.trim()) {
+        TALLY_ENDPOINT = input.trim();
+        localStorage.setItem('tally_url', TALLY_ENDPOINT);
+        syncTallyStock(false);
+      }
+    }
+
+    // Auto-refresh periodically every 30 seconds
+    function startAutoRefresh() {
+      if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+      autoRefreshTimer = setInterval(() => {
+        syncTallyStock(true); // silent auto-refresh in background
+      }, 30000);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
 
     function switchTab(tab) {
       if (tab === 'rooms') {
@@ -300,10 +401,15 @@
       const totalWallArea = wRft * wHt;
 
       const chkHl = document.getElementById('chkHl').checked;
-      const chkDk = document.getElementById('chkDk').checked;
+      const hlRft = parseFloat(document.getElementById('hlRft').value) || 0;
+      const hlHt = parseFloat(document.getElementById('hlHt').value) || 0;
+      const hlArea = chkHl ? (hlRft * hlHt) : 0;
 
-      const hlArea = chkHl ? (parseFloat(document.getElementById('hlRft').value) || 0) * (parseFloat(document.getElementById('hlHt').value) || wHt) : 0;
-      const dkArea = chkDk ? (parseFloat(document.getElementById('dkRft').value) || 0) * (parseFloat(document.getElementById('dkHt').value) || 0) : 0;
+      const chkDk = document.getElementById('chkDk').checked;
+      const dkRft = parseFloat(document.getElementById('dkRft').value) || 0;
+      const dkHt = parseFloat(document.getElementById('dkHt').value) || 0;
+      const dkArea = chkDk ? (dkRft * dkHt) : 0;
+
       const ltArea = Math.max(0, totalWallArea - hlArea - dkArea);
 
       const fLen = parseFloat(document.getElementById('fLen').value) || 0;
@@ -330,12 +436,29 @@
       renderBill();
     }
 
-    function selectTileFromDropdown(key, itemName) {
-      selectedNames[key] = itemName;
-      const item = tallyStock.find(i => i.name === itemName);
-      if (item && item.rate) {
-        rates[key] = item.rate;
+    // AUTO-POPULATE ON TYPING
+    function handleTileInput(key, val) {
+      const query = (val || '').trim();
+      selectedNames[key] = query;
+      const detailsEl = document.getElementById(key + 'Details');
+
+      // Find item by name (case-insensitive)
+      const item = tallyStock.find(i => i.name.toLowerCase() === query.toLowerCase());
+
+      if (item) {
+        selectedItems[key] = item;
+        if (item.rate && item.rate > 0) {
+          rates[key] = item.rate;
+        }
+        if (detailsEl) {
+          detailsEl.style.display = 'block';
+          detailsEl.innerHTML = `📁 <b>${escapeHtml(item.parent || 'General')}</b> &bull; Stock: <b>${item.stockBoxes}</b> ${escapeHtml(item.unit || 'bx')} &bull; Rate: <b>₹${item.rate}</b>`;
+        }
+      } else {
+        selectedItems[key] = null;
+        if (detailsEl) detailsEl.style.display = 'none';
       }
+
       renderBill();
     }
 
@@ -346,16 +469,24 @@
       const items = [];
 
       if (document.getElementById('chkHl').checked && bHl > 0) {
-        items.push({ id: 'hl', name: selectedNames.hl || 'Highlighter Tile', qty: bHl });
+        const itemObj = selectedItems.hl;
+        const displayName = itemObj ? `${itemObj.name} ${itemObj.parent ? '(' + itemObj.parent + ')' : ''}` : (selectedNames.hl || 'Highlighter Tile');
+        items.push({ id: 'hl', name: displayName, qty: bHl });
       }
       if (document.getElementById('chkDk').checked && bDk > 0) {
-        items.push({ id: 'dk', name: selectedNames.dk || 'Dark Tile', qty: bDk });
+        const itemObj = selectedItems.dk;
+        const displayName = itemObj ? `${itemObj.name} ${itemObj.parent ? '(' + itemObj.parent + ')' : ''}` : (selectedNames.dk || 'Dark Tile');
+        items.push({ id: 'dk', name: displayName, qty: bDk });
       }
       if (bLt > 0) {
-        items.push({ id: 'lt', name: selectedNames.lt || 'Light Main Tile', qty: bLt });
+        const itemObj = selectedItems.lt;
+        const displayName = itemObj ? `${itemObj.name} ${itemObj.parent ? '(' + itemObj.parent + ')' : ''}` : (selectedNames.lt || 'Light Main Tile');
+        items.push({ id: 'lt', name: displayName, qty: bLt });
       }
       if (bFl > 0) {
-        items.push({ id: 'fl', name: selectedNames.fl || 'Floor Tile', qty: bFl });
+        const itemObj = selectedItems.fl;
+        const displayName = itemObj ? `${itemObj.name} ${itemObj.parent ? '(' + itemObj.parent + ')' : ''}` : (selectedNames.fl || 'Floor Tile');
+        items.push({ id: 'fl', name: displayName, qty: bFl });
       }
 
       let html = '';
@@ -382,34 +513,50 @@
       document.getElementById('billTotal').innerText = '₹ ' + grandTotal.toLocaleString('en-IN');
     }
 
-    async function syncTallyStock() {
+    async function syncTallyStock(isSilent = false) {
       const status = document.getElementById('syncStatus');
+      if (!isSilent) {
+        status.innerText = '🔄 Syncing...';
+        status.style.color = '#facc15';
+      }
+
       try {
-        const res = await fetch(TALLY_ENDPOINT);
+        const urlWithCacheBuster = TALLY_ENDPOINT + (TALLY_ENDPOINT.includes('?') ? '&' : '?') + 't=' + Date.now();
+        const res = await fetch(urlWithCacheBuster);
         if (!res.ok) throw new Error('Network error');
         tallyStock = await res.json();
 
+        isConnected = true;
         status.innerText = `🟢 Live: ${tallyStock.length} items`;
         status.style.color = '#4ade80';
+        status.title = `Connected to Tally! (Auto-refreshes every 30s) • Click to refresh now`;
 
-        // Populate dropdown selectors
-        const optionsHtml = '<option value="">-- Choose Tally Stock Item --</option>' + 
-          tallyStock.map(i => `<option value="${i.name}">${i.name} (${i.stockBoxes} Boxes | ₹${i.rate})</option>`).join('');
+        // Populate the datalist suggestions
+        const datalist = document.getElementById('tallyList');
+        if (datalist) {
+          datalist.innerHTML = tallyStock.map(i => 
+            `<option value="${escapeHtml(i.name)}">${escapeHtml(i.parent ? `[${i.parent}] ` : '')}${i.stockBoxes} ${i.unit || 'bx'} • ₹${i.rate}</option>`
+          ).join('');
+        }
 
-        ['hlSelect', 'dkSelect', 'ltSelect', 'flSelect'].forEach(id => {
-          const selectEl = document.getElementById(id);
-          if (selectEl) selectEl.innerHTML = optionsHtml;
+        // Re-evaluate any already typed tiles with newest stock/rates
+        ['hl', 'dk', 'lt', 'fl'].forEach(key => {
+          if (selectedNames[key]) {
+            handleTileInput(key, selectedNames[key]);
+          }
         });
-
       } catch (err) {
+        isConnected = false;
         status.innerText = '🔴 Tally Offline';
         status.style.color = '#f87171';
+        status.title = 'Tally is offline • Click to enter URL';
         console.warn(err);
       }
     }
 
     calculate();
-    syncTallyStock();
+    syncTallyStock(false);
+    startAutoRefresh();
   </script>
 </body>
 </html>

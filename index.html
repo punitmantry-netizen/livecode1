@@ -1,235 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Tile Estimator & Billing Pro</title>
-
-  <!-- iOS & Android Web App Standalone Meta -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="TileCalc Pro">
-  <meta name="theme-color" content="#0f172a">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Tile Estimator Pro</title>
+  
+  <!-- iOS PWA Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Tile Calc" />
+  <meta name="theme-color" content="#1e293b" />
 
   <style>
-    /* =========================================================
-       100% PURE NATIVE CSS (ZERO EXTERNAL CDN DEPENDENCIES)
-       ========================================================= */
-    *, *::before, *::after {
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --surface: #ffffff;
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --hl-color: #d97706;
+      --dk-color: #4338ca;
+      --lt-color: #0284c7;
+      --fl-color: #059669;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #f1f5f9;
-      color: #0f172a;
-      line-height: 1.4;
-      font-size: 14px;
-      padding-bottom: 95px;
-      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--text);
+      padding: 16px;
+      padding-bottom: 90px;
+      line-height: 1.5;
     }
 
-    /* STRICT HIGH-CONTRAST PITCH BLACK TEXT ON PURE WHITE BACKGROUNDS */
-    input, select, textarea {
-      font-family: inherit;
-      color: #000000 !important;
-      background-color: #ffffff !important;
-      font-size: 15px !important;
-      font-weight: 700 !important;
-      -webkit-text-fill-color: #000000 !important;
-      opacity: 1 !important;
-      border: 1.5px solid #cbd5e1;
-      border-radius: 8px;
-      padding: 9px 10px;
-      width: 100%;
-      outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: #2563eb !important;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
-    }
-
-    input::placeholder, textarea::placeholder {
-      color: #94a3b8 !important;
-      -webkit-text-fill-color: #94a3b8 !important;
-      font-weight: 400 !important;
-    }
-
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    input[type=number] {
-      -moz-appearance: textfield;
-    }
-
-    input[type="checkbox"] {
-      width: 20px !important;
-      height: 20px !important;
-      cursor: pointer;
-      accent-color: #2563eb;
-      margin: 0;
-      padding: 0;
-      flex-shrink: 0;
-    }
-
-    /* HEADER */
-    .app-header {
-      background: #0f172a;
-      color: #ffffff;
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-
-    .header-inner {
-      max-width: 640px;
+    .container {
+      max-width: 680px;
       margin: 0 auto;
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
     }
 
-    .brand-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-icon {
-      width: 36px;
-      height: 36px;
-      background: #2563eb;
+    /* App Header */
+    .app-header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
       color: #fff;
-      border-radius: 10px;
+      padding: 18px 20px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      flex-shrink: 0;
+      margin-bottom: 16px;
     }
 
-    .brand-title {
-      font-size: 15px;
+    .app-header h1 {
+      font-size: 19px;
       font-weight: 800;
       letter-spacing: -0.3px;
-      color: #ffffff;
-      line-height: 1.1;
     }
 
-    .brand-subtitle {
-      font-size: 11px;
+    .app-header p {
+      font-size: 12px;
       color: #94a3b8;
-      font-weight: 500;
+      margin-top: 2px;
     }
 
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
-    .container {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 12px 14px;
-    }
-
-    /* BUTTONS */
-    .btn {
+    .status-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 9px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #38bdf8;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-weight: 700;
-      font-size: 12px;
-      padding: 9px 12px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.05s;
-      white-space: nowrap;
-      text-decoration: none;
+      gap: 5px;
     }
-    .btn:active {
-      transform: scale(0.98);
-    }
-    .btn-sm {
-      padding: 6px 10px;
-      font-size: 11px;
-      border-radius: 6px;
-    }
-    .btn-primary { background: #2563eb; color: #fff; }
-    .btn-primary:active { background: #1d4ed8; }
-    .btn-success { background: #16a34a; color: #fff; }
-    .btn-success:active { background: #15803d; }
-    .btn-dark { background: #1e293b; color: #fff; }
-    .btn-dark:active { background: #0f172a; }
-    .btn-pdf { background: #dc2626; color: #fff; }
-    .btn-pdf:active { background: #b91c1c; }
-    .btn-outline { background: #fff; border: 1.5px solid #cbd5e1; color: #334155; }
-    .btn-outline:active { background: #f8fafc; }
-    .btn-danger { background: #ef4444; color: #fff; }
-    .btn-danger-outline { background: transparent; border: 1px solid #f87171; color: #dc2626; }
 
-    /* TABS */
-    .tabs-bar {
-      display: flex;
-      background: #e2e8f0;
-      padding: 3px;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      gap: 4px;
-    }
-    .tab-btn {
-      flex: 1;
-      padding: 10px 4px;
-      border: none;
-      background: transparent;
-      font-weight: 700;
+    .btn-icon {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
       font-size: 13px;
-      color: #64748b;
-      border-radius: 7px;
+      font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-    .tab-btn.active {
-      background: #ffffff;
-      color: #2563eb;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      gap: 6px;
     }
 
-    /* CARD STYLING */
-    .card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    /* Segmented Navigation */
+    .nav-tabs {
+      display: flex;
+      background: #e2e8f0;
+      padding: 4px;
+      border-radius: 10px;
+      margin-bottom: 16px;
     }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
     .card-title {
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      color: #334155;
+      color: var(--text);
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 10px;
+    }
+
+    /* Form Fields */
+    .field-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      height: 44px;
+      padding: 0 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f172a;
+      background: #fff;
+      transition: border-color 0.15s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
     }
 
     .grid-2 {
@@ -237,571 +194,353 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
-    .form-group {
-      margin-bottom: 8px;
-    }
-    .form-group:last-child {
-      margin-bottom: 0;
-    }
-    .form-label {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      color: #475569;
-      margin-bottom: 4px;
-    }
-    .subtext {
-      font-size: 10px;
-      color: #64748b;
-      margin-top: 2px;
-      display: block;
-    }
 
-    /* TOGGLE SECTIONS FOR HIGHLIGHTER & DARK TILES */
-    .toggle-section {
-      border: 1.5px solid #e2e8f0;
+    /* Section Toggles */
+    .toggle-card {
+      background: #f8fafc;
+      border: 1.5px dashed var(--border);
       border-radius: 10px;
-      padding: 10px;
-      margin-top: 8px;
-      background: #fafaf9;
-    }
-    .toggle-section.hl-active {
-      border-color: #f59e0b;
-      background: #fffbeb;
-    }
-    .toggle-section.dark-active {
-      border-color: #3b82f6;
-      background: #eff6ff;
-    }
-    .toggle-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      user-select: none;
-      font-weight: 700;
-      font-size: 12px;
-      color: #1e293b;
+      padding: 12px;
+      margin-bottom: 10px;
     }
 
-    .room-header {
+    .chk-label {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      padding: 2px 0;
-    }
-    .room-title-edit {
+      gap: 10px;
       font-size: 14px;
-      font-weight: 800;
-      color: #0f172a;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .chk-label input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary);
+      margin: 0;
+    }
+
+    .sub-panel {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      display: none;
+    }
+
+    /* Badges */
+    .summary-badge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .badge-card {
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
       display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .room-badge {
-      background: #dbeafe;
-      color: #1e40af;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 12px;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    /* FIXED 4-COLUMN BILLING TABLE (ZERO HORIZONTAL SCROLL) */
-    .fixed-table-wrap {
-      width: 100%;
-      overflow: hidden;
-      margin: 8px 0;
+    .badge-card .num {
+      font-size: 19px;
+      font-weight: 800;
     }
-    .bill-table {
+
+    .badge-hl { background: #fef3c7; color: var(--hl-color); }
+    .badge-dk { background: #e0e7ff; color: var(--dk-color); }
+    .badge-lt { background: #e0f2fe; color: var(--lt-color); }
+    .badge-fl { background: #d1fae5; color: var(--fl-color); }
+
+    /* Rates Table */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    table {
       width: 100%;
-      table-layout: fixed;
       border-collapse: collapse;
+      background: #fff;
+    }
+
+    th {
+      background: #f1f5f9;
+      padding: 10px 8px;
       font-size: 12px;
-    }
-    .bill-table th {
-      padding: 8px 3px;
-      text-align: left;
-      font-size: 10px;
-      font-weight: 800;
-      color: #64748b;
+      font-weight: 700;
       text-transform: uppercase;
-      border-bottom: 2px solid #cbd5e1;
-    }
-    .bill-table td {
-      padding: 6px 3px;
-      border-bottom: 1px solid #e2e8f0;
-      vertical-align: middle;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .col-item { width: 40%; }
-    .col-qty  { width: 17%; text-align: center; }
-    .col-rate { width: 21%; text-align: right; }
-    .col-sub  { width: 22%; text-align: right; font-weight: 800; }
-
-    .table-input {
-      font-size: 12px !important;
-      padding: 5px 6px !important;
-      height: 34px !important;
-      font-weight: 700 !important;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      text-align: left;
     }
 
-    /* STICKY BOTTOM BAR */
-    .sticky-bar {
+    td {
+      padding: 8px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    td input {
+      height: 36px;
+      padding: 0 8px;
+      font-size: 14px;
+    }
+
+    /* Floating Bar */
+    .floating-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      z-index: 30;
-      background: #0f172a;
-      color: #fff;
-      padding: 10px 14px;
-      box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
-      border-top: 1px solid #1e293b;
-    }
-    .sticky-inner {
-      max-width: 640px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    /* MODAL SYSTEM */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.75);
-      z-index: 60;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px;
-    }
-    .modal-content {
-      background: #ffffff;
-      width: 100%;
-      max-width: 540px;
-      max-height: 90vh;
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
-    }
-    .modal-header {
-      background: #0f172a;
-      color: #fff;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-top: 1px solid var(--border);
       padding: 12px 16px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-    }
-    .modal-body {
-      padding: 16px;
-      overflow-y: auto;
-      font-size: 13px;
-    }
-    .modal-footer {
-      padding: 10px 16px;
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
-      display: flex;
-      gap: 8px;
-    }
-
-    /* TOAST */
-    #toast-msg {
-      position: fixed;
-      bottom: 85px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #0f172a;
-      color: #ffffff;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 10px 20px;
-      border-radius: 24px;
-      z-index: 99;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      display: flex;
       align-items: center;
+      z-index: 100;
+    }
+
+    .bar-total {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bar-total span:first-child {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .bar-total span:last-child {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .bar-actions {
+      display: flex;
       gap: 8px;
-      border: 1px solid #334155;
-    }
-    #toast-msg.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(-5px);
     }
 
-    .svg-icon {
-      width: 16px;
-      height: 16px;
-      display: inline-block;
-      vertical-align: middle;
-      stroke-width: 2.2;
-      stroke: currentColor;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      flex-shrink: 0;
+    .btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
-    /* =========================================================
-       NATIVE PRINT / SAVE TO PDF STYLESHEET
-       ========================================================= */
-    #print-invoice-sheet {
-      display: none;
-    }
+    .btn-wa { background: #25d366; color: #fff; }
+    .btn-primary { background: var(--primary); color: #fff; }
 
     @media print {
-      body * {
-        visibility: hidden !important;
-      }
-      #print-invoice-sheet, #print-invoice-sheet * {
-        visibility: visible !important;
-      }
-      #print-invoice-sheet {
-        display: block !important;
-        position: absolute !important;
-        left: 0 !important;
-        top: 0 !important;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 15mm !important;
-        background: #ffffff !important;
-        color: #0f172a !important;
-      }
-      .no-print {
-        display: none !important;
-      }
+      body { background: #fff; padding: 0; }
+      .app-header, .nav-tabs, .floating-bar, .no-print { display: none !important; }
+      #tab-rooms { display: none !important; }
+      #tab-rates { display: block !important; }
+      .card { box-shadow: none; border: 1px solid #cbd5e1; }
     }
   </style>
 </head>
 <body>
 
-  <!-- APP HEADER (STICKY) -->
-  <header class="app-header no-print">
-    <div class="header-inner">
-      <div class="brand-wrap">
-        <div class="brand-icon">
-          <svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-        </div>
-        <div>
-          <h1 class="brand-title">Tile Estimator Pro</h1>
-          <p class="brand-subtitle">4×2 Tiles • 16 SFT / Box</p>
-        </div>
-      </div>
-
-      <div class="header-actions">
-        <button type="button" onclick="triggerNativePrint()" class="btn btn-pdf btn-sm" title="Print or Save to PDF">
-          <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-          <span>Print / PDF</span>
-        </button>
-        <button type="button" onclick="openQuotesModal()" class="btn btn-outline btn-sm" title="Saved Quotes">
-          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
-          <span>Quotes (<span id="quotes-badge-count">0</span>)</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- MAIN WRAPPER -->
-  <div class="container no-print">
-
-    <!-- TABS BAR -->
-    <div class="tabs-bar">
-      <button type="button" id="tab-btn-rooms" class="tab-btn active" onclick="switchTab('rooms')">
-        <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        <span>1. Rooms (<span id="rooms-pill-count">1</span>)</span>
-      </button>
-      <button type="button" id="tab-btn-bill" class="tab-btn" onclick="switchTab('bill')">
-        <svg class="svg-icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        <span>2. Rates & Bill (₹)</span>
-      </button>
-    </div>
-
-    <!-- 1. CUSTOMER DETAILS CARD -->
-    <div class="card">
-      <div class="card-title">
-        <span>Customer & Site Details</span>
-        <span id="save-status-indicator" style="font-size: 10px; color: #16a34a; font-weight: 700;">● Auto-Saved</span>
-      </div>
-
-      <div class="grid-2">
-        <div class="form-group">
-          <label class="form-label">Customer Name</label>
-          <input type="text" id="cust-name" placeholder="e.g. Rajesh Kumar" oninput="triggerAutoSave()">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Phone Number</label>
-          <input type="tel" id="cust-phone" placeholder="e.g. 9876543210" oninput="triggerAutoSave()">
-        </div>
-      </div>
-
-      <div class="grid-2" style="margin-top: 8px;">
-        <div class="form-group">
-          <label class="form-label">Site / Project Address</label>
-          <input type="text" id="cust-address" placeholder="e.g. Flat 402, Royal Palms" oninput="triggerAutoSave()">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Quotation Date</label>
-          <input type="date" id="cust-date" oninput="triggerAutoSave()">
-        </div>
-      </div>
-    </div>
-
-    <!-- VIEW 1: ROOMS & MEASUREMENTS -->
-    <div id="view-rooms">
-      <div id="rooms-container"></div>
-
-      <button type="button" onclick="addRoom()" class="btn btn-outline" style="width: 100%; padding: 12px; border-style: dashed; border-color: #2563eb; color: #2563eb; font-size: 13px; margin-top: 4px;">
-        <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-        <span>+ Add Another Bathroom / Room</span>
-      </button>
-    </div>
-
-    <!-- VIEW 2: CONSOLIDATED BILLING SCREEN -->
-    <div id="view-bill" style="display: none;">
-
-      <!-- Primary Action Buttons Header -->
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-        <button type="button" onclick="switchTab('rooms')" class="btn btn-outline btn-sm">
-          <svg class="svg-icon" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-          <span>Rooms</span>
-        </button>
-
-        <div style="display: flex; gap: 6px;">
-          <button type="button" onclick="triggerNativePrint()" class="btn btn-pdf btn-sm" style="font-weight:800;">
-            <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-            <span>Print / PDF</span>
-          </button>
-
-          <button type="button" onclick="shareWhatsApp()" class="btn btn-success btn-sm">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            <span>WhatsApp</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- TILES BILL TABLE CARD (STRICT FIXED 4-COL LAYOUT) -->
-      <div class="card">
-        <div class="card-title">
-          <span>Tiles Schedule (4×2 • 16 SFT/Box)</span>
-          <span id="bill-grand-boxes-tag" style="background: #dbeafe; color: #1e40af; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 800;">0 Boxes</span>
-        </div>
-
-        <div class="fixed-table-wrap">
-          <table class="bill-table">
-            <thead>
-              <tr>
-                <th class="col-item">Item Name</th>
-                <th class="col-qty">Boxes</th>
-                <th class="col-rate">Rate (₹)</th>
-                <th class="col-sub">Subtotal (₹)</th>
-              </tr>
-            </thead>
-            <tbody id="tiles-bill-tbody"></tbody>
-            <tfoot>
-              <tr style="border-top: 2px solid #0f172a; font-weight: 800;">
-                <td colspan="3" style="padding-top: 8px;">Tiles Subtotal:</td>
-                <td id="tiles-bill-subtotal" class="col-sub" style="padding-top: 8px; color: #2563eb; font-size: 13px;">₹ 0</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      </div>
-
-      <!-- ACCESSORIES & LABOR CARD -->
-      <div class="card">
-        <div class="card-title">
-          <span>Accessories & Labor</span>
-          <button type="button" onclick="addCustomAccessory()" class="btn btn-outline btn-sm" style="padding: 3px 8px; font-size: 10px;">
-            + Add Item
-          </button>
-        </div>
-
-        <!-- Quick preset badges -->
-        <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px;">
-          <span style="font-size: 10px; font-weight: 700; color: #64748b; align-self: center;">Add:</span>
-          <button type="button" onclick="addPresetAccessory('Tile Adhesive (20kg)', 4, 480)" class="btn btn-outline btn-sm" style="padding: 2px 6px; font-size: 10px;">+ Adhesive</button>
-          <button type="button" onclick="addPresetAccessory('Epoxy Grout (1kg)', 2, 650)" class="btn btn-outline btn-sm" style="padding: 2px 6px; font-size: 10px;">+ Epoxy Grout</button>
-          <button type="button" onclick="addPresetAccessory('Tile Spacers (Pkt)', 2, 80)" class="btn btn-outline btn-sm" style="padding: 2px 6px; font-size: 10px;">+ Spacers</button>
-          <button type="button" onclick="addPresetAccessory('Waterproofing (Ltr)', 5, 280)" class="btn btn-outline btn-sm" style="padding: 2px 6px; font-size: 10px;">+ Waterproofing</button>
-          <button type="button" onclick="addPresetAccessory('Tile Laying Labor', 0, 25)" class="btn btn-outline btn-sm" style="padding: 2px 6px; font-size: 10px;">+ Labor</button>
-        </div>
-
-        <div class="fixed-table-wrap">
-          <table class="bill-table">
-            <thead>
-              <tr>
-                <th class="col-item">Item Name</th>
-                <th class="col-qty">Qty</th>
-                <th class="col-rate">Rate (₹)</th>
-                <th class="col-sub">Subtotal (₹)</th>
-              </tr>
-            </thead>
-            <tbody id="acc-bill-tbody"></tbody>
-            <tfoot>
-              <tr style="border-top: 1px solid #cbd5e1; font-weight: 800;">
-                <td colspan="3" style="padding-top: 8px;">Accessories Subtotal:</td>
-                <td id="acc-bill-subtotal" class="col-sub" style="padding-top: 8px; color: #d97706; font-size: 13px;">₹ 0</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      </div>
-
-      <!-- FINAL TOTAL CARD -->
-      <div class="card" style="background: #0f172a; color: #ffffff; border-color: #1e293b;">
-        <div class="card-title" style="color: #60a5fa; border-bottom: 1px solid #1e293b; padding-bottom: 8px;">
-          <span>Grand Total & Taxes</span>
-        </div>
-
-        <div style="font-size: 12px; margin-top: 8px;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 6px; color: #cbd5e1;">
-            <span>Tiles Amount:</span>
-            <span style="font-weight: 800; color: #fff;">₹ <span id="summary-tiles-amt">0</span></span>
-          </div>
-
-          <div style="display: flex; justify-content: space-between; margin-bottom: 6px; color: #cbd5e1;">
-            <span>Accessories & Labor:</span>
-            <span style="font-weight: 800; color: #fff;">₹ <span id="summary-acc-amt">0</span></span>
-          </div>
-
-          <!-- Discount Input -->
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; color: #cbd5e1;">
-            <span>Discount (₹ Flat):</span>
-            <div style="width: 100px;">
-              <input type="number" id="bill-discount" placeholder="0" min="0" oninput="calculateGrandTotal()" class="table-input" style="text-align: right;">
-            </div>
-          </div>
-
-          <!-- GST Toggle -->
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; color: #cbd5e1;">
-            <span>Tax / GST:</span>
-            <div style="width: 100px;">
-              <select id="bill-gst" onchange="calculateGrandTotal()" class="table-input" style="font-size: 11px !important;">
-                <option value="0">None (0%)</option>
-                <option value="5">GST 5%</option>
-                <option value="12">GST 12%</option>
-                <option value="18" selected>GST 18%</option>
-                <option value="28">GST 28%</option>
-              </select>
-            </div>
-          </div>
-
-          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; color: #94a3b8; font-size: 11px;">
-            <span>GST Amount:</span>
-            <span style="font-weight: 700; color: #e2e8f0;">₹ <span id="summary-gst-amt">0</span></span>
-          </div>
-
-          <!-- Grand Net Total -->
-          <div style="border-top: 2px solid #334155; padding-top: 10px; display: flex; align-items: baseline; justify-content: space-between;">
-            <div>
-              <div style="font-size: 11px; text-transform: uppercase; font-weight: 800; color: #60a5fa;">Net Payable Amount</div>
-              <div style="font-size: 10px; color: #94a3b8;">Includes all taxes & materials</div>
-            </div>
-            <div style="font-size: 22px; font-weight: 900; color: #ffffff;">
-              <span style="font-size: 16px; color: #60a5fa;">₹ </span>
-              <span id="summary-net-total">0</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2 BULLETPROOF INVOICE OPTIONS -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px;">
-          <!-- METHOD 1: DOWNLOAD INVOICE FILE DIRECTLY INTO PHONE FILES -->
-          <button type="button" onclick="downloadInvoiceHtmlFile()" class="btn btn-pdf" style="padding: 12px; font-size: 12px; font-weight: 800;">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span>Save Invoice File</span>
-          </button>
-
-          <!-- METHOD 2: DIRECT NATIVE PRINT / SAVE TO PDF -->
-          <button type="button" onclick="triggerNativePrint()" class="btn btn-dark" style="border: 1px solid #3b82f6; color: #60a5fa; padding: 12px; font-size: 12px; font-weight: 800;">
-            <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-            <span>Print to PDF</span>
-          </button>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 8px; margin-top: 8px;">
-          <button type="button" onclick="shareWhatsApp()" class="btn btn-success" style="padding: 10px;">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            <span>WhatsApp</span>
-          </button>
-          <button type="button" onclick="saveCurrentQuotationInternal()" class="btn btn-dark" style="border: 1px solid #334155; padding: 10px;">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/></svg>
-            <span>Save to App</span>
-          </button>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- STICKY BOTTOM BAR (SHOWN ON ROOMS TAB) -->
-  <div id="sticky-bottom-summary" class="sticky-bar no-print">
-    <div class="sticky-inner">
+  <div class="container">
+    <header class="app-header">
       <div>
-        <span style="font-size: 10px; color: #94a3b8; font-weight: 800; text-transform: uppercase;">Total Requirement</span>
-        <div style="display: flex; align-items: baseline; gap: 4px;">
-          <span id="sticky-grand-boxes" style="font-size: 20px; font-weight: 900; color: #60a5fa;">0</span>
-          <span style="font-size: 12px; font-weight: 700; color: #e2e8f0;">Boxes</span>
-          <span style="color: #64748b; font-size: 10px;">•</span>
-          <span id="sticky-grand-sqft" style="font-size: 11px; color: #cbd5e1; font-weight: 600;">0 sft</span>
+        <h1>Tile Estimator Pro</h1>
+        <p>4×2 Tiles (16 sq.ft / Box) • Auto Bifurcation</p>
+      </div>
+      <div class="header-actions">
+        <span class="status-badge" id="syncStatus">🔄 Syncing Tally</span>
+        <button class="btn-icon" onclick="window.print()">🖨️ Print</button>
+      </div>
+    </header>
+
+    <nav class="nav-tabs no-print">
+      <button class="tab-btn active" id="btnTabRooms" onclick="switchTab('rooms')">1. Tile Dimensions</button>
+      <button class="tab-btn" id="btnTabRates" onclick="switchTab('rates')">2. Rates & Invoice</button>
+    </nav>
+
+    <!-- TAB 1: DIMENSIONS -->
+    <div id="tab-rooms">
+      <div class="card">
+        <div class="card-title">Client Details</div>
+        <div class="grid-2">
+          <div class="field-group">
+            <label>Customer Name</label>
+            <input type="text" id="custName" placeholder="Client Name" />
+          </div>
+          <div class="field-group">
+            <label>Mobile Number</label>
+            <input type="tel" id="custPhone" placeholder="Mobile Number" />
+          </div>
         </div>
       </div>
 
-      <div style="display: flex; gap: 6px;">
-        <button type="button" onclick="downloadInvoiceHtmlFile()" class="btn btn-pdf btn-sm" title="Save Invoice to Files">
-          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Save File</span>
-        </button>
-        <button type="button" onclick="switchTab('bill')" class="btn btn-primary" style="padding: 9px 14px; font-size: 12px;">
-          <span>View Bill</span>
-          <svg class="svg-icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
+      <div class="card">
+        <div class="card-title">Wall Dimensions</div>
+        <div class="grid-2">
+          <div class="field-group">
+            <label>Wall Running Feet (RFT)</label>
+            <input type="number" id="wRft" placeholder="e.g. 30" oninput="calculate()" />
+          </div>
+          <div class="field-group">
+            <label>Wall Height (Feet)</label>
+            <input type="number" id="wHt" placeholder="e.g. 7" oninput="calculate()" />
+          </div>
+        </div>
+
+        <!-- Highlighter Accent -->
+        <div class="toggle-card">
+          <label class="chk-label">
+            <input type="checkbox" id="chkHl" onchange="togglePanel('hlPanel', this.checked)" />
+            Use Highlighter (HL) Accent Wall
+          </label>
+          <div id="hlPanel" class="sub-panel">
+            <div class="field-group">
+              <label>Highlighter Model Name (Tally Auto-suggest)</label>
+              <input type="text" id="hlName" placeholder="Search item from Tally..." />
+            </div>
+            <div class="grid-2">
+              <div class="field-group">
+                <label>HL Running Ft</label>
+                <input type="number" id="hlRft" placeholder="RFT" oninput="calculate()" />
+              </div>
+              <div class="field-group">
+                <label>HL Height (Ft)</label>
+                <input type="number" id="hlHt" placeholder="Height" oninput="calculate()" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dark Accent -->
+        <div class="toggle-card">
+          <label class="chk-label">
+            <input type="checkbox" id="chkDk" onchange="togglePanel('dkPanel', this.checked)" />
+            Use Dark Color Accent / Dado
+          </label>
+          <div id="dkPanel" class="sub-panel">
+            <div class="field-group">
+              <label>Dark Tile Model Name (Tally Auto-suggest)</label>
+              <input type="text" id="dkName" placeholder="Search item from Tally..." />
+            </div>
+            <div class="grid-2">
+              <div class="field-group">
+                <label>Dark Running Ft</label>
+                <input type="number" id="dkRft" placeholder="RFT" oninput="calculate()" />
+              </div>
+              <div class="field-group">
+                <label>Dark Height (Ft)</label>
+                <input type="number" id="dkHt" placeholder="Height" oninput="calculate()" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Light Main -->
+        <div class="field-group" style="margin-top: 10px;">
+          <label>Light (Main) Tile Model Name (Tally Auto-suggest)</label>
+          <input type="text" id="ltName" placeholder="Search item from Tally..." />
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Floor Dimensions</div>
+        <div class="grid-2">
+          <div class="field-group">
+            <label>Length (Feet)</label>
+            <input type="number" id="fLen" placeholder="Length" oninput="calculate()" />
+          </div>
+          <div class="field-group">
+            <label>Width (Feet)</label>
+            <input type="number" id="fWid" placeholder="Width" oninput="calculate()" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Floor Tile Model Name (Tally Auto-suggest)</label>
+          <input type="text" id="flName" placeholder="Search item from Tally..." />
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Box Requirement (16 sq.ft / Box)</div>
+        <div class="summary-badge-grid">
+          <div class="badge-card badge-hl" id="boxCardHl" style="display:none;">
+            <span>Highlighter Tile</span>
+            <span class="num"><span id="outHl">0</span> Boxes</span>
+          </div>
+          <div class="badge-card badge-dk" id="boxCardDk" style="display:none;">
+            <span>Dark Tile</span>
+            <span class="num"><span id="outDk">0</span> Boxes</span>
+          </div>
+          <div class="badge-card badge-lt">
+            <span>Light (Main) Tile</span>
+            <span class="num"><span id="outLt">0</span> Boxes</span>
+          </div>
+          <div class="badge-card badge-fl">
+            <span>Floor Tile</span>
+            <span class="num"><span id="outFl">0</span> Boxes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: RATES & INVOICE -->
+    <div id="tab-rates" style="display: none;">
+      <div class="card">
+        <div class="card-title">Billing & Quotation (₹)</div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Tile Item</th>
+                <th style="width: 70px;">Boxes</th>
+                <th style="width: 100px;">Rate (₹)</th>
+                <th style="width: 90px; text-align: right;">Total</th>
+              </tr>
+            </thead>
+            <tbody id="billItems"></tbody>
+          </table>
+        </div>
+
+        <div style="margin-top: 16px; border-top: 1.5px solid var(--border); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-weight: 800; font-size: 16px;">Grand Total</span>
+          <span style="font-weight: 900; font-size: 20px; color: var(--primary);" id="billTotal">₹ 0</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- SAVED QUOTATIONS MODAL -->
-  <div id="modal-quotes" class="modal-backdrop no-print" style="display: none;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div style="font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 6px;">
-          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/></svg>
-          <span>Saved Quotations</span>
-        </div>
-        <button type="button" onclick="closeQuotesModal()" class="btn btn-dark btn-sm" style="padding: 4px 6px;">✕</button>
-      </div>
-      <div class="modal-body" id="quotes-list-container"></div>
-      <div class="modal-footer" style="justify-content: flex-end;">
-        <button type="button" onclick="closeQuotesModal()" class="btn btn-dark btn-sm">Close</button>
-      </div>
+  <!-- Bottom Action Bar -->
+  <div class="floating-bar">
+    <div class="bar-total">
+      <span>Total Quantity</span>
+      <span id="barTotalBoxes">0 Boxes</span>
+    </div>
+    <div class="bar-actions">
+      <button class="btn btn-wa" onclick="sendWhatsApp()">💬 WhatsApp</button>
+      <button class="btn btn-primary" onclick="switchTab('rates')">Next: Bill →</button>
     </div>
   </div>
 
-  <!-- TOAST NOTIFICATION -->
-  <div id="toast-msg">
-    <svg class="svg-icon" style="color: #4ade80;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-    <span id="toast-text">Notification</span>
-  </div>
-
-  <!-- NATIVE PRINT MEDIA CONTAINER -->
-  <div id="print-invoice-sheet"></div>
-
-  <!-- JAVASCRIPT ENGINE -->
   <script>
-      
-    // Live Cloudflare Tunnel endpoint connected to your Tally machine
     const TALLY_ENDPOINT = 'https://sender-world-hospital-fool.trycloudflare.com/api/stock';
 
     let tallyStock = [];
@@ -927,12 +666,22 @@
 
     // --- Tally Live Sync Integration ---
     async function syncTallyStock() {
+      const syncStatus = document.getElementById('syncStatus');
       try {
         const res = await fetch(TALLY_ENDPOINT);
         if (!res.ok) throw new Error('Network error from Tally tunnel');
         tallyStock = await res.json();
+        
+        if (syncStatus) {
+          syncStatus.innerHTML = `🟢 Live Tally: ${tallyStock.length} items`;
+          syncStatus.style.color = '#4ade80';
+        }
         populateDatalists();
       } catch (err) {
+        if (syncStatus) {
+          syncStatus.innerHTML = `🔴 Tally Offline`;
+          syncStatus.style.color = '#f87171';
+        }
         console.warn('Tally Bridge unavailable:', err);
       }
     }
@@ -971,1081 +720,9 @@
       });
     }
 
-    // Initialize calculations and fetch live Tally stock
     calculate();
     window.addEventListener('DOMContentLoaded', syncTallyStock);
     window.addEventListener('focus', syncTallyStock);
-  
-
-    const SafeStorage = {
-      memoryStore: {},
-      isSupported: (function() {
-        try {
-          const testKey = '__storage_test__';
-          window.localStorage.setItem(testKey, testKey);
-          window.localStorage.removeItem(testKey);
-          return true;
-        } catch (e) {
-          return false;
-        }
-      })(),
-      getItem: function(key) {
-        if (this.isSupported) {
-          try { return window.localStorage.getItem(key); } catch (e) {}
-        }
-        return this.memoryStore[key] || null;
-      },
-      setItem: function(key, val) {
-        if (this.isSupported) {
-          try { window.localStorage.setItem(key, val); return; } catch (e) {}
-        }
-        this.memoryStore[key] = String(val);
-      }
-    };
-
-    const DRAFT_KEY = 'tilecalc_draft_v5';
-    const SAVED_QUOTES_KEY = 'tilecalc_quotes_v5';
-    const SFT_PER_BOX = 16.0; // 4ft x 2ft (2 pcs per box)
-
-    let currentQuoteId = null;
-    let customer = {
-      name: '',
-      phone: '',
-      address: '',
-      date: new Date().toISOString().split('T')[0]
-    };
-    let rooms = [];
-    let tileRates = {};
-    let accessories = [];
-    let billDiscount = 0;
-    let billGstRate = 18;
-
-    document.addEventListener('DOMContentLoaded', function() {
-      loadDraftOrInit();
-      updateQuotesBadge();
-    });
-
-    function initCleanState() {
-      currentQuoteId = 'quote_' + Date.now();
-      customer = {
-        name: '',
-        phone: '',
-        address: '',
-        date: new Date().toISOString().split('T')[0]
-      };
-      rooms = [createNewRoom('Master Bathroom')];
-      tileRates = {};
-      accessories = [
-        { id: 'acc_1', name: 'Tile Adhesive (20kg)', qty: '', rate: '480' },
-        { id: 'acc_2', name: 'Epoxy Grout (1kg)', qty: '', rate: '650' }
-      ];
-      billDiscount = 0;
-      billGstRate = 18;
-
-      syncCustomerInputs();
-      document.getElementById('bill-discount').value = '';
-      document.getElementById('bill-gst').value = '18';
-      renderAllRooms();
-      recalc();
-      updateQuotesBadge();
-    }
-
-    function createNewRoom(defaultTitle) {
-      return {
-        id: 'room_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
-        name: defaultTitle || 'Bathroom',
-        collapsed: false,
-        wallRft: '',
-        wallHeight: '',
-        floorLen: '',
-        floorWid: '',
-        useHl: false,
-        hlName: '',
-        hlRft: '',
-        hlHeight: '',
-        useDark: false,
-        darkName: '',
-        darkRft: '',
-        darkHeight: '',
-        lightName: '',
-        floorName: ''
-      };
-    }
-
-    function syncCustomerInputs() {
-      document.getElementById('cust-name').value = customer.name || '';
-      document.getElementById('cust-phone').value = customer.phone || '';
-      document.getElementById('cust-address').value = customer.address || '';
-      document.getElementById('cust-date').value = customer.date || new Date().toISOString().split('T')[0];
-    }
-
-    function readCustomerInputs() {
-      customer.name = document.getElementById('cust-name').value.trim();
-      customer.phone = document.getElementById('cust-phone').value.trim();
-      customer.address = document.getElementById('cust-address').value.trim();
-      customer.date = document.getElementById('cust-date').value || new Date().toISOString().split('T')[0];
-    }
-
-    let autoSaveTimer = null;
-    function triggerAutoSave() {
-      clearTimeout(autoSaveTimer);
-      autoSaveTimer = setTimeout(() => {
-        readCustomerInputs();
-        const payload = {
-          currentQuoteId,
-          customer,
-          rooms,
-          tileRates,
-          accessories,
-          billDiscount: parseFloat(document.getElementById('bill-discount').value) || 0,
-          billGstRate: parseFloat(document.getElementById('bill-gst').value) || 0,
-          savedAt: Date.now()
-        };
-        SafeStorage.setItem(DRAFT_KEY, JSON.stringify(payload));
-      }, 300);
-    }
-
-    function loadDraftOrInit() {
-      const raw = SafeStorage.getItem(DRAFT_KEY);
-      if (!raw) { initCleanState(); return; }
-      try {
-        const data = JSON.parse(raw);
-        currentQuoteId = data.currentQuoteId || ('quote_' + Date.now());
-        customer = data.customer || customer;
-        rooms = (data.rooms && data.rooms.length > 0) ? data.rooms : [createNewRoom('Master Bathroom')];
-        tileRates = data.tileRates || {};
-        accessories = data.accessories || [];
-        billDiscount = data.billDiscount || 0;
-        billGstRate = (data.billGstRate !== undefined) ? data.billGstRate : 18;
-
-        syncCustomerInputs();
-        document.getElementById('bill-discount').value = billDiscount || '';
-        document.getElementById('bill-gst').value = billGstRate;
-        renderAllRooms();
-        recalc();
-      } catch (e) {
-        initCleanState();
-      }
-    }
-
-    function switchTab(tab) {
-      const viewRooms = document.getElementById('view-rooms');
-      const viewBill = document.getElementById('view-bill');
-      const tabRooms = document.getElementById('tab-btn-rooms');
-      const tabBill = document.getElementById('tab-btn-bill');
-      const stickyBar = document.getElementById('sticky-bottom-summary');
-
-      if (tab === 'rooms') {
-        viewRooms.style.display = 'block';
-        viewBill.style.display = 'none';
-        tabRooms.classList.add('active');
-        tabBill.classList.remove('active');
-        stickyBar.style.display = 'block';
-      } else {
-        viewRooms.style.display = 'none';
-        viewBill.style.display = 'block';
-        tabRooms.classList.remove('active');
-        tabBill.classList.add('active');
-        stickyBar.style.display = 'none';
-        renderBillingTable();
-        calculateGrandTotal();
-      }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function addRoom() {
-      const idx = rooms.length + 1;
-      const defaultNames = ['Master Bathroom', 'Common Bathroom', 'Guest Bathroom', 'Attached Toilet', 'Powder Room'];
-      const defaultTitle = defaultNames[idx - 1] || `Bathroom ${idx}`;
-      rooms.push(createNewRoom(defaultTitle));
-      renderAllRooms();
-      recalc();
-      triggerAutoSave();
-      showToast(`Added ${defaultTitle}`);
-    }
-
-    function deleteRoom(roomId) {
-      if (rooms.length <= 1) {
-        showToast('At least one room is required!');
-        return;
-      }
-      rooms = rooms.filter(r => r.id !== roomId);
-      renderAllRooms();
-      recalc();
-      triggerAutoSave();
-      showToast('Room removed');
-    }
-
-    function toggleRoomCollapse(roomId) {
-      const r = rooms.find(item => item.id === roomId);
-      if (r) {
-        r.collapsed = !r.collapsed;
-        renderAllRooms();
-      }
-    }
-
-    function renderAllRooms() {
-      const container = document.getElementById('rooms-container');
-      container.innerHTML = '';
-      document.getElementById('rooms-pill-count').innerText = rooms.length;
-
-      rooms.forEach((room, index) => {
-        const c = calculateRoom(room);
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.id = `card_${room.id}`;
-        const isCollapsed = room.collapsed;
-        </script>
-
-        card.innerHTML = `
-          <div class="room-header" onclick="toggleRoomCollapse('${room.id}')">
-            <div class="room-title-edit" onclick="event.stopPropagation()">
-              <span style="color:#2563eb; font-weight:800;">${index + 1}.</span>
-              <input type="text" value="${escapeHtml(room.name)}" placeholder="Room Name" 
-                oninput="updateRoomField('${room.id}', 'name', this.value)" 
-                style="border:none; border-bottom:1.5px dashed #cbd5e1; border-radius:0; padding:2px 4px; font-size:14px!important; font-weight:800!important; width:170px;">
-            </div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <span class="room-badge">${c.totalBoxes} Boxes</span>
-              <button type="button" class="btn btn-outline btn-sm" style="padding:2px 6px;">${isCollapsed ? '▼' : '▲'}</button>
-              ${rooms.length > 1 ? `
-                <button type="button" onclick="event.stopPropagation(); deleteRoom('${room.id}')" class="btn btn-danger-outline btn-sm" style="padding:2px 6px;">✕</button>
-              ` : ''}
-            </div>
-          </div>
-
-          <div style="display: ${isCollapsed ? 'none' : 'block'}; margin-top: 12px;">
-            <div class="grid-2">
-              <div class="form-group">
-                <label class="form-label">Total Wall RFT</label>
-                <input type="number" placeholder="e.g. 28" min="0" step="any" value="${room.wallRft}"
-                  oninput="updateRoomField('${room.id}', 'wallRft', this.value)">
-                <span class="subtext">Sum of 4 walls (ft)</span>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Wall Height (ft)</label>
-                <input type="number" placeholder="e.g. 8" min="0" step="any" value="${room.wallHeight}"
-                  oninput="updateRoomField('${room.id}', 'wallHeight', this.value)">
-                <span class="subtext">Tiling height</span>
-              </div>
-            </div>
-
-            <div class="grid-2" style="margin-top: 8px;">
-              <div class="form-group">
-                <label class="form-label">Floor Length (ft)</label>
-                <input type="number" placeholder="e.g. 8" min="0" step="any" value="${room.floorLen}"
-                  oninput="updateRoomField('${room.id}', 'floorLen', this.value)">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Floor Width (ft)</label>
-                <input type="number" placeholder="e.g. 6" min="0" step="any" value="${room.floorWid}"
-                  oninput="updateRoomField('${room.id}', 'floorWid', this.value)">
-              </div>
-            </div>
-
-            <div class="form-group" style="margin-top: 8px;">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <label class="form-label">Floor Tile Name</label>
-                <span style="font-size:10px; font-weight:700; color:#16a34a;">${c.floorBoxes} Bx (${c.floorArea.toFixed(1)} sft)</span>
-              </div>
-              <input type="text" placeholder="e.g. 4x2 Slate Grey Floor" value="${escapeHtml(room.floorName)}"
-                oninput="updateRoomField('${room.id}', 'floorName', this.value)">
-            </div>
-
-            <!-- HIGHLIGHTER TILE -->
-            <div class="toggle-section ${room.useHl ? 'hl-active' : ''}">
-              <label class="toggle-header">
-                <input type="checkbox" ${room.useHl ? 'checked' : ''} onchange="toggleRoomCheckbox('${room.id}', 'useHl', this.checked)">
-                <span style="color:${room.useHl ? '#b45309' : '#334155'};">Use Highlighter (HL) Accent Wall</span>
-                ${room.useHl ? `<span style="margin-left:auto; font-size:10px; background:#fef3c7; color:#b45309; padding:2px 6px; border-radius:10px;">${c.hlBoxes} Boxes</span>` : ''}
-              </label>
-
-              <div id="hl_panel_${room.id}" style="display: ${room.useHl ? 'block' : 'none'}; margin-top: 10px;">
-                <div class="form-group">
-                  <label class="form-label">Highlighter Tile Name</label>
-                  <input type="text" placeholder="e.g. Statuario Gold Feature 4x2" value="${escapeHtml(room.hlName)}"
-                    oninput="updateRoomField('${room.id}', 'hlName', this.value)">
-                </div>
-                <div class="grid-2" style="margin-top: 6px;">
-                  <div class="form-group">
-                    <label class="form-label">Highlighter RFT</label>
-                    <input type="number" placeholder="e.g. 6" min="0" step="any" value="${room.hlRft}"
-                      oninput="updateRoomField('${room.id}', 'hlRft', this.value)">
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">HL Height (ft)</label>
-                    <input type="number" placeholder="${room.wallHeight ? 'Default: ' + room.wallHeight : 'Height'}" min="0" step="any" value="${room.hlHeight}"
-                      oninput="updateRoomField('${room.id}', 'hlHeight', this.value)">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- DARK TILE -->
-            <div class="toggle-section ${room.useDark ? 'dark-active' : ''}">
-              <label class="toggle-header">
-                <input type="checkbox" ${room.useDark ? 'checked' : ''} onchange="toggleRoomCheckbox('${room.id}', 'useDark', this.checked)">
-                <span style="color:${room.useDark ? '#1d4ed8' : '#334155'};">Use Dark Color Tile (Dado / Accent)</span>
-                ${room.useDark ? `<span style="margin-left:auto; font-size:10px; background:#dbeafe; color:#1e40af; padding:2px 6px; border-radius:10px;">${c.darkBoxes} Boxes</span>` : ''}
-              </label>
-
-              <div id="dark_panel_${room.id}" style="display: ${room.useDark ? 'block' : 'none'}; margin-top: 10px;">
-                <div class="form-group">
-                  <label class="form-label">Dark Tile Name</label>
-                  <input type="text" placeholder="e.g. Charcoal Matte Dado 4x2" value="${escapeHtml(room.darkName)}"
-                    oninput="updateRoomField('${room.id}', 'darkName', this.value)">
-                </div>
-                <div class="grid-2" style="margin-top: 6px;">
-                  <div class="form-group">
-                    <label class="form-label">Dark Tile RFT</label>
-                    <input type="number" placeholder="e.g. 22" min="0" step="any" value="${room.darkRft}"
-                      oninput="updateRoomField('${room.id}', 'darkRft', this.value)">
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Dark Height (ft)</label>
-                    <input type="number" placeholder="e.g. 3 (Dado)" min="0" step="any" value="${room.darkHeight}"
-                      oninput="updateRoomField('${room.id}', 'darkHeight', this.value)">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- LIGHT TILE (BALANCE) -->
-            <div style="border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 10px; margin-top: 8px; background: #ffffff;">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 4px;">
-                <label class="form-label" style="color: #0f172a; margin-bottom: 0;">Light / Main Wall Tile</label>
-                <span style="font-size:10px; font-weight:800; color:#2563eb;">${c.lightBoxes} Bx (${c.lightArea.toFixed(1)} sft)</span>
-              </div>
-              <input type="text" placeholder="e.g. Pure White Glossy 4x2" value="${escapeHtml(room.lightName)}"
-                oninput="updateRoomField('${room.id}', 'lightName', this.value)">
-              <span class="subtext">Auto-balances: Total Wall - (HL + Dark)</span>
-            </div>
-
-            <div style="margin-top: 10px; padding: 8px 10px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center; font-size:11px;">
-              <span style="font-weight:700; color:#64748b;">Room Total (16 SFT/Box):</span>
-              <span style="font-weight:900; color:#0f172a; font-size:12px;">${c.totalBoxes} Boxes (${c.totalSqft.toFixed(1)} sq.ft)</span>
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function updateRoomField(roomId, field, val) {
-      const r = rooms.find(item => item.id === roomId);
-      if (r) {
-        r[field] = val;
-        recalc();
-        triggerAutoSave();
-        const card = document.getElementById(`card_${room.id}`);
-        if (card) {
-          const c = calculateRoom(r);
-          const badge = card.querySelector('.room-badge');
-          if (badge) badge.innerText = `${c.totalBoxes} Boxes`;
-        }
-      }
-    }
-
-    function toggleRoomCheckbox(roomId, field, isChecked) {
-      const r = rooms.find(item => item.id === roomId);
-      if (r) {
-        r[field] = isChecked;
-        renderAllRooms();
-        recalc();
-        triggerAutoSave();
-      }
-    }
-
-    function calculateRoom(r) {
-      const wallRft = parseFloat(r.wallRft) || 0;
-      const wallHeight = parseFloat(r.wallHeight) || 0;
-      const totalWallArea = wallRft * wallHeight;
-
-      let hlArea = 0;
-      if (r.useHl) {
-        const hlRft = parseFloat(r.hlRft) || 0;
-        const hlH = parseFloat(r.hlHeight) || wallHeight;
-        hlArea = hlRft * hlH;
-      }
-
-      let darkArea = 0;
-      if (r.useDark) {
-        const dRft = parseFloat(r.darkRft) || 0;
-        const dH = parseFloat(r.darkHeight) || 0;
-        darkArea = dRft * dH;
-      }
-
-      const lightArea = Math.max(0, totalWallArea - hlArea - darkArea);
-      const fLen = parseFloat(r.floorLen) || 0;
-      const fWid = parseFloat(r.floorWid) || 0;
-      const floorArea = fLen * fWid;
-
-      const hlBoxes = r.useHl && hlArea > 0 ? Math.ceil(hlArea / SFT_PER_BOX) : 0;
-      const darkBoxes = r.useDark && darkArea > 0 ? Math.ceil(darkArea / SFT_PER_BOX) : 0;
-      const lightBoxes = lightArea > 0 ? Math.ceil(lightArea / SFT_PER_BOX) : 0;
-      const floorBoxes = floorArea > 0 ? Math.ceil(floorArea / SFT_PER_BOX) : 0;
-
-      const totalBoxes = hlBoxes + darkBoxes + lightBoxes + floorBoxes;
-      const totalSqft = (r.useHl ? hlArea : 0) + (r.useDark ? darkArea : 0) + lightArea + floorArea;
-
-      return {
-        totalWallArea, hlArea, darkArea, lightArea, floorArea,
-        hlBoxes, darkBoxes, lightBoxes, floorBoxes,
-        totalBoxes, totalSqft
-      };
-    }
-
-    function recalc() {
-      let grandBoxes = 0;
-      let grandSqft = 0;
-      rooms.forEach(r => {
-        const c = calculateRoom(r);
-        grandBoxes += c.totalBoxes;
-        grandSqft += c.totalSqft;
-      });
-
-      document.getElementById('sticky-grand-boxes').innerText = grandBoxes;
-      document.getElementById('sticky-grand-sqft').innerText = grandSqft.toFixed(1) + ' sft';
-      const badge = document.getElementById('bill-grand-boxes-tag');
-      if (badge) badge.innerText = `${grandBoxes} Boxes`;
-    }
-
-    function renderBillingTable() {
-      recalc();
-      const tbody = document.getElementById('tiles-bill-tbody');
-      tbody.innerHTML = '';
-      const map = {};
-
-      rooms.forEach(r => {
-        const c = calculateRoom(r);
-        const roomName = r.name.trim() || 'Bathroom';
-        if (c.floorBoxes > 0) aggregateItem(map, r.floorName.trim() || `Floor Tile (${roomName})`, c.floorBoxes, c.floorArea, 'Floor');
-        if (r.useHl && c.hlBoxes > 0) aggregateItem(map, r.hlName.trim() || `Highlighter Tile (${roomName})`, c.hlBoxes, c.hlArea, 'Highlighter');
-        if (r.useDark && c.darkBoxes > 0) aggregateItem(map, r.darkName.trim() || `Dark Tile (${roomName})`, c.darkBoxes, c.darkArea, 'Dark');
-        if (c.lightBoxes > 0) aggregateItem(map, r.lightName.trim() || `Light Tile (${roomName})`, c.lightBoxes, c.lightArea, 'Light');
-      });
-
-      const keys = Object.keys(map);
-      if (keys.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:18px; color:#94a3b8;">Enter room dimensions to see tiles bill</td></tr>`;
-      } else {
-        keys.forEach(k => {
-          const item = map[k];
-          const rate = tileRates[k] !== undefined ? tileRates[k] : '';
-          const subtotal = (parseFloat(rate) || 0) * item.boxes;
-
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td class="col-item">
-              <div style="font-weight:800; color:#0f172a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(item.displayName)}</div>
-              <div style="font-size:10px; color:#64748b;">${item.tag} • ${item.sqft.toFixed(1)} sft</div>
-            </td>
-            <td class="col-qty font-bold">
-              <span style="font-weight:800; font-size:13px; color:#1e293b;">${item.boxes}</span>
-              <span style="font-size:10px; color:#64748b; display:block;">Bx</span>
-            </td>
-            <td class="col-rate">
-              <input type="number" min="0" step="any" placeholder="₹/Bx" value="${rate}"
-                class="table-input" style="text-align:right;"
-                oninput="updateTileRate('${escapeJsStr(k)}', this.value)">
-            </td>
-            <td class="col-sub" id="sub_tile_${escapeElementId(k)}">
-              ₹ ${subtotal.toLocaleString('en-IN')}
-            </td>
-          `;
-          tbody.appendChild(tr);
-        });
-      }
-
-      renderAccessoriesTable();
-      calculateGrandTotal();
-    }
-
-    function aggregateItem(map, name, boxes, sqft, tag) {
-      const key = name.toLowerCase().trim();
-      if (!map[key]) {
-        map[key] = { displayName: name, boxes: 0, sqft: 0, tag: tag };
-      }
-      map[key].boxes += boxes;
-      map[key].sqft += sqft;
-    }
-
-    function updateTileRate(key, rateVal) {
-      tileRates[key] = rateVal;
-      calculateGrandTotal();
-      triggerAutoSave();
-    }
-
-    function renderAccessoriesTable() {
-      const tbody = document.getElementById('acc-bill-tbody');
-      tbody.innerHTML = '';
-
-      if (accessories.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:10px; color:#94a3b8; font-size:11px;">No additional accessories added</td></tr>`;
-        return;
-      }
-
-      accessories.forEach(item => {
-        const qty = parseFloat(item.qty) || 0;
-        const rate = parseFloat(item.rate) || 0;
-        const subtotal = qty * rate;
-
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="col-item">
-            <input type="text" value="${escapeHtml(item.name)}" placeholder="Item description"
-              class="table-input" style="font-size:11px!important;"
-              oninput="updateAccessoryField('${item.id}', 'name', this.value)">
-          </td>
-          <td class="col-qty">
-            <input type="number" min="0" step="any" value="${item.qty}" placeholder="0"
-              class="table-input" style="text-align:center;"
-              oninput="updateAccessoryField('${item.id}', 'qty', this.value)">
-          </td>
-          <td class="col-rate">
-            <input type="number" min="0" step="any" value="${item.rate}" placeholder="₹ Rate"
-              class="table-input" style="text-align:right;"
-              oninput="updateAccessoryField('${item.id}', 'rate', this.value)">
-          </td>
-          <td class="col-sub">
-            <div style="display:flex; align-items:center; justify-content:flex-end; gap:4px;">
-              <span>₹ ${subtotal.toLocaleString('en-IN')}</span>
-              <button type="button" onclick="deleteAccessory('${item.id}')" style="background:none; border:none; color:#ef4444; font-size:14px; cursor:pointer;" title="Remove">✕</button>
-            </div>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function addPresetAccessory(name, qty, rate) {
-      accessories.push({
-        id: 'acc_' + Date.now() + '_' + Math.floor(Math.random()*100),
-        name: name, qty: qty || '', rate: rate || ''
-      });
-      renderAccessoriesTable();
-      calculateGrandTotal();
-      triggerAutoSave();
-    }
-
-    function addCustomAccessory() {
-      accessories.push({
-        id: 'acc_' + Date.now() + '_' + Math.floor(Math.random()*100),
-        name: '', qty: '', rate: ''
-      });
-      renderAccessoriesTable();
-      calculateGrandTotal();
-      triggerAutoSave();
-    }
-
-    function updateAccessoryField(id, field, val) {
-      const it = accessories.find(a => a.id === id);
-      if (it) {
-        it[field] = val;
-        calculateGrandTotal();
-        triggerAutoSave();
-      }
-    }
-
-    function deleteAccessory(id) {
-      accessories = accessories.filter(a => a.id !== id);
-      renderAccessoriesTable();
-      calculateGrandTotal();
-      triggerAutoSave();
-    }
-
-    function calculateGrandTotal() {
-      let tilesSum = 0;
-      const tileMap = {};
-      rooms.forEach(r => {
-        const c = calculateRoom(r);
-        const roomName = r.name.trim() || 'Bathroom';
-        if (c.floorBoxes > 0) aggregateItem(tileMap, r.floorName.trim() || `Floor Tile (${roomName})`, c.floorBoxes, c.floorArea, 'Floor');
-        if (r.useHl && c.hlBoxes > 0) aggregateItem(tileMap, r.hlName.trim() || `Highlighter Tile (${roomName})`, c.hlBoxes, c.hlArea, 'Highlighter');
-        if (r.useDark && c.darkBoxes > 0) aggregateItem(tileMap, r.darkName.trim() || `Dark Tile (${roomName})`, c.darkBoxes, c.darkArea, 'Dark');
-        if (c.lightBoxes > 0) aggregateItem(tileMap, r.lightName.trim() || `Light Tile (${roomName})`, c.lightBoxes, c.lightArea, 'Light');
-      });
-
-      Object.keys(tileMap).forEach(k => {
-        const item = tileMap[k];
-        const rate = parseFloat(tileRates[k]) || 0;
-        const sub = rate * item.boxes;
-        tilesSum += sub;
-
-        const cell = document.getElementById(`sub_tile_${escapeElementId(k)}`);
-        if (cell) cell.innerText = `₹ ${sub.toLocaleString('en-IN')}`;
-      });
-
-      document.getElementById('tiles-bill-subtotal').innerText = `₹ ${tilesSum.toLocaleString('en-IN')}`;
-      document.getElementById('summary-tiles-amt').innerText = tilesSum.toLocaleString('en-IN');
-
-      let accSum = 0;
-      accessories.forEach(a => {
-        const q = parseFloat(a.qty) || 0;
-        const rt = parseFloat(a.rate) || 0;
-        accSum += (q * rt);
-      });
-      document.getElementById('acc-bill-subtotal').innerText = `₹ ${accSum.toLocaleString('en-IN')}`;
-      document.getElementById('summary-acc-amt').innerText = accSum.toLocaleString('en-IN');
-
-      const discountInput = parseFloat(document.getElementById('bill-discount').value) || 0;
-      const subtotalAfterDiscount = Math.max(0, (tilesSum + accSum) - discountInput);
-
-      const gstRate = parseFloat(document.getElementById('bill-gst').value) || 0;
-      const gstAmount = Math.round(subtotalAfterDiscount * (gstRate / 100));
-      document.getElementById('summary-gst-amt').innerText = gstAmount.toLocaleString('en-IN');
-
-      const grandNet = subtotalAfterDiscount + gstAmount;
-      document.getElementById('summary-net-total').innerText = grandNet.toLocaleString('en-IN');
-
-      triggerAutoSave();
-      return { tilesSum, accSum, discountInput, gstRate, gstAmount, grandNet, tileMap };
-    }
-
-    /**
-     * GENERATE STANDALONE CLEAN INVOICE HTML CODE
-     */
-    function buildCleanInvoiceDocumentHtml() {
-      readCustomerInputs();
-      const fin = calculateGrandTotal();
-      let totalBoxes = 0;
-      let totalSqft = 0;
-      rooms.forEach(r => {
-        const c = calculateRoom(r);
-        totalBoxes += c.totalBoxes;
-        totalSqft += c.totalSqft;
-      });
-
-      const custName = customer.name.trim() || 'Valued Customer';
-      const safeDate = customer.date || new Date().toISOString().split('T')[0];
-
-      let tileRowsHtml = '';
-      let tIdx = 1;
-      Object.keys(fin.tileMap).forEach(k => {
-        const item = fin.tileMap[k];
-        const rate = parseFloat(tileRates[k]) || 0;
-        const sub = rate * item.boxes;
-        tileRowsHtml += `
-          <tr style="border-bottom:1px solid #e2e8f0;">
-            <td style="padding:8px 6px;">${tIdx++}</td>
-            <td style="padding:8px 6px; font-weight:700;">${escapeHtml(item.displayName)} <span style="font-size:10px; color:#64748b;">(${item.tag})</span></td>
-            <td style="padding:8px 6px; text-align:center;">${item.sqft.toFixed(1)}</td>
-            <td style="padding:8px 6px; text-align:center; font-weight:800;">${item.boxes} Bx</td>
-            <td style="padding:8px 6px; text-align:right;">₹ ${rate.toLocaleString('en-IN')}</td>
-            <td style="padding:8px 6px; text-align:right; font-weight:800;">₹ ${sub.toLocaleString('en-IN')}</td>
-          </tr>
-        `;
-      });
-
-      let accRowsHtml = '';
-      let aIdx = 1;
-      accessories.forEach(a => {
-        const q = parseFloat(a.qty) || 0;
-        const rt = parseFloat(a.rate) || 0;
-        if (q > 0 && a.name.trim()) {
-          accRowsHtml += `
-            <tr style="border-bottom:1px solid #e2e8f0;">
-              <td style="padding:7px 6px;">${aIdx++}</td>
-              <td style="padding:7px 6px;">${escapeHtml(a.name)}</td>
-              <td style="padding:7px 6px; text-align:center;">${q}</td>
-              <td style="padding:7px 6px; text-align:right;">₹ ${rt.toLocaleString('en-IN')}</td>
-              <td style="padding:7px 6px; text-align:right; font-weight:700;">₹ ${(q * rt).toLocaleString('en-IN')}</td>
-            </tr>
-          `;
-        }
-      });
-
-      let roomBreakdownHtml = '';
-      rooms.forEach((r, idx) => {
-        const c = calculateRoom(r);
-        const title = r.name.trim() || `Bathroom ${idx + 1}`;
-        roomBreakdownHtml += `
-          <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:8px 10px; margin-bottom:6px; font-size:11px;">
-            <div style="display:flex; justify-content:space-between; font-weight:800; margin-bottom:4px;">
-              <span>${idx + 1}. ${escapeHtml(title)}</span>
-              <span style="color:#2563eb;">Total: ${c.totalBoxes} Boxes (${c.totalSqft.toFixed(1)} sft)</span>
-            </div>
-            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:6px; color:#475569; font-size:10.5px;">
-              <div>Wall: ${r.wallRft || 0}' × ${r.wallHeight || 0}'</div>
-              <div>Floor: ${r.floorLen || 0}' × ${r.floorWid || 0}'</div>
-              <div>Light: ${c.lightBoxes} Bx</div>
-              <div>Floor: ${c.floorBoxes} Bx</div>
-              ${r.useHl ? `<div>HL: ${c.hlBoxes} Bx (${escapeHtml(r.hlName || 'HL')})</div>` : ''}
-              ${r.useDark ? `<div>Dark: ${c.darkBoxes} Bx (${escapeHtml(r.darkName || 'Dark')})</div>` : ''}
-            </div>
-          </div>
-        `;
-      });
-
-      return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invoice - ${escapeHtml(custName)}</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #ffffff; color: #0f172a; padding: 24px; max-width: 820px; margin: 0 auto; line-height: 1.4; }
-    .header-bar { border-bottom: 2.5px solid #0f172a; padding-bottom: 12px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: flex-start; }
-    .brand-h1 { font-size: 20px; font-weight: 900; color: #0f172a; }
-    .info-card { display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 14px; font-size: 11px; margin-bottom: 14px; }
-    .section-title { font-size: 11px; font-weight: 800; color: #0f172a; text-transform: uppercase; border-bottom: 1.5px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 6px; }
-    table { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 14px; }
-    th { background: #f1f5f9; padding: 8px 6px; text-align: left; text-transform: uppercase; font-size: 10px; color: #475569; border-top: 1px solid #cbd5e1; border-bottom: 2px solid #cbd5e1; }
-    .totals-area { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; margin-top: 10px; }
-    .print-btn-bar { margin-bottom: 16px; padding: 10px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
-    .btn-act { padding: 8px 16px; background: #2563eb; color: #fff; border: none; border-radius: 6px; font-weight: 700; font-size: 13px; cursor: pointer; text-decoration: none; }
-    @media print { .print-btn-bar { display: none !important; } body { padding: 0 !important; } }
-  </style>
-</head>
-<body>
-  <div class="print-btn-bar">
-    <span style="font-size:12px; font-weight:700; color:#1e40af;">📄 Tap "Print to PDF" to save directly as a PDF on your iPhone/Android</span>
-    <button class="btn-act" onclick="window.print()">Print to PDF</button>
-  </div>
-
-  <div class="header-bar">
-    <div>
-      <h1 class="brand-h1">TILE ESTIMATION & TAX INVOICE</h1>
-      <p style="font-size: 11px; color: #475569; margin-top: 2px;">Standard 4ft × 2ft Vitrified Tiles (16 sq.ft / Box, 2 pcs)</p>
-    </div>
-    <div style="text-align: right; font-size: 11px;">
-      <div style="font-weight: 800; font-size: 13px; color: #2563eb;">TAX INVOICE</div>
-      <div style="color: #334155; margin-top: 2px;"><strong>Date:</strong> ${safeDate}</div>
-      <div style="color: #64748b;">Ref: ${currentQuoteId.replace('quote_', '#EST-')}</div>
-    </div>
-  </div>
-
-  <div class="info-card">
-    <div>
-      <div style="font-size: 9.5px; font-weight: 800; color: #64748b; text-transform: uppercase;">Customer Details</div>
-      <div style="margin-top: 4px;"><strong>Name:</strong> ${escapeHtml(custName)}</div>
-      <div><strong>Phone:</strong> ${escapeHtml(customer.phone || 'N/A')}</div>
-      <div><strong>Site Address:</strong> ${escapeHtml(customer.address || 'Standard Site Address')}</div>
-    </div>
-    <div>
-      <div style="font-size: 9.5px; font-weight: 800; color: #64748b; text-transform: uppercase;">Project Specifications</div>
-      <div style="margin-top: 4px;"><strong>Scope:</strong> Bathroom Wall & Floor Tiling</div>
-      <div><strong>Format:</strong> 4ft × 2ft (16.0 SFT/Box)</div>
-      <div><strong>Total Rooms:</strong> ${rooms.length} Bathroom(s)</div>
-    </div>
-  </div>
-
-  <div class="section-title">1. Bathroom Area Bifurcation</div>
-  ${roomBreakdownHtml}
-
-  <div class="section-title" style="margin-top: 14px;">2. Consolidated Tiles Purchase Schedule</div>
-  <table>
-    <thead>
-      <tr>
-        <th style="width: 4%;">#</th>
-        <th style="width: 44%;">Tile Model / Description</th>
-        <th style="width: 12%; text-align: center;">Area (SFT)</th>
-        <th style="width: 12%; text-align: center;">Boxes</th>
-        <th style="width: 14%; text-align: right;">Rate (₹)</th>
-        <th style="width: 14%; text-align: right;">Subtotal (₹)</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${tileRowsHtml || '<tr><td colspan="6" style="text-align:center; padding:12px;">No tiles calculated</td></tr>'}
-    </tbody>
-    <tfoot>
-      <tr style="background: #f8fafc; font-weight: 800;">
-        <td colspan="3" style="padding: 8px 6px;">Total Tiles Requirement:</td>
-        <td style="padding: 8px 6px; text-align: center; color: #2563eb;">${totalBoxes} Boxes</td>
-        <td style="padding: 8px 6px; text-align: right;">Tiles Subtotal:</td>
-        <td style="padding: 8px 6px; text-align: right; color: #2563eb;">₹ ${fin.tilesSum.toLocaleString('en-IN')}</td>
-      </tr>
-    </tfoot>
-  </table>
-
-  ${accRowsHtml ? `
-    <div class="section-title">3. Accessories & Labor Charges</div>
-    <table>
-      <thead>
-        <tr>
-          <th style="width: 4%;">#</th>
-          <th style="width: 52%;">Item Description</th>
-          <th style="width: 14%; text-align: center;">Quantity</th>
-          <th style="width: 15%; text-align: right;">Unit Rate (₹)</th>
-          <th style="width: 15%; text-align: right;">Subtotal (₹)</th>
-        </tr>
-      </thead>
-      <tbody>${accRowsHtml}</tbody>
-      <tfoot>
-        <tr style="background: #f8fafc; font-weight: 800;">
-          <td colspan="4" style="padding: 8px 6px; text-align: right;">Accessories Subtotal:</td>
-          <td style="padding: 8px 6px; text-align: right; color: #d97706;">₹ ${fin.accSum.toLocaleString('en-IN')}</td>
-        </tr>
-      </tfoot>
-    </table>
-  ` : ''}
-
-  <div class="totals-area">
-    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; font-size: 10px; color: #475569;">
-      <strong>Terms & Notes:</strong>
-      <ol style="margin: 4px 0 0 14px; padding: 0; line-height: 1.4;">
-        <li>Calculations based on standard 16 sq.ft per box (2 pcs 4ft × 2ft).</li>
-        <li>Please verify shade and lot numbers prior to fixing tiles.</li>
-        <li>Ceiling rounded box counts include standard cutting wastage.</li>
-      </ol>
-    </div>
-
-    <div>
-      <table style="width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 0;">
-        <tr><td style="padding: 4px 0; color: #475569;">Tiles Subtotal:</td><td style="text-align: right; font-weight: 700;">₹ ${fin.tilesSum.toLocaleString('en-IN')}</td></tr>
-        ${fin.accSum > 0 ? `<tr><td style="padding: 4px 0; color: #475569;">Accessories & Labor:</td><td style="text-align: right; font-weight: 700;">₹ ${fin.accSum.toLocaleString('en-IN')}</td></tr>` : ''}
-        ${fin.discountInput > 0 ? `<tr><td style="padding: 4px 0; color: #dc2626;">Discount (Flat):</td><td style="text-align: right; font-weight: 700; color: #dc2626;">- ₹ ${fin.discountInput.toLocaleString('en-IN')}</td></tr>` : ''}
-        ${fin.gstAmount > 0 ? `<tr><td style="padding: 4px 0; color: #475569;">GST (${fin.gstRate}%):</td><td style="text-align: right; font-weight: 700;">₹ ${fin.gstAmount.toLocaleString('en-IN')}</td></tr>` : ''}
-        <tr style="border-top: 2px solid #0f172a; border-bottom: 2px solid #0f172a; font-size: 14px; font-weight: 900;">
-          <td style="padding: 8px 0; color: #0f172a;">Grand Net Total:</td>
-          <td style="text-align: right; color: #2563eb;">₹ ${fin.grandNet.toLocaleString('en-IN')}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <div style="display: flex; justify-content: space-between; margin-top: 28px; padding-top: 12px; border-top: 1px dashed #cbd5e1; font-size: 10px; color: #64748b;">
-    <div>Customer Signature</div>
-    <div>Authorized Signatory</div>
-  </div>
-</body>
-</html>`;
-    }
-
-    /**
-     * METHOD 1: DOWNLOAD STANDALONE INVOICE FILE DIRECTLY INTO PHONE FILES
-     */
-    function downloadInvoiceHtmlFile() {
-      const htmlContent = buildCleanInvoiceDocumentHtml();
-      const custName = (customer.name || 'Customer').replace(/[^a-zA-Z0-9_-]/g, '_');
-      const filename = `Tile_Invoice_${custName}_${customer.date || 'date'}.html`;
-
-      const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-
-      showToast(`Saved to Files: ${filename}`);
-      saveCurrentQuotationInternal();
-    }
-
-    /**
-     * METHOD 2: DIRECT NATIVE PRINT / SAVE TO PDF
-     */
-    function triggerNativePrint() {
-      const container = document.getElementById('print-invoice-sheet');
-      container.innerHTML = buildCleanInvoiceDocumentHtml();
-      window.print();
-    }
-
-    /**
-     * INTERNAL STORAGE & QUOTES MANAGEMENT
-     */
-    function getSavedQuotes() {
-      try {
-        const raw = SafeStorage.getItem(SAVED_QUOTES_KEY);
-        return raw ? JSON.parse(raw) : [];
-      } catch (e) {
-        return [];
-      }
-    }
-
-    function updateQuotesBadge() {
-      const quotes = getSavedQuotes();
-      const badge = document.getElementById('quotes-badge-count');
-      if (badge) badge.innerText = quotes.length;
-    }
-
-    function saveCurrentQuotationInternal() {
-      readCustomerInputs();
-      if (!customer.name) {
-        customer.name = `Customer_${new Date().toLocaleDateString('en-GB').replace(/\//g,'-')}`;
-        document.getElementById('cust-name').value = customer.name;
-      }
-
-      const fin = calculateGrandTotal();
-      let totalBoxes = 0;
-      rooms.forEach(r => { totalBoxes += calculateRoom(r).totalBoxes; });
-
-      const quoteRecord = {
-        id: currentQuoteId,
-        customer: { ...customer },
-        rooms: JSON.parse(JSON.stringify(rooms)),
-        tileRates: { ...tileRates },
-        accessories: JSON.parse(JSON.stringify(accessories)),
-        billDiscount: parseFloat(document.getElementById('bill-discount').value) || 0,
-        billGstRate: parseFloat(document.getElementById('bill-gst').value) || 0,
-        totalBoxes: totalBoxes,
-        grandTotal: fin.grandNet,
-        savedAt: Date.now()
-      };
-
-      const quotes = getSavedQuotes();
-      const existingIdx = quotes.findIndex(q => q.id === currentQuoteId);
-      if (existingIdx >= 0) quotes[existingIdx] = quoteRecord;
-      else quotes.unshift(quoteRecord);
-
-      SafeStorage.setItem(SAVED_QUOTES_KEY, JSON.stringify(quotes));
-      triggerAutoSave();
-      updateQuotesBadge();
-      showToast(`Saved Quote for ${customer.name}`);
-    }
-
-    function openQuotesModal() {
-      const container = document.getElementById('quotes-list-container');
-      const quotes = getSavedQuotes();
-
-      if (quotes.length === 0) {
-        container.innerHTML = `<div style="text-align:center; padding:24px 10px; color:#94a3b8;">No saved quotations yet.</div>`;
-      } else {
-        let listHtml = '';
-        quotes.forEach(q => {
-          const dateStr = new Date(q.savedAt).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
-          const clientName = q.customer.name || 'Unnamed Client';
-          listHtml += `
-            <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:10px 12px; margin-bottom:8px;">
-              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <div>
-                  <h4 style="font-size:13px; font-weight:800; color:#0f172a;">${escapeHtml(clientName)}</h4>
-                  <p style="font-size:11px; color:#64748b;">${q.rooms.length} Room(s) • ${q.totalBoxes} Boxes</p>
-                  <p style="font-size:10px; color:#94a3b8;">${dateStr}</p>
-                </div>
-                <div style="text-align:right;">
-                  <div style="font-weight:900; font-size:14px; color:#2563eb;">₹ ${(q.grandTotal || 0).toLocaleString('en-IN')}</div>
-                </div>
-              </div>
-              <div style="display:flex; gap:6px; margin-top:8px;">
-                <button type="button" onclick="loadSavedQuotation('${q.id}')" class="btn btn-primary btn-sm" style="flex:1;">Load</button>
-                <button type="button" onclick="deleteSavedQuotation('${q.id}')" class="btn btn-danger-outline btn-sm">Delete</button>
-              </div>
-            </div>
-          `;
-        });
-        container.innerHTML = listHtml;
-      }
-      document.getElementById('modal-quotes').style.display = 'flex';
-    }
-
-    function closeQuotesModal() {
-      document.getElementById('modal-quotes').style.display = 'none';
-    }
-
-    function loadSavedQuotation(id) {
-      const quotes = getSavedQuotes();
-      const quote = quotes.find(q => q.id === id);
-      if (!quote) return;
-
-      currentQuoteId = quote.id;
-      customer = { ...quote.customer };
-      rooms = JSON.parse(JSON.stringify(quote.rooms || []));
-      tileRates = { ...(quote.tileRates || {}) };
-      accessories = JSON.parse(JSON.stringify(quote.accessories || []));
-      billDiscount = quote.billDiscount || 0;
-      billGstRate = (quote.billGstRate !== undefined) ? quote.billGstRate : 18;
-
-      syncCustomerInputs();
-      document.getElementById('bill-discount').value = billDiscount || '';
-      document.getElementById('bill-gst').value = billGstRate;
-
-      renderAllRooms();
-      recalc();
-      closeQuotesModal();
-      showToast(`Loaded ${customer.name}`);
-    }
-
-    function deleteSavedQuotation(id) {
-      let quotes = getSavedQuotes();
-      quotes = quotes.filter(q => q.id !== id);
-      SafeStorage.setItem(SAVED_QUOTES_KEY, JSON.stringify(quotes));
-      updateQuotesBadge();
-      openQuotesModal();
-      showToast('Deleted quotation');
-    }
-
-    /**
-     * WHATSAPP SHARE
-     */
-    function shareWhatsApp() {
-      const fin = calculateGrandTotal();
-      let totalBoxes = 0;
-      rooms.forEach(r => { totalBoxes += calculateRoom(r).totalBoxes; });
-
-      let txt = `*BATHROOM TILE ESTIMATION & BILL*\n`;
-      txt += `---------------------------------\n`;
-      if (customer.name) txt += `*Customer:* ${customer.name}\n`;
-      if (customer.phone) txt += `*Phone:* ${customer.phone}\n`;
-      if (customer.address) txt += `*Site:* ${customer.address}\n`;
-      txt += `*Date:* ${customer.date}\n`;
-      txt += `---------------------------------\n\n`;
-
-      txt += `*TOTAL TILES:* ${totalBoxes} Boxes (4x2 Format)\n`;
-      txt += `*Tiles Amount:* ₹ ${fin.tilesSum.toLocaleString('en-IN')}\n`;
-      if (fin.accSum > 0) txt += `*Accessories & Labor:* ₹ ${fin.accSum.toLocaleString('en-IN')}\n`;
-      if (fin.discountInput > 0) txt += `*Discount:* -₹ ${fin.discountInput.toLocaleString('en-IN')}\n`;
-      if (fin.gstAmount > 0) txt += `*GST (${fin.gstRate}%):* ₹ ${fin.gstAmount.toLocaleString('en-IN')}\n`;
-      txt += `*NET GRAND TOTAL:* ₹ ${fin.grandNet.toLocaleString('en-IN')}\n`;
-
-      copyToClipboard(txt).catch(() => {});
-      const encoded = encodeURIComponent(txt);
-      const phoneDigits = (customer.phone || '').replace(/\D/g, '');
-      const waUrl = phoneDigits.length >= 10 
-        ? `https://api.whatsapp.com/send?phone=${phoneDigits.length === 10 ? '91' + phoneDigits : phoneDigits}&text=${encoded}`
-        : `https://api.whatsapp.com/send?text=${encoded}`;
-
-      const a = document.createElement('a');
-      a.href = waUrl;
-      a.target = '_blank';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      showToast('Opened WhatsApp');
-    }
-
-    function copyToClipboard(text) {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        return navigator.clipboard.writeText(text);
-      }
-      return new Promise((resolve) => {
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.focus();
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        resolve();
-      });
-    }
-
-    let toastTimer = null;
-    function showToast(msg) {
-      const toast = document.getElementById('toast-msg');
-      const toastText = document.getElementById('toast-text');
-      toastText.innerText = msg;
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => { toast.classList.remove('show'); }, 2200);
-    }
-
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-    }
-    function escapeJsStr(str) {
-      if (!str) return '';
-      return String(str).replace(/'/g, "\\'").replace(/"/g, '\\"');
-    }
-    function escapeElementId(str) {
-      return String(str).replace(/[^a-zA-Z0-9_-]/g, '_');
-    }
   </script>
 </body>
 </html>

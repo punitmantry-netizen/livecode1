@@ -8,151 +8,304 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Tile Estimator" />
-  <meta name="theme-color" content="#0f172a" />
+  <meta name="theme-color" content="#2D3E2B" />
 
   <style>
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --surface: #ffffff;
-      --bg: #f8fafc;
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --border-dark: #cbd5e1;
-      --hl-color: #d97706;
-      --dk-color: #4338ca;
-      --lt-color: #0284c7;
-      --fl-color: #059669;
-      --radius: 12px;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      /* OLIVE GREEN & OFF-WHITE THEME */
+      --primary: #4A6746;
+      --primary-dark: #354E33;
+      --primary-deeper: #243622;
+      --primary-light: #658561;
+      --primary-tint: #EBF2E8;
+      --primary-subtle: #F3F7F1;
+      
+      --bg: #F8FAF6;
+      --surface: #FFFFFF;
+      --surface-muted: #F2F5EF;
+      --surface-card: #FFFFFF;
+      
+      --text: #192618;
+      --text-muted: #546852;
+      --text-light: #839781;
+      
+      --border: #DFE6DB;
+      --border-dark: #CAD4C5;
+      --border-hover: #9BB098;
+      
+      --radius-sm: 8px;
+      --radius: 14px;
+      --radius-lg: 18px;
+      
+      --shadow-xs: 0 1px 3px rgba(35, 52, 33, 0.04);
+      --shadow: 0 3px 12px -2px rgba(35, 52, 33, 0.06), 0 1px 4px rgba(35, 52, 33, 0.03);
+      --shadow-hover: 0 8px 24px -4px rgba(35, 52, 33, 0.10), 0 2px 8px rgba(35, 52, 33, 0.04);
+      --shadow-lg: 0 16px 36px -6px rgba(35, 52, 33, 0.14), 0 4px 12px rgba(35, 52, 33, 0.06);
+      
+      --focus-ring: 0 0 0 3.5px rgba(74, 103, 70, 0.18);
+      --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-    body { background: var(--bg); color: var(--text); padding: 14px; padding-bottom: 96px; -webkit-font-smoothing: antialiased; }
-    .container { max-width: 760px; margin: 0 auto; }
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+    }
+
+    /* CUSTOM SUBTLE SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--surface-muted); }
+    ::-webkit-scrollbar-thumb { background: #CAD6C5; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary-light); }
+
+    body { 
+      background: var(--bg); 
+      color: var(--text); 
+      padding: 16px; 
+      padding-bottom: 104px; 
+      -webkit-font-smoothing: antialiased; 
+      min-height: 100vh;
+    }
+
+    .container { max-width: 780px; margin: 0 auto; }
 
     /* HEADER */
     .app-header {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      background: linear-gradient(135deg, #263824 0%, #354E33 55%, #4A6746 100%);
       color: #fff;
-      padding: 16px 18px;
+      padding: 18px 22px;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
     }
-    .app-header h1 { font-size: 19px; font-weight: 800; letter-spacing: -0.3px; }
-    .app-header p { font-size: 12px; color: #94a3b8; margin-top: 2px; }
 
-    .badge-actions { display: flex; align-items: center; gap: 8px; }
+    .app-header::after {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+      pointer-events: none;
+    }
+
+    .app-header h1 { 
+      font-size: 20px; 
+      font-weight: 800; 
+      letter-spacing: -0.3px; 
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .app-header p { 
+      font-size: 12.5px; 
+      color: #D3E0D1; 
+      margin-top: 3px; 
+      font-weight: 500; 
+      letter-spacing: 0.2px;
+    }
+
+    .badge-actions { display: flex; align-items: center; gap: 10px; z-index: 1; }
+
     .status-badge {
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.14);
-      color: #facc15;
+      padding: 7px 14px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #F4FBF3;
       cursor: pointer;
       user-select: none;
-      transition: all 0.2s ease;
+      transition: var(--transition);
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
-    .status-badge:hover { background: rgba(255, 255, 255, 0.24); transform: translateY(-1px); }
-    .status-badge:active { transform: scale(0.96); }
+
+    .status-badge:hover { 
+      background: rgba(255, 255, 255, 0.26); 
+      transform: translateY(-1.5px); 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .status-badge:active { transform: scale(0.97); }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      background-color: #FACC15;
+    }
+    .status-dot.online {
+      background-color: #4ADE80;
+      box-shadow: 0 0 8px #4ADE80;
+      animation: pulseGreen 2s infinite;
+    }
+    .status-dot.offline {
+      background-color: #F87171;
+    }
+
+    @keyframes pulseGreen {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+      70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+    }
 
     .btn-gear {
-      background: rgba(255, 255, 255, 0.14);
-      border: none;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 50%;
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
       cursor: pointer;
-      font-size: 14px;
-      transition: background 0.2s, transform 0.1s;
+      font-size: 15px;
+      transition: var(--transition);
     }
-    .btn-gear:hover { background: rgba(255, 255, 255, 0.28); transform: rotate(45deg); }
+    .btn-gear:hover { 
+      background: rgba(255, 255, 255, 0.28); 
+      transform: rotate(45deg) scale(1.05); 
+    }
 
     /* TABS */
-    .nav-tabs { display: flex; background: #e2e8f0; padding: 4px; border-radius: 10px; margin-bottom: 14px; }
+    .nav-tabs { 
+      display: flex; 
+      background: #EAEFE6; 
+      padding: 5px; 
+      border-radius: 12px; 
+      margin-bottom: 16px; 
+      border: 1px solid var(--border);
+    }
+    
     .tab-btn {
       flex: 1;
-      padding: 11px 8px;
+      padding: 12px 10px;
       border: none;
-      border-radius: 8px;
+      border-radius: 9px;
       font-size: 13.5px;
       font-weight: 700;
       color: var(--text-muted);
       background: transparent;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: var(--transition);
       text-align: center;
+      letter-spacing: -0.1px;
+    }
+    .tab-btn:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.55);
     }
     .tab-btn.active {
       background: var(--surface);
-      color: var(--primary);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      color: var(--primary-dark);
+      box-shadow: 0 2px 8px rgba(35, 52, 33, 0.08);
     }
 
     /* CARDS & INPUTS */
     .card {
       background: var(--surface);
       border-radius: var(--radius);
-      padding: 16px;
+      padding: 18px 20px;
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
+      transition: var(--transition);
     }
+    .card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-hover);
+    }
+
     .card-title {
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 800;
-      color: #1e293b;
-      margin-bottom: 12px;
+      color: #192618;
+      margin-bottom: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      letter-spacing: -0.2px;
     }
-    .card-subtitle { font-size: 11.5px; font-weight: 600; color: var(--text-muted); }
+    .card-subtitle { 
+      font-size: 11.5px; 
+      font-weight: 700; 
+      color: var(--primary); 
+      background: var(--primary-tint);
+      padding: 3px 9px;
+      border-radius: 20px;
+      border: 1px solid #D6E4D3;
+    }
 
     .field-group { margin-bottom: 12px; }
     .field-group:last-child { margin-bottom: 0; }
-    label { display: block; font-size: 11.5px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 5px; }
+    
+    label { 
+      display: block; 
+      font-size: 11.5px; 
+      font-weight: 700; 
+      color: var(--text-muted); 
+      text-transform: uppercase; 
+      letter-spacing: 0.4px; 
+      margin-bottom: 6px; 
+    }
     
     input, select, textarea {
       width: 100%;
       height: 42px;
-      padding: 0 12px;
+      padding: 0 13px;
       border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 14.5px;
+      border-radius: 9px;
+      font-size: 14px;
       font-weight: 600;
-      color: #0f172a;
-      background: #fff;
-      transition: border-color 0.2s;
+      color: var(--text);
+      background: #FFFFFF;
+      transition: var(--transition);
     }
-    textarea { height: 60px; padding: 8px 12px; resize: vertical; }
-    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); }
+    textarea { height: 64px; padding: 10px 13px; resize: vertical; line-height: 1.4; }
+    
+    input:hover, select:hover, textarea:hover {
+      border-color: var(--border-hover);
+    }
+    input:focus, select:focus, textarea:focus { 
+      outline: none; 
+      border-color: var(--primary); 
+      box-shadow: var(--focus-ring);
+      background: #FFFFFF;
+    }
 
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
 
     /* ROOM CARDS */
     .room-card {
-      background: #ffffff;
+      background: var(--surface);
       border: 1.5px solid var(--border);
       border-radius: var(--radius);
-      padding: 16px;
-      margin-bottom: 16px;
+      padding: 18px;
+      margin-bottom: 18px;
       box-shadow: var(--shadow);
+      transition: var(--transition);
     }
+    .room-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-hover);
+    }
+
     .room-card-header {
       display: flex;
       justify-content: space-between;
@@ -161,166 +314,285 @@
       margin-bottom: 14px;
       border-bottom: 1.5px solid var(--border);
     }
+    
     .room-name-input {
-      font-size: 16px;
+      font-size: 16.5px;
       font-weight: 800;
-      color: #0f172a;
+      color: var(--text);
       border: 1.5px solid transparent;
-      padding: 4px 8px;
-      border-radius: 6px;
+      padding: 5px 10px;
+      border-radius: 7px;
       background: transparent;
       width: auto;
       max-width: 280px;
+      transition: var(--transition);
     }
-    .room-name-input:focus { border-color: var(--primary); background: #f8fafc; }
+    .room-name-input:hover {
+      border-color: var(--border);
+      background: var(--surface-muted);
+    }
+    .room-name-input:focus { 
+      border-color: var(--primary); 
+      background: #FFFFFF;
+      box-shadow: var(--focus-ring);
+    }
 
     .btn-remove-room {
-      background: #fee2e2;
-      color: #b91c1c;
-      border: 1px solid #fecaca;
-      border-radius: 6px;
-      padding: 5px 10px;
+      background: #FDF2F2;
+      color: #B91C1C;
+      border: 1px solid #F8D7DA;
+      border-radius: 7px;
+      padding: 6px 12px;
       font-size: 11.5px;
       font-weight: 700;
       cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
-    .btn-remove-room:hover { background: #fecaca; }
+    .btn-remove-room:hover { 
+      background: #FCE8E8; 
+      border-color: #F5C2C7;
+      transform: translateY(-1px);
+    }
 
     .tile-spec-box {
-      background: #f8fafc;
+      background: var(--surface-muted);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 12px;
+      padding: 14px;
       margin-top: 10px;
+      transition: var(--transition);
     }
+    .tile-spec-box:hover {
+      border-color: var(--border-hover);
+    }
+
     .tile-meta {
       font-size: 12px;
       font-weight: 600;
-      color: #1e40af;
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      border-radius: 6px;
-      padding: 6px 10px;
-      margin-top: 6px;
+      color: var(--primary-dark);
+      background: var(--primary-subtle);
+      border: 1px solid #D1DFCF;
+      border-radius: 7px;
+      padding: 7px 11px;
+      margin-top: 8px;
     }
 
     .toggle-card {
-      background: #f8fafc;
+      background: var(--surface-muted);
       border: 1.5px dashed var(--border-dark);
       border-radius: 10px;
-      padding: 12px;
+      padding: 13px;
       margin-bottom: 12px;
-      transition: background 0.2s;
+      transition: var(--transition);
     }
-    .toggle-card.active { background: #fff; border-color: var(--primary); border-style: solid; }
-    .chk-label { display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 700; cursor: pointer; color: #1e293b; }
-    .chk-label input { width: 18px; height: 18px; cursor: pointer; }
-    .sub-panel { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); display: none; }
+    .toggle-card:hover {
+      border-color: var(--border-hover);
+    }
+    .toggle-card.active { 
+      background: #FFFFFF; 
+      border-color: var(--primary); 
+      border-style: solid; 
+      box-shadow: 0 2px 8px rgba(74, 103, 70, 0.08);
+    }
+    
+    .chk-label { 
+      display: flex; 
+      align-items: center; 
+      gap: 10px; 
+      font-size: 13.5px; 
+      font-weight: 700; 
+      cursor: pointer; 
+      color: var(--text); 
+      user-select: none;
+    }
+    .chk-label input { 
+      width: 19px; 
+      height: 19px; 
+      accent-color: var(--primary);
+      cursor: pointer; 
+    }
+    
+    .sub-panel { 
+      margin-top: 12px; 
+      padding-top: 12px; 
+      border-top: 1px solid var(--border); 
+      display: none; 
+    }
 
     .measurement-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: #e0f2fe;
-      color: #0369a1;
-      padding: 4px 10px;
-      border-radius: 6px;
+      background: var(--primary-tint);
+      color: var(--primary-dark);
+      border: 1px solid #D4E3D1;
+      padding: 5px 11px;
+      border-radius: 7px;
       font-size: 11.5px;
       font-weight: 700;
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
-    .summary-badge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+    /* SUMMARY BADGES */
+    .summary-badge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
     .badge-card {
-      padding: 10px;
-      border-radius: 8px;
+      padding: 12px 14px;
+      border-radius: 10px;
       font-size: 12px;
       font-weight: 600;
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
       border: 1px solid transparent;
+      transition: var(--transition);
     }
-    .badge-card .num { font-size: 16px; font-weight: 800; }
-    .badge-card .sub-detail { font-size: 11px; opacity: 0.85; }
-    .badge-hl { background: #fef3c7; color: var(--hl-color); border-color: #fde68a; }
-    .badge-dk { background: #e0e7ff; color: var(--dk-color); border-color: #c7d2fe; }
-    .badge-lt { background: #e0f2fe; color: var(--lt-color); border-color: #bae6fd; }
-    .badge-fl { background: #d1fae5; color: var(--fl-color); border-color: #a7f3d0; }
+    .badge-card:hover {
+      transform: translateY(-1.5px);
+    }
+    .badge-card .num { font-size: 17px; font-weight: 800; }
+    .badge-card .sub-detail { font-size: 11px; opacity: 0.85; font-weight: 700; }
+    
+    .badge-lt { 
+      background: #EEF4EC; 
+      color: #314C2F; 
+      border-color: #D3E2D1; 
+    }
+    .badge-fl { 
+      background: #E5EFE4; 
+      color: #244122; 
+      border-color: #C6DFC4; 
+    }
 
     /* INVOICE & BILL TABLE */
     .invoice-header {
       border-bottom: 2px solid var(--border);
       padding-bottom: 14px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
     }
-    .shop-title { font-size: 18px; font-weight: 900; color: #0f172a; cursor: pointer; }
-    .shop-sub { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; line-height: 1.4; }
 
-    .inv-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12.5px; margin-bottom: 14px; }
-    .inv-meta-block { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
-    .inv-meta-block strong { display: block; font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 3px; }
+    .inv-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 12.5px; margin-bottom: 16px; }
+    .inv-meta-block { 
+      background: var(--surface-muted); 
+      border: 1px solid var(--border); 
+      border-radius: 9px; 
+      padding: 12px; 
+      transition: var(--transition);
+    }
+    .inv-meta-block:hover { border-color: var(--border-hover); }
+    .inv-meta-block strong { display: block; font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.3px; }
 
-    table.bill-table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+    table.bill-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
     table.bill-table th {
-      background: #f1f5f9;
-      padding: 10px 8px;
+      background: #EEF3EB;
+      padding: 11px 9px;
       font-size: 11px;
+      font-weight: 700;
       text-transform: uppercase;
-      color: var(--text-muted);
+      letter-spacing: 0.3px;
+      color: #384F36;
       text-align: left;
-      border-bottom: 1.5px solid var(--border);
+      border-bottom: 2px solid #D5E1D3;
     }
     table.bill-table td {
-      padding: 9px 8px;
+      padding: 10px 9px;
       font-size: 13px;
       border-bottom: 1px solid var(--border);
       font-weight: 600;
       vertical-align: middle;
+      transition: background 0.15s ease;
+    }
+    table.bill-table tr:hover td {
+      background: #F4F8F2;
     }
     table.bill-table td input {
-      height: 34px;
-      padding: 0 6px;
-      font-size: 13px;
-      width: 80px;
+      height: 36px;
+      padding: 0 8px;
+      font-size: 13.5px;
+      font-weight: 700;
+      width: 88px;
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      background: #FFFFFF;
+      transition: var(--transition);
     }
-    .item-desc-cell .main-name { font-weight: 700; color: #0f172a; font-size: 13.5px; }
-    .item-desc-cell .meta-info { font-size: 11px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+    table.bill-table td input:hover { border-color: var(--border-hover); }
+    table.bill-table td input:focus { border-color: var(--primary); box-shadow: var(--focus-ring); }
+    
+    .item-desc-cell .main-name { font-weight: 800; color: var(--text); font-size: 13.5px; }
+    .item-desc-cell .meta-info { font-size: 11.5px; color: var(--text-muted); font-weight: 600; margin-top: 3px; }
+    .item-desc-cell .dim-pill { 
+      font-size: 11px; 
+      color: #2F4C2D; 
+      background: #EBF3E9; 
+      border: 1px solid #D4E3D2;
+      padding: 2px 7px; 
+      border-radius: 5px; 
+      display: inline-block; 
+      margin-top: 4px; 
+      font-weight: 600;
+    }
 
     .inv-summary-row {
       display: flex;
       justify-content: space-between;
-      padding: 6px 0;
-      font-size: 13px;
+      padding: 7px 0;
+      font-size: 13.5px;
       font-weight: 600;
-      color: #334155;
+      color: #2E3E2C;
     }
     .inv-summary-total {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 10px;
-      margin-top: 8px;
+      padding-top: 12px;
+      margin-top: 10px;
       border-top: 2px solid var(--border);
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 900;
-      color: var(--primary);
+      color: var(--primary-dark);
     }
-    .amount-words { font-size: 11.5px; font-weight: 600; color: var(--text-muted); font-style: italic; margin-top: 4px; text-align: right; }
+    .amount-words { font-size: 12px; font-weight: 600; color: var(--text-muted); font-style: italic; margin-top: 5px; text-align: right; }
+
+    /* ACCESSORIES PILLS */
+    .acc-quick-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+    .acc-pill {
+      background: var(--surface-muted);
+      border: 1px solid var(--border-dark);
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #354D33;
+      cursor: pointer;
+      user-select: none;
+      transition: var(--transition);
+    }
+    .acc-pill:hover { 
+      background: var(--primary); 
+      color: #FFFFFF; 
+      border-color: var(--primary);
+      transform: translateY(-1.5px);
+      box-shadow: 0 4px 10px rgba(74, 103, 70, 0.2);
+    }
+    .acc-pill:active { transform: scale(0.97); }
 
     /* ACTION BUTTONS */
     .btn-action-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 14px;
+      gap: 12px;
+      margin-top: 16px;
     }
+    
     .btn {
-      padding: 11px 16px;
-      border-radius: 8px;
+      padding: 12px 18px;
+      border-radius: 9px;
       font-size: 13.5px;
       font-weight: 700;
       border: none;
@@ -328,30 +600,91 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      transition: all 0.15s ease;
+      gap: 7px;
+      transition: var(--transition);
+      letter-spacing: -0.1px;
     }
-    .btn:active { transform: scale(0.98); }
-    .btn-wa { background: #25d366; color: #fff; }
-    .btn-wa:hover { background: #22c55e; }
-    .btn-print { background: #334155; color: #fff; }
-    .btn-print:hover { background: #1e293b; }
-    .btn-tally { background: #0284c7; color: #fff; }
-    .btn-tally:hover { background: #0369a1; }
-    .btn-save { background: #64748b; color: #fff; }
-    .btn-save:hover { background: #475569; }
-    .btn-primary { background: var(--primary); color: #fff; }
-    .btn-primary:hover { background: var(--primary-dark); }
+    .btn:active { transform: translateY(0.5px) scale(0.98); }
+    
+    /* SPECIFIC BUTTON COLORS & HOVERS */
+    .btn-wa { 
+      background: #25D366; 
+      color: #FFFFFF; 
+      box-shadow: 0 2px 6px rgba(37, 211, 102, 0.2);
+    }
+    .btn-wa:hover { 
+      background: #1EBD5A; 
+      transform: translateY(-1.5px); 
+      box-shadow: 0 5px 14px rgba(37, 211, 102, 0.35); 
+    }
+
+    .btn-print { 
+      background: #2B3B2A; 
+      color: #FFFFFF; 
+      box-shadow: 0 2px 6px rgba(43, 59, 42, 0.2);
+    }
+    .btn-print:hover { 
+      background: #1C281C; 
+      transform: translateY(-1.5px); 
+      box-shadow: 0 5px 14px rgba(43, 59, 42, 0.35); 
+    }
+
+    .btn-tally { 
+      background: #4A6746; 
+      color: #FFFFFF; 
+      box-shadow: 0 2px 6px rgba(74, 103, 70, 0.2);
+    }
+    .btn-tally:hover { 
+      background: #395236; 
+      transform: translateY(-1.5px); 
+      box-shadow: 0 5px 14px rgba(74, 103, 70, 0.35); 
+    }
+
+    .btn-save { 
+      background: #6B7D69; 
+      color: #FFFFFF; 
+      box-shadow: 0 2px 6px rgba(107, 125, 105, 0.2);
+    }
+    .btn-save:hover { 
+      background: #576855; 
+      transform: translateY(-1.5px); 
+      box-shadow: 0 5px 14px rgba(107, 125, 105, 0.35); 
+    }
+
+    .btn-primary { 
+      background: var(--primary); 
+      color: #FFFFFF; 
+      box-shadow: 0 2px 6px rgba(74, 103, 70, 0.2);
+    }
+    .btn-primary:hover { 
+      background: var(--primary-dark); 
+      transform: translateY(-1.5px); 
+      box-shadow: 0 5px 14px rgba(74, 103, 70, 0.35); 
+    }
+
     .btn-add-room {
-      background: #eff6ff;
-      color: var(--primary);
+      background: #F4F8F2;
+      color: #354E33;
       border: 1.5px dashed var(--primary);
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       font-size: 14px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 700;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
-    .btn-add-room:hover { background: #dbeafe; }
+    .btn-add-room:hover { 
+      background: #E5EFE3; 
+      border-style: solid;
+      transform: translateY(-1.5px);
+      box-shadow: 0 4px 12px rgba(74, 103, 70, 0.15);
+    }
 
     /* FLOATING BOTTOM BAR */
     .floating-bar {
@@ -359,27 +692,30 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(8px);
+      background: rgba(248, 250, 246, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-top: 1px solid var(--border);
-      padding: 10px 16px;
+      padding: 11px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 -4px 10px rgba(0,0,0,0.04);
+      box-shadow: 0 -4px 16px rgba(35, 52, 33, 0.06);
       z-index: 100;
     }
-    .bar-stats { display: flex; gap: 14px; align-items: center; }
+    .bar-stats { display: flex; gap: 16px; align-items: center; }
     .stat-pill { display: flex; flex-direction: column; }
-    .stat-pill span:first-child { font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
-    .stat-pill span:last-child { font-size: 16px; font-weight: 800; color: #0f172a; }
-    .stat-pill.primary span:last-child { color: var(--primary); }
+    .stat-pill span:first-child { font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; }
+    .stat-pill span:last-child { font-size: 16.5px; font-weight: 800; color: var(--text); }
+    .stat-pill.primary span:last-child { color: var(--primary-dark); }
 
     /* MODAL */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(15, 23, 42, 0.6);
+      background: rgba(26, 38, 25, 0.65);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -387,17 +723,35 @@
       z-index: 200;
     }
     .modal-card {
-      background: #fff;
-      border-radius: var(--radius);
-      padding: 20px;
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 22px;
       max-width: 480px;
       width: 100%;
       max-height: 85vh;
       overflow-y: auto;
-      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
     }
-    .modal-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
-    .btn-close { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text-muted); }
+    .modal-title { 
+      font-size: 16.5px; 
+      font-weight: 800; 
+      color: var(--text); 
+      margin-bottom: 12px; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    }
+    .btn-close { 
+      background: none; 
+      border: none; 
+      font-size: 22px; 
+      cursor: pointer; 
+      color: var(--text-muted); 
+      transition: var(--transition);
+      line-height: 1;
+    }
+    .btn-close:hover { color: var(--text); transform: scale(1.1); }
 
     /* PRINT STYLESHEET */
     @media print {
@@ -406,7 +760,7 @@
       .app-header, .nav-tabs, .floating-bar, .btn-action-grid, #tab-rooms, .btn-gear, .status-badge, .no-print, .modal-overlay, .btn-add-room { display: none !important; }
       #tab-rates { display: block !important; }
       .card { box-shadow: none; border: none; padding: 0; margin-bottom: 0; }
-      table.bill-table th { background: #f1f5f9 !important; -webkit-print-color-adjust: exact; }
+      table.bill-table th { background: #EEF3EB !important; -webkit-print-color-adjust: exact; color: #000 !important; }
       table.bill-table td input { border: none; background: transparent; font-weight: 700; width: auto; }
       .print-only { display: block !important; }
     }
@@ -421,11 +775,14 @@
   <div class="container">
     <header class="app-header">
       <div>
-        <h1 id="headerStoreName">Tile Estimator & Quotation</h1>
-        <p>Tile Measurement, SFT & Box Estimator</p>
+        <h1>Tile Estimator & Quotation</h1>
+        <p>Measurements, SFT & Billing</p>
       </div>
       <div class="badge-actions">
-        <span class="status-badge" id="syncStatus" onclick="handleBadgeClick()" title="Click to refresh stock from Tally">🔄 Connecting...</span>
+        <span class="status-badge" id="syncStatus" onclick="handleBadgeClick()" title="Click to refresh stock from Tally">
+          <span class="status-dot" id="statusDot"></span>
+          <span id="syncStatusText">Connecting...</span>
+        </span>
         <button type="button" class="btn-gear" onclick="configureTallyUrl()" title="Configure Tally Bridge / Tunnel URL">⚙️</button>
       </div>
     </header>
@@ -456,7 +813,7 @@
             <input type="tel" id="custPhone" placeholder="Mobile Number" oninput="saveDraft()" />
           </div>
         </div>
-        <div class="grid-2" style="margin-top:10px;">
+        <div class="grid-2" style="margin-top:12px;">
           <div class="field-group">
             <label>Site / Delivery Address</label>
             <input type="text" id="custAddress" placeholder="Site Address / Location" oninput="saveDraft()" />
@@ -475,6 +832,25 @@
       <button type="button" class="btn btn-add-room no-print" onclick="addRoom()">
         ➕ Add Another Room / Area
       </button>
+
+      <!-- ACCESSORIES & EXTRA MATERIALS -->
+      <div class="card">
+        <div class="card-title">
+          <span>Accessories & Extra Items</span>
+          <span class="card-subtitle" id="accCountLabel">0 items</span>
+        </div>
+        
+        <div class="acc-quick-pills no-print">
+          <span class="acc-pill" onclick="addQuickAccessory('Tile Adhesive (20 Kg)', 'Bag', 450)">+ Tile Adhesive 20kg</span>
+          <span class="acc-pill" onclick="addQuickAccessory('Epoxy Grout (1 Kg)', 'Kg', 350)">+ Epoxy Grout 1kg</span>
+          <span class="acc-pill" onclick="addQuickAccessory('Tile Spacers (Packet)', 'Pkt', 80)">+ Tile Spacers</span>
+          <span class="acc-pill" onclick="addQuickAccessory('Corner Beading (8 Ft)', 'Pc', 120)">+ Corner Beading</span>
+          <span class="acc-pill" onclick="addQuickAccessory('Tile Cleaner (1 Ltr)', 'Btl', 150)">+ Tile Cleaner</span>
+          <span class="acc-pill" onclick="addBlankAccessory()">+ Custom Item</span>
+        </div>
+
+        <div id="accessoriesList"></div>
+      </div>
 
       <!-- OVERALL TOTAL MEASUREMENTS CARD -->
       <div class="card">
@@ -503,17 +879,14 @@
     <div id="tab-rates" style="display: none;">
       <div class="card" id="printableInvoiceCard">
         
-        <!-- STORE BRANDING / HEADER -->
+        <!-- INVOICE HEADER (NO SHOP NAME) -->
         <div class="invoice-header">
           <div>
-            <div class="shop-title" id="invStoreName" onclick="editStoreDetails()" title="Click to edit Store Name & Contact">CERAMIC TILES & SANITARYWARE ✏️</div>
-            <div class="shop-sub" id="invStoreAddress">Tiles • Marbles • Bath Fittings</div>
-            <div class="shop-sub" id="invStoreGstin" style="display:none;"></div>
+            <div style="font-size:18px; font-weight:900; color:var(--text); letter-spacing:0.3px;">ESTIMATE / QUOTATION</div>
+            <div style="font-size:12.5px; font-weight:700; color:var(--primary); margin-top:2px;" id="invRefNum">#EST-1001</div>
           </div>
           <div style="text-align: right;">
-            <div style="font-size:16px; font-weight:900; color:var(--primary);">ESTIMATE / QUOTE</div>
-            <div style="font-size:12px; font-weight:700; color:#334155; margin-top:2px;" id="invRefNum">#EST-1001</div>
-            <div style="font-size:11.5px; color:var(--text-muted);" id="invDate">Date: 01/11/2026</div>
+            <div style="font-size:12.5px; font-weight:700; color:var(--text-muted);" id="invDate">Date: 01/11/2026</div>
           </div>
         </div>
 
@@ -521,12 +894,12 @@
         <div class="inv-meta-grid">
           <div class="inv-meta-block">
             <strong>Customer Details</strong>
-            <div style="font-weight:700;" id="invCustName">Walk-in Customer</div>
+            <div style="font-weight:700; color:var(--text);" id="invCustName">Walk-in Customer</div>
             <div style="color:var(--text-muted);" id="invCustPhone">-</div>
           </div>
           <div class="inv-meta-block">
             <strong>Site / Delivery Address</strong>
-            <div id="invCustAddress" style="color:#1e293b; font-weight:600;">Site: As specified</div>
+            <div id="invCustAddress" style="color:var(--text); font-weight:600;">Site: As specified</div>
           </div>
         </div>
 
@@ -535,10 +908,10 @@
           <thead>
             <tr>
               <th style="width:25px;">#</th>
-              <th>Item / Room Description</th>
+              <th>Item & Wall Area Specification</th>
               <th style="text-align:right; width:65px;">Area (SFT)</th>
-              <th style="text-align:right; width:60px;">Boxes</th>
-              <th style="text-align:right; width:85px;">Rate/Box</th>
+              <th style="text-align:right; width:60px;">Qty</th>
+              <th style="text-align:right; width:90px;">Rate (₹)</th>
               <th style="text-align:right; width:70px;">Rate/SFT</th>
               <th style="text-align:right; width:85px;">Total (₹)</th>
             </tr>
@@ -547,22 +920,22 @@
         </table>
 
         <!-- INVOICE TOTALS & SUMMARY -->
-        <div style="margin-top:14px; padding-top:10px; border-top:1px solid var(--border);">
+        <div style="margin-top:16px; padding-top:12px; border-top:1.5px solid var(--border);">
           <div class="inv-summary-row">
-            <span>Subtotal (Boxes: <b id="invTotalBoxes">0</b> • SFT: <b id="invTotalSft">0</b>)</span>
-            <span id="invSubTotal">₹ 0</span>
+            <span>Subtotal (Boxes: <b id="invTotalBoxes">0</b> • Tile SFT: <b id="invTotalSft">0</b>)</span>
+            <span id="invSubTotal" style="font-weight:700;">₹ 0</span>
           </div>
 
           <div class="inv-summary-row">
             <span style="display:flex; align-items:center; gap:8px;">
               <span>GST Option:</span>
-              <select id="taxSelector" class="no-print" onchange="renderBill()" style="height:28px; width:auto; font-size:12px; padding:0 6px;">
+              <select id="taxSelector" class="no-print" onchange="updateInvoiceTotalsOnly()" style="height:30px; width:auto; font-size:12px; padding:0 8px;">
                 <option value="0">None (Quotation / Estimate)</option>
                 <option value="18">18% GST (CGST 9% + SGST 9%)</option>
               </select>
               <span class="print-only" id="taxPrintLabel">GST (0%):</span>
             </span>
-            <span id="invTaxAmount">₹ 0</span>
+            <span id="invTaxAmount" style="font-weight:700;">₹ 0</span>
           </div>
 
           <div class="inv-summary-total">
@@ -572,8 +945,8 @@
           <div class="amount-words" id="invAmountInWords">Rupees Zero Only</div>
         </div>
 
-        <!-- TERMS & SIGNATURE -->
-        <div style="margin-top:20px; padding-top:10px; border-top:1px dashed var(--border); font-size:10.5px; color:#64748b; line-height:1.5;">
+        <!-- TERMS -->
+        <div style="margin-top:22px; padding-top:12px; border-top:1px dashed var(--border); font-size:11px; color:var(--text-muted); line-height:1.5;">
           <b>Terms & Conditions:</b><br />
           1. Rates are valid for 7 days from quote date.<br />
           2. Check tile shade/batch and size before fixing. No claims entertained after tiles are laid.<br />
@@ -598,8 +971,8 @@
       </div>
 
       <!-- PAST ESTIMATES DRAWER BUTTON -->
-      <div style="margin-top:12px; text-align:center;" class="no-print">
-        <button type="button" class="btn" style="background:#f1f5f9; color:#475569; width:100%;" onclick="openPastQuotesModal()">
+      <div style="margin-top:14px; text-align:center;" class="no-print">
+        <button type="button" class="btn" style="background:var(--surface-muted); color:var(--text-muted); width:100%; border:1px solid var(--border);" onclick="openPastQuotesModal()">
           📂 View Past Saved Estimates
         </button>
       </div>
@@ -634,7 +1007,7 @@
         <span>Push to Tally ERP</span>
         <button type="button" class="btn-close" onclick="closeTallyModal()">&times;</button>
       </div>
-      <div style="font-size:12.5px; color:var(--text-muted); margin-bottom:14px;">
+      <div style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">
         Create an official Sales Order or Sales Voucher directly into your running Tally company.
       </div>
       <div class="field-group">
@@ -652,7 +1025,7 @@
         <label>Order Narration</label>
         <textarea id="tallyNarration" placeholder="Site and delivery notes..."></textarea>
       </div>
-      <div id="tallyModalStatus" style="display:none; padding:10px; border-radius:6px; font-size:12.5px; font-weight:700; margin-bottom:12px;"></div>
+      <div id="tallyModalStatus" style="display:none; padding:10px; border-radius:8px; font-size:12.5px; font-weight:700; margin-bottom:12px;"></div>
       <div style="display:flex; gap:10px; justify-content:flex-end;">
         <button type="button" class="btn btn-save" onclick="closeTallyModal()">Cancel</button>
         <button type="button" class="btn btn-tally" id="btnConfirmTally" onclick="executeTallyPush()">
@@ -669,8 +1042,8 @@
         <span>Saved Estimates History</span>
         <button type="button" class="btn-close" onclick="closePastQuotesModal()">&times;</button>
       </div>
-      <div id="historyListContainer" style="max-height:300px; overflow-y:auto;"></div>
-      <div style="margin-top:14px; text-align:right;">
+      <div id="historyListContainer" style="max-height:320px; overflow-y:auto;"></div>
+      <div style="margin-top:16px; text-align:right;">
         <button type="button" class="btn btn-save" onclick="closePastQuotesModal()">Close</button>
       </div>
     </div>
@@ -682,16 +1055,16 @@
     const PERMANENT_ENDPOINT = 'https://monologue-corsage-hardhat.ngrok-free.dev/api/stock';
     const TALLY_ORDER_ENDPOINT = 'https://monologue-corsage-hardhat.ngrok-free.dev/api/sales-order';
 
-    // STANDARD TILE SIZES IN INDIA
+    // STANDARD TILE SIZES (CLEAN IMPERIAL SIZES)
     const STANDARD_TILE_SIZES = [
-      { id: '4x2', label: '4×2 ft (1200×600 mm)', sqft: 16.00 },
-      { id: '2x2', label: '2×2 ft (600×600 mm)', sqft: 16.00 },
-      { id: '12x18_9', label: '12×18 in (300×450 mm) - 9 sq.ft', sqft: 9.00 },
-      { id: '12x18_12', label: '12×18 in (300×450 mm) - 12 sq.ft', sqft: 12.00 },
-      { id: '12x24', label: '12×24 in (300×600 mm) - 10.66 sq.ft', sqft: 10.66 },
-      { id: '2.5x5', label: '2.5×5 ft (800×1600 mm)', sqft: 27.56 },
+      { id: '4x2', label: '4×2 ft', sqft: 16.00 },
+      { id: '2x2', label: '2×2 ft', sqft: 16.00 },
+      { id: '12x18_9', label: '12×18 in (9 sq.ft/box)', sqft: 9.00 },
+      { id: '12x18_12', label: '12×18 in (12 sq.ft/box)', sqft: 12.00 },
+      { id: '12x24', label: '12×24 in (10.66 sq.ft/box)', sqft: 10.66 },
+      { id: '2.5x5', label: '2.5×5 ft', sqft: 27.56 },
       { id: '32x64', label: '32×64 in (GVT Slab)', sqft: 28.44 },
-      { id: '1x1', label: '1×1 ft (300×300 mm)', sqft: 10.00 },
+      { id: '1x1', label: '1×1 ft', sqft: 10.00 },
       { id: 'custom', label: 'Custom Size...', sqft: 16.00 }
     ];
 
@@ -701,21 +1074,21 @@
     let currentTab = 'rooms';
     let roomCounter = 1;
 
-    // ROOMS STATE
+    // DATA STATE
     let rooms = [];
+    let accessories = [];
 
     // INITIALIZATION
     window.addEventListener('DOMContentLoaded', () => {
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('quoteDate').value = today;
 
-      loadStoreDetails();
-      
       const loaded = loadDraft();
       if (!loaded || rooms.length === 0) {
-        addRoom('Room 1 (Bathroom / Area)');
+        addRoom('Room 1');
       } else {
         renderAllRooms();
+        renderAccessoriesList();
         calculateAll();
       }
 
@@ -726,7 +1099,7 @@
       startAutoRefresh();
     });
 
-    // CREATE NEW ROOM DATA OBJECT
+    // ROOM MANAGEMENT
     function createRoomObj(name) {
       roomCounter++;
       return {
@@ -788,6 +1161,82 @@
       saveDraft();
     }
 
+    // ACCESSORIES MANAGEMENT
+    function addQuickAccessory(name, unit, defaultRate) {
+      accessories.push({
+        id: 'acc_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+        name: name,
+        unit: unit,
+        qty: 1,
+        rate: defaultRate || 0
+      });
+      renderAccessoriesList();
+      calculateAll();
+      saveDraft();
+    }
+
+    function addBlankAccessory() {
+      accessories.push({
+        id: 'acc_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+        name: '',
+        unit: 'Pcs',
+        qty: 1,
+        rate: ''
+      });
+      renderAccessoriesList();
+      calculateAll();
+      saveDraft();
+    }
+
+    function removeAccessory(accId) {
+      accessories = accessories.filter(a => a.id !== accId);
+      renderAccessoriesList();
+      calculateAll();
+      saveDraft();
+    }
+
+    function updateAccessoryField(accId, field, val) {
+      const acc = accessories.find(a => a.id === accId);
+      if (acc) {
+        acc[field] = val;
+        calculateAll();
+        saveDraft();
+      }
+    }
+
+    function renderAccessoriesList() {
+      const container = document.getElementById('accessoriesList');
+      document.getElementById('accCountLabel').innerText = `${accessories.length} items`;
+
+      if (accessories.length === 0) {
+        container.innerHTML = `<p style="font-size:12.5px; color:var(--text-muted); font-style:italic; padding:6px 2px;">No accessories added yet. Click any quick pill above to add adhesive, grout, spacers, etc.</p>`;
+        return;
+      }
+
+      container.innerHTML = accessories.map((acc, idx) => `
+        <div style="display:grid; grid-template-columns: 2fr 1fr 1fr 1fr 30px; gap:8px; align-items:center; margin-bottom:8px; background:var(--surface-muted); padding:10px; border-radius:9px; border:1px solid var(--border);">
+          <div>
+            <input type="text" list="tallyList" value="${escapeHtml(acc.name)}" placeholder="Item / Material Name"
+              oninput="updateAccessoryField('${acc.id}', 'name', this.value)" style="height:36px; font-size:13px;" />
+          </div>
+          <div>
+            <input type="number" value="${acc.qty}" placeholder="Qty" step="1" min="1"
+              oninput="updateAccessoryField('${acc.id}', 'qty', this.value)" style="height:36px; font-size:13px;" />
+          </div>
+          <div>
+            <input type="text" value="${escapeHtml(acc.unit)}" placeholder="Unit (Bag/Kg)"
+              oninput="updateAccessoryField('${acc.id}', 'unit', this.value)" style="height:36px; font-size:13px;" />
+          </div>
+          <div>
+            <input type="number" value="${acc.rate}" placeholder="₹ / Unit" step="1"
+              oninput="updateAccessoryField('${acc.id}', 'rate', this.value)" style="height:36px; font-size:13px;" />
+          </div>
+          <button type="button" onclick="removeAccessory('${acc.id}')" 
+            style="background:none; border:none; color:#DC2626; font-size:20px; cursor:pointer; transition:transform 0.15s ease;" title="Remove">&times;</button>
+        </div>
+      `).join('');
+    }
+
     // RENDER ALL ROOMS HTML
     function renderAllRooms() {
       const container = document.getElementById('roomsContainer');
@@ -800,7 +1249,7 @@
           </div>
 
           <!-- WALL DIMENSIONS -->
-          <div class="card" style="box-shadow:none; border:1px solid #e2e8f0; margin-bottom:12px;">
+          <div class="card" style="box-shadow:none; border:1px solid var(--border); margin-bottom:12px; padding:14px;">
             <div class="card-title">
               <span>Wall Dimensions & Tiles</span>
               <span class="card-subtitle" id="grossWall_${room.id}">Gross: 0 SFT</span>
@@ -819,7 +1268,7 @@
             </div>
 
             <!-- HIGHLIGHTER ACCENT -->
-            <div class="toggle-card ${room.chkHl ? 'active' : ''}" id="hlCard_${room.id}">
+            <div class="toggle-card ${room.chkHl ? 'active' : ''}" id="hlCard_${room.id}" style="margin-top:12px;">
               <label class="chk-label">
                 <input type="checkbox" ${room.chkHl ? 'checked' : ''} 
                   onchange="toggleRoomHl('${room.id}', this.checked)" />
@@ -853,14 +1302,14 @@
                     </div>
                   </div>
                   <div class="field-group" style="margin-top:8px;">
-                    <label>HL Tile Item (Type to auto-populate)</label>
+                    <label>Highlighter Tile Item (Type to auto-populate)</label>
                     <input type="text" list="tallyList" value="${escapeHtml(room.hlName)}" placeholder="🔍 Type tile or group..." 
                       oninput="onTileSearchInput('${room.id}', 'hl', this.value)" autocomplete="off" />
                     <div id="meta_hl_${room.id}" class="tile-meta" style="${room.hlItem ? '' : 'display:none;'}">
                       ${room.hlItem ? formatTileMeta(room.hlItem) : ''}
                     </div>
                   </div>
-                  <div id="calc_hl_${room.id}" class="measurement-pill" style="background:#fef3c7; color:#92400e; display:none;"></div>
+                  <div id="calc_hl_${room.id}" class="measurement-pill" style="display:none;"></div>
                 </div>
               </div>
             </div>
@@ -870,7 +1319,7 @@
               <label class="chk-label">
                 <input type="checkbox" ${room.chkDk ? 'checked' : ''} 
                   onchange="toggleRoomDk('${room.id}', this.checked)" />
-                <span>Dark Color Accent / Dado Wall</span>
+                <span>Dark Color Accent / Dado</span>
               </label>
               <div class="sub-panel" id="dkPanel_${room.id}" style="display:${room.chkDk ? 'block' : 'none'};">
                 <div class="grid-2">
@@ -907,14 +1356,14 @@
                       ${room.dkItem ? formatTileMeta(room.dkItem) : ''}
                     </div>
                   </div>
-                  <div id="calc_dk_${room.id}" class="measurement-pill" style="background:#e0e7ff; color:#3730a3; display:none;"></div>
+                  <div id="calc_dk_${room.id}" class="measurement-pill" style="display:none;"></div>
                 </div>
               </div>
             </div>
 
             <!-- LIGHT BASE WALL TILE -->
-            <div style="margin-top:10px;">
-              <label style="font-weight:800; color:#1e293b;">Main Light Base Tile (Remaining Wall)</label>
+            <div style="margin-top:12px;">
+              <label style="font-weight:800; color:var(--text);">Main Light Base Tile (Remaining Wall)</label>
               <div class="tile-spec-box" style="margin-top:6px;">
                 <div class="grid-2">
                   <div class="field-group">
@@ -943,7 +1392,7 @@
           </div>
 
           <!-- FLOOR DIMENSIONS -->
-          <div class="card" style="box-shadow:none; border:1px solid #e2e8f0; margin-bottom:0;">
+          <div class="card" style="box-shadow:none; border:1px solid var(--border); margin-bottom:0; padding:14px;">
             <div class="card-title">
               <span>Floor Dimensions & Tile</span>
               <span class="card-subtitle" id="grossFloor_${room.id}">Area: 0 SFT</span>
@@ -983,7 +1432,7 @@
                   ${room.flItem ? formatTileMeta(room.flItem) : ''}
                 </div>
               </div>
-              <div id="calc_fl_${room.id}" class="measurement-pill" style="background:#d1fae5; color:#065f46; display:none;"></div>
+              <div id="calc_fl_${room.id}" class="measurement-pill" style="display:none;"></div>
             </div>
           </div>
         </div>
@@ -991,10 +1440,10 @@
     }
 
     function formatTileMeta(item) {
-      return `📁 <b>${escapeHtml(item.parent || 'General')}</b> &bull; Tally Stock: <b>${item.stockBoxes}</b> ${escapeHtml(item.unit || 'bx')} &bull; Rate: <b>₹${item.rate}</b>`;
+      return `🏷️ <b>${escapeHtml(item.parent || 'General')}</b> &bull; Stock: <b>${item.stockBoxes}</b> ${escapeHtml(item.unit || 'bx')} &bull; Rate: <b>₹${item.rate}</b>`;
     }
 
-    // UPDATE ROOM FIELDS IN REAL-TIME
+    // UPDATE ROOM FIELDS
     function updateRoomField(roomId, field, value) {
       const room = rooms.find(r => r.id === roomId);
       if (room) {
@@ -1008,16 +1457,11 @@
       const room = rooms.find(r => r.id === roomId);
       if (room) {
         room[tileKey + 'Size'] = sizeId;
-        const match = STANDARD_TILE_SIZES.find(s => s.id === sizeId);
-        if (match) {
-          room[tileKey + 'Coverage'] = match.sqft;
-          // Update the input field in DOM if it exists
-          const card = document.getElementById(`card_${roomId}`);
-          if (card) {
-            const covInput = card.querySelector(`input[oninput*="${tileKey}Coverage"]`);
-            if (covInput) covInput.value = match.sqft;
-          }
+        const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === sizeId);
+        if (sizeObj) {
+          room[tileKey + 'Coverage'] = sizeObj.sqft;
         }
+        renderAllRooms();
         calculateAll();
         saveDraft();
       }
@@ -1083,7 +1527,7 @@
       saveDraft();
     }
 
-    // CALCULATE ALL ROOMS (EXACT SFT, NO WASTAGE, NO SKIRTING)
+    // CALCULATE ALL ROOMS
     function calculateAll() {
       let grandTotalWallSft = 0;
       let grandTotalWallBoxes = 0;
@@ -1124,18 +1568,12 @@
         const flCov = parseFloat(room.flCoverage) || 16;
         const bFl = flArea > 0 ? Math.ceil(flArea / flCov) : 0;
 
-        // Per-room Wall Totals
-        const roomWallSft = grossWallArea;
-        const roomWallBoxes = bHl + bDk + bLt;
-        const roomFloorSft = flArea;
-        const roomFloorBoxes = bFl;
+        grandTotalWallSft += grossWallArea;
+        grandTotalWallBoxes += (bHl + bDk + bLt);
+        grandTotalFloorSft += flArea;
+        grandTotalFloorBoxes += bFl;
 
-        grandTotalWallSft += roomWallSft;
-        grandTotalWallBoxes += roomWallBoxes;
-        grandTotalFloorSft += roomFloorSft;
-        grandTotalFloorBoxes += roomFloorBoxes;
-
-        // Update live room indicators
+        // Update live indicators on room card
         const grossWallEl = document.getElementById(`grossWall_${room.id}`);
         if (grossWallEl) grossWallEl.innerText = `Gross: ${grossWallArea.toFixed(1)} SFT`;
 
@@ -1146,7 +1584,7 @@
         if (calcHlEl) {
           if (room.chkHl && hlArea > 0) {
             calcHlEl.style.display = 'inline-flex';
-            calcHlEl.innerHTML = `HL: <b>${hlArea.toFixed(1)} SFT</b> → Req: <b>${bHl} Bx</b> (@${hlCov} sft/bx)`;
+            calcHlEl.innerHTML = `HL: <b>${hlRft}′ × ${hlHt}′ = ${hlArea.toFixed(1)} SFT</b> → Req: <b>${bHl} Bx</b> (@${hlCov} sft/bx)`;
           } else {
             calcHlEl.style.display = 'none';
           }
@@ -1156,7 +1594,7 @@
         if (calcDkEl) {
           if (room.chkDk && dkArea > 0) {
             calcDkEl.style.display = 'inline-flex';
-            calcDkEl.innerHTML = `Dark: <b>${dkArea.toFixed(1)} SFT</b> → Req: <b>${bDk} Bx</b> (@${dkCov} sft/bx)`;
+            calcDkEl.innerHTML = `Dark: <b>${dkRft}′ × ${dkHt}′ = ${dkArea.toFixed(1)} SFT</b> → Req: <b>${bDk} Bx</b> (@${dkCov} sft/bx)`;
           } else {
             calcDkEl.style.display = 'none';
           }
@@ -1176,7 +1614,7 @@
         if (calcFlEl) {
           if (flArea > 0) {
             calcFlEl.style.display = 'inline-flex';
-            calcFlEl.innerHTML = `Floor: <b>${flArea.toFixed(1)} SFT</b> → Req: <b>${bFl} Bx</b> (@${flCov} sft/bx)`;
+            calcFlEl.innerHTML = `Floor: <b>${fLen}′ × ${fWid}′ = ${flArea.toFixed(1)} SFT</b> → Req: <b>${bFl} Bx</b> (@${flCov} sft/bx)`;
           } else {
             calcFlEl.style.display = 'none';
           }
@@ -1184,10 +1622,11 @@
 
         window.calculatedRooms.push({
           room,
-          bHl, hlArea, hlCov,
-          bDk, dkArea, dkCov,
+          wRft, wHt, grossWallArea,
+          hlRft, hlHt, bHl, hlArea, hlCov,
+          dkRft, dkHt, bDk, dkArea, dkCov,
           bLt, ltArea, ltCov,
-          bFl, flArea, flCov
+          fLen, fWid, bFl, flArea, flCov
         });
       });
 
@@ -1207,7 +1646,7 @@
       renderBill();
     }
 
-    // RENDER BILL & INVOICE TABLE (CONSOLIDATED & ITEMIZED)
+    // BUILD INVOICE TABLE (CALLED WHEN TAB SWITCHES OR DATA STRUCTURE CHANGES)
     function renderBill() {
       if (!window.calculatedRooms) return;
 
@@ -1231,15 +1670,18 @@
         if (r.chkHl && cr.bHl > 0) {
           const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.hlSize);
           billItemsList.push({
+            type: 'tile',
             roomId: r.id,
             roomName: rName,
-            typeKey: 'hl',
+            tileKey: 'hl',
             label: 'Highlighter (HL)',
             name: r.hlName || 'Highlighter Tile',
             sizeText: sizeObj ? sizeObj.label : '4×2 ft',
+            dimText: `Wall: ${cr.hlRft}′ × ${cr.hlHt}′ = ${cr.hlArea.toFixed(1)} sq.ft`,
             sft: cr.hlArea,
             coverage: cr.hlCov,
             qty: cr.bHl,
+            unit: 'bx',
             rate: r.hlRate
           });
         }
@@ -1248,15 +1690,18 @@
         if (r.chkDk && cr.bDk > 0) {
           const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.dkSize);
           billItemsList.push({
+            type: 'tile',
             roomId: r.id,
             roomName: rName,
-            typeKey: 'dk',
+            tileKey: 'dk',
             label: 'Dark Accent',
             name: r.dkName || 'Dark Accent Tile',
             sizeText: sizeObj ? sizeObj.label : '4×2 ft',
+            dimText: `Dado: ${cr.dkRft}′ × ${cr.dkHt}′ = ${cr.dkArea.toFixed(1)} sq.ft`,
             sft: cr.dkArea,
             coverage: cr.dkCov,
             qty: cr.bDk,
+            unit: 'bx',
             rate: r.dkRate
           });
         }
@@ -1265,15 +1710,18 @@
         if (cr.bLt > 0) {
           const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.ltSize);
           billItemsList.push({
+            type: 'tile',
             roomId: r.id,
             roomName: rName,
-            typeKey: 'lt',
+            tileKey: 'lt',
             label: 'Light Base Wall',
             name: r.ltName || 'Light Wall Tile',
             sizeText: sizeObj ? sizeObj.label : '4×2 ft',
+            dimText: `Wall: (${cr.wRft}′ × ${cr.wHt}′) Net Area = ${cr.ltArea.toFixed(1)} sq.ft`,
             sft: cr.ltArea,
             coverage: cr.ltCov,
             qty: cr.bLt,
+            unit: 'bx',
             rate: r.ltRate
           });
         }
@@ -1282,74 +1730,190 @@
         if (cr.bFl > 0) {
           const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.flSize);
           billItemsList.push({
+            type: 'tile',
             roomId: r.id,
             roomName: rName,
-            typeKey: 'fl',
+            tileKey: 'fl',
             label: 'Floor Tile',
             name: r.flName || 'Floor Tile',
             sizeText: sizeObj ? sizeObj.label : '4×2 ft',
+            dimText: `Floor: ${cr.fLen}′ × ${cr.fWid}′ = ${cr.flArea.toFixed(1)} sq.ft`,
             sft: cr.flArea,
             coverage: cr.flCov,
             qty: cr.bFl,
+            unit: 'bx',
             rate: r.flRate
           });
         }
       });
 
-      let html = '';
-      let subTotal = 0;
-      let totalBoxesCount = 0;
-      let totalSftCount = 0;
+      // 5. Accessories & Extra Materials
+      accessories.forEach((acc, idx) => {
+        billItemsList.push({
+          type: 'acc',
+          accId: acc.id,
+          label: 'Material / Accessory',
+          name: acc.name || 'Accessory Item',
+          sizeText: '',
+          dimText: 'Quantity: ' + acc.qty + ' ' + (acc.unit || 'unit'),
+          sft: 0,
+          coverage: 0,
+          qty: parseFloat(acc.qty) || 1,
+          unit: acc.unit || 'unit',
+          rate: acc.rate
+        });
+      });
 
+      let html = '';
       billItemsList.forEach((item, idx) => {
         const rateNum = parseFloat(item.rate) || 0;
-        const rateSft = item.coverage > 0 ? (rateNum / item.coverage) : 0;
         const lineTotal = rateNum * item.qty;
+        const rateSft = item.coverage > 0 ? (rateNum / item.coverage) : 0;
 
-        subTotal += lineTotal;
-        totalBoxesCount += item.qty;
-        totalSftCount += item.sft;
-
-        html += `
-          <tr>
-            <td>${idx + 1}</td>
-            <td class="item-desc-cell">
-              <div class="main-name">${escapeHtml(item.name)}</div>
-              <div class="meta-info"><b>${escapeHtml(item.roomName)}</b> &bull; ${escapeHtml(item.label)} &bull; ${escapeHtml(item.sizeText)}</div>
-            </td>
-            <td style="text-align: right;">${item.sft.toFixed(1)}</td>
-            <td style="text-align: right;">${item.qty} bx</td>
-            <td style="text-align: right;">
-              <input type="number" value="${item.rate}" placeholder="₹ / bx" step="0.5" 
-                oninput="onBillRateChange('${item.roomId}', '${item.typeKey}', this.value)" />
-            </td>
-            <td style="text-align: right; color:#64748b; font-size:12px;">
-              ₹ ${rateSft > 0 ? rateSft.toFixed(1) : '-'}
-            </td>
-            <td style="text-align: right; font-weight:700;">₹ ${Math.round(lineTotal).toLocaleString('en-IN')}</td>
-          </tr>
-        `;
+        if (item.type === 'tile') {
+          html += `
+            <tr data-row-type="tile" data-room-id="${item.roomId}" data-tile-key="${item.tileKey}" data-qty="${item.qty}" data-coverage="${item.coverage}">
+              <td>${idx + 1}</td>
+              <td class="item-desc-cell">
+                <div class="main-name">${escapeHtml(item.name)} <span style="font-size:12px; color:var(--text-muted); font-weight:600;">(${escapeHtml(item.sizeText)})</span></div>
+                <div class="meta-info"><b>${escapeHtml(item.roomName)}</b> &bull; ${escapeHtml(item.label)}</div>
+                <div class="dim-pill">📐 ${escapeHtml(item.dimText)}</div>
+              </td>
+              <td style="text-align: right; font-weight:700;">${item.sft > 0 ? item.sft.toFixed(1) : '-'}</td>
+              <td style="text-align: right; font-weight:700;">${item.qty} ${item.unit}</td>
+              <td style="text-align: right;">
+                <input type="number" class="bill-rate-input" value="${item.rate}" placeholder="₹ / bx" step="0.5" 
+                  oninput="handleTileRateInput(this, '${item.roomId}', '${item.tileKey}')" />
+              </td>
+              <td class="rate-sft-cell" style="text-align: right; color:var(--text-muted); font-size:12px;">
+                ${rateSft > 0 ? `₹ ${rateSft.toFixed(1)}` : '-'}
+              </td>
+              <td class="line-total-cell" style="text-align: right; font-weight:800; color:var(--text);">
+                ₹ ${Math.round(lineTotal).toLocaleString('en-IN')}
+              </td>
+            </tr>
+          `;
+        } else {
+          // Accessory row
+          html += `
+            <tr data-row-type="acc" data-acc-id="${item.accId}" data-qty="${item.qty}" data-coverage="0">
+              <td>${idx + 1}</td>
+              <td class="item-desc-cell">
+                <div class="main-name">${escapeHtml(item.name)}</div>
+                <div class="meta-info" style="color:var(--primary);">Extra Material / Accessory</div>
+              </td>
+              <td style="text-align: right; color:var(--text-light);">-</td>
+              <td style="text-align: right; font-weight:700;">${item.qty} ${item.unit}</td>
+              <td style="text-align: right;">
+                <input type="number" class="bill-rate-input" value="${item.rate}" placeholder="₹ / unit" step="1" 
+                  oninput="handleAccRateInput(this, '${item.accId}')" />
+              </td>
+              <td class="rate-sft-cell" style="text-align: right; color:var(--text-light); font-size:12px;">-</td>
+              <td class="line-total-cell" style="text-align: right; font-weight:800; color:var(--text);">
+                ₹ ${Math.round(lineTotal).toLocaleString('en-IN')}
+              </td>
+            </tr>
+          `;
+        }
       });
 
       if (billItemsList.length === 0) {
-        html = `<tr><td colspan="7" style="text-align:center; padding:24px; color:#94a3b8;">Enter wall or floor dimensions to generate quotation</td></tr>`;
+        html = `<tr><td colspan="7" style="text-align:center; padding:28px; color:var(--text-light); font-weight:600;">Enter wall or floor dimensions to generate quotation</td></tr>`;
       }
 
-      // Check if user is actively focusing an input in bill table before touching innerHTML
+      // Check if user is actively typing in a bill input so we don't destroy cursor
       const activeEl = document.activeElement;
-      const isEditingBillInput = activeEl && activeEl.closest && activeEl.closest('#billItems');
+      const isEditingRate = activeEl && activeEl.classList && activeEl.classList.contains('bill-rate-input');
 
-      if (!isEditingBillInput) {
+      if (!isEditingRate) {
         document.getElementById('billItems').innerHTML = html;
       }
 
-      // Tax calculation
+      updateInvoiceTotalsOnly();
+    }
+
+    // REAL-TIME INSTANT RATE HANDLER (NO CURSOR DISRUPTION)
+    function handleTileRateInput(inputEl, roomId, tileKey) {
+      const val = inputEl.value;
+      const rateNum = parseFloat(val) || 0;
+
+      const room = rooms.find(r => r.id === roomId);
+      if (room) {
+        room[tileKey + 'Rate'] = val;
+      }
+
+      const tr = inputEl.closest('tr');
+      if (tr) {
+        const qty = parseFloat(tr.dataset.qty) || 0;
+        const cov = parseFloat(tr.dataset.coverage) || 16;
+        const lineTotal = rateNum * qty;
+        const rateSft = cov > 0 ? (rateNum / cov) : 0;
+
+        const sftEl = tr.querySelector('.rate-sft-cell');
+        if (sftEl) sftEl.innerText = rateSft > 0 ? `₹ ${rateSft.toFixed(1)}` : '-';
+
+        const totalEl = tr.querySelector('.line-total-cell');
+        if (totalEl) totalEl.innerText = `₹ ${Math.round(lineTotal).toLocaleString('en-IN')}`;
+      }
+
+      updateInvoiceTotalsOnly();
+      saveDraft();
+    }
+
+    function handleAccRateInput(inputEl, accId) {
+      const val = inputEl.value;
+      const rateNum = parseFloat(val) || 0;
+
+      const acc = accessories.find(a => a.id === accId);
+      if (acc) {
+        acc.rate = val;
+      }
+
+      const tr = inputEl.closest('tr');
+      if (tr) {
+        const qty = parseFloat(tr.dataset.qty) || 0;
+        const lineTotal = rateNum * qty;
+        const totalEl = tr.querySelector('.line-total-cell');
+        if (totalEl) totalEl.innerText = `₹ ${Math.round(lineTotal).toLocaleString('en-IN')}`;
+      }
+
+      updateInvoiceTotalsOnly();
+      saveDraft();
+    }
+
+    // UPDATE TOTALS & TAX WITHOUT RE-RENDERING HTML
+    function updateInvoiceTotalsOnly() {
+      let subTotal = 0;
+      let totalBoxesCount = 0;
+      let totalTileSft = 0;
+
+      const rows = document.querySelectorAll('#billItems tr');
+      rows.forEach(tr => {
+        const rateInput = tr.querySelector('.bill-rate-input');
+        if (rateInput) {
+          const qty = parseFloat(tr.dataset.qty) || 0;
+          const rate = parseFloat(rateInput.value) || 0;
+          subTotal += (rate * qty);
+
+          if (tr.dataset.rowType === 'tile') {
+            totalBoxesCount += qty;
+            const cov = parseFloat(tr.dataset.coverage) || 16;
+            // Get SFT from 3rd column
+            const sftCell = tr.children[2];
+            if (sftCell) {
+              const parsed = parseFloat(sftCell.innerText) || 0;
+              totalTileSft += parsed;
+            }
+          }
+        }
+      });
+
       const taxRate = parseFloat(document.getElementById('taxSelector').value) || 0;
       const taxAmount = Math.round((subTotal * taxRate) / 100);
       const grandTotal = Math.round(subTotal + taxAmount);
 
       document.getElementById('invTotalBoxes').innerText = totalBoxesCount;
-      document.getElementById('invTotalSft').innerText = totalSftCount.toFixed(1);
+      document.getElementById('invTotalSft').innerText = totalTileSft.toFixed(1);
       document.getElementById('invSubTotal').innerText = `₹ ${Math.round(subTotal).toLocaleString('en-IN')}`;
       document.getElementById('invTaxAmount').innerText = taxRate > 0 ? `₹ ${taxAmount.toLocaleString('en-IN')}` : '₹ 0';
       document.getElementById('taxPrintLabel').innerText = `GST (${taxRate}%):`;
@@ -1358,37 +1922,45 @@
 
       document.getElementById('invAmountInWords').innerText = grandTotal > 0 ? numberToIndianWords(grandTotal) : 'Rupees Zero Only';
 
+      // Keep invoice data structure updated
+      const custName = (document.getElementById('custName').value || '').trim() || 'Walk-in Customer';
+      const custPhone = (document.getElementById('custPhone').value || '').trim() || '-';
+      const custAddress = (document.getElementById('custAddress').value || '').trim() || 'Site: As Specified';
+      const quoteDate = document.getElementById('quoteDate').value || new Date().toISOString().split('T')[0];
+
+      const exportItems = [];
+      rows.forEach(tr => {
+        const rateInput = tr.querySelector('.bill-rate-input');
+        if (rateInput) {
+          const nameEl = tr.querySelector('.main-name');
+          const metaEl = tr.querySelector('.meta-info');
+          const dimEl = tr.querySelector('.dim-pill');
+          const qty = parseFloat(tr.dataset.qty) || 0;
+          const rate = parseFloat(rateInput.value) || 0;
+          exportItems.push({
+            name: nameEl ? nameEl.innerText.trim() : 'Item',
+            description: metaEl ? metaEl.innerText.trim() : '',
+            dimensions: dimEl ? dimEl.innerText.replace('📐', '').trim() : '',
+            qty: qty,
+            rate: rate,
+            amount: Math.round(qty * rate),
+            unit: tr.dataset.rowType === 'tile' ? 'box' : 'unit'
+          });
+        }
+      });
+
       window.invoiceData = {
         refNo: document.getElementById('quoteRefLabel').innerText.replace('Quote #', ''),
         date: quoteDate,
         customerName: custName,
         customerPhone: custPhone,
         siteAddress: custAddress,
-        items: billItemsList.map(i => ({
-          name: i.name,
-          label: `${i.roomName} - ${i.label}`,
-          roomName: i.roomName,
-          sizeText: i.sizeText,
-          sft: i.sft,
-          qty: i.qty,
-          rate: parseFloat(i.rate) || 0,
-          amount: Math.round((parseFloat(i.rate) || 0) * i.qty),
-          unit: 'box'
-        })),
+        items: exportItems,
         subTotal,
         taxRate,
         taxAmount,
         grandTotal
       };
-    }
-
-    function onBillRateChange(roomId, tileKey, rateVal) {
-      const room = rooms.find(r => r.id === roomId);
-      if (room) {
-        room[tileKey + 'Rate'] = rateVal;
-        calculateAll();
-        saveDraft();
-      }
     }
 
     // NUMBER TO WORDS (INDIAN RUPEES)
@@ -1422,24 +1994,23 @@
       let cleanPhone = (inv.customerPhone || '').replace(/[^0-9]/g, '');
       if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
 
-      let msg = `*TILE ESTIMATE / QUOTATION*\n`;
+      let msg = `*ESTIMATE / QUOTATION*\n`;
       msg += `------------------------------------\n`;
       msg += `*Quote Ref:* #${inv.refNo} | *Date:* ${formatIndianDate(inv.date)}\n`;
       msg += `*Customer:* ${inv.customerName} (${inv.customerPhone})\n`;
       msg += `*Site Address:* ${inv.siteAddress}\n`;
       msg += `------------------------------------\n`;
-      msg += `*ROOM & TILE SPECIFICATIONS:*\n\n`;
+      msg += `*ITEMS & MEASUREMENTS:*\n\n`;
 
       inv.items.forEach((item, i) => {
-        msg += `${i + 1}. *${item.label}*\n`;
-        msg += `   • Item: ${item.name} (${item.sizeText})\n`;
-        msg += `   • Area: ${item.sft.toFixed(1)} sq.ft (${item.qty} Boxes)\n`;
-        msg += `   • Rate: ₹${item.rate} / box\n`;
-        msg += `   • Subtotal: ₹${item.amount.toLocaleString('en-IN')}\n\n`;
+        msg += `${i + 1}. *${item.name}*\n`;
+        if (item.description) msg += `   • ${item.description}\n`;
+        if (item.dimensions) msg += `   • Area: ${item.dimensions}\n`;
+        msg += `   • Qty: ${item.qty} ${item.unit} @ ₹${item.rate} / ${item.unit}\n`;
+        msg += `   • Line Total: ₹${item.amount.toLocaleString('en-IN')}\n\n`;
       });
 
       msg += `------------------------------------\n`;
-      msg += `*Total Boxes:* ${inv.items.reduce((s, x) => s + x.qty, 0)} Boxes\n`;
       if (inv.taxRate > 0) {
         msg += `*Subtotal:* ₹${inv.subTotal.toLocaleString('en-IN')}\n`;
         msg += `*GST (${inv.taxRate}%):* ₹${inv.taxAmount.toLocaleString('en-IN')}\n`;
@@ -1509,19 +2080,19 @@
         statusEl.style.display = 'block';
 
         if (data.success) {
-          statusEl.style.background = '#dcfce7';
-          statusEl.style.color = '#15803d';
+          statusEl.style.background = '#E8F5E9';
+          statusEl.style.color = '#2E7D32';
           statusEl.innerHTML = `✅ <b>Success!</b> ${escapeHtml(data.message || 'Sales Order created in Tally!')}`;
           setTimeout(() => { closeTallyModal(); }, 2500);
         } else {
-          statusEl.style.background = '#fee2e2';
-          statusEl.style.color = '#b91c1c';
+          statusEl.style.background = '#FFEBEE';
+          statusEl.style.color = '#C62828';
           statusEl.innerHTML = `⚠️ <b>Tally Notice:</b> ${escapeHtml(data.error || 'Check Party Ledger and Voucher Types in Tally.')}`;
         }
       } catch (err) {
         statusEl.style.display = 'block';
-        statusEl.style.background = '#fee2e2';
-        statusEl.style.color = '#b91c1c';
+        statusEl.style.background = '#FFEBEE';
+        statusEl.style.color = '#C62828';
         statusEl.innerHTML = `❌ Connection Error: ${escapeHtml(err.message)}`;
       } finally {
         btn.disabled = false;
@@ -1539,6 +2110,7 @@
       const record = {
         ...window.invoiceData,
         roomsState: JSON.parse(JSON.stringify(rooms)),
+        accessoriesState: JSON.parse(JSON.stringify(accessories)),
         savedAt: new Date().toISOString()
       };
       history.unshift(record);
@@ -1550,15 +2122,15 @@
       const history = JSON.parse(localStorage.getItem('tile_quote_history') || '[]');
       const container = document.getElementById('historyListContainer');
       if (history.length === 0) {
-        container.innerHTML = '<p style="color:#64748b; font-size:13px; text-align:center; padding:20px;">No saved estimates yet.</p>';
+        container.innerHTML = '<p style="color:var(--text-muted); font-size:13px; text-align:center; padding:24px;">No saved estimates yet.</p>';
       } else {
         container.innerHTML = history.map((q, idx) => `
-          <div style="border:1px solid #e2e8f0; border-radius:8px; padding:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+          <div style="border:1px solid var(--border); border-radius:9px; padding:12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; background:var(--surface-muted); transition:var(--transition);" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
             <div>
-              <div style="font-weight:700; font-size:13.5px;">${escapeHtml(q.customerName || 'Customer')} - ₹${q.grandTotal.toLocaleString('en-IN')}</div>
-              <div style="font-size:11.5px; color:#64748b;">Ref: #${escapeHtml(q.refNo)} &bull; ${formatIndianDate(q.date)} &bull; ${q.items.length} items</div>
+              <div style="font-weight:700; font-size:13.5px; color:var(--text);">${escapeHtml(q.customerName || 'Customer')} - ₹${q.grandTotal.toLocaleString('en-IN')}</div>
+              <div style="font-size:11.5px; color:var(--text-muted); margin-top:2px;">Ref: #${escapeHtml(q.refNo)} &bull; ${formatIndianDate(q.date)} &bull; ${q.items.length} items</div>
             </div>
-            <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;" onclick="loadPastQuote(${idx})">Load</button>
+            <button class="btn btn-primary" style="padding:6px 14px; font-size:12px;" onclick="loadPastQuote(${idx})">Load</button>
           </div>
         `).join('');
       }
@@ -1584,34 +2156,14 @@
         rooms = q.roomsState;
         renderAllRooms();
       }
+      if (q.accessoriesState && Array.isArray(q.accessoriesState)) {
+        accessories = q.accessoriesState;
+        renderAccessoriesList();
+      }
 
       closePastQuotesModal();
       calculateAll();
       switchTab('rates');
-    }
-
-    // STORE DETAILS
-    function editStoreDetails() {
-      const currentName = localStorage.getItem('store_name') || 'CERAMIC TILES & SANITARYWARE';
-      const currentAddr = localStorage.getItem('store_addr') || 'Tiles • Marbles • Bath Fittings';
-
-      const newName = prompt('Enter Showroom Title / Header:', currentName);
-      if (newName === null) return;
-      const newAddr = prompt('Enter Showroom Tagline / Address:', currentAddr);
-      if (newAddr === null) return;
-
-      localStorage.setItem('store_name', newName.trim() || currentName);
-      localStorage.setItem('store_addr', newAddr.trim() || currentAddr);
-
-      loadStoreDetails();
-    }
-
-    function loadStoreDetails() {
-      const storeName = localStorage.getItem('store_name') || 'CERAMIC TILES & SANITARYWARE';
-      const storeAddr = localStorage.getItem('store_addr') || 'Tiles • Marbles • Bath Fittings';
-
-      document.getElementById('invStoreName').innerText = `${storeName} ✏️`;
-      document.getElementById('invStoreAddress').innerText = storeAddr;
     }
 
     // LOCAL DRAFT SAVING
@@ -1621,13 +2173,14 @@
         phone: document.getElementById('custPhone').value,
         address: document.getElementById('custAddress').value,
         date: document.getElementById('quoteDate').value,
-        rooms: rooms
+        rooms: rooms,
+        accessories: accessories
       };
-      localStorage.setItem('tile_estimator_multi_draft', JSON.stringify(draft));
+      localStorage.setItem('tile_estimator_multi_draft_v3', JSON.stringify(draft));
     }
 
     function loadDraft() {
-      const saved = localStorage.getItem('tile_estimator_multi_draft');
+      const saved = localStorage.getItem('tile_estimator_multi_draft_v3');
       if (!saved) {
         const randId = Math.floor(1000 + Math.random() * 9000);
         document.getElementById('quoteRefLabel').innerText = `Quote #EST-${randId}`;
@@ -1639,6 +2192,9 @@
         if (d.phone) document.getElementById('custPhone').value = d.phone;
         if (d.address) document.getElementById('custAddress').value = d.address;
         if (d.date) document.getElementById('quoteDate').value = d.date;
+        if (d.accessories && Array.isArray(d.accessories)) {
+          accessories = d.accessories;
+        }
         if (d.rooms && Array.isArray(d.rooms) && d.rooms.length > 0) {
           rooms = d.rooms;
           return true;
@@ -1671,12 +2227,14 @@
       else switchTab('rooms');
     }
 
-    // SILENT 10-SECOND AUTO-REFRESH (NEVER INTERRUPTS CURSOR, FOCUS OR SCROLL)
+    // SILENT 10-SECOND AUTO-REFRESH
     async function syncTallyStock(isSilent = false) {
-      const status = document.getElementById('syncStatus');
+      const statusText = document.getElementById('syncStatusText');
+      const dot = document.getElementById('statusDot');
+      
       if (!isSilent) {
-        status.innerText = '🔄 Syncing...';
-        status.style.color = '#facc15';
+        statusText.innerText = 'Syncing...';
+        dot.className = 'status-dot';
       }
 
       const endpointsToTry = [];
@@ -1716,14 +2274,16 @@
         } catch (e) {}
       }
 
+      const badge = document.getElementById('syncStatus');
+
       if (data && Array.isArray(data)) {
         tallyStock = data;
         isConnected = true;
-        status.innerText = `🟢 Live: ${tallyStock.length} items`;
-        status.style.color = '#4ade80';
-        status.title = `Connected to Tally!\nVia: ${connectedUrl}\nClick to refresh`;
+        dot.className = 'status-dot online';
+        statusText.innerText = `Live (${tallyStock.length})`;
+        badge.title = `Connected to Tally ERP!\nVia: ${connectedUrl}\nClick to refresh`;
 
-        // Update datalist without touching active input elements
+        // Update datalist without touching active inputs or cursor
         const datalist = document.getElementById('tallyList');
         if (datalist && datalist.children.length !== tallyStock.length) {
           datalist.innerHTML = tallyStock.map(i => 
@@ -1732,9 +2292,9 @@
         }
       } else {
         isConnected = false;
-        status.innerText = '🔴 Tally Offline';
-        status.style.color = '#f87171';
-        status.title = 'Tally is offline • Click to check URL';
+        dot.className = 'status-dot offline';
+        statusText.innerText = 'Tally Offline';
+        badge.title = 'Tally is offline • Click to configure URL';
       }
     }
 
@@ -1758,11 +2318,10 @@
       }
     }
 
-    // EXACTLY 10 SECONDS INTERVAL SILENT REFRESH
     function startAutoRefresh() {
       if (autoRefreshTimer) clearInterval(autoRefreshTimer);
       autoRefreshTimer = setInterval(() => {
-        syncTallyStock(true); // silent background fetch: does NOT touch DOM inputs or focus
+        syncTallyStock(true); // silent background fetch
       }, 10000);
     }
 

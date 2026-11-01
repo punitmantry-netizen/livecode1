@@ -154,7 +154,7 @@
       </div>
       <div class="badge-actions">
         <span class="status-badge" id="syncStatus" onclick="handleBadgeClick()" title="Click to refresh stock from Tally">🔄 Connecting...</span>
-        <button type="button" class="btn-gear" onclick="configureTallyUrl()" title="Configure Tally Bridge / Cloudflare URL">⚙️</button>
+        <button type="button" class="btn-gear" onclick="configureTallyUrl()" title="Configure Tally Bridge / Tunnel URL">⚙️</button>
       </div>
     </header>
 
@@ -328,7 +328,7 @@
 
   <script>
     const LOCAL_ENDPOINT = 'http://localhost:3001/api/stock';
-    const CLOUDFLARE_ENDPOINT = 'https://gamma-induced-rate-recorded.trycloudflare.com/api/stock';
+    const PERMANENT_ENDPOINT = 'https://monologue-corsage-hardhat.ngrok-free.dev/api/stock';
 
     let tallyStock = [];
     let rates = {};
@@ -348,9 +348,9 @@
 
     // Configure or change custom Tally Tunnel URL
     function configureTallyUrl() {
-      const current = localStorage.getItem('tally_url') || CLOUDFLARE_ENDPOINT;
+      const current = localStorage.getItem('tally_url') || PERMANENT_ENDPOINT;
       const input = prompt(
-        'Configure Tally Bridge / Cloudflare URL:\n(Enter your live endpoint or leave blank to reset)',
+        'Configure Tally Bridge / Tunnel URL:\n(Enter your live endpoint or leave blank to reset)',
         current
       );
       if (input !== null) {
@@ -514,7 +514,7 @@
       document.getElementById('billTotal').innerText = '₹ ' + grandTotal.toLocaleString('en-IN');
     }
 
-    // Smart Multi-Candidate Sync: tries local bridge first, then custom, then Cloudflare
+    // Smart Multi-Candidate Sync: tries local bridge first, then custom, then permanent tunnel
     async function syncTallyStock(isSilent = false) {
       const status = document.getElementById('syncStatus');
       if (!isSilent) {
@@ -532,8 +532,8 @@
         endpointsToTry.push('/api/stock');
       }
 
-      // Always include Cloudflare endpoint as fallback
-      endpointsToTry.push(CLOUDFLARE_ENDPOINT);
+      // Always include permanent static domain endpoint
+      endpointsToTry.push(PERMANENT_ENDPOINT);
       if (!endpointsToTry.includes(LOCAL_ENDPOINT)) endpointsToTry.push(LOCAL_ENDPOINT);
 
       let data = null;
@@ -544,8 +544,11 @@
           const sep = ep.includes('?') ? '&' : '?';
           const url = ep + sep + 't=' + Date.now();
           const controller = new AbortController();
-          const timer = setTimeout(() => controller.abort(), 3000);
-          const res = await fetch(url, { signal: controller.signal });
+          const timer = setTimeout(() => controller.abort(), 4000);
+          const res = await fetch(url, {
+            signal: controller.signal,
+            headers: { 'ngrok-skip-browser-warning': 'true' }
+          });
           clearTimeout(timer);
           if (res.ok) {
             data = await res.json();

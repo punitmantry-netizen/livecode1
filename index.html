@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Tile Estimator Pro & Quotation Invoice</title>
+  <title>Tile Estimator & Quotation</title>
   
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -24,15 +24,13 @@
       --dk-color: #4338ca;
       --lt-color: #0284c7;
       --fl-color: #059669;
-      --success: #16a34a;
-      --danger: #dc2626;
       --radius: 12px;
       --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
     body { background: var(--bg); color: var(--text); padding: 14px; padding-bottom: 96px; -webkit-font-smoothing: antialiased; }
-    .container { max-width: 720px; margin: 0 auto; }
+    .container { max-width: 760px; margin: 0 auto; }
 
     /* HEADER */
     .app-header {
@@ -146,7 +144,48 @@
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
 
-    /* TILE SECTION BOXES */
+    /* ROOM CARDS */
+    .room-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+    .room-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .room-name-input {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+      border: 1.5px solid transparent;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: transparent;
+      width: auto;
+      max-width: 280px;
+    }
+    .room-name-input:focus { border-color: var(--primary); background: #f8fafc; }
+
+    .btn-remove-room {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-remove-room:hover { background: #fecaca; }
+
     .tile-spec-box {
       background: #f8fafc;
       border: 1px solid var(--border);
@@ -174,11 +213,10 @@
       transition: background 0.2s;
     }
     .toggle-card.active { background: #fff; border-color: var(--primary); border-style: solid; }
-    .chk-label { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; cursor: pointer; color: #1e293b; }
+    .chk-label { display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 700; cursor: pointer; color: #1e293b; }
     .chk-label input { width: 18px; height: 18px; cursor: pointer; }
     .sub-panel { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); display: none; }
 
-    /* MEASUREMENT SUMMARY BADGES */
     .measurement-pill {
       display: inline-flex;
       align-items: center;
@@ -192,18 +230,18 @@
       margin-top: 6px;
     }
 
-    .summary-badge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+    .summary-badge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
     .badge-card {
-      padding: 12px;
-      border-radius: 10px;
+      padding: 10px;
+      border-radius: 8px;
       font-size: 12px;
       font-weight: 600;
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 2px;
       border: 1px solid transparent;
     }
-    .badge-card .num { font-size: 17px; font-weight: 800; }
+    .badge-card .num { font-size: 16px; font-weight: 800; }
     .badge-card .sub-detail { font-size: 11px; opacity: 0.85; }
     .badge-hl { background: #fef3c7; color: var(--hl-color); border-color: #fde68a; }
     .badge-dk { background: #e0e7ff; color: var(--dk-color); border-color: #c7d2fe; }
@@ -237,7 +275,7 @@
       border-bottom: 1.5px solid var(--border);
     }
     table.bill-table td {
-      padding: 10px 8px;
+      padding: 9px 8px;
       font-size: 13px;
       border-bottom: 1px solid var(--border);
       font-weight: 600;
@@ -250,7 +288,7 @@
       width: 80px;
     }
     .item-desc-cell .main-name { font-weight: 700; color: #0f172a; font-size: 13.5px; }
-    .item-desc-cell .meta-info { font-size: 11.5px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+    .item-desc-cell .meta-info { font-size: 11px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
 
     .inv-summary-row {
       display: flex;
@@ -304,6 +342,16 @@
     .btn-save:hover { background: #475569; }
     .btn-primary { background: var(--primary); color: #fff; }
     .btn-primary:hover { background: var(--primary-dark); }
+    .btn-add-room {
+      background: #eff6ff;
+      color: var(--primary);
+      border: 1.5px dashed var(--primary);
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+    .btn-add-room:hover { background: #dbeafe; }
 
     /* FLOATING BOTTOM BAR */
     .floating-bar {
@@ -353,9 +401,9 @@
 
     /* PRINT STYLESHEET */
     @media print {
-      body { background: #fff; padding: 0; color: #000; font-size: 12pt; }
+      body { background: #fff; padding: 0; color: #000; font-size: 11pt; }
       .container { max-width: 100%; margin: 0; padding: 0; }
-      .app-header, .nav-tabs, .floating-bar, .btn-action-grid, #tab-rooms, .btn-gear, .status-badge, .no-print, .modal-overlay { display: none !important; }
+      .app-header, .nav-tabs, .floating-bar, .btn-action-grid, #tab-rooms, .btn-gear, .status-badge, .no-print, .modal-overlay, .btn-add-room { display: none !important; }
       #tab-rates { display: block !important; }
       .card { box-shadow: none; border: none; padding: 0; margin-bottom: 0; }
       table.bill-table th { background: #f1f5f9 !important; -webkit-print-color-adjust: exact; }
@@ -373,8 +421,8 @@
   <div class="container">
     <header class="app-header">
       <div>
-        <h1 id="headerStoreName">Tile Estimator Pro</h1>
-        <p>4×2 Standard Tiles • SFT & Box Estimator</p>
+        <h1 id="headerStoreName">Tile Estimator & Quotation</h1>
+        <p>Tile Measurement, SFT & Box Estimator</p>
       </div>
       <div class="badge-actions">
         <span class="status-badge" id="syncStatus" onclick="handleBadgeClick()" title="Click to refresh stock from Tally">🔄 Connecting...</span>
@@ -383,12 +431,12 @@
     </header>
 
     <nav class="nav-tabs">
-      <button class="tab-btn active" id="btnTabRooms" onclick="switchTab('rooms')">📐 1. Measurements & Tiles</button>
+      <button class="tab-btn active" id="btnTabRooms" onclick="switchTab('rooms')">📐 1. Rooms & Measurements</button>
       <button class="tab-btn" id="btnTabRates" onclick="switchTab('rates')">🧾 2. Quotation / Invoice</button>
     </nav>
 
     <!-- ========================================== -->
-    <!-- TAB 1: MEASUREMENTS & TILE SPECIFICATION   -->
+    <!-- TAB 1: MEASUREMENTS & ROOMS                -->
     <!-- ========================================== -->
     <div id="tab-rooms">
       
@@ -401,227 +449,49 @@
         <div class="grid-2">
           <div class="field-group">
             <label>Customer Name</label>
-            <input type="text" id="custName" placeholder="e.g. Rajesh Kumar" oninput="saveDraft()" />
+            <input type="text" id="custName" placeholder="Customer Name" oninput="saveDraft()" />
           </div>
           <div class="field-group">
             <label>Mobile Number</label>
-            <input type="tel" id="custPhone" placeholder="e.g. 9876543210" oninput="saveDraft()" />
+            <input type="tel" id="custPhone" placeholder="Mobile Number" oninput="saveDraft()" />
           </div>
         </div>
         <div class="grid-2" style="margin-top:10px;">
           <div class="field-group">
             <label>Site / Delivery Address</label>
-            <input type="text" id="custAddress" placeholder="e.g. Flat 402, Sunshine Heights, Ring Road" oninput="saveDraft()" />
+            <input type="text" id="custAddress" placeholder="Site Address / Location" oninput="saveDraft()" />
           </div>
           <div class="field-group">
             <label>Quotation Date</label>
             <input type="date" id="quoteDate" onchange="saveDraft()" />
           </div>
         </div>
-        <div class="field-group" style="margin-top:10px;">
-          <label>Wastage Allowance</label>
-          <select id="wastagePct" onchange="calculate()">
-            <option value="0">0% (Exact measurements)</option>
-            <option value="5" selected>5% (Standard Cutting Wastage - Recommended)</option>
-            <option value="10">10% (High Wastage / Diagonal Laying / Patterns)</option>
-          </select>
-        </div>
       </div>
 
-      <!-- WALL MEASUREMENTS & TILES -->
+      <!-- DYNAMIC ROOMS CONTAINER -->
+      <div id="roomsContainer"></div>
+
+      <!-- ADD ROOM BUTTON -->
+      <button type="button" class="btn btn-add-room no-print" onclick="addRoom()">
+        ➕ Add Another Room / Area
+      </button>
+
+      <!-- OVERALL TOTAL MEASUREMENTS CARD -->
       <div class="card">
         <div class="card-title">
-          <span>Wall Area & Tile Selection</span>
-          <span class="card-subtitle" id="wallGrossDisplay">Gross: 0 SFT</span>
-        </div>
-
-        <div class="grid-2">
-          <div class="field-group">
-            <label>Wall Running Feet (RFT)</label>
-            <input type="number" id="wRft" placeholder="e.g. 30" step="0.1" oninput="calculate()" />
-          </div>
-          <div class="field-group">
-            <label>Wall Height (Feet)</label>
-            <input type="number" id="wHt" placeholder="e.g. 7" step="0.1" oninput="calculate()" />
-          </div>
-        </div>
-
-        <div id="grossWallPill" class="measurement-pill" style="display:none;"></div>
-
-        <!-- 1. HIGHLIGHTER (HL) ACCENT -->
-        <div class="toggle-card" id="hlToggleCard">
-          <label class="chk-label">
-            <input type="checkbox" id="chkHl" onchange="togglePanel('hlPanel', this.checked, 'hlToggleCard')" />
-            <span>Highlighter (HL) Accent Wall</span>
-          </label>
-          <div id="hlPanel" class="sub-panel">
-            <div class="grid-2">
-              <div class="field-group">
-                <label>HL Running Ft</label>
-                <input type="number" id="hlRft" placeholder="RFT" step="0.1" oninput="calculate()" />
-              </div>
-              <div class="field-group">
-                <label>HL Height (Ft)</label>
-                <input type="number" id="hlHt" placeholder="Height" step="0.1" oninput="calculate()" />
-              </div>
-            </div>
-
-            <div class="tile-spec-box">
-              <div class="grid-2">
-                <div class="field-group">
-                  <label>Tile Size</label>
-                  <select id="hlSize" onchange="onSizeSelect('hl', this.value)"></select>
-                </div>
-                <div class="field-group">
-                  <label>Sq.Ft / Box</label>
-                  <input type="number" id="hlCoverage" value="16" step="0.01" oninput="calculate()" />
-                </div>
-              </div>
-              <div class="field-group" style="margin-top:8px;">
-                <label>Choose Tile (Type to auto-populate)</label>
-                <input type="text" id="hlInput" list="tallyList" placeholder="🔍 Type tile or group name..." oninput="handleTileInput('hl', this.value)" autocomplete="off" />
-                <div id="hlDetails" class="tile-meta" style="display:none;"></div>
-              </div>
-              <div id="hlCalcInfo" class="measurement-pill" style="display:none; background:#fef3c7; color:#92400e;"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2. DARK ACCENT / DADO -->
-        <div class="toggle-card" id="dkToggleCard">
-          <label class="chk-label">
-            <input type="checkbox" id="chkDk" onchange="togglePanel('dkPanel', this.checked, 'dkToggleCard')" />
-            <span>Dark Color Accent / Dado Wall</span>
-          </label>
-          <div id="dkPanel" class="sub-panel">
-            <div class="grid-2">
-              <div class="field-group">
-                <label>Dark Running Ft</label>
-                <input type="number" id="dkRft" placeholder="RFT" step="0.1" oninput="calculate()" />
-              </div>
-              <div class="field-group">
-                <label>Dark Height (Ft)</label>
-                <input type="number" id="dkHt" placeholder="Height" step="0.1" oninput="calculate()" />
-              </div>
-            </div>
-
-            <div class="tile-spec-box">
-              <div class="grid-2">
-                <div class="field-group">
-                  <label>Tile Size</label>
-                  <select id="dkSize" onchange="onSizeSelect('dk', this.value)"></select>
-                </div>
-                <div class="field-group">
-                  <label>Sq.Ft / Box</label>
-                  <input type="number" id="dkCoverage" value="16" step="0.01" oninput="calculate()" />
-                </div>
-              </div>
-              <div class="field-group" style="margin-top:8px;">
-                <label>Choose Tile (Type to auto-populate)</label>
-                <input type="text" id="dkInput" list="tallyList" placeholder="🔍 Type tile or group name..." oninput="handleTileInput('dk', this.value)" autocomplete="off" />
-                <div id="dkDetails" class="tile-meta" style="display:none;"></div>
-              </div>
-              <div id="dkCalcInfo" class="measurement-pill" style="display:none; background:#e0e7ff; color:#3730a3;"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. MAIN LIGHT TILE (REMAINING WALL) -->
-        <div style="margin-top:12px;">
-          <label style="font-weight:800; color:#1e293b;">Main Light Base Tile (Remaining Wall)</label>
-          <div class="tile-spec-box" style="margin-top:6px;">
-            <div class="grid-2">
-              <div class="field-group">
-                <label>Tile Size</label>
-                <select id="ltSize" onchange="onSizeSelect('lt', this.value)"></select>
-              </div>
-              <div class="field-group">
-                <label>Sq.Ft / Box</label>
-                <input type="number" id="ltCoverage" value="16" step="0.01" oninput="calculate()" />
-              </div>
-            </div>
-            <div class="field-group" style="margin-top:8px;">
-              <label>Choose Tile (Type to auto-populate)</label>
-              <input type="text" id="ltInput" list="tallyList" placeholder="🔍 Type tile or group name..." oninput="handleTileInput('lt', this.value)" autocomplete="off" />
-              <div id="ltDetails" class="tile-meta" style="display:none;"></div>
-            </div>
-            <div id="ltCalcInfo" class="measurement-pill" style="display:none;"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- FLOOR MEASUREMENTS & TILES -->
-      <div class="card">
-        <div class="card-title">
-          <span>Floor Area & Tile Selection</span>
-          <span class="card-subtitle" id="floorGrossDisplay">Area: 0 SFT</span>
-        </div>
-
-        <div class="grid-2">
-          <div class="field-group">
-            <label>Length (Feet)</label>
-            <input type="number" id="fLen" placeholder="e.g. 10" step="0.1" oninput="calculate()" />
-          </div>
-          <div class="field-group">
-            <label>Width (Feet)</label>
-            <input type="number" id="fWid" placeholder="e.g. 12" step="0.1" oninput="calculate()" />
-          </div>
-        </div>
-
-        <!-- SKIRTING CHECKBOX -->
-        <div style="margin:10px 0;">
-          <label class="chk-label" style="font-size:12.5px;">
-            <input type="checkbox" id="chkSkirting" onchange="calculate()" checked />
-            <span>Include 4-inch Skirting along perimeter (Perimeter × 0.33 Ft)</span>
-          </label>
-        </div>
-
-        <div class="tile-spec-box">
-          <div class="grid-2">
-            <div class="field-group">
-              <label>Tile Size</label>
-              <select id="flSize" onchange="onSizeSelect('fl', this.value)"></select>
-            </div>
-            <div class="field-group">
-              <label>Sq.Ft / Box</label>
-              <input type="number" id="flCoverage" value="16" step="0.01" oninput="calculate()" />
-            </div>
-          </div>
-          <div class="field-group" style="margin-top:8px;">
-            <label>Choose Tile (Type to auto-populate)</label>
-            <input type="text" id="flInput" list="tallyList" placeholder="🔍 Type tile or group name..." oninput="handleTileInput('fl', this.value)" autocomplete="off" />
-            <div id="flDetails" class="tile-meta" style="display:none;"></div>
-          </div>
-          <div id="flCalcInfo" class="measurement-pill" style="display:none; background:#d1fae5; color:#065f46;"></div>
-        </div>
-      </div>
-
-      <!-- DETAILED SFT & BOXES SUMMARY CARD -->
-      <div class="card">
-        <div class="card-title">
-          <span>Detailed SFT & Box Summary</span>
-          <span class="card-subtitle" id="totalCoverageLabel">0 sq.ft total</span>
+          <span>Overall All-Rooms Summary</span>
+          <span class="card-subtitle" id="totalCoverageLabel">0 SFT total</span>
         </div>
         <div class="summary-badge-grid">
-          <div class="badge-card badge-hl" id="boxCardHl" style="display:none;">
-            <span>Highlighter (HL)</span>
-            <span class="num"><span id="outHl">0</span> Boxes</span>
-            <span class="sub-detail" id="outHlSft">0 SFT</span>
-          </div>
-          <div class="badge-card badge-dk" id="boxCardDk" style="display:none;">
-            <span>Dark Accent</span>
-            <span class="num"><span id="outDk">0</span> Boxes</span>
-            <span class="sub-detail" id="outDkSft">0 SFT</span>
-          </div>
           <div class="badge-card badge-lt">
-            <span>Light Main</span>
-            <span class="num"><span id="outLt">0</span> Boxes</span>
-            <span class="sub-detail" id="outLtSft">0 SFT</span>
+            <span>Wall Total</span>
+            <span class="num"><span id="outTotalWallBoxes">0</span> Boxes</span>
+            <span class="sub-detail" id="outTotalWallSft">0 SFT</span>
           </div>
           <div class="badge-card badge-fl">
-            <span>Floor Tile</span>
-            <span class="num"><span id="outFl">0</span> Boxes</span>
-            <span class="sub-detail" id="outFlSft">0 SFT</span>
+            <span>Floor Total</span>
+            <span class="num"><span id="outTotalFloorBoxes">0</span> Boxes</span>
+            <span class="sub-detail" id="outTotalFloorSft">0 SFT</span>
           </div>
         </div>
       </div>
@@ -636,9 +506,9 @@
         <!-- STORE BRANDING / HEADER -->
         <div class="invoice-header">
           <div>
-            <div class="shop-title" id="invStoreName" onclick="editStoreDetails()" title="Click to edit Store Name & Address">SHREE GANESH CERAMICS & TILES ✏️</div>
-            <div class="shop-sub" id="invStoreAddress">Opp. New Bus Terminal, Ring Road • Phone: 98765-43210</div>
-            <div class="shop-sub" id="invStoreGstin">GSTIN: 24AAAAA0000A1Z5</div>
+            <div class="shop-title" id="invStoreName" onclick="editStoreDetails()" title="Click to edit Store Name & Contact">CERAMIC TILES & SANITARYWARE ✏️</div>
+            <div class="shop-sub" id="invStoreAddress">Tiles • Marbles • Bath Fittings</div>
+            <div class="shop-sub" id="invStoreGstin" style="display:none;"></div>
           </div>
           <div style="text-align: right;">
             <div style="font-size:16px; font-weight:900; color:var(--primary);">ESTIMATE / QUOTE</div>
@@ -665,7 +535,7 @@
           <thead>
             <tr>
               <th style="width:25px;">#</th>
-              <th>Tile Item & Size</th>
+              <th>Item / Room Description</th>
               <th style="text-align:right; width:65px;">Area (SFT)</th>
               <th style="text-align:right; width:60px;">Boxes</th>
               <th style="text-align:right; width:85px;">Rate/Box</th>
@@ -707,7 +577,7 @@
           <b>Terms & Conditions:</b><br />
           1. Rates are valid for 7 days from quote date.<br />
           2. Check tile shade/batch and size before fixing. No claims entertained after tiles are laid.<br />
-          3. Breakage in transportation at customer risk. 100% payment before delivery.
+          3. Breakage in transportation at customer risk.
         </div>
       </div>
 
@@ -826,246 +696,523 @@
     ];
 
     let tallyStock = [];
-    let rates = {};
-    let selectedNames = { hl: '', dk: '', lt: '', fl: '' };
-    let selectedItems = { hl: null, dk: null, lt: null, fl: null };
     let isConnected = false;
     let autoRefreshTimer = null;
     let currentTab = 'rooms';
+    let roomCounter = 1;
+
+    // ROOMS STATE
+    let rooms = [];
 
     // INITIALIZATION
     window.addEventListener('DOMContentLoaded', () => {
-      // Set today's date
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('quoteDate').value = today;
 
-      // Populate Tile Size Dropdowns
-      ['hl', 'dk', 'lt', 'fl'].forEach(key => {
-        const select = document.getElementById(key + 'Size');
-        if (select) {
-          select.innerHTML = STANDARD_TILE_SIZES.map(s => 
-            `<option value="${s.id}" ${s.id === '4x2' ? 'selected' : ''}>${s.label}</option>`
-          ).join('');
-        }
-      });
-
-      // Load Store Details from localStorage
       loadStoreDetails();
+      
+      const loaded = loadDraft();
+      if (!loaded || rooms.length === 0) {
+        addRoom('Room 1 (Bathroom / Area)');
+      } else {
+        renderAllRooms();
+        calculateAll();
+      }
 
-      // Load draft from localStorage if present
-      loadDraft();
-
-      // Initial calculation & Stock sync
-      calculate();
+      // Initial Stock Sync
       syncTallyStock(false);
+
+      // Silent Auto-Refresh every 10 seconds without shifting view/cursor
       startAutoRefresh();
     });
 
-    // SIZE CHANGE HANDLER
-    function onSizeSelect(key, sizeId) {
-      const match = STANDARD_TILE_SIZES.find(s => s.id === sizeId);
-      if (match) {
-        document.getElementById(key + 'Coverage').value = match.sqft;
-      }
-      calculate();
-    }
-
-    // TAB SWITCHING
-    function switchTab(tab) {
-      currentTab = tab;
-      if (tab === 'rooms') {
-        document.getElementById('tab-rooms').style.display = 'block';
-        document.getElementById('tab-rates').style.display = 'none';
-        document.getElementById('btnTabRooms').classList.add('active');
-        document.getElementById('btnTabRates').classList.remove('active');
-        document.getElementById('btnBottomSwitch').innerText = 'Invoice →';
-      } else {
-        document.getElementById('tab-rooms').style.display = 'none';
-        document.getElementById('tab-rates').style.display = 'block';
-        document.getElementById('btnTabRooms').classList.remove('active');
-        document.getElementById('btnTabRates').classList.add('active');
-        document.getElementById('btnBottomSwitch').innerText = '← Edit Tiles';
-        renderBill();
-      }
-    }
-
-    function toggleViewTab() {
-      if (currentTab === 'rooms') switchTab('rates');
-      else switchTab('rooms');
-    }
-
-    function togglePanel(id, show, cardId) {
-      document.getElementById(id).style.display = show ? 'block' : 'none';
-      const card = document.getElementById(cardId);
-      if (card) {
-        if (show) card.classList.add('active');
-        else card.classList.remove('active');
-      }
-      calculate();
-    }
-
-    // MAIN ESTIMATION LOGIC (SFT + BOXES + WASTAGE)
-    function calculate() {
-      const wastagePct = parseFloat(document.getElementById('wastagePct').value) || 0;
-      const wastageMultiplier = 1 + (wastagePct / 100);
-
-      // WALLS
-      const wRft = parseFloat(document.getElementById('wRft').value) || 0;
-      const wHt = parseFloat(document.getElementById('wHt').value) || 0;
-      const grossWallArea = wRft * wHt;
-      const grossWallWithWastage = grossWallArea * wastageMultiplier;
-
-      const grossPill = document.getElementById('grossWallPill');
-      const grossDisplay = document.getElementById('wallGrossDisplay');
-      if (grossWallArea > 0) {
-        grossDisplay.innerText = `Gross: ${grossWallArea.toFixed(1)} SFT`;
-        grossPill.style.display = 'inline-flex';
-        grossPill.innerHTML = `📐 Total Wall Gross: <b>${grossWallArea.toFixed(2)} SFT</b> ${wastagePct > 0 ? `(+${wastagePct}% Wastage = <b>${grossWallWithWastage.toFixed(2)} SFT</b>)` : ''}`;
-      } else {
-        grossDisplay.innerText = 'Gross: 0 SFT';
-        grossPill.style.display = 'none';
-      }
-
-      // 1. HIGHLIGHTER
-      const chkHl = document.getElementById('chkHl').checked;
-      const hlRft = parseFloat(document.getElementById('hlRft').value) || 0;
-      const hlHt = parseFloat(document.getElementById('hlHt').value) || 0;
-      const hlNetArea = chkHl ? (hlRft * hlHt) : 0;
-      const hlAreaWithWastage = hlNetArea * wastageMultiplier;
-      const hlCoverage = parseFloat(document.getElementById('hlCoverage').value) || 16;
-      const bHl = chkHl && hlAreaWithWastage > 0 ? Math.ceil(hlAreaWithWastage / hlCoverage) : 0;
-
-      const hlCalcInfo = document.getElementById('hlCalcInfo');
-      if (chkHl && hlNetArea > 0) {
-        hlCalcInfo.style.display = 'inline-flex';
-        hlCalcInfo.innerHTML = `HL: <b>${hlNetArea.toFixed(1)} SFT</b> → Req: <b>${bHl} Boxes</b> (@${hlCoverage} sft/bx)`;
-      } else {
-        hlCalcInfo.style.display = 'none';
-      }
-
-      // 2. DARK ACCENT
-      const chkDk = document.getElementById('chkDk').checked;
-      const dkRft = parseFloat(document.getElementById('dkRft').value) || 0;
-      const dkHt = parseFloat(document.getElementById('dkHt').value) || 0;
-      const dkNetArea = chkDk ? (dkRft * dkHt) : 0;
-      const dkAreaWithWastage = dkNetArea * wastageMultiplier;
-      const dkCoverage = parseFloat(document.getElementById('dkCoverage').value) || 16;
-      const bDk = chkDk && dkAreaWithWastage > 0 ? Math.ceil(dkAreaWithWastage / dkCoverage) : 0;
-
-      const dkCalcInfo = document.getElementById('dkCalcInfo');
-      if (chkDk && dkNetArea > 0) {
-        dkCalcInfo.style.display = 'inline-flex';
-        dkCalcInfo.innerHTML = `Dark: <b>${dkNetArea.toFixed(1)} SFT</b> → Req: <b>${bDk} Boxes</b> (@${dkCoverage} sft/bx)`;
-      } else {
-        dkCalcInfo.style.display = 'none';
-      }
-
-      // 3. LIGHT MAIN (REMAINING WALL)
-      const ltNetArea = Math.max(0, grossWallArea - hlNetArea - dkNetArea);
-      const ltAreaWithWastage = ltNetArea * wastageMultiplier;
-      const ltCoverage = parseFloat(document.getElementById('ltCoverage').value) || 16;
-      const bLt = ltAreaWithWastage > 0 ? Math.ceil(ltAreaWithWastage / ltCoverage) : 0;
-
-      const ltCalcInfo = document.getElementById('ltCalcInfo');
-      if (grossWallArea > 0) {
-        ltCalcInfo.style.display = 'inline-flex';
-        ltCalcInfo.innerHTML = `Light Base: <b>${ltNetArea.toFixed(1)} SFT</b> ${wastagePct > 0 ? `(${ltAreaWithWastage.toFixed(1)} with waste)` : ''} → Req: <b>${bLt} Boxes</b> (@${ltCoverage} sft/bx)`;
-      } else {
-        ltCalcInfo.style.display = 'none';
-      }
-
-      // 4. FLOOR MEASUREMENTS
-      const fLen = parseFloat(document.getElementById('fLen').value) || 0;
-      const fWid = parseFloat(document.getElementById('fWid').value) || 0;
-      const floorBaseArea = fLen * fWid;
-      
-      const chkSkirting = document.getElementById('chkSkirting').checked;
-      const skirtingArea = (chkSkirting && (fLen > 0 || fWid > 0)) ? ((2 * (fLen + fWid)) * 0.33) : 0;
-      const floorTotalNet = floorBaseArea + skirtingArea;
-      const floorAreaWithWastage = floorTotalNet * wastageMultiplier;
-      const flCoverage = parseFloat(document.getElementById('flCoverage').value) || 16;
-      const bFl = floorAreaWithWastage > 0 ? Math.ceil(floorAreaWithWastage / flCoverage) : 0;
-
-      const flDisplay = document.getElementById('floorGrossDisplay');
-      const flCalcInfo = document.getElementById('flCalcInfo');
-      if (floorBaseArea > 0) {
-        flDisplay.innerText = `Area: ${floorTotalNet.toFixed(1)} SFT`;
-        flCalcInfo.style.display = 'inline-flex';
-        flCalcInfo.innerHTML = `Floor: <b>${floorBaseArea.toFixed(1)} SFT</b> ${skirtingArea > 0 ? `+ Skirting <b>${skirtingArea.toFixed(1)} SFT</b>` : ''} → Req: <b>${bFl} Boxes</b> (@${flCoverage} sft/bx)`;
-      } else {
-        flDisplay.innerText = 'Area: 0 SFT';
-        flCalcInfo.style.display = 'none';
-      }
-
-      // SUMMARY BADGES DISPLAY
-      document.getElementById('boxCardHl').style.display = chkHl && bHl > 0 ? 'flex' : 'none';
-      document.getElementById('boxCardDk').style.display = chkDk && bDk > 0 ? 'flex' : 'none';
-
-      document.getElementById('outHl').innerText = bHl;
-      document.getElementById('outHlSft').innerText = `${hlNetArea.toFixed(1)} SFT (${hlCoverage} sft/bx)`;
-
-      document.getElementById('outDk').innerText = bDk;
-      document.getElementById('outDkSft').innerText = `${dkNetArea.toFixed(1)} SFT (${dkCoverage} sft/bx)`;
-
-      document.getElementById('outLt').innerText = bLt;
-      document.getElementById('outLtSft').innerText = `${ltNetArea.toFixed(1)} SFT (${ltCoverage} sft/bx)`;
-
-      document.getElementById('outFl').innerText = bFl;
-      document.getElementById('outFlSft').innerText = `${floorTotalNet.toFixed(1)} SFT (${flCoverage} sft/bx)`;
-
-      const totalBoxes = bHl + bDk + bLt + bFl;
-      const totalSftNet = hlNetArea + dkNetArea + ltNetArea + floorTotalNet;
-
-      document.getElementById('totalCoverageLabel').innerText = `${totalSftNet.toFixed(1)} sq.ft total`;
-      document.getElementById('barTotalSft').innerText = `${totalSftNet.toFixed(0)} SFT`;
-      document.getElementById('barTotalBoxes').innerText = `${totalBoxes} Bx`;
-
-      window.calcState = {
-        bHl, hlNetArea, hlCoverage,
-        bDk, dkNetArea, dkCoverage,
-        bLt, ltNetArea, ltCoverage,
-        bFl, floorTotalNet, flCoverage,
-        totalBoxes, totalSftNet, wastagePct
+    // CREATE NEW ROOM DATA OBJECT
+    function createRoomObj(name) {
+      roomCounter++;
+      return {
+        id: 'room_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+        name: name || `Room ${rooms.length + 1}`,
+        wRft: '',
+        wHt: '',
+        // Highlighter
+        chkHl: false,
+        hlRft: '',
+        hlHt: '',
+        hlSize: '4x2',
+        hlCoverage: 16.00,
+        hlName: '',
+        hlItem: null,
+        hlRate: '',
+        // Dark
+        chkDk: false,
+        dkRft: '',
+        dkHt: '',
+        dkSize: '4x2',
+        dkCoverage: 16.00,
+        dkName: '',
+        dkItem: null,
+        dkRate: '',
+        // Light Base
+        ltSize: '4x2',
+        ltCoverage: 16.00,
+        ltName: '',
+        ltItem: null,
+        ltRate: '',
+        // Floor
+        fLen: '',
+        fWid: '',
+        flSize: '4x2',
+        flCoverage: 16.00,
+        flName: '',
+        flItem: null,
+        flRate: ''
       };
+    }
 
-      renderBill();
+    function addRoom(name) {
+      const room = createRoomObj(name);
+      rooms.push(room);
+      renderAllRooms();
+      calculateAll();
       saveDraft();
     }
 
-    // AUTO-POPULATE TILE INPUT ON TYPING
-    function handleTileInput(key, val) {
-      const query = (val || '').trim();
-      selectedNames[key] = query;
-      const detailsEl = document.getElementById(key + 'Details');
+    function removeRoom(roomId) {
+      if (rooms.length <= 1) {
+        alert('At least one room is required.');
+        return;
+      }
+      rooms = rooms.filter(r => r.id !== roomId);
+      renderAllRooms();
+      calculateAll();
+      saveDraft();
+    }
 
-      const item = tallyStock.find(i => i.name.toLowerCase() === query.toLowerCase());
+    // RENDER ALL ROOMS HTML
+    function renderAllRooms() {
+      const container = document.getElementById('roomsContainer');
+      container.innerHTML = rooms.map((room, idx) => `
+        <div class="room-card" id="card_${room.id}">
+          <div class="room-card-header">
+            <input type="text" class="room-name-input" value="${escapeHtml(room.name)}" 
+              onchange="updateRoomField('${room.id}', 'name', this.value)" title="Click to rename room" />
+            ${rooms.length > 1 ? `<button type="button" class="btn-remove-room" onclick="removeRoom('${room.id}')">🗑️ Remove Room</button>` : ''}
+          </div>
 
-      if (item) {
-        selectedItems[key] = item;
-        if (item.rate && item.rate > 0) {
-          rates[key] = item.rate;
+          <!-- WALL DIMENSIONS -->
+          <div class="card" style="box-shadow:none; border:1px solid #e2e8f0; margin-bottom:12px;">
+            <div class="card-title">
+              <span>Wall Dimensions & Tiles</span>
+              <span class="card-subtitle" id="grossWall_${room.id}">Gross: 0 SFT</span>
+            </div>
+            <div class="grid-2">
+              <div class="field-group">
+                <label>Wall Running Feet (RFT)</label>
+                <input type="number" value="${room.wRft}" placeholder="e.g. 30" step="0.1" 
+                  oninput="updateRoomField('${room.id}', 'wRft', this.value)" />
+              </div>
+              <div class="field-group">
+                <label>Wall Height (Feet)</label>
+                <input type="number" value="${room.wHt}" placeholder="e.g. 7" step="0.1" 
+                  oninput="updateRoomField('${room.id}', 'wHt', this.value)" />
+              </div>
+            </div>
+
+            <!-- HIGHLIGHTER ACCENT -->
+            <div class="toggle-card ${room.chkHl ? 'active' : ''}" id="hlCard_${room.id}">
+              <label class="chk-label">
+                <input type="checkbox" ${room.chkHl ? 'checked' : ''} 
+                  onchange="toggleRoomHl('${room.id}', this.checked)" />
+                <span>Highlighter (HL) Accent Wall</span>
+              </label>
+              <div class="sub-panel" id="hlPanel_${room.id}" style="display:${room.chkHl ? 'block' : 'none'};">
+                <div class="grid-2">
+                  <div class="field-group">
+                    <label>HL Running Ft</label>
+                    <input type="number" value="${room.hlRft}" placeholder="RFT" step="0.1" 
+                      oninput="updateRoomField('${room.id}', 'hlRft', this.value)" />
+                  </div>
+                  <div class="field-group">
+                    <label>HL Height (Ft)</label>
+                    <input type="number" value="${room.hlHt}" placeholder="Height" step="0.1" 
+                      oninput="updateRoomField('${room.id}', 'hlHt', this.value)" />
+                  </div>
+                </div>
+                <div class="tile-spec-box">
+                  <div class="grid-2">
+                    <div class="field-group">
+                      <label>Tile Size</label>
+                      <select onchange="updateRoomSize('${room.id}', 'hl', this.value)">
+                        ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.hlSize ? 'selected' : ''}>${s.label}</option>`).join('')}
+                      </select>
+                    </div>
+                    <div class="field-group">
+                      <label>Sq.Ft / Box</label>
+                      <input type="number" value="${room.hlCoverage}" step="0.01" 
+                        oninput="updateRoomField('${room.id}', 'hlCoverage', this.value)" />
+                    </div>
+                  </div>
+                  <div class="field-group" style="margin-top:8px;">
+                    <label>HL Tile Item (Type to auto-populate)</label>
+                    <input type="text" list="tallyList" value="${escapeHtml(room.hlName)}" placeholder="🔍 Type tile or group..." 
+                      oninput="onTileSearchInput('${room.id}', 'hl', this.value)" autocomplete="off" />
+                    <div id="meta_hl_${room.id}" class="tile-meta" style="${room.hlItem ? '' : 'display:none;'}">
+                      ${room.hlItem ? formatTileMeta(room.hlItem) : ''}
+                    </div>
+                  </div>
+                  <div id="calc_hl_${room.id}" class="measurement-pill" style="background:#fef3c7; color:#92400e; display:none;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- DARK COLOR ACCENT -->
+            <div class="toggle-card ${room.chkDk ? 'active' : ''}" id="dkCard_${room.id}">
+              <label class="chk-label">
+                <input type="checkbox" ${room.chkDk ? 'checked' : ''} 
+                  onchange="toggleRoomDk('${room.id}', this.checked)" />
+                <span>Dark Color Accent / Dado Wall</span>
+              </label>
+              <div class="sub-panel" id="dkPanel_${room.id}" style="display:${room.chkDk ? 'block' : 'none'};">
+                <div class="grid-2">
+                  <div class="field-group">
+                    <label>Dark Running Ft</label>
+                    <input type="number" value="${room.dkRft}" placeholder="RFT" step="0.1" 
+                      oninput="updateRoomField('${room.id}', 'dkRft', this.value)" />
+                  </div>
+                  <div class="field-group">
+                    <label>Dark Height (Ft)</label>
+                    <input type="number" value="${room.dkHt}" placeholder="Height" step="0.1" 
+                      oninput="updateRoomField('${room.id}', 'dkHt', this.value)" />
+                  </div>
+                </div>
+                <div class="tile-spec-box">
+                  <div class="grid-2">
+                    <div class="field-group">
+                      <label>Tile Size</label>
+                      <select onchange="updateRoomSize('${room.id}', 'dk', this.value)">
+                        ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.dkSize ? 'selected' : ''}>${s.label}</option>`).join('')}
+                      </select>
+                    </div>
+                    <div class="field-group">
+                      <label>Sq.Ft / Box</label>
+                      <input type="number" value="${room.dkCoverage}" step="0.01" 
+                        oninput="updateRoomField('${room.id}', 'dkCoverage', this.value)" />
+                    </div>
+                  </div>
+                  <div class="field-group" style="margin-top:8px;">
+                    <label>Dark Tile Item (Type to auto-populate)</label>
+                    <input type="text" list="tallyList" value="${escapeHtml(room.dkName)}" placeholder="🔍 Type tile or group..." 
+                      oninput="onTileSearchInput('${room.id}', 'dk', this.value)" autocomplete="off" />
+                    <div id="meta_dk_${room.id}" class="tile-meta" style="${room.dkItem ? '' : 'display:none;'}">
+                      ${room.dkItem ? formatTileMeta(room.dkItem) : ''}
+                    </div>
+                  </div>
+                  <div id="calc_dk_${room.id}" class="measurement-pill" style="background:#e0e7ff; color:#3730a3; display:none;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- LIGHT BASE WALL TILE -->
+            <div style="margin-top:10px;">
+              <label style="font-weight:800; color:#1e293b;">Main Light Base Tile (Remaining Wall)</label>
+              <div class="tile-spec-box" style="margin-top:6px;">
+                <div class="grid-2">
+                  <div class="field-group">
+                    <label>Tile Size</label>
+                    <select onchange="updateRoomSize('${room.id}', 'lt', this.value)">
+                      ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.ltSize ? 'selected' : ''}>${s.label}</option>`).join('')}
+                    </select>
+                  </div>
+                  <div class="field-group">
+                    <label>Sq.Ft / Box</label>
+                    <input type="number" value="${room.ltCoverage}" step="0.01" 
+                      oninput="updateRoomField('${room.id}', 'ltCoverage', this.value)" />
+                  </div>
+                </div>
+                <div class="field-group" style="margin-top:8px;">
+                  <label>Light Base Tile Item (Type to auto-populate)</label>
+                  <input type="text" list="tallyList" value="${escapeHtml(room.ltName)}" placeholder="🔍 Type tile or group..." 
+                    oninput="onTileSearchInput('${room.id}', 'lt', this.value)" autocomplete="off" />
+                  <div id="meta_lt_${room.id}" class="tile-meta" style="${room.ltItem ? '' : 'display:none;'}">
+                    ${room.ltItem ? formatTileMeta(room.ltItem) : ''}
+                  </div>
+                </div>
+                <div id="calc_lt_${room.id}" class="measurement-pill" style="display:none;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FLOOR DIMENSIONS -->
+          <div class="card" style="box-shadow:none; border:1px solid #e2e8f0; margin-bottom:0;">
+            <div class="card-title">
+              <span>Floor Dimensions & Tile</span>
+              <span class="card-subtitle" id="grossFloor_${room.id}">Area: 0 SFT</span>
+            </div>
+            <div class="grid-2">
+              <div class="field-group">
+                <label>Floor Length (Feet)</label>
+                <input type="number" value="${room.fLen}" placeholder="e.g. 10" step="0.1" 
+                  oninput="updateRoomField('${room.id}', 'fLen', this.value)" />
+              </div>
+              <div class="field-group">
+                <label>Floor Width (Feet)</label>
+                <input type="number" value="${room.fWid}" placeholder="e.g. 12" step="0.1" 
+                  oninput="updateRoomField('${room.id}', 'fWid', this.value)" />
+              </div>
+            </div>
+
+            <div class="tile-spec-box">
+              <div class="grid-2">
+                <div class="field-group">
+                  <label>Tile Size</label>
+                  <select onchange="updateRoomSize('${room.id}', 'fl', this.value)">
+                    ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.flSize ? 'selected' : ''}>${s.label}</option>`).join('')}
+                  </select>
+                </div>
+                <div class="field-group">
+                  <label>Sq.Ft / Box</label>
+                  <input type="number" value="${room.flCoverage}" step="0.01" 
+                    oninput="updateRoomField('${room.id}', 'flCoverage', this.value)" />
+                </div>
+              </div>
+              <div class="field-group" style="margin-top:8px;">
+                <label>Floor Tile Item (Type to auto-populate)</label>
+                <input type="text" list="tallyList" value="${escapeHtml(room.flName)}" placeholder="🔍 Type tile or group..." 
+                  oninput="onTileSearchInput('${room.id}', 'fl', this.value)" autocomplete="off" />
+                <div id="meta_fl_${room.id}" class="tile-meta" style="${room.flItem ? '' : 'display:none;'}">
+                  ${room.flItem ? formatTileMeta(room.flItem) : ''}
+                </div>
+              </div>
+              <div id="calc_fl_${room.id}" class="measurement-pill" style="background:#d1fae5; color:#065f46; display:none;"></div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function formatTileMeta(item) {
+      return `📁 <b>${escapeHtml(item.parent || 'General')}</b> &bull; Tally Stock: <b>${item.stockBoxes}</b> ${escapeHtml(item.unit || 'bx')} &bull; Rate: <b>₹${item.rate}</b>`;
+    }
+
+    // UPDATE ROOM FIELDS IN REAL-TIME
+    function updateRoomField(roomId, field, value) {
+      const room = rooms.find(r => r.id === roomId);
+      if (room) {
+        room[field] = value;
+        calculateAll();
+        saveDraft();
+      }
+    }
+
+    function updateRoomSize(roomId, tileKey, sizeId) {
+      const room = rooms.find(r => r.id === roomId);
+      if (room) {
+        room[tileKey + 'Size'] = sizeId;
+        const match = STANDARD_TILE_SIZES.find(s => s.id === sizeId);
+        if (match) {
+          room[tileKey + 'Coverage'] = match.sqft;
+          // Update the input field in DOM if it exists
+          const card = document.getElementById(`card_${roomId}`);
+          if (card) {
+            const covInput = card.querySelector(`input[oninput*="${tileKey}Coverage"]`);
+            if (covInput) covInput.value = match.sqft;
+          }
         }
-        if (detailsEl) {
-          detailsEl.style.display = 'block';
-          detailsEl.innerHTML = `📁 <b>${escapeHtml(item.parent || 'General')}</b> &bull; Tally Stock: <b>${item.stockBoxes}</b> ${escapeHtml(item.unit || 'bx')} &bull; Rate: <b>₹${item.rate}</b>`;
+        calculateAll();
+        saveDraft();
+      }
+    }
+
+    function toggleRoomHl(roomId, checked) {
+      const room = rooms.find(r => r.id === roomId);
+      if (room) {
+        room.chkHl = checked;
+        const panel = document.getElementById(`hlPanel_${roomId}`);
+        const card = document.getElementById(`hlCard_${roomId}`);
+        if (panel) panel.style.display = checked ? 'block' : 'none';
+        if (card) {
+          if (checked) card.classList.add('active');
+          else card.classList.remove('active');
+        }
+        calculateAll();
+        saveDraft();
+      }
+    }
+
+    function toggleRoomDk(roomId, checked) {
+      const room = rooms.find(r => r.id === roomId);
+      if (room) {
+        room.chkDk = checked;
+        const panel = document.getElementById(`dkPanel_${roomId}`);
+        const card = document.getElementById(`dkCard_${roomId}`);
+        if (panel) panel.style.display = checked ? 'block' : 'none';
+        if (card) {
+          if (checked) card.classList.add('active');
+          else card.classList.remove('active');
+        }
+        calculateAll();
+        saveDraft();
+      }
+    }
+
+    // SEARCH AUTO-POPULATION
+    function onTileSearchInput(roomId, tileKey, query) {
+      const room = rooms.find(r => r.id === roomId);
+      if (!room) return;
+
+      room[tileKey + 'Name'] = query;
+      const metaEl = document.getElementById(`meta_${tileKey}_${roomId}`);
+      const cleanQ = (query || '').trim().toLowerCase();
+
+      const item = tallyStock.find(i => i.name.toLowerCase() === cleanQ);
+      if (item) {
+        room[tileKey + 'Item'] = item;
+        if (item.rate && (!room[tileKey + 'Rate'] || room[tileKey + 'Rate'] === '0')) {
+          room[tileKey + 'Rate'] = item.rate;
+        }
+        if (metaEl) {
+          metaEl.style.display = 'block';
+          metaEl.innerHTML = formatTileMeta(item);
         }
       } else {
-        selectedItems[key] = null;
-        if (detailsEl) detailsEl.style.display = 'none';
+        room[tileKey + 'Item'] = null;
+        if (metaEl) metaEl.style.display = 'none';
       }
 
-      renderBill();
+      calculateAll();
       saveDraft();
     }
 
-    // RENDER BILL & INVOICE TABLE
-    function renderBill() {
-      if (!window.calcState) return;
-      const { bHl, hlNetArea, hlCoverage, bDk, dkNetArea, dkCoverage, bLt, ltNetArea, ltCoverage, bFl, floorTotalNet, flCoverage } = window.calcState;
+    // CALCULATE ALL ROOMS (EXACT SFT, NO WASTAGE, NO SKIRTING)
+    function calculateAll() {
+      let grandTotalWallSft = 0;
+      let grandTotalWallBoxes = 0;
+      let grandTotalFloorSft = 0;
+      let grandTotalFloorBoxes = 0;
 
-      // Update Header Info
+      window.calculatedRooms = [];
+
+      rooms.forEach(room => {
+        // Wall
+        const wRft = parseFloat(room.wRft) || 0;
+        const wHt = parseFloat(room.wHt) || 0;
+        const grossWallArea = wRft * wHt;
+
+        // HL
+        const hlRft = parseFloat(room.hlRft) || 0;
+        const hlHt = parseFloat(room.hlHt) || 0;
+        const hlArea = room.chkHl ? (hlRft * hlHt) : 0;
+        const hlCov = parseFloat(room.hlCoverage) || 16;
+        const bHl = (room.chkHl && hlArea > 0) ? Math.ceil(hlArea / hlCov) : 0;
+
+        // DK
+        const dkRft = parseFloat(room.dkRft) || 0;
+        const dkHt = parseFloat(room.dkHt) || 0;
+        const dkArea = room.chkDk ? (dkRft * dkHt) : 0;
+        const dkCov = parseFloat(room.dkCoverage) || 16;
+        const bDk = (room.chkDk && dkArea > 0) ? Math.ceil(dkArea / dkCov) : 0;
+
+        // LT
+        const ltArea = Math.max(0, grossWallArea - hlArea - dkArea);
+        const ltCov = parseFloat(room.ltCoverage) || 16;
+        const bLt = ltArea > 0 ? Math.ceil(ltArea / ltCov) : 0;
+
+        // Floor
+        const fLen = parseFloat(room.fLen) || 0;
+        const fWid = parseFloat(room.fWid) || 0;
+        const flArea = fLen * fWid;
+        const flCov = parseFloat(room.flCoverage) || 16;
+        const bFl = flArea > 0 ? Math.ceil(flArea / flCov) : 0;
+
+        // Per-room Wall Totals
+        const roomWallSft = grossWallArea;
+        const roomWallBoxes = bHl + bDk + bLt;
+        const roomFloorSft = flArea;
+        const roomFloorBoxes = bFl;
+
+        grandTotalWallSft += roomWallSft;
+        grandTotalWallBoxes += roomWallBoxes;
+        grandTotalFloorSft += roomFloorSft;
+        grandTotalFloorBoxes += roomFloorBoxes;
+
+        // Update live room indicators
+        const grossWallEl = document.getElementById(`grossWall_${room.id}`);
+        if (grossWallEl) grossWallEl.innerText = `Gross: ${grossWallArea.toFixed(1)} SFT`;
+
+        const grossFloorEl = document.getElementById(`grossFloor_${room.id}`);
+        if (grossFloorEl) grossFloorEl.innerText = `Area: ${flArea.toFixed(1)} SFT`;
+
+        const calcHlEl = document.getElementById(`calc_hl_${room.id}`);
+        if (calcHlEl) {
+          if (room.chkHl && hlArea > 0) {
+            calcHlEl.style.display = 'inline-flex';
+            calcHlEl.innerHTML = `HL: <b>${hlArea.toFixed(1)} SFT</b> → Req: <b>${bHl} Bx</b> (@${hlCov} sft/bx)`;
+          } else {
+            calcHlEl.style.display = 'none';
+          }
+        }
+
+        const calcDkEl = document.getElementById(`calc_dk_${room.id}`);
+        if (calcDkEl) {
+          if (room.chkDk && dkArea > 0) {
+            calcDkEl.style.display = 'inline-flex';
+            calcDkEl.innerHTML = `Dark: <b>${dkArea.toFixed(1)} SFT</b> → Req: <b>${bDk} Bx</b> (@${dkCov} sft/bx)`;
+          } else {
+            calcDkEl.style.display = 'none';
+          }
+        }
+
+        const calcLtEl = document.getElementById(`calc_lt_${room.id}`);
+        if (calcLtEl) {
+          if (grossWallArea > 0) {
+            calcLtEl.style.display = 'inline-flex';
+            calcLtEl.innerHTML = `Light Base: <b>${ltArea.toFixed(1)} SFT</b> → Req: <b>${bLt} Bx</b> (@${ltCov} sft/bx)`;
+          } else {
+            calcLtEl.style.display = 'none';
+          }
+        }
+
+        const calcFlEl = document.getElementById(`calc_fl_${room.id}`);
+        if (calcFlEl) {
+          if (flArea > 0) {
+            calcFlEl.style.display = 'inline-flex';
+            calcFlEl.innerHTML = `Floor: <b>${flArea.toFixed(1)} SFT</b> → Req: <b>${bFl} Bx</b> (@${flCov} sft/bx)`;
+          } else {
+            calcFlEl.style.display = 'none';
+          }
+        }
+
+        window.calculatedRooms.push({
+          room,
+          bHl, hlArea, hlCov,
+          bDk, dkArea, dkCov,
+          bLt, ltArea, ltCov,
+          bFl, flArea, flCov
+        });
+      });
+
+      const grandTotalSft = grandTotalWallSft + grandTotalFloorSft;
+      const grandTotalBoxes = grandTotalWallBoxes + grandTotalFloorBoxes;
+
+      document.getElementById('outTotalWallBoxes').innerText = grandTotalWallBoxes;
+      document.getElementById('outTotalWallSft').innerText = `${grandTotalWallSft.toFixed(1)} SFT`;
+
+      document.getElementById('outTotalFloorBoxes').innerText = grandTotalFloorBoxes;
+      document.getElementById('outTotalFloorSft').innerText = `${grandTotalFloorSft.toFixed(1)} SFT`;
+
+      document.getElementById('totalCoverageLabel').innerText = `${grandTotalSft.toFixed(1)} SFT total`;
+      document.getElementById('barTotalSft').innerText = `${grandTotalSft.toFixed(0)} SFT`;
+      document.getElementById('barTotalBoxes').innerText = `${grandTotalBoxes} Bx`;
+
+      renderBill();
+    }
+
+    // RENDER BILL & INVOICE TABLE (CONSOLIDATED & ITEMIZED)
+    function renderBill() {
+      if (!window.calculatedRooms) return;
+
       const custName = (document.getElementById('custName').value || '').trim() || 'Walk-in Customer';
-      const custPhone = (document.getElementById('custPhone').value || '').trim() || 'N/A';
+      const custPhone = (document.getElementById('custPhone').value || '').trim() || '-';
       const custAddress = (document.getElementById('custAddress').value || '').trim() || 'Site: As Specified';
       const quoteDate = document.getElementById('quoteDate').value || new Date().toISOString().split('T')[0];
 
@@ -1074,80 +1221,88 @@
       document.getElementById('invCustAddress').innerText = custAddress;
       document.getElementById('invDate').innerText = `Date: ${formatIndianDate(quoteDate)}`;
 
-      const items = [];
+      const billItemsList = [];
 
-      // 1. Highlighter
-      if (document.getElementById('chkHl').checked && bHl > 0) {
-        const itemObj = selectedItems.hl;
-        const sizeText = document.getElementById('hlSize').options[document.getElementById('hlSize').selectedIndex].text;
-        items.push({
-          id: 'hl',
-          label: 'Highlighter (HL) Wall Tile',
-          name: itemObj ? itemObj.name : (selectedNames.hl || 'Highlighter Tile'),
-          parent: itemObj ? itemObj.parent : '',
-          sizeText: sizeText,
-          sft: hlNetArea,
-          coverage: hlCoverage,
-          qty: bHl
-        });
-      }
+      window.calculatedRooms.forEach(cr => {
+        const r = cr.room;
+        const rName = r.name || 'Room';
 
-      // 2. Dark Accent
-      if (document.getElementById('chkDk').checked && bDk > 0) {
-        const itemObj = selectedItems.dk;
-        const sizeText = document.getElementById('dkSize').options[document.getElementById('dkSize').selectedIndex].text;
-        items.push({
-          id: 'dk',
-          label: 'Dark Accent / Dado Tile',
-          name: itemObj ? itemObj.name : (selectedNames.dk || 'Dark Tile'),
-          parent: itemObj ? itemObj.parent : '',
-          sizeText: sizeText,
-          sft: dkNetArea,
-          coverage: dkCoverage,
-          qty: bDk
-        });
-      }
+        // 1. Highlighter
+        if (r.chkHl && cr.bHl > 0) {
+          const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.hlSize);
+          billItemsList.push({
+            roomId: r.id,
+            roomName: rName,
+            typeKey: 'hl',
+            label: 'Highlighter (HL)',
+            name: r.hlName || 'Highlighter Tile',
+            sizeText: sizeObj ? sizeObj.label : '4×2 ft',
+            sft: cr.hlArea,
+            coverage: cr.hlCov,
+            qty: cr.bHl,
+            rate: r.hlRate
+          });
+        }
 
-      // 3. Light Base
-      if (bLt > 0) {
-        const itemObj = selectedItems.lt;
-        const sizeText = document.getElementById('ltSize').options[document.getElementById('ltSize').selectedIndex].text;
-        items.push({
-          id: 'lt',
-          label: 'Light Base Wall Tile',
-          name: itemObj ? itemObj.name : (selectedNames.lt || 'Light Wall Tile'),
-          parent: itemObj ? itemObj.parent : '',
-          sizeText: sizeText,
-          sft: ltNetArea,
-          coverage: ltCoverage,
-          qty: bLt
-        });
-      }
+        // 2. Dark
+        if (r.chkDk && cr.bDk > 0) {
+          const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.dkSize);
+          billItemsList.push({
+            roomId: r.id,
+            roomName: rName,
+            typeKey: 'dk',
+            label: 'Dark Accent',
+            name: r.dkName || 'Dark Accent Tile',
+            sizeText: sizeObj ? sizeObj.label : '4×2 ft',
+            sft: cr.dkArea,
+            coverage: cr.dkCov,
+            qty: cr.bDk,
+            rate: r.dkRate
+          });
+        }
 
-      // 4. Floor
-      if (bFl > 0) {
-        const itemObj = selectedItems.fl;
-        const sizeText = document.getElementById('flSize').options[document.getElementById('flSize').selectedIndex].text;
-        items.push({
-          id: 'fl',
-          label: 'Floor Tile',
-          name: itemObj ? itemObj.name : (selectedNames.fl || 'Floor Tile'),
-          parent: itemObj ? itemObj.parent : '',
-          sizeText: sizeText,
-          sft: floorTotalNet,
-          coverage: flCoverage,
-          qty: bFl
-        });
-      }
+        // 3. Light Base
+        if (cr.bLt > 0) {
+          const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.ltSize);
+          billItemsList.push({
+            roomId: r.id,
+            roomName: rName,
+            typeKey: 'lt',
+            label: 'Light Base Wall',
+            name: r.ltName || 'Light Wall Tile',
+            sizeText: sizeObj ? sizeObj.label : '4×2 ft',
+            sft: cr.ltArea,
+            coverage: cr.ltCov,
+            qty: cr.bLt,
+            rate: r.ltRate
+          });
+        }
+
+        // 4. Floor
+        if (cr.bFl > 0) {
+          const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.flSize);
+          billItemsList.push({
+            roomId: r.id,
+            roomName: rName,
+            typeKey: 'fl',
+            label: 'Floor Tile',
+            name: r.flName || 'Floor Tile',
+            sizeText: sizeObj ? sizeObj.label : '4×2 ft',
+            sft: cr.flArea,
+            coverage: cr.flCov,
+            qty: cr.bFl,
+            rate: r.flRate
+          });
+        }
+      });
 
       let html = '';
       let subTotal = 0;
       let totalBoxesCount = 0;
       let totalSftCount = 0;
 
-      items.forEach((item, idx) => {
-        const rateBox = rates[item.id] !== undefined ? rates[item.id] : '';
-        const rateNum = parseFloat(rateBox) || 0;
+      billItemsList.forEach((item, idx) => {
+        const rateNum = parseFloat(item.rate) || 0;
         const rateSft = item.coverage > 0 ? (rateNum / item.coverage) : 0;
         const lineTotal = rateNum * item.qty;
 
@@ -1160,13 +1315,13 @@
             <td>${idx + 1}</td>
             <td class="item-desc-cell">
               <div class="main-name">${escapeHtml(item.name)}</div>
-              <div class="meta-info">${escapeHtml(item.label)} &bull; ${escapeHtml(item.sizeText)}</div>
+              <div class="meta-info"><b>${escapeHtml(item.roomName)}</b> &bull; ${escapeHtml(item.label)} &bull; ${escapeHtml(item.sizeText)}</div>
             </td>
             <td style="text-align: right;">${item.sft.toFixed(1)}</td>
             <td style="text-align: right;">${item.qty} bx</td>
             <td style="text-align: right;">
-              <input type="number" value="${rateBox}" placeholder="₹ / box" step="0.5" 
-                oninput="onRateBoxChange('${item.id}', this.value)" />
+              <input type="number" value="${item.rate}" placeholder="₹ / bx" step="0.5" 
+                oninput="onBillRateChange('${item.roomId}', '${item.typeKey}', this.value)" />
             </td>
             <td style="text-align: right; color:#64748b; font-size:12px;">
               ₹ ${rateSft > 0 ? rateSft.toFixed(1) : '-'}
@@ -1176,11 +1331,17 @@
         `;
       });
 
-      if (items.length === 0) {
+      if (billItemsList.length === 0) {
         html = `<tr><td colspan="7" style="text-align:center; padding:24px; color:#94a3b8;">Enter wall or floor dimensions to generate quotation</td></tr>`;
       }
 
-      document.getElementById('billItems').innerHTML = html;
+      // Check if user is actively focusing an input in bill table before touching innerHTML
+      const activeEl = document.activeElement;
+      const isEditingBillInput = activeEl && activeEl.closest && activeEl.closest('#billItems');
+
+      if (!isEditingBillInput) {
+        document.getElementById('billItems').innerHTML = html;
+      }
 
       // Tax calculation
       const taxRate = parseFloat(document.getElementById('taxSelector').value) || 0;
@@ -1203,15 +1364,15 @@
         customerName: custName,
         customerPhone: custPhone,
         siteAddress: custAddress,
-        items: items.map(i => ({
-          id: i.id,
+        items: billItemsList.map(i => ({
           name: i.name,
-          label: i.label,
+          label: `${i.roomName} - ${i.label}`,
+          roomName: i.roomName,
           sizeText: i.sizeText,
           sft: i.sft,
           qty: i.qty,
-          rate: parseFloat(rates[i.id]) || 0,
-          amount: Math.round((parseFloat(rates[i.id]) || 0) * i.qty),
+          rate: parseFloat(i.rate) || 0,
+          amount: Math.round((parseFloat(i.rate) || 0) * i.qty),
           unit: 'box'
         })),
         subTotal,
@@ -1221,10 +1382,13 @@
       };
     }
 
-    function onRateBoxChange(id, val) {
-      rates[id] = val;
-      renderBill();
-      saveDraft();
+    function onBillRateChange(roomId, tileKey, rateVal) {
+      const room = rooms.find(r => r.id === roomId);
+      if (room) {
+        room[tileKey + 'Rate'] = rateVal;
+        calculateAll();
+        saveDraft();
+      }
     }
 
     // NUMBER TO WORDS (INDIAN RUPEES)
@@ -1250,7 +1414,7 @@
       return isoStr;
     }
 
-    // WHATSAPP QUOTATION SENDER
+    // WHATSAPP SHARE
     function shareOnWhatsApp() {
       if (!window.invoiceData) return;
       const inv = window.invoiceData;
@@ -1260,17 +1424,15 @@
 
       let msg = `*TILE ESTIMATE / QUOTATION*\n`;
       msg += `------------------------------------\n`;
-      msg += `*Store:* ${document.getElementById('invStoreName').innerText.replace('✏️','').trim()}\n`;
       msg += `*Quote Ref:* #${inv.refNo} | *Date:* ${formatIndianDate(inv.date)}\n`;
       msg += `*Customer:* ${inv.customerName} (${inv.customerPhone})\n`;
       msg += `*Site Address:* ${inv.siteAddress}\n`;
       msg += `------------------------------------\n`;
-      msg += `*DETAILED MEASUREMENTS & TILES:*\n\n`;
+      msg += `*ROOM & TILE SPECIFICATIONS:*\n\n`;
 
       inv.items.forEach((item, i) => {
         msg += `${i + 1}. *${item.label}*\n`;
-        msg += `   • Item: ${item.name}\n`;
-        msg += `   • Size: ${item.sizeText}\n`;
+        msg += `   • Item: ${item.name} (${item.sizeText})\n`;
         msg += `   • Area: ${item.sft.toFixed(1)} sq.ft (${item.qty} Boxes)\n`;
         msg += `   • Rate: ₹${item.rate} / box\n`;
         msg += `   • Subtotal: ₹${item.amount.toLocaleString('en-IN')}\n\n`;
@@ -1284,7 +1446,7 @@
       }
       msg += `*GRAND TOTAL:* ₹${inv.grandTotal.toLocaleString('en-IN')}\n`;
       msg += `------------------------------------\n`;
-      msg += `_Prices valid for 7 days. Thank you for your business!_`;
+      msg += `_Prices valid for 7 days. Thank you!_`;
 
       const targetUrl = cleanPhone.length >= 10 
         ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`
@@ -1296,7 +1458,7 @@
     // PUSH AS SALES ORDER TO TALLY
     function openTallyModal() {
       if (!window.invoiceData || window.invoiceData.items.length === 0) {
-        alert('Please specify at least one tile measurement before pushing to Tally.');
+        alert('Please enter measurements for at least one room.');
         return;
       }
       const inv = window.invoiceData;
@@ -1376,12 +1538,12 @@
       const history = JSON.parse(localStorage.getItem('tile_quote_history') || '[]');
       const record = {
         ...window.invoiceData,
+        roomsState: JSON.parse(JSON.stringify(rooms)),
         savedAt: new Date().toISOString()
       };
       history.unshift(record);
-      // Keep last 30
       localStorage.setItem('tile_quote_history', JSON.stringify(history.slice(0, 30)));
-      alert(`✅ Quotation #${window.invoiceData.refNo} for ${window.invoiceData.customerName} saved successfully!`);
+      alert(`✅ Quotation #${window.invoiceData.refNo} saved successfully!`);
     }
 
     function openPastQuotesModal() {
@@ -1418,43 +1580,38 @@
       document.getElementById('quoteDate').value = q.date || '';
       document.getElementById('quoteRefLabel').innerText = `Quote #${q.refNo}`;
 
-      q.items.forEach(it => {
-        if (rates[it.id] !== undefined) rates[it.id] = it.rate;
-      });
+      if (q.roomsState && Array.isArray(q.roomsState)) {
+        rooms = q.roomsState;
+        renderAllRooms();
+      }
 
       closePastQuotesModal();
-      calculate();
+      calculateAll();
       switchTab('rates');
     }
 
-    // STORE DETAILS CUSTOMIZATION
+    // STORE DETAILS
     function editStoreDetails() {
-      const currentName = localStorage.getItem('store_name') || 'SHREE GANESH CERAMICS & TILES';
-      const currentAddr = localStorage.getItem('store_addr') || 'Opp. New Bus Terminal, Ring Road • Phone: 98765-43210';
-      const currentGst = localStorage.getItem('store_gst') || 'GSTIN: 24AAAAA0000A1Z5';
+      const currentName = localStorage.getItem('store_name') || 'CERAMIC TILES & SANITARYWARE';
+      const currentAddr = localStorage.getItem('store_addr') || 'Tiles • Marbles • Bath Fittings';
 
-      const newName = prompt('Enter your Store / Showroom Name:', currentName);
+      const newName = prompt('Enter Showroom Title / Header:', currentName);
       if (newName === null) return;
-      const newAddr = prompt('Enter Showroom Address & Contact Number:', currentAddr);
+      const newAddr = prompt('Enter Showroom Tagline / Address:', currentAddr);
       if (newAddr === null) return;
-      const newGst = prompt('Enter Store GSTIN (or leave blank):', currentGst);
 
       localStorage.setItem('store_name', newName.trim() || currentName);
       localStorage.setItem('store_addr', newAddr.trim() || currentAddr);
-      localStorage.setItem('store_gst', (newGst || '').trim());
 
       loadStoreDetails();
     }
 
     function loadStoreDetails() {
-      const storeName = localStorage.getItem('store_name') || 'SHREE GANESH CERAMICS & TILES';
-      const storeAddr = localStorage.getItem('store_addr') || 'Opp. New Bus Terminal, Ring Road • Phone: 98765-43210';
-      const storeGst = localStorage.getItem('store_gst') || 'GSTIN: 24AAAAA0000A1Z5';
+      const storeName = localStorage.getItem('store_name') || 'CERAMIC TILES & SANITARYWARE';
+      const storeAddr = localStorage.getItem('store_addr') || 'Tiles • Marbles • Bath Fittings';
 
-      document.getElementById('headerStoreName').innerText = storeName;
       document.getElementById('invStoreName').innerText = `${storeName} ✏️`;
       document.getElementById('invStoreAddress').innerText = storeAddr;
-      document.getElementById('invStoreGstin').innerText = storeGst;
     }
 
     // LOCAL DRAFT SAVING
@@ -1464,28 +1621,17 @@
         phone: document.getElementById('custPhone').value,
         address: document.getElementById('custAddress').value,
         date: document.getElementById('quoteDate').value,
-        wRft: document.getElementById('wRft').value,
-        wHt: document.getElementById('wHt').value,
-        chkHl: document.getElementById('chkHl').checked,
-        hlRft: document.getElementById('hlRft').value,
-        hlHt: document.getElementById('hlHt').value,
-        chkDk: document.getElementById('chkDk').checked,
-        dkRft: document.getElementById('dkRft').value,
-        dkHt: document.getElementById('dkHt').value,
-        fLen: document.getElementById('fLen').value,
-        fWid: document.getElementById('fWid').value,
-        selectedNames, rates
+        rooms: rooms
       };
-      localStorage.setItem('tile_estimator_draft', JSON.stringify(draft));
+      localStorage.setItem('tile_estimator_multi_draft', JSON.stringify(draft));
     }
 
     function loadDraft() {
-      const saved = localStorage.getItem('tile_estimator_draft');
+      const saved = localStorage.getItem('tile_estimator_multi_draft');
       if (!saved) {
-        // Generate random initial Quote Ref
         const randId = Math.floor(1000 + Math.random() * 9000);
         document.getElementById('quoteRefLabel').innerText = `Quote #EST-${randId}`;
-        return;
+        return false;
       }
       try {
         const d = JSON.parse(saved);
@@ -1493,34 +1639,39 @@
         if (d.phone) document.getElementById('custPhone').value = d.phone;
         if (d.address) document.getElementById('custAddress').value = d.address;
         if (d.date) document.getElementById('quoteDate').value = d.date;
-        if (d.wRft) document.getElementById('wRft').value = d.wRft;
-        if (d.wHt) document.getElementById('wHt').value = d.wHt;
-        if (d.chkHl !== undefined) {
-          document.getElementById('chkHl').checked = d.chkHl;
-          togglePanel('hlPanel', d.chkHl, 'hlToggleCard');
-        }
-        if (d.hlRft) document.getElementById('hlRft').value = d.hlRft;
-        if (d.hlHt) document.getElementById('hlHt').value = d.hlHt;
-        if (d.chkDk !== undefined) {
-          document.getElementById('chkDk').checked = d.chkDk;
-          togglePanel('dkPanel', d.chkDk, 'dkToggleCard');
-        }
-        if (d.dkRft) document.getElementById('dkRft').value = d.dkRft;
-        if (d.dkHt) document.getElementById('dkHt').value = d.dkHt;
-        if (d.fLen) document.getElementById('fLen').value = d.fLen;
-        if (d.fWid) document.getElementById('fWid').value = d.fWid;
-        if (d.rates) rates = d.rates;
-        if (d.selectedNames) {
-          selectedNames = d.selectedNames;
-          ['hl', 'dk', 'lt', 'fl'].forEach(k => {
-            const el = document.getElementById(k + 'Input');
-            if (el && selectedNames[k]) el.value = selectedNames[k];
-          });
+        if (d.rooms && Array.isArray(d.rooms) && d.rooms.length > 0) {
+          rooms = d.rooms;
+          return true;
         }
       } catch (e) {}
+      return false;
     }
 
-    // SYNC TALLY STOCK
+    // TAB NAVIGATION
+    function switchTab(tab) {
+      currentTab = tab;
+      if (tab === 'rooms') {
+        document.getElementById('tab-rooms').style.display = 'block';
+        document.getElementById('tab-rates').style.display = 'none';
+        document.getElementById('btnTabRooms').classList.add('active');
+        document.getElementById('btnTabRates').classList.remove('active');
+        document.getElementById('btnBottomSwitch').innerText = 'Invoice →';
+      } else {
+        document.getElementById('tab-rooms').style.display = 'none';
+        document.getElementById('tab-rates').style.display = 'block';
+        document.getElementById('btnTabRooms').classList.remove('active');
+        document.getElementById('btnTabRates').classList.add('active');
+        document.getElementById('btnBottomSwitch').innerText = '← Edit Rooms';
+        renderBill();
+      }
+    }
+
+    function toggleViewTab() {
+      if (currentTab === 'rooms') switchTab('rates');
+      else switchTab('rooms');
+    }
+
+    // SILENT 10-SECOND AUTO-REFRESH (NEVER INTERRUPTS CURSOR, FOCUS OR SCROLL)
     async function syncTallyStock(isSilent = false) {
       const status = document.getElementById('syncStatus');
       if (!isSilent) {
@@ -1530,9 +1681,11 @@
 
       const endpointsToTry = [];
       const customUrl = localStorage.getItem('tally_url');
-      if (customUrl) endpointsToTry.push(customUrl);
+      if (customUrl) {
+        const trimmed = customUrl.trim().replace(/\/+$/, '');
+        endpointsToTry.push(trimmed.endsWith('/api/stock') ? trimmed : `${trimmed}/api/stock`);
+      }
 
-      // Localhost check
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:') {
         endpointsToTry.push(LOCAL_ENDPOINT);
         endpointsToTry.push('/api/stock');
@@ -1549,7 +1702,7 @@
           const sep = ep.includes('?') ? '&' : '?';
           const url = ep + sep + 't=' + Date.now();
           const controller = new AbortController();
-          const timer = setTimeout(() => controller.abort(), 4000);
+          const timer = setTimeout(() => controller.abort(), 3500);
           const res = await fetch(url, {
             signal: controller.signal,
             headers: { 'ngrok-skip-browser-warning': 'true' }
@@ -1570,21 +1723,18 @@
         status.style.color = '#4ade80';
         status.title = `Connected to Tally!\nVia: ${connectedUrl}\nClick to refresh`;
 
+        // Update datalist without touching active input elements
         const datalist = document.getElementById('tallyList');
-        if (datalist) {
+        if (datalist && datalist.children.length !== tallyStock.length) {
           datalist.innerHTML = tallyStock.map(i => 
             `<option value="${escapeHtml(i.name)}">${escapeHtml(i.parent ? `[${i.parent}] ` : '')}${i.stockBoxes} ${i.unit || 'bx'} • ₹${i.rate}</option>`
           ).join('');
         }
-
-        ['hl', 'dk', 'lt', 'fl'].forEach(key => {
-          if (selectedNames[key]) handleTileInput(key, selectedNames[key]);
-        });
       } else {
         isConnected = false;
         status.innerText = '🔴 Tally Offline';
         status.style.color = '#f87171';
-        status.title = 'Tally is offline • Click to enter URL';
+        status.title = 'Tally is offline • Click to check URL';
       }
     }
 
@@ -1595,17 +1745,25 @@
 
     function configureTallyUrl() {
       const current = localStorage.getItem('tally_url') || PERMANENT_ENDPOINT;
-      const input = prompt('Configure Tally Bridge / Tunnel URL:\n(Enter your endpoint or leave blank to reset)', current);
+      const input = prompt('Configure Tally Bridge / Tunnel URL:\n(Leave blank and click OK to reset to default)', current);
       if (input !== null) {
-        if (input.trim()) localStorage.setItem('tally_url', input.trim());
-        else localStorage.removeItem('tally_url');
+        if (input.trim()) {
+          const trimmed = input.trim().replace(/\/+$/, '');
+          const fullUrl = trimmed.endsWith('/api/stock') ? trimmed : `${trimmed}/api/stock`;
+          localStorage.setItem('tally_url', fullUrl);
+        } else {
+          localStorage.removeItem('tally_url');
+        }
         syncTallyStock(false);
       }
     }
 
+    // EXACTLY 10 SECONDS INTERVAL SILENT REFRESH
     function startAutoRefresh() {
       if (autoRefreshTimer) clearInterval(autoRefreshTimer);
-      autoRefreshTimer = setInterval(() => { syncTallyStock(true); }, 30000);
+      autoRefreshTimer = setInterval(() => {
+        syncTallyStock(true); // silent background fetch: does NOT touch DOM inputs or focus
+      }, 10000);
     }
 
     function escapeHtml(str) {

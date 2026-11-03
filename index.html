@@ -68,7 +68,7 @@
       min-height: 100vh;
     }
 
-    .container { max-width: 780px; margin: 0 auto; }
+    .container { max-width: 820px; margin: 0 auto; }
 
     /* HEADER */
     .app-header {
@@ -147,11 +147,12 @@
       border-radius: 50%;
       display: inline-block;
       background-color: #FACC15;
+      transition: transform 0.3s ease;
     }
     .status-dot.online {
       background-color: #4ADE80;
       box-shadow: 0 0 8px #4ADE80;
-      animation: pulseGreen 2s infinite;
+      animation: pulseGreen 2.5s infinite;
     }
     .status-dot.offline {
       background-color: #F87171;
@@ -190,6 +191,8 @@
       border-radius: 12px; 
       margin-bottom: 16px; 
       border: 1px solid var(--border);
+      align-items: center;
+      gap: 4px;
     }
     
     .tab-btn {
@@ -214,6 +217,76 @@
       background: var(--surface);
       color: var(--primary-dark);
       box-shadow: 0 2px 8px rgba(35, 52, 33, 0.08);
+    }
+
+    /* NEW CUSTOMER TAB BUTTON */
+    .tab-btn-new-cust {
+      background: #E1EBE0;
+      color: #2D4C2B;
+      border: 1px dashed #4A6746;
+      font-weight: 800;
+      flex: 0 0 auto;
+      padding: 11px 16px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .tab-btn-new-cust:hover {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-style: solid;
+      transform: translateY(-1.5px);
+      box-shadow: 0 4px 12px rgba(74, 103, 70, 0.25);
+    }
+    .tab-btn-new-cust:active { transform: scale(0.97); }
+
+    /* CLOSE BILL BUTTON */
+    .btn-close-bill {
+      background: #FDF2F2;
+      color: #B91C1C;
+      border: 1px solid #F8D7DA;
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: var(--transition);
+    }
+    .btn-close-bill:hover {
+      background: #FCE8E8;
+      border-color: #F5C2C7;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(185, 28, 28, 0.16);
+    }
+    .btn-close-bill:active { transform: scale(0.97); }
+
+    /* TOAST NOTIFICATION */
+    .toast-banner {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #253723;
+      color: #FFFFFF;
+      padding: 12px 22px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+      font-size: 13.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      z-index: 1000;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      animation: toastSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes toastSlideDown {
+      from { transform: translate(-50%, -24px); opacity: 0; }
+      to { transform: translate(-50%, 0); opacity: 1; }
     }
 
     /* CARDS & INPUTS */
@@ -490,7 +563,7 @@
     table.bill-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
     table.bill-table th {
       background: #EEF3EB;
-      padding: 11px 9px;
+      padding: 11px 8px;
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
@@ -500,7 +573,7 @@
       border-bottom: 2px solid #D5E1D3;
     }
     table.bill-table td {
-      padding: 10px 9px;
+      padding: 9px 8px;
       font-size: 13px;
       border-bottom: 1px solid var(--border);
       font-weight: 600;
@@ -510,12 +583,15 @@
     table.bill-table tr:hover td {
       background: #F4F8F2;
     }
+    table.bill-table tr.table-entry-row td {
+      background: #FAFDF9 !important;
+    }
     table.bill-table td input {
       height: 36px;
       padding: 0 8px;
       font-size: 13.5px;
       font-weight: 700;
-      width: 88px;
+      width: 82px;
       border: 1.5px solid var(--border);
       border-radius: 7px;
       background: #FFFFFF;
@@ -585,13 +661,13 @@
     /* ACTION BUTTONS */
     .btn-action-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 12px;
       margin-top: 16px;
     }
     
     .btn {
-      padding: 12px 18px;
+      padding: 12px 16px;
       border-radius: 9px;
       font-size: 13.5px;
       font-weight: 700;
@@ -606,7 +682,6 @@
     }
     .btn:active { transform: translateY(0.5px) scale(0.98); }
     
-    /* SPECIFIC BUTTON COLORS & HOVERS */
     .btn-wa { 
       background: #25D366; 
       color: #FFFFFF; 
@@ -638,17 +713,6 @@
       background: #395236; 
       transform: translateY(-1.5px); 
       box-shadow: 0 5px 14px rgba(74, 103, 70, 0.35); 
-    }
-
-    .btn-save { 
-      background: #6B7D69; 
-      color: #FFFFFF; 
-      box-shadow: 0 2px 6px rgba(107, 125, 105, 0.2);
-    }
-    .btn-save:hover { 
-      background: #576855; 
-      transform: translateY(-1.5px); 
-      box-shadow: 0 5px 14px rgba(107, 125, 105, 0.35); 
     }
 
     .btn-primary { 
@@ -684,6 +748,24 @@
       border-style: solid;
       transform: translateY(-1.5px);
       box-shadow: 0 4px 12px rgba(74, 103, 70, 0.15);
+    }
+
+    /* ROW DELETE BUTTON */
+    .btn-row-del {
+      background: none;
+      border: none;
+      color: #DC2626;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      line-height: 1;
+      transition: var(--transition);
+    }
+    .btn-row-del:hover {
+      background: #FEE2E2;
+      transform: scale(1.15);
     }
 
     /* FLOATING BOTTOM BAR */
@@ -757,7 +839,7 @@
     @media print {
       body { background: #fff; padding: 0; color: #000; font-size: 11pt; }
       .container { max-width: 100%; margin: 0; padding: 0; }
-      .app-header, .nav-tabs, .floating-bar, .btn-action-grid, #tab-rooms, .btn-gear, .status-badge, .no-print, .modal-overlay, .btn-add-room { display: none !important; }
+      .app-header, .nav-tabs, .floating-bar, .btn-action-grid, #tab-rooms, .btn-gear, .status-badge, .no-print, .modal-overlay, .btn-add-room, .btn-close-bill, .btn-row-del, .table-entry-row { display: none !important; }
       #tab-rates { display: block !important; }
       .card { box-shadow: none; border: none; padding: 0; margin-bottom: 0; }
       table.bill-table th { background: #EEF3EB !important; -webkit-print-color-adjust: exact; color: #000 !important; }
@@ -790,6 +872,9 @@
     <nav class="nav-tabs">
       <button class="tab-btn active" id="btnTabRooms" onclick="switchTab('rooms')">📐 1. Rooms & Measurements</button>
       <button class="tab-btn" id="btnTabRates" onclick="switchTab('rates')">🧾 2. Quotation / Invoice</button>
+      <button class="tab-btn tab-btn-new-cust no-print" id="btnNewCustomer" onclick="startNewCustomer()" title="Start clean bill for next customer">
+        <span>➕</span> New Customer
+      </button>
     </nav>
 
     <!-- ========================================== -->
@@ -797,7 +882,7 @@
     <!-- ========================================== -->
     <div id="tab-rooms">
       
-      <!-- CLIENT, SITE & DATE DETAILS -->
+      <!-- CLIENT, SITE & DATE DETAILS (SHARED) -->
       <div class="card">
         <div class="card-title">
           <span>Client & Project Details</span>
@@ -806,21 +891,21 @@
         <div class="grid-2">
           <div class="field-group">
             <label>Customer Name</label>
-            <input type="text" id="custName" placeholder="Customer Name" oninput="saveDraft()" />
+            <input type="text" id="custName" placeholder="Customer Name" oninput="syncCustomerFromRooms('name', this.value)" />
           </div>
           <div class="field-group">
             <label>Mobile Number</label>
-            <input type="tel" id="custPhone" placeholder="Mobile Number" oninput="saveDraft()" />
+            <input type="tel" id="custPhone" placeholder="Mobile Number" oninput="syncCustomerFromRooms('phone', this.value)" />
           </div>
         </div>
         <div class="grid-2" style="margin-top:12px;">
           <div class="field-group">
             <label>Site / Delivery Address</label>
-            <input type="text" id="custAddress" placeholder="Site Address / Location" oninput="saveDraft()" />
+            <input type="text" id="custAddress" placeholder="Site Address / Location" oninput="syncCustomerFromRooms('address', this.value)" />
           </div>
           <div class="field-group">
             <label>Quotation Date</label>
-            <input type="date" id="quoteDate" onchange="saveDraft()" />
+            <input type="date" id="quoteDate" onchange="syncCustomerFromRooms('date', this.value)" />
           </div>
         </div>
       </div>
@@ -833,7 +918,7 @@
         ➕ Add Another Room / Area
       </button>
 
-      <!-- ACCESSORIES & EXTRA MATERIALS -->
+      <!-- ACCESSORIES & EXTRA MATERIALS ON ROOMS PAGE -->
       <div class="card">
         <div class="card-title">
           <span>Accessories & Extra Items</span>
@@ -841,12 +926,12 @@
         </div>
         
         <div class="acc-quick-pills no-print">
-          <span class="acc-pill" onclick="addQuickAccessory('Tile Adhesive (20 Kg)', 'Bag', 450)">+ Tile Adhesive 20kg</span>
-          <span class="acc-pill" onclick="addQuickAccessory('Epoxy Grout (1 Kg)', 'Kg', 350)">+ Epoxy Grout 1kg</span>
-          <span class="acc-pill" onclick="addQuickAccessory('Tile Spacers (Packet)', 'Pkt', 80)">+ Tile Spacers</span>
-          <span class="acc-pill" onclick="addQuickAccessory('Corner Beading (8 Ft)', 'Pc', 120)">+ Corner Beading</span>
-          <span class="acc-pill" onclick="addQuickAccessory('Tile Cleaner (1 Ltr)', 'Btl', 150)">+ Tile Cleaner</span>
-          <span class="acc-pill" onclick="addBlankAccessory()">+ Custom Item</span>
+          <span class="acc-pill" onclick="addDirectAccessory('Tile Adhesive (20 Kg)', 'Bag', 450)">+ Tile Adhesive 20kg</span>
+          <span class="acc-pill" onclick="addDirectAccessory('Epoxy Grout (1 Kg)', 'Kg', 350)">+ Epoxy Grout 1kg</span>
+          <span class="acc-pill" onclick="addDirectAccessory('Tile Spacers (Packet)', 'Pkt', 80)">+ Tile Spacers</span>
+          <span class="acc-pill" onclick="addDirectAccessory('Corner Beading (8 Ft)', 'Pc', 120)">+ Corner Beading</span>
+          <span class="acc-pill" onclick="addDirectAccessory('Tile Cleaner (1 Ltr)', 'Btl', 150)">+ Tile Cleaner</span>
+          <span class="acc-pill" onclick="addBlankDirectItem()">+ Custom Item</span>
         </div>
 
         <div id="accessoriesList"></div>
@@ -877,52 +962,92 @@
     <!-- TAB 2: QUOTATION / BILL INVOICE            -->
     <!-- ========================================== -->
     <div id="tab-rates" style="display: none;">
+      
+      <!-- INVOICE CARD FOR DISPLAY & PRINT -->
       <div class="card" id="printableInvoiceCard">
         
-        <!-- INVOICE HEADER (NO SHOP NAME) -->
+        <!-- INVOICE HEADER (NO SHOP NAME + CLOSE BILL CROSS) -->
         <div class="invoice-header">
           <div>
             <div style="font-size:18px; font-weight:900; color:var(--text); letter-spacing:0.3px;">ESTIMATE / QUOTATION</div>
             <div style="font-size:12.5px; font-weight:700; color:var(--primary); margin-top:2px;" id="invRefNum">#EST-1001</div>
           </div>
-          <div style="text-align: right;">
-            <div style="font-size:12.5px; font-weight:700; color:var(--text-muted);" id="invDate">Date: 01/11/2026</div>
+          
+          <!-- RIGHT ACTIONS: DATE & CLOSE BILL CROSS (DOES NOT CLOSE APP) -->
+          <div style="display:flex; align-items:center; gap:12px;" class="no-print">
+            <div style="font-size:12.5px; font-weight:700; color:var(--text-muted);" id="invDate">Date: 02/11/2026</div>
+            <button type="button" class="btn-close-bill" onclick="closeInvoiceBill()" title="Close current bill and clear for next customer (stays in app)">
+              <span style="font-size:15px; font-weight:900; line-height:1;">✕</span> Close Bill
+            </button>
+          </div>
+          <div class="print-only" style="text-align: right;">
+            <div style="font-size:12.5px; font-weight:700; color:#333;" id="invDatePrint">Date: 02/11/2026</div>
           </div>
         </div>
 
-        <!-- CLIENT & SITE ADDRESS META -->
-        <div class="inv-meta-grid">
+        <!-- EDITABLE CUSTOMER & SITE DETAILS ON INVOICE (NO-PRINT FORM) -->
+        <div class="inv-meta-grid no-print">
           <div class="inv-meta-block">
             <strong>Customer Details</strong>
-            <div style="font-weight:700; color:var(--text);" id="invCustName">Walk-in Customer</div>
-            <div style="color:var(--text-muted);" id="invCustPhone">-</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px;">
+              <input type="text" id="invCustNameInput" placeholder="Customer Name" oninput="syncCustomerFromInvoice('name', this.value)" style="height:34px; font-size:13px;" />
+              <input type="tel" id="invCustPhoneInput" placeholder="Mobile Number" oninput="syncCustomerFromInvoice('phone', this.value)" style="height:34px; font-size:13px;" />
+            </div>
           </div>
           <div class="inv-meta-block">
             <strong>Site / Delivery Address</strong>
-            <div id="invCustAddress" style="color:var(--text); font-weight:600;">Site: As specified</div>
+            <div style="display:grid; grid-template-columns:1.5fr 1fr; gap:8px; margin-top:4px;">
+              <input type="text" id="invCustAddressInput" placeholder="Site Address / Location" oninput="syncCustomerFromInvoice('address', this.value)" style="height:34px; font-size:13px;" />
+              <input type="date" id="invQuoteDateInput" onchange="syncCustomerFromInvoice('date', this.value)" style="height:34px; font-size:13px;" />
+            </div>
           </div>
         </div>
 
-        <!-- ITEM DETAILS TABLE -->
+        <!-- PRINT-ONLY CUSTOMER DETAILS -->
+        <div class="inv-meta-grid print-only">
+          <div class="inv-meta-block">
+            <strong>Customer Details</strong>
+            <div style="font-weight:700; color:#000;" id="invCustName">Walk-in Customer</div>
+            <div style="color:#555;" id="invCustPhone">-</div>
+          </div>
+          <div class="inv-meta-block">
+            <strong>Site / Delivery Address</strong>
+            <div id="invCustAddress" style="color:#000; font-weight:600;">Site: As specified</div>
+          </div>
+        </div>
+
+        <!-- ITEM DETAILS TABLE (WITH INLINE ENTRY ROW) -->
         <table class="bill-table">
           <thead>
             <tr>
               <th style="width:25px;">#</th>
-              <th>Item & Wall Area Specification</th>
+              <th>Item & Wall / Stock Specification</th>
               <th style="text-align:right; width:65px;">Area (SFT)</th>
-              <th style="text-align:right; width:60px;">Qty</th>
-              <th style="text-align:right; width:90px;">Rate (₹)</th>
+              <th style="text-align:right; width:70px;">Qty</th>
+              <th style="text-align:right; width:88px;">Rate (₹)</th>
               <th style="text-align:right; width:70px;">Rate/SFT</th>
               <th style="text-align:right; width:85px;">Total (₹)</th>
+              <th style="width:28px;" class="no-print"></th>
             </tr>
           </thead>
           <tbody id="billItems"></tbody>
         </table>
 
+        <!-- QUICK ACCESSORIES PILLS UNDER TABLE -->
+        <div class="acc-quick-pills no-print" style="margin-top:10px; margin-bottom:14px; padding-top:8px; border-top:1px dashed var(--border); display:flex; align-items:center; flex-wrap:wrap; gap:6px;">
+          <span style="font-size:11.5px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-right:4px;">+ Quick Add:</span>
+          <span class="acc-pill" onclick="addDirectAccessory('Tile Adhesive (20 Kg)', 'Bag', 450)">+ Tile Adhesive 20kg</span>
+          <span class="acc-pill" onclick="addDirectAccessory('Epoxy Grout (1 Kg)', 'Kg', 350)">+ Epoxy Grout 1kg</span>
+          <span class="acc-pill" onclick="addDirectAccessory('Tile Spacers (Packet)', 'Pkt', 80)">+ Tile Spacers</span>
+          <span class="acc-pill" onclick="addDirectAccessory('Corner Beading (8 Ft)', 'Pc', 120)">+ Corner Beading</span>
+          <span class="acc-pill" onclick="addDirectAccessory('Tile Cleaner (1 Ltr)', 'Btl', 150)">+ Tile Cleaner</span>
+          <span class="acc-pill" onclick="addBlankDirectItem()">+ Custom Item</span>
+        </div>
+
         <!-- INVOICE TOTALS & SUMMARY -->
-        <div style="margin-top:16px; padding-top:12px; border-top:1.5px solid var(--border);">
+        <div style="padding-top:12px; border-top:1.5px solid var(--border);">
           <div class="inv-summary-row">
-            <span>Subtotal (Boxes: <b id="invTotalBoxes">0</b> • Tile SFT: <b id="invTotalSft">0</b>)</span>
+            <span>Subtotal (Boxes/Units: <b id="invTotalBoxes">0</b> • Tile SFT: <b id="invTotalSft">0</b>)</span>
             <span id="invSubTotal" style="font-weight:700;">₹ 0</span>
           </div>
 
@@ -954,7 +1079,7 @@
         </div>
       </div>
 
-      <!-- ACTION BUTTONS: PRINT, WHATSAPP, SAVE, TALLY -->
+      <!-- ACTION BUTTONS: PRINT, WHATSAPP, TALLY -->
       <div class="btn-action-grid no-print">
         <button class="btn btn-wa" onclick="shareOnWhatsApp()">
           <span>📲</span> Share on WhatsApp
@@ -965,15 +1090,12 @@
         <button class="btn btn-tally" onclick="openTallyModal()">
           <span>📤</span> Push to Tally
         </button>
-        <button class="btn btn-save" onclick="saveQuotationToHistory()">
-          <span>💾</span> Save Estimate
-        </button>
       </div>
 
-      <!-- PAST ESTIMATES DRAWER BUTTON -->
-      <div style="margin-top:14px; text-align:center;" class="no-print">
-        <button type="button" class="btn" style="background:var(--surface-muted); color:var(--text-muted); width:100%; border:1px solid var(--border);" onclick="openPastQuotesModal()">
-          📂 View Past Saved Estimates
+      <!-- SECONDARY ACTIONS -->
+      <div style="margin-top:12px;" class="no-print">
+        <button type="button" class="btn btn-close-bill" style="width:100%; justify-content:center; padding:12px;" onclick="closeInvoiceBill()">
+          <span>✕</span> Close Current Bill for Next Customer
         </button>
       </div>
     </div>
@@ -1027,24 +1149,10 @@
       </div>
       <div id="tallyModalStatus" style="display:none; padding:10px; border-radius:8px; font-size:12.5px; font-weight:700; margin-bottom:12px;"></div>
       <div style="display:flex; gap:10px; justify-content:flex-end;">
-        <button type="button" class="btn btn-save" onclick="closeTallyModal()">Cancel</button>
+        <button type="button" class="btn" style="background:var(--surface-muted); color:var(--text); border:1px solid var(--border);" onclick="closeTallyModal()">Cancel</button>
         <button type="button" class="btn btn-tally" id="btnConfirmTally" onclick="executeTallyPush()">
           🚀 Confirm & Push
         </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL: PAST ESTIMATES HISTORY -->
-  <div class="modal-overlay" id="historyModal">
-    <div class="modal-card">
-      <div class="modal-title">
-        <span>Saved Estimates History</span>
-        <button type="button" class="btn-close" onclick="closePastQuotesModal()">&times;</button>
-      </div>
-      <div id="historyListContainer" style="max-height:320px; overflow-y:auto;"></div>
-      <div style="margin-top:16px; text-align:right;">
-        <button type="button" class="btn btn-save" onclick="closePastQuotesModal()">Close</button>
       </div>
     </div>
   </div>
@@ -1076,12 +1184,21 @@
 
     // DATA STATE
     let rooms = [];
-    let accessories = [];
+    let directBillItems = []; // Direct stock items & accessories added on invoice
+    
+    // INLINE TABLE DRAFT STATE
+    window.inlineSearchDraft = '';
+    window.inlineQtyDraft = 1;
+    window.inlineRateDraft = '';
+    window.inlineUnitDraft = 'bx';
+    window.inlineStockBadgeHtml = '';
+    window.selectedDirectStockItem = null;
 
     // INITIALIZATION
     window.addEventListener('DOMContentLoaded', () => {
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('quoteDate').value = today;
+      document.getElementById('invQuoteDateInput').value = today;
 
       const loaded = loadDraft();
       if (!loaded || rooms.length === 0) {
@@ -1098,6 +1215,47 @@
       // Silent Auto-Refresh every 10 seconds without shifting view/cursor
       startAutoRefresh();
     });
+
+    // SYNC CUSTOMER FIELDS BETWEEN TABS
+    function syncCustomerFromRooms(field, val) {
+      if (field === 'name') {
+        document.getElementById('invCustNameInput').value = val;
+        document.getElementById('invCustName').innerText = val || 'Walk-in Customer';
+      } else if (field === 'phone') {
+        document.getElementById('invCustPhoneInput').value = val;
+        document.getElementById('invCustPhone').innerText = val ? `Phone: ${val}` : '-';
+      } else if (field === 'address') {
+        document.getElementById('invCustAddressInput').value = val;
+        document.getElementById('invCustAddress').innerText = val || 'Site: As specified';
+      } else if (field === 'date') {
+        document.getElementById('invQuoteDateInput').value = val;
+        const formatted = `Date: ${formatIndianDate(val)}`;
+        document.getElementById('invDate').innerText = formatted;
+        const p = document.getElementById('invDatePrint');
+        if (p) p.innerText = formatted;
+      }
+      saveDraft();
+    }
+
+    function syncCustomerFromInvoice(field, val) {
+      if (field === 'name') {
+        document.getElementById('custName').value = val;
+        document.getElementById('invCustName').innerText = val || 'Walk-in Customer';
+      } else if (field === 'phone') {
+        document.getElementById('custPhone').value = val;
+        document.getElementById('invCustPhone').innerText = val ? `Phone: ${val}` : '-';
+      } else if (field === 'address') {
+        document.getElementById('custAddress').value = val;
+        document.getElementById('invCustAddress').innerText = val || 'Site: As specified';
+      } else if (field === 'date') {
+        document.getElementById('quoteDate').value = val;
+        const formatted = `Date: ${formatIndianDate(val)}`;
+        document.getElementById('invDate').innerText = formatted;
+        const p = document.getElementById('invDatePrint');
+        if (p) p.innerText = formatted;
+      }
+      saveDraft();
+    }
 
     // ROOM MANAGEMENT
     function createRoomObj(name) {
@@ -1161,80 +1319,219 @@
       saveDraft();
     }
 
-    // ACCESSORIES MANAGEMENT
-    function addQuickAccessory(name, unit, defaultRate) {
-      accessories.push({
-        id: 'acc_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
-        name: name,
-        unit: unit,
-        qty: 1,
-        rate: defaultRate || 0
-      });
-      renderAccessoriesList();
-      calculateAll();
-      saveDraft();
-    }
-
-    function addBlankAccessory() {
-      accessories.push({
-        id: 'acc_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
-        name: '',
-        unit: 'Pcs',
-        qty: 1,
-        rate: ''
-      });
-      renderAccessoriesList();
-      calculateAll();
-      saveDraft();
-    }
-
-    function removeAccessory(accId) {
-      accessories = accessories.filter(a => a.id !== accId);
-      renderAccessoriesList();
-      calculateAll();
-      saveDraft();
-    }
-
-    function updateAccessoryField(accId, field, val) {
-      const acc = accessories.find(a => a.id === accId);
-      if (acc) {
-        acc[field] = val;
-        calculateAll();
-        saveDraft();
+    // INLINE DIRECT ENTRY IN THE TABLE
+    function onInlineItemSearch(val) {
+      window.inlineSearchDraft = val;
+      const cleanQ = (val || '').trim().toLowerCase();
+      let item = tallyStock.find(i => i.name.toLowerCase() === cleanQ);
+      if (!item && cleanQ.length >= 2) {
+        item = tallyStock.find(i => i.name.toLowerCase().startsWith(cleanQ));
       }
+      const badge = document.getElementById('inlineStockBadge');
+      const rateInput = document.getElementById('inlineItemRate');
+      const unitLabel = document.getElementById('inlineItemUnitLabel');
+
+      if (item) {
+        window.selectedDirectStockItem = item;
+        window.inlineRateDraft = item.rate || '';
+        window.inlineUnitDraft = item.unit || 'bx';
+        window.inlineStockBadgeHtml = `In Stock: <b>${item.stockBoxes} ${item.unit || 'bx'}</b> &bull; Rate: <b>₹${item.rate}</b> &bull; ${escapeHtml(item.parent || 'General')}`;
+
+        if (rateInput) rateInput.value = item.rate || '';
+        if (unitLabel) unitLabel.innerText = item.unit || 'bx';
+        if (badge) {
+          badge.style.display = 'block';
+          badge.innerHTML = window.inlineStockBadgeHtml;
+        }
+      } else {
+        window.selectedDirectStockItem = null;
+        window.inlineStockBadgeHtml = '';
+        if (badge) badge.style.display = 'none';
+      }
+      updateInlineTotalDisplay();
+    }
+
+    function onInlineQtyChange(val) {
+      window.inlineQtyDraft = parseFloat(val) || 1;
+      updateInlineTotalDisplay();
+    }
+
+    function onInlineRateChange(val) {
+      window.inlineRateDraft = val;
+      updateInlineTotalDisplay();
+    }
+
+    function updateInlineTotalDisplay() {
+      const totalEl = document.getElementById('inlineItemTotal');
+      if (totalEl) {
+        const qty = parseFloat(window.inlineQtyDraft) || 1;
+        const rate = parseFloat(window.inlineRateDraft) || 0;
+        totalEl.innerText = `₹ ${Math.round(qty * rate).toLocaleString('en-IN')}`;
+      }
+    }
+
+    function onInlineKeyDown(e, field) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (field === 'name') {
+          const rateInput = document.getElementById('inlineItemRate');
+          if (rateInput && rateInput.value) {
+            commitInlineRow();
+          } else {
+            const qtyEl = document.getElementById('inlineItemQty');
+            if (qtyEl) qtyEl.focus();
+          }
+        } else {
+          commitInlineRow();
+        }
+      }
+    }
+
+    function commitInlineRow() {
+      const searchEl = document.getElementById('inlineItemSearch');
+      let name = (window.inlineSearchDraft || (searchEl ? searchEl.value : '')).trim();
+      if (!name) {
+        if (searchEl) searchEl.focus();
+        return;
+      }
+      const qtyEl = document.getElementById('inlineItemQty');
+      const qty = parseFloat(window.inlineQtyDraft || (qtyEl ? qtyEl.value : 1)) || 1;
+
+      const rateEl = document.getElementById('inlineItemRate');
+      const rate = parseFloat(window.inlineRateDraft || (rateEl ? rateEl.value : 0)) || 0;
+      const unit = window.inlineUnitDraft || 'bx';
+
+      let stockItem = window.selectedDirectStockItem;
+      if (!stockItem) {
+        const cleanName = name.toLowerCase();
+        stockItem = tallyStock.find(i => i.name.toLowerCase() === cleanName) ||
+                    (cleanName.length >= 2 ? tallyStock.find(i => i.name.toLowerCase().startsWith(cleanName)) : null);
+        if (stockItem && stockItem.name) {
+          name = stockItem.name;
+        }
+      }
+
+      directBillItems.push({
+        id: 'direct_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+        name: name,
+        parent: stockItem ? stockItem.parent : '',
+        stockBoxes: stockItem ? stockItem.stockBoxes : null,
+        qty: qty,
+        unit: stockItem && stockItem.unit ? stockItem.unit : unit,
+        rate: rate > 0 ? rate : (stockItem && stockItem.rate ? stockItem.rate : 0),
+        isStock: !!stockItem
+      });
+
+      // Reset inline draft
+      window.inlineSearchDraft = '';
+      window.inlineQtyDraft = 1;
+      window.inlineRateDraft = '';
+      window.inlineUnitDraft = 'bx';
+      window.inlineStockBadgeHtml = '';
+      window.selectedDirectStockItem = null;
+
+      renderBill();
+      renderAccessoriesList();
+      saveDraft();
+
+      // Refocus inline search input directly so user can immediately type the next item
+      setTimeout(() => {
+        const nextInput = document.getElementById('inlineItemSearch');
+        if (nextInput) nextInput.focus();
+      }, 40);
+
+      showToast(`Added ${name} to bill`);
+    }
+
+    // DIRECT ACCESSORIES ON INVOICE OR ROOMS
+    function addDirectAccessory(name, unit, defaultRate) {
+      // Check if item exists in live Tally stock
+      const tallyItem = tallyStock.find(i => i.name.toLowerCase().includes(name.toLowerCase().split(' ')[0]));
+      const finalRate = tallyItem && tallyItem.rate ? tallyItem.rate : defaultRate;
+      const finalStock = tallyItem ? tallyItem.stockBoxes : null;
+
+      directBillItems.push({
+        id: 'direct_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+        name: name,
+        parent: tallyItem ? tallyItem.parent : 'Material',
+        stockBoxes: finalStock,
+        qty: 1,
+        unit: unit,
+        rate: finalRate,
+        isStock: !!tallyItem
+      });
+
+      renderBill();
+      renderAccessoriesList();
+      saveDraft();
+      showToast(`Added ${name}`);
+    }
+
+    function addBlankDirectItem() {
+      directBillItems.push({
+        id: 'direct_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+        name: 'Custom Item',
+        parent: 'Custom',
+        stockBoxes: null,
+        qty: 1,
+        unit: 'Pcs',
+        rate: 0,
+        isStock: false
+      });
+
+      renderBill();
+      renderAccessoriesList();
+      saveDraft();
+    }
+
+    function removeDirectItem(itemId) {
+      directBillItems = directBillItems.filter(i => i.id !== itemId);
+      renderBill();
+      renderAccessoriesList();
+      saveDraft();
     }
 
     function renderAccessoriesList() {
       const container = document.getElementById('accessoriesList');
-      document.getElementById('accCountLabel').innerText = `${accessories.length} items`;
+      if (!container) return;
+      document.getElementById('accCountLabel').innerText = `${directBillItems.length} items`;
 
-      if (accessories.length === 0) {
-        container.innerHTML = `<p style="font-size:12.5px; color:var(--text-muted); font-style:italic; padding:6px 2px;">No accessories added yet. Click any quick pill above to add adhesive, grout, spacers, etc.</p>`;
+      if (directBillItems.length === 0) {
+        container.innerHTML = `<p style="font-size:12.5px; color:var(--text-muted); font-style:italic; padding:6px 2px;">No items added yet. Type directly in the table on the Invoice tab or click any quick pill.</p>`;
         return;
       }
 
-      container.innerHTML = accessories.map((acc, idx) => `
+      container.innerHTML = directBillItems.map((acc) => `
         <div style="display:grid; grid-template-columns: 2fr 1fr 1fr 1fr 30px; gap:8px; align-items:center; margin-bottom:8px; background:var(--surface-muted); padding:10px; border-radius:9px; border:1px solid var(--border);">
           <div>
-            <input type="text" list="tallyList" value="${escapeHtml(acc.name)}" placeholder="Item / Material Name"
-              oninput="updateAccessoryField('${acc.id}', 'name', this.value)" style="height:36px; font-size:13px;" />
+            <input type="text" list="tallyList" value="${escapeHtml(acc.name)}" placeholder="Item Name"
+              oninput="updateDirectItemField('${acc.id}', 'name', this.value)" style="height:36px; font-size:13px;" />
           </div>
           <div>
             <input type="number" value="${acc.qty}" placeholder="Qty" step="1" min="1"
-              oninput="updateAccessoryField('${acc.id}', 'qty', this.value)" style="height:36px; font-size:13px;" />
+              oninput="updateDirectItemField('${acc.id}', 'qty', this.value)" style="height:36px; font-size:13px;" />
           </div>
           <div>
-            <input type="text" value="${escapeHtml(acc.unit)}" placeholder="Unit (Bag/Kg)"
-              oninput="updateAccessoryField('${acc.id}', 'unit', this.value)" style="height:36px; font-size:13px;" />
+            <input type="text" value="${escapeHtml(acc.unit)}" placeholder="Unit"
+              oninput="updateDirectItemField('${acc.id}', 'unit', this.value)" style="height:36px; font-size:13px;" />
           </div>
           <div>
             <input type="number" value="${acc.rate}" placeholder="₹ / Unit" step="1"
-              oninput="updateAccessoryField('${acc.id}', 'rate', this.value)" style="height:36px; font-size:13px;" />
+              oninput="updateDirectItemField('${acc.id}', 'rate', this.value)" style="height:36px; font-size:13px;" />
           </div>
-          <button type="button" onclick="removeAccessory('${acc.id}')" 
-            style="background:none; border:none; color:#DC2626; font-size:20px; cursor:pointer; transition:transform 0.15s ease;" title="Remove">&times;</button>
+          <button type="button" onclick="removeDirectItem('${acc.id}')" 
+            style="background:none; border:none; color:#DC2626; font-size:20px; cursor:pointer;" title="Remove">&times;</button>
         </div>
       `).join('');
+    }
+
+    function updateDirectItemField(id, field, val) {
+      const item = directBillItems.find(i => i.id === id);
+      if (item) {
+        item[field] = val;
+        renderBill();
+        saveDraft();
+      }
     }
 
     // RENDER ALL ROOMS HTML
@@ -1440,7 +1737,7 @@
     }
 
     function formatTileMeta(item) {
-      return `🏷️ <b>${escapeHtml(item.parent || 'General')}</b> &bull; Stock: <b>${item.stockBoxes}</b> ${escapeHtml(item.unit || 'bx')} &bull; Rate: <b>₹${item.rate}</b>`;
+      return `🏷️ <b>${escapeHtml(item.parent || 'General')}</b> &bull; In Stock: <b>${item.stockBoxes}</b> ${escapeHtml(item.unit || 'bx')} &bull; Rate: <b>₹${item.rate}</b>`;
     }
 
     // UPDATE ROOM FIELDS
@@ -1646,121 +1943,133 @@
       renderBill();
     }
 
-    // BUILD INVOICE TABLE (CALLED WHEN TAB SWITCHES OR DATA STRUCTURE CHANGES)
+    // BUILD INVOICE TABLE (WITH INLINE ENTRY ROW)
     function renderBill() {
-      if (!window.calculatedRooms) return;
-
       const custName = (document.getElementById('custName').value || '').trim() || 'Walk-in Customer';
       const custPhone = (document.getElementById('custPhone').value || '').trim() || '-';
       const custAddress = (document.getElementById('custAddress').value || '').trim() || 'Site: As Specified';
       const quoteDate = document.getElementById('quoteDate').value || new Date().toISOString().split('T')[0];
 
+      // Update sync elements
       document.getElementById('invCustName').innerText = custName;
-      document.getElementById('invCustPhone').innerText = `Phone: ${custPhone}`;
+      document.getElementById('invCustPhone').innerText = custPhone !== '-' ? `Phone: ${custPhone}` : '-';
       document.getElementById('invCustAddress').innerText = custAddress;
-      document.getElementById('invDate').innerText = `Date: ${formatIndianDate(quoteDate)}`;
+      const formattedDate = `Date: ${formatIndianDate(quoteDate)}`;
+      document.getElementById('invDate').innerText = formattedDate;
+      const printDateEl = document.getElementById('invDatePrint');
+      if (printDateEl) printDateEl.innerText = formattedDate;
 
       const billItemsList = [];
 
-      window.calculatedRooms.forEach(cr => {
-        const r = cr.room;
-        const rName = r.name || 'Room';
+      // 1. Items from room calculations (if any rooms have measurements)
+      if (window.calculatedRooms) {
+        window.calculatedRooms.forEach(cr => {
+          const r = cr.room;
+          const rName = r.name || 'Room';
 
-        // 1. Highlighter
-        if (r.chkHl && cr.bHl > 0) {
-          const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.hlSize);
-          billItemsList.push({
-            type: 'tile',
-            roomId: r.id,
-            roomName: rName,
-            tileKey: 'hl',
-            label: 'Highlighter (HL)',
-            name: r.hlName || 'Highlighter Tile',
-            sizeText: sizeObj ? sizeObj.label : '4×2 ft',
-            dimText: `Wall: ${cr.hlRft}′ × ${cr.hlHt}′ = ${cr.hlArea.toFixed(1)} sq.ft`,
-            sft: cr.hlArea,
-            coverage: cr.hlCov,
-            qty: cr.bHl,
-            unit: 'bx',
-            rate: r.hlRate
-          });
-        }
+          // Highlighter
+          if (r.chkHl && cr.bHl > 0) {
+            const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.hlSize);
+            billItemsList.push({
+              type: 'room_tile',
+              sourceId: r.id,
+              roomName: rName,
+              tileKey: 'hl',
+              label: 'Highlighter (HL)',
+              name: r.hlName || 'Highlighter Tile',
+              stockBoxes: r.hlItem ? r.hlItem.stockBoxes : null,
+              sizeText: sizeObj ? sizeObj.label : '4×2 ft',
+              dimText: `Wall: ${cr.hlRft}′ × ${cr.hlHt}′ = ${cr.hlArea.toFixed(1)} sq.ft`,
+              sft: cr.hlArea,
+              coverage: cr.hlCov,
+              qty: cr.bHl,
+              unit: 'bx',
+              rate: r.hlRate
+            });
+          }
 
-        // 2. Dark
-        if (r.chkDk && cr.bDk > 0) {
-          const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.dkSize);
-          billItemsList.push({
-            type: 'tile',
-            roomId: r.id,
-            roomName: rName,
-            tileKey: 'dk',
-            label: 'Dark Accent',
-            name: r.dkName || 'Dark Accent Tile',
-            sizeText: sizeObj ? sizeObj.label : '4×2 ft',
-            dimText: `Dado: ${cr.dkRft}′ × ${cr.dkHt}′ = ${cr.dkArea.toFixed(1)} sq.ft`,
-            sft: cr.dkArea,
-            coverage: cr.dkCov,
-            qty: cr.bDk,
-            unit: 'bx',
-            rate: r.dkRate
-          });
-        }
+          // Dark
+          if (r.chkDk && cr.bDk > 0) {
+            const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.dkSize);
+            billItemsList.push({
+              type: 'room_tile',
+              sourceId: r.id,
+              roomName: rName,
+              tileKey: 'dk',
+              label: 'Dark Accent',
+              name: r.dkName || 'Dark Accent Tile',
+              stockBoxes: r.dkItem ? r.dkItem.stockBoxes : null,
+              sizeText: sizeObj ? sizeObj.label : '4×2 ft',
+              dimText: `Dado: ${cr.dkRft}′ × ${cr.dkHt}′ = ${cr.dkArea.toFixed(1)} sq.ft`,
+              sft: cr.dkArea,
+              coverage: cr.dkCov,
+              qty: cr.bDk,
+              unit: 'bx',
+              rate: r.dkRate
+            });
+          }
 
-        // 3. Light Base
-        if (cr.bLt > 0) {
-          const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.ltSize);
-          billItemsList.push({
-            type: 'tile',
-            roomId: r.id,
-            roomName: rName,
-            tileKey: 'lt',
-            label: 'Light Base Wall',
-            name: r.ltName || 'Light Wall Tile',
-            sizeText: sizeObj ? sizeObj.label : '4×2 ft',
-            dimText: `Wall: (${cr.wRft}′ × ${cr.wHt}′) Net Area = ${cr.ltArea.toFixed(1)} sq.ft`,
-            sft: cr.ltArea,
-            coverage: cr.ltCov,
-            qty: cr.bLt,
-            unit: 'bx',
-            rate: r.ltRate
-          });
-        }
+          // Light Base
+          if (cr.bLt > 0) {
+            const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.ltSize);
+            billItemsList.push({
+              type: 'room_tile',
+              sourceId: r.id,
+              roomName: rName,
+              tileKey: 'lt',
+              label: 'Light Base Wall',
+              name: r.ltName || 'Light Wall Tile',
+              stockBoxes: r.ltItem ? r.ltItem.stockBoxes : null,
+              sizeText: sizeObj ? sizeObj.label : '4×2 ft',
+              dimText: `Wall: (${cr.wRft}′ × ${cr.wHt}′) Net Area = ${cr.ltArea.toFixed(1)} sq.ft`,
+              sft: cr.ltArea,
+              coverage: cr.ltCov,
+              qty: cr.bLt,
+              unit: 'bx',
+              rate: r.ltRate
+            });
+          }
 
-        // 4. Floor
-        if (cr.bFl > 0) {
-          const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.flSize);
-          billItemsList.push({
-            type: 'tile',
-            roomId: r.id,
-            roomName: rName,
-            tileKey: 'fl',
-            label: 'Floor Tile',
-            name: r.flName || 'Floor Tile',
-            sizeText: sizeObj ? sizeObj.label : '4×2 ft',
-            dimText: `Floor: ${cr.fLen}′ × ${cr.fWid}′ = ${cr.flArea.toFixed(1)} sq.ft`,
-            sft: cr.flArea,
-            coverage: cr.flCov,
-            qty: cr.bFl,
-            unit: 'bx',
-            rate: r.flRate
-          });
-        }
-      });
+          // Floor
+          if (cr.bFl > 0) {
+            const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.flSize);
+            billItemsList.push({
+              type: 'room_tile',
+              sourceId: r.id,
+              roomName: rName,
+              tileKey: 'fl',
+              label: 'Floor Tile',
+              name: r.flName || 'Floor Tile',
+              stockBoxes: r.flItem ? r.flItem.stockBoxes : null,
+              sizeText: sizeObj ? sizeObj.label : '4×2 ft',
+              dimText: `Floor: ${cr.fLen}′ × ${cr.fWid}′ = ${cr.flArea.toFixed(1)} sq.ft`,
+              sft: cr.flArea,
+              coverage: cr.flCov,
+              qty: cr.bFl,
+              unit: 'bx',
+              rate: r.flRate
+            });
+          }
+        });
+      }
 
-      // 5. Accessories & Extra Materials
-      accessories.forEach((acc, idx) => {
+      // 2. Direct stock items & accessories
+      directBillItems.forEach(item => {
         billItemsList.push({
-          type: 'acc',
-          accId: acc.id,
-          label: 'Material / Accessory',
-          name: acc.name || 'Accessory Item',
+          type: 'direct',
+          sourceId: item.id,
+          roomName: '',
+          tileKey: '',
+          label: item.isStock ? (item.parent ? `Stock • ${item.parent}` : 'Stock Item') : 'Material / Accessory',
+          name: item.name || 'Stock Item',
+          stockBoxes: item.stockBoxes,
           sizeText: '',
-          dimText: 'Quantity: ' + acc.qty + ' ' + (acc.unit || 'unit'),
+          dimText: item.isStock ? `Tally Item (${item.parent || 'General'})` : `Quantity: ${item.qty} ${item.unit}`,
           sft: 0,
           coverage: 0,
-          qty: parseFloat(acc.qty) || 1,
-          unit: acc.unit || 'unit',
-          rate: acc.rate
+          qty: parseFloat(item.qty) || 1,
+          unit: item.unit || 'bx',
+          rate: item.rate
         });
       });
 
@@ -1770,12 +2079,20 @@
         const lineTotal = rateNum * item.qty;
         const rateSft = item.coverage > 0 ? (rateNum / item.coverage) : 0;
 
-        if (item.type === 'tile') {
+        const stockBadge = (item.stockBoxes !== null && item.stockBoxes !== undefined)
+          ? `<span style="background:#E2EFE0; color:#254623; border:1px solid #C4D9C2; font-size:11px; padding:1px 6px; border-radius:4px; font-weight:700; margin-left:6px;" title="Available stock in Tally">In Stock: ${item.stockBoxes}</span>`
+          : '';
+
+        if (item.type === 'room_tile') {
           html += `
-            <tr data-row-type="tile" data-room-id="${item.roomId}" data-tile-key="${item.tileKey}" data-qty="${item.qty}" data-coverage="${item.coverage}">
+            <tr data-row-type="room_tile" data-room-id="${item.sourceId}" data-tile-key="${item.tileKey}" data-qty="${item.qty}" data-coverage="${item.coverage}">
               <td>${idx + 1}</td>
               <td class="item-desc-cell">
-                <div class="main-name">${escapeHtml(item.name)} <span style="font-size:12px; color:var(--text-muted); font-weight:600;">(${escapeHtml(item.sizeText)})</span></div>
+                <div class="main-name">
+                  ${escapeHtml(item.name)} 
+                  <span style="font-size:12px; color:var(--text-muted); font-weight:600;">(${escapeHtml(item.sizeText)})</span>
+                  ${stockBadge}
+                </div>
                 <div class="meta-info"><b>${escapeHtml(item.roomName)}</b> &bull; ${escapeHtml(item.label)}</div>
                 <div class="dim-pill">📐 ${escapeHtml(item.dimText)}</div>
               </td>
@@ -1783,7 +2100,7 @@
               <td style="text-align: right; font-weight:700;">${item.qty} ${item.unit}</td>
               <td style="text-align: right;">
                 <input type="number" class="bill-rate-input" value="${item.rate}" placeholder="₹ / bx" step="0.5" 
-                  oninput="handleTileRateInput(this, '${item.roomId}', '${item.tileKey}')" />
+                  oninput="handleTileRateInput(this, '${item.sourceId}', '${item.tileKey}')" />
               </td>
               <td class="rate-sft-cell" style="text-align: right; color:var(--text-muted); font-size:12px;">
                 ${rateSft > 0 ? `₹ ${rateSft.toFixed(1)}` : '-'}
@@ -1791,48 +2108,103 @@
               <td class="line-total-cell" style="text-align: right; font-weight:800; color:var(--text);">
                 ₹ ${Math.round(lineTotal).toLocaleString('en-IN')}
               </td>
+              <td class="no-print" style="text-align:center;"></td>
             </tr>
           `;
         } else {
-          // Accessory row
+          // Direct item / accessory row
           html += `
-            <tr data-row-type="acc" data-acc-id="${item.accId}" data-qty="${item.qty}" data-coverage="0">
+            <tr data-row-type="direct" data-direct-id="${item.sourceId}" data-qty="${item.qty}" data-coverage="0">
               <td>${idx + 1}</td>
               <td class="item-desc-cell">
-                <div class="main-name">${escapeHtml(item.name)}</div>
-                <div class="meta-info" style="color:var(--primary);">Extra Material / Accessory</div>
+                <div class="main-name">
+                  ${escapeHtml(item.name)}
+                  ${stockBadge}
+                </div>
+                <div class="meta-info" style="color:var(--primary);">${escapeHtml(item.label)}</div>
               </td>
               <td style="text-align: right; color:var(--text-light);">-</td>
-              <td style="text-align: right; font-weight:700;">${item.qty} ${item.unit}</td>
+              <td style="text-align: right;">
+                <div style="display:flex; align-items:center; justify-content:flex-end; gap:2px;">
+                  <input type="number" class="bill-qty-input" value="${item.qty}" min="1" step="1" 
+                    style="width:58px; text-align:right;" oninput="handleDirectQtyInput(this, '${item.sourceId}')" />
+                  <span style="font-size:11px; font-weight:700; color:var(--text-muted);">${item.unit}</span>
+                </div>
+              </td>
               <td style="text-align: right;">
                 <input type="number" class="bill-rate-input" value="${item.rate}" placeholder="₹ / unit" step="1" 
-                  oninput="handleAccRateInput(this, '${item.accId}')" />
+                  oninput="handleDirectRateInput(this, '${item.sourceId}')" />
               </td>
               <td class="rate-sft-cell" style="text-align: right; color:var(--text-light); font-size:12px;">-</td>
               <td class="line-total-cell" style="text-align: right; font-weight:800; color:var(--text);">
                 ₹ ${Math.round(lineTotal).toLocaleString('en-IN')}
+              </td>
+              <td class="no-print" style="text-align:center;">
+                <button type="button" class="btn-row-del" onclick="removeDirectItem('${item.sourceId}')" title="Remove item">&times;</button>
               </td>
             </tr>
           `;
         }
       });
 
-      if (billItemsList.length === 0) {
-        html = `<tr><td colspan="7" style="text-align:center; padding:28px; color:var(--text-light); font-weight:600;">Enter wall or floor dimensions to generate quotation</td></tr>`;
-      }
+      // 3. INLINE DIRECT ENTRY ROW (Type here directly to add items)
+      const nextNum = billItemsList.length + 1;
+      const currentDraftQty = window.inlineQtyDraft || 1;
+      const currentDraftRate = parseFloat(window.inlineRateDraft) || 0;
+      const currentDraftTotal = Math.round(currentDraftQty * currentDraftRate);
 
-      // Check if user is actively typing in a bill input so we don't destroy cursor
-      const activeEl = document.activeElement;
-      const isEditingRate = activeEl && activeEl.classList && activeEl.classList.contains('bill-rate-input');
+      html += `
+        <tr class="table-entry-row no-print" style="background:#FAFDF9; border-top:1.5px dashed var(--primary-light);">
+          <td style="text-align:center; font-weight:800; color:var(--primary); font-size:13px;">${nextNum}</td>
+          <td class="item-desc-cell">
+            <div style="display:flex; flex-direction:column; gap:4px;">
+              <input type="text" id="inlineItemSearch" list="tallyList" placeholder="🔍 Click / Type item name (auto-populates stock & price)..." 
+                value="${escapeHtml(window.inlineSearchDraft || '')}"
+                oninput="onInlineItemSearch(this.value)" onkeydown="onInlineKeyDown(event, 'name')" autocomplete="off"
+                style="height:36px; width:100%; border:1.5px solid var(--primary-light); background:#FFFFFF; border-radius:7px; padding:0 10px; font-weight:700; color:var(--text); font-size:13.5px;" />
+              <div id="inlineStockBadge" style="display:${window.inlineStockBadgeHtml ? 'block' : 'none'}; font-size:11px; font-weight:700; color:#234821; background:#E2EFE0; border:1px solid #C4D9C2; border-radius:4px; padding:2px 7px;">
+                ${window.inlineStockBadgeHtml || ''}
+              </div>
+            </div>
+          </td>
+          <td style="text-align:right; color:var(--text-light);">-</td>
+          <td style="text-align:right;">
+            <div style="display:flex; align-items:center; justify-content:flex-end; gap:3px;">
+              <input type="number" id="inlineItemQty" value="${window.inlineQtyDraft || 1}" min="1" step="1" 
+                oninput="onInlineQtyChange(this.value)" onkeydown="onInlineKeyDown(event, 'qty')" 
+                style="width:58px; height:36px; text-align:right; font-weight:700;" placeholder="Qty" />
+              <span id="inlineItemUnitLabel" style="font-size:11px; font-weight:700; color:var(--text-muted);">${escapeHtml(window.inlineUnitDraft || 'bx')}</span>
+            </div>
+          </td>
+          <td style="text-align:right;">
+            <input type="number" id="inlineItemRate" placeholder="Rate" step="0.5" 
+              value="${window.inlineRateDraft !== undefined ? window.inlineRateDraft : ''}"
+              oninput="onInlineRateChange(this.value)" onkeydown="onInlineKeyDown(event, 'rate')" 
+              style="width:82px; height:36px; text-align:right; font-weight:700;" />
+          </td>
+          <td class="rate-sft-cell" style="text-align:right; color:var(--text-light); font-size:12px;">-</td>
+          <td class="line-total-cell" style="text-align:right; font-weight:800; color:var(--primary-dark);">
+            <span id="inlineItemTotal">₹ ${currentDraftTotal.toLocaleString('en-IN')}</span>
+          </td>
+          <td class="no-print" style="text-align:center;">
+            <button type="button" class="btn btn-primary" onclick="commitInlineRow()" 
+              style="padding:6px 12px; font-size:13px; height:34px; border-radius:6px; font-weight:800;" title="Add to bill (or press Enter)">
+              ➕
+            </button>
+          </td>
+        </tr>
+      `;
 
-      if (!isEditingRate) {
-        document.getElementById('billItems').innerHTML = html;
+      // Render table rows
+      const tbody = document.getElementById('billItems');
+      if (tbody) {
+        tbody.innerHTML = html;
       }
 
       updateInvoiceTotalsOnly();
     }
 
-    // REAL-TIME INSTANT RATE HANDLER (NO CURSOR DISRUPTION)
+    // REAL-TIME RATE & QTY HANDLERS (NO CURSOR DISRUPTION)
     function handleTileRateInput(inputEl, roomId, tileKey) {
       const val = inputEl.value;
       const rateNum = parseFloat(val) || 0;
@@ -1860,19 +2232,41 @@
       saveDraft();
     }
 
-    function handleAccRateInput(inputEl, accId) {
+    function handleDirectRateInput(inputEl, directId) {
       const val = inputEl.value;
       const rateNum = parseFloat(val) || 0;
 
-      const acc = accessories.find(a => a.id === accId);
-      if (acc) {
-        acc.rate = val;
+      const item = directBillItems.find(i => i.id === directId);
+      if (item) {
+        item.rate = val;
       }
 
       const tr = inputEl.closest('tr');
       if (tr) {
         const qty = parseFloat(tr.dataset.qty) || 0;
         const lineTotal = rateNum * qty;
+        const totalEl = tr.querySelector('.line-total-cell');
+        if (totalEl) totalEl.innerText = `₹ ${Math.round(lineTotal).toLocaleString('en-IN')}`;
+      }
+
+      updateInvoiceTotalsOnly();
+      saveDraft();
+    }
+
+    function handleDirectQtyInput(inputEl, directId) {
+      const val = parseFloat(inputEl.value) || 1;
+
+      const item = directBillItems.find(i => i.id === directId);
+      if (item) {
+        item.qty = val;
+      }
+
+      const tr = inputEl.closest('tr');
+      if (tr) {
+        tr.dataset.qty = val;
+        const rateInput = tr.querySelector('.bill-rate-input');
+        const rateNum = rateInput ? (parseFloat(rateInput.value) || 0) : 0;
+        const lineTotal = rateNum * val;
         const totalEl = tr.querySelector('.line-total-cell');
         if (totalEl) totalEl.innerText = `₹ ${Math.round(lineTotal).toLocaleString('en-IN')}`;
       }
@@ -1889,21 +2283,22 @@
 
       const rows = document.querySelectorAll('#billItems tr');
       rows.forEach(tr => {
+        if (tr.classList.contains('table-entry-row')) return; // Ignore inline add row
         const rateInput = tr.querySelector('.bill-rate-input');
         if (rateInput) {
           const qty = parseFloat(tr.dataset.qty) || 0;
           const rate = parseFloat(rateInput.value) || 0;
           subTotal += (rate * qty);
 
-          if (tr.dataset.rowType === 'tile') {
+          if (tr.dataset.rowType === 'room_tile') {
             totalBoxesCount += qty;
-            const cov = parseFloat(tr.dataset.coverage) || 16;
-            // Get SFT from 3rd column
             const sftCell = tr.children[2];
             if (sftCell) {
               const parsed = parseFloat(sftCell.innerText) || 0;
               totalTileSft += parsed;
             }
+          } else if (tr.dataset.rowType === 'direct') {
+            totalBoxesCount += qty;
           }
         }
       });
@@ -1930,6 +2325,7 @@
 
       const exportItems = [];
       rows.forEach(tr => {
+        if (tr.classList.contains('table-entry-row')) return;
         const rateInput = tr.querySelector('.bill-rate-input');
         if (rateInput) {
           const nameEl = tr.querySelector('.main-name');
@@ -1938,13 +2334,13 @@
           const qty = parseFloat(tr.dataset.qty) || 0;
           const rate = parseFloat(rateInput.value) || 0;
           exportItems.push({
-            name: nameEl ? nameEl.innerText.trim() : 'Item',
+            name: nameEl ? nameEl.innerText.replace(/In Stock:[^]+/, '').trim() : 'Item',
             description: metaEl ? metaEl.innerText.trim() : '',
             dimensions: dimEl ? dimEl.innerText.replace('📐', '').trim() : '',
             qty: qty,
             rate: rate,
             amount: Math.round(qty * rate),
-            unit: tr.dataset.rowType === 'tile' ? 'box' : 'unit'
+            unit: tr.dataset.rowType === 'room_tile' ? 'box' : 'unit'
           });
         }
       });
@@ -2000,7 +2396,7 @@
       msg += `*Customer:* ${inv.customerName} (${inv.customerPhone})\n`;
       msg += `*Site Address:* ${inv.siteAddress}\n`;
       msg += `------------------------------------\n`;
-      msg += `*ITEMS & MEASUREMENTS:*\n\n`;
+      msg += `*ITEMS & SPECIFICATIONS:*\n\n`;
 
       inv.items.forEach((item, i) => {
         msg += `${i + 1}. *${item.name}*\n`;
@@ -2029,7 +2425,7 @@
     // PUSH AS SALES ORDER TO TALLY
     function openTallyModal() {
       if (!window.invoiceData || window.invoiceData.items.length === 0) {
-        alert('Please enter measurements for at least one room.');
+        alert('Please add at least one item or room measurement.');
         return;
       }
       const inv = window.invoiceData;
@@ -2100,73 +2496,93 @@
       }
     }
 
-    // SAVING & PAST ESTIMATES HISTORY
-    function saveQuotationToHistory() {
-      if (!window.invoiceData || window.invoiceData.items.length === 0) {
-        alert('No estimation data to save.');
+    // NEW CUSTOMER & CLOSE BILL (NO SAVING OF BILLS)
+    function startNewCustomer(bypassConfirm = false) {
+      const hasData = (rooms.some(r => (parseFloat(r.wRft) > 0 && parseFloat(r.wHt) > 0) || (parseFloat(r.fLen) > 0 && parseFloat(r.fWid) > 0))) || 
+                      (document.getElementById('custName').value.trim() !== '') ||
+                      directBillItems.length > 0;
+
+      if (hasData && !bypassConfirm) {
+        const ok = confirm("Start a fresh customer quotation?\n\n• Current bill will be cleared.\n• No saving is performed.");
+        if (!ok) return;
+      }
+
+      // Reset client fields
+      document.getElementById('custName').value = '';
+      document.getElementById('custPhone').value = '';
+      document.getElementById('custAddress').value = '';
+      document.getElementById('invCustNameInput').value = '';
+      document.getElementById('invCustPhoneInput').value = '';
+      document.getElementById('invCustAddressInput').value = '';
+
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('quoteDate').value = today;
+      document.getElementById('invQuoteDateInput').value = today;
+
+      // Generate fresh Quote Reference
+      const newRef = Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('quoteRefLabel').innerText = `Quote #EST-${newRef}`;
+      const invRef = document.getElementById('invRefNum');
+      if (invRef) invRef.innerText = `#EST-${newRef}`;
+
+      // Reset rooms to 1 fresh room and reset direct items
+      roomCounter = 1;
+      rooms = [ createRoomObj('Room 1') ];
+      directBillItems = [];
+
+      // Clear inline draft
+      window.inlineSearchDraft = '';
+      window.inlineQtyDraft = 1;
+      window.inlineRateDraft = '';
+      window.inlineUnitDraft = 'bx';
+      window.inlineStockBadgeHtml = '';
+      window.selectedDirectStockItem = null;
+
+      // Clear draft in localStorage
+      localStorage.removeItem('tile_estimator_multi_draft_v3');
+
+      // Re-render
+      renderAllRooms();
+      renderAccessoriesList();
+      calculateAll();
+
+      showToast("✨ New customer bill started! Clean slate ready.");
+    }
+
+    function closeInvoiceBill() {
+      const hasData = (rooms.some(r => (parseFloat(r.wRft) > 0 && parseFloat(r.wHt) > 0) || (parseFloat(r.fLen) > 0 && parseFloat(r.fWid) > 0))) || 
+                      (document.getElementById('custName').value.trim() !== '') ||
+                      directBillItems.length > 0;
+
+      if (!hasData) {
+        switchTab('rooms');
         return;
       }
-      const history = JSON.parse(localStorage.getItem('tile_quote_history') || '[]');
-      const record = {
-        ...window.invoiceData,
-        roomsState: JSON.parse(JSON.stringify(rooms)),
-        accessoriesState: JSON.parse(JSON.stringify(accessories)),
-        savedAt: new Date().toISOString()
-      };
-      history.unshift(record);
-      localStorage.setItem('tile_quote_history', JSON.stringify(history.slice(0, 30)));
-      alert(`✅ Quotation #${window.invoiceData.refNo} saved successfully!`);
-    }
 
-    function openPastQuotesModal() {
-      const history = JSON.parse(localStorage.getItem('tile_quote_history') || '[]');
-      const container = document.getElementById('historyListContainer');
-      if (history.length === 0) {
-        container.innerHTML = '<p style="color:var(--text-muted); font-size:13px; text-align:center; padding:24px;">No saved estimates yet.</p>';
-      } else {
-        container.innerHTML = history.map((q, idx) => `
-          <div style="border:1px solid var(--border); border-radius:9px; padding:12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; background:var(--surface-muted); transition:var(--transition);" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
-            <div>
-              <div style="font-weight:700; font-size:13.5px; color:var(--text);">${escapeHtml(q.customerName || 'Customer')} - ₹${q.grandTotal.toLocaleString('en-IN')}</div>
-              <div style="font-size:11.5px; color:var(--text-muted); margin-top:2px;">Ref: #${escapeHtml(q.refNo)} &bull; ${formatIndianDate(q.date)} &bull; ${q.items.length} items</div>
-            </div>
-            <button class="btn btn-primary" style="padding:6px 14px; font-size:12px;" onclick="loadPastQuote(${idx})">Load</button>
-          </div>
-        `).join('');
+      const ok = confirm("Close current customer bill?\n\n• The bill will be cleared for the next customer.\n(The app stays open and ready!)");
+      if (ok) {
+        startNewCustomer(true);
+        showToast("✅ Current bill closed. Ready for next customer!");
       }
-      document.getElementById('historyModal').style.display = 'flex';
     }
 
-    function closePastQuotesModal() {
-      document.getElementById('historyModal').style.display = 'none';
-    }
-
-    function loadPastQuote(idx) {
-      const history = JSON.parse(localStorage.getItem('tile_quote_history') || '[]');
-      const q = history[idx];
-      if (!q) return;
-
-      document.getElementById('custName').value = q.customerName || '';
-      document.getElementById('custPhone').value = q.customerPhone || '';
-      document.getElementById('custAddress').value = q.siteAddress || '';
-      document.getElementById('quoteDate').value = q.date || '';
-      document.getElementById('quoteRefLabel').innerText = `Quote #${q.refNo}`;
-
-      if (q.roomsState && Array.isArray(q.roomsState)) {
-        rooms = q.roomsState;
-        renderAllRooms();
+    function showToast(msg) {
+      let toast = document.getElementById('toastNotification');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toastNotification';
+        toast.className = 'toast-banner';
+        document.body.appendChild(toast);
       }
-      if (q.accessoriesState && Array.isArray(q.accessoriesState)) {
-        accessories = q.accessoriesState;
-        renderAccessoriesList();
-      }
-
-      closePastQuotesModal();
-      calculateAll();
-      switchTab('rates');
+      toast.innerHTML = msg;
+      toast.style.display = 'flex';
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3500);
     }
 
-    // LOCAL DRAFT SAVING
+    // LOCAL DRAFT SAVING (TEMPORARY BROWSER CRASH RESILIENCE ONLY)
     function saveDraft() {
       const draft = {
         name: document.getElementById('custName').value,
@@ -2174,7 +2590,7 @@
         address: document.getElementById('custAddress').value,
         date: document.getElementById('quoteDate').value,
         rooms: rooms,
-        accessories: accessories
+        directBillItems: directBillItems
       };
       localStorage.setItem('tile_estimator_multi_draft_v3', JSON.stringify(draft));
     }
@@ -2188,12 +2604,24 @@
       }
       try {
         const d = JSON.parse(saved);
-        if (d.name) document.getElementById('custName').value = d.name;
-        if (d.phone) document.getElementById('custPhone').value = d.phone;
-        if (d.address) document.getElementById('custAddress').value = d.address;
-        if (d.date) document.getElementById('quoteDate').value = d.date;
-        if (d.accessories && Array.isArray(d.accessories)) {
-          accessories = d.accessories;
+        if (d.name) {
+          document.getElementById('custName').value = d.name;
+          document.getElementById('invCustNameInput').value = d.name;
+        }
+        if (d.phone) {
+          document.getElementById('custPhone').value = d.phone;
+          document.getElementById('invCustPhoneInput').value = d.phone;
+        }
+        if (d.address) {
+          document.getElementById('custAddress').value = d.address;
+          document.getElementById('invCustAddressInput').value = d.address;
+        }
+        if (d.date) {
+          document.getElementById('quoteDate').value = d.date;
+          document.getElementById('invQuoteDateInput').value = d.date;
+        }
+        if (d.directBillItems && Array.isArray(d.directBillItems)) {
+          directBillItems = d.directBillItems;
         }
         if (d.rooms && Array.isArray(d.rooms) && d.rooms.length > 0) {
           rooms = d.rooms;
@@ -2219,6 +2647,10 @@
         document.getElementById('btnTabRates').classList.add('active');
         document.getElementById('btnBottomSwitch').innerText = '← Edit Rooms';
         renderBill();
+        setTimeout(() => {
+          const inlineInput = document.getElementById('inlineItemSearch');
+          if (inlineInput) inlineInput.focus();
+        }, 80);
       }
     }
 
@@ -2227,7 +2659,7 @@
       else switchTab('rooms');
     }
 
-    // SILENT 10-SECOND AUTO-REFRESH
+    // SILENT 10-SECOND AUTO-REFRESH WITH VISUAL CONFIRMATION
     async function syncTallyStock(isSilent = false) {
       const statusText = document.getElementById('syncStatusText');
       const dot = document.getElementById('statusDot');
@@ -2280,14 +2712,21 @@
         tallyStock = data;
         isConnected = true;
         dot.className = 'status-dot online';
+        const nowStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
         statusText.innerText = `Live (${tallyStock.length})`;
-        badge.title = `Connected to Tally ERP!\nVia: ${connectedUrl}\nClick to refresh`;
+        badge.title = `Connected to Tally ERP!\nVia: ${connectedUrl}\nLast synced: ${nowStr}\nAuto-refresh: Every 10 seconds\nClick to manually refresh now`;
 
-        // Update datalist without touching active inputs or cursor
+        // Subtle dot pulse to visually confirm silent 10s auto-refresh
+        if (isSilent) {
+          dot.style.transform = 'scale(1.4)';
+          setTimeout(() => { dot.style.transform = ''; }, 350);
+        }
+
+        // Update datalist with available stock & rates
         const datalist = document.getElementById('tallyList');
         if (datalist && datalist.children.length !== tallyStock.length) {
           datalist.innerHTML = tallyStock.map(i => 
-            `<option value="${escapeHtml(i.name)}">${escapeHtml(i.parent ? `[${i.parent}] ` : '')}${i.stockBoxes} ${i.unit || 'bx'} • ₹${i.rate}</option>`
+            `<option value="${escapeHtml(i.name)}">${escapeHtml(i.name)} &bull; Stock: ${i.stockBoxes} ${escapeHtml(i.unit || 'bx')} &bull; ₹${i.rate}${i.parent ? ` &bull; ${escapeHtml(i.parent)}` : ''}</option>`
           ).join('');
         }
       } else {

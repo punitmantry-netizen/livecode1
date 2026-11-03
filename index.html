@@ -62,28 +62,33 @@
     body { 
       background: var(--bg); 
       color: var(--text); 
-      padding: 6px 12px; 
-      padding-bottom: 160px; 
+      padding: 16px 20px; 
+      padding-bottom: 140px; 
       -webkit-font-smoothing: antialiased; 
       min-height: 100vh;
     }
+    @media (max-width: 650px) {
+      body {
+        padding: 10px 10px;
+        padding-bottom: 130px;
+      }
+    }
 
-    .container { max-width: 940px; margin: 0 auto; }
+    .container { max-width: 940px; margin: 0 auto; width: 100%; }
 
     /* HEADER */
     .app-header {
       background: linear-gradient(135deg, #263824 0%, #354E33 55%, #4A6746 100%);
       color: #fff;
-      padding: 7px 14px;
-      border-radius: 9px;
+      padding: 14px 20px;
+      border-radius: 12px;
       box-shadow: var(--shadow);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
+      margin-bottom: 14px;
       position: relative;
       overflow: hidden;
-      min-height: 38px;
     }
 
     .app-header::after {
@@ -99,23 +104,35 @@
     }
 
     .app-header h1 { 
-      font-size: 14.5px; 
+      font-size: 18px; 
       font-weight: 800; 
       letter-spacing: -0.2px; 
       color: #FFFFFF;
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       margin: 0;
     }
 
     .app-header p { 
-      display: inline-block;
-      font-size: 11px; 
+      display: block;
+      font-size: 12px; 
       color: #D3E0D1; 
-      margin: 0 0 0 8px; 
+      margin: 3px 0 0 0; 
       font-weight: 500; 
       letter-spacing: 0.1px;
+    }
+
+    @media (max-width: 650px) {
+      .app-header {
+        padding: 12px 14px;
+      }
+      .app-header h1 {
+        font-size: 15.5px;
+      }
+      .app-header p {
+        font-size: 11px;
+      }
     }
 
     .badge-actions { display: flex; align-items: center; gap: 8px; z-index: 1; }
@@ -190,20 +207,22 @@
     .nav-tabs { 
       display: flex; 
       background: #EAEFE6; 
-      padding: 3px; 
-      border-radius: 8px; 
-      margin-bottom: 6px; 
+      padding: 5px; 
+      border-radius: 10px; 
+      margin-bottom: 14px; 
       border: 1px solid var(--border);
       align-items: center;
-      gap: 3px;
+      gap: 5px;
+      flex-wrap: wrap;
     }
     
     .tab-btn {
       flex: 1;
-      padding: 6px 8px;
+      min-width: 130px;
+      padding: 10px 14px;
       border: none;
-      border-radius: 6px;
-      font-size: 12.5px;
+      border-radius: 7px;
+      font-size: 13.5px;
       font-weight: 700;
       color: var(--text-muted);
       background: transparent;
@@ -226,15 +245,15 @@
     .tab-btn-new-cust {
       background: #E1EBE0;
       color: #2D4C2B;
-      border: 1px dashed #4A6746;
+      border: 1.5px dashed #4A6746;
       font-weight: 800;
       flex: 0 0 auto;
-      padding: 6px 12px;
-      font-size: 12px;
-      border-radius: 6px;
+      padding: 9px 15px;
+      font-size: 13px;
+      border-radius: 7px;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
     }
     .tab-btn-new-cust:hover {
       background: var(--primary);
@@ -250,9 +269,9 @@
       background: #FDF2F2;
       color: #B91C1C;
       border: 1px solid #F8D7DA;
-      border-radius: 6px;
-      padding: 4px 10px;
-      font-size: 11.5px;
+      border-radius: 7px;
+      padding: 6px 12px;
+      font-size: 12.5px;
       font-weight: 800;
       cursor: pointer;
       display: inline-flex;
@@ -552,79 +571,93 @@
 
     /* INVOICE & BILL TABLE */
     #printableInvoiceCard {
-      padding: 8px 12px;
-      margin-bottom: 8px;
+      padding: 20px 22px;
+      margin-bottom: 18px;
+    }
+    @media (max-width: 650px) {
+      .card, #printableInvoiceCard {
+        padding: 14px 12px;
+        border-radius: 12px;
+        margin-bottom: 14px;
+      }
     }
 
     .invoice-header {
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 5px;
-      margin-bottom: 6px;
+      border-bottom: 1.5px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    /* ULTRA-COMPACT CUSTOMER & SITE DETAILS BAR (UPPER 20% OF SPACE) */
-    .inv-compact-meta-bar {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1.6fr 1.1fr;
-      gap: 6px;
-      background: var(--surface-muted);
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      padding: 5px 8px;
-      margin-bottom: 6px;
-      align-items: center;
+    .inv-meta-grid { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 12px; 
+      font-size: 13px; 
+      margin-bottom: 16px; 
     }
-    @media (max-width: 720px) {
-      .inv-compact-meta-bar {
-        grid-template-columns: 1fr 1fr;
-        gap: 5px;
-      }
-    }
-    .meta-field {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-    .meta-tag {
-      font-size: 9px;
-      font-weight: 800;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      line-height: 1;
-    }
-    .inv-compact-meta-bar input {
-      height: 27px !important;
-      padding: 0 6px !important;
-      font-size: 12px !important;
-      font-weight: 600 !important;
-      border: 1px solid var(--border-dark) !important;
-      border-radius: 5px !important;
-      background: #FFFFFF !important;
-      width: 100% !important;
-    }
-    .inv-compact-meta-bar input:focus {
-      border-color: var(--primary) !important;
-      box-shadow: var(--focus-ring) !important;
-    }
-
-    .inv-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; margin-bottom: 8px; }
     .inv-meta-block { 
       background: var(--surface-muted); 
       border: 1px solid var(--border); 
-      border-radius: 7px; 
-      padding: 6px 10px; 
+      border-radius: 10px; 
+      padding: 12px 14px; 
     }
-    .inv-meta-block strong { display: block; font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 2px; }
+    .inv-meta-block strong { 
+      display: block; 
+      font-size: 11px; 
+      color: var(--text-muted); 
+      text-transform: uppercase; 
+      letter-spacing: 0.4px; 
+      margin-bottom: 8px; 
+      font-weight: 800; 
+    }
+    .inv-meta-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .inv-meta-fields input {
+      height: 38px;
+      padding: 0 10px;
+      font-size: 13.5px;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: #FFFFFF;
+      width: 100%;
+    }
+    @media (max-width: 650px) {
+      .inv-meta-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .inv-meta-fields {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
 
-    table.bill-table { width: 100%; border-collapse: collapse; margin-bottom: 4px; }
+    .bill-table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 8px;
+    }
+
+    table.bill-table { 
+      width: 100%; 
+      min-width: 660px;
+      border-collapse: collapse; 
+      margin-bottom: 4px; 
+    }
     table.bill-table th {
       background: #EEF3EB;
-      padding: 6px 6px;
-      font-size: 10.5px;
+      padding: 9px 8px;
+      font-size: 11px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.3px;
@@ -633,8 +666,8 @@
       border-bottom: 1.5px solid #D5E1D3;
     }
     table.bill-table td {
-      padding: 4px 6px;
-      font-size: 12.5px;
+      padding: 8px 8px;
+      font-size: 13px;
       border-bottom: 1px solid var(--border);
       font-weight: 600;
       vertical-align: middle;
@@ -647,38 +680,37 @@
       background: #FAFDF9 !important;
     }
     table.bill-table td input {
-      height: 29px;
-      padding: 0 6px;
-      font-size: 12.5px;
+      height: 34px;
+      padding: 0 8px;
+      font-size: 13px;
       font-weight: 700;
-      width: 78px;
       border: 1.5px solid var(--border);
-      border-radius: 5px;
+      border-radius: 6px;
       background: #FFFFFF;
       transition: var(--transition);
     }
     table.bill-table td input:hover { border-color: var(--border-hover); }
     table.bill-table td input:focus { border-color: var(--primary); box-shadow: var(--focus-ring); }
     
-    .item-desc-cell .main-name { font-weight: 800; color: var(--text); font-size: 12.5px; line-height: 1.25; }
-    .item-desc-cell .meta-info { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 1px; }
+    .item-desc-cell .main-name { font-weight: 800; color: var(--text); font-size: 13px; line-height: 1.3; }
+    .item-desc-cell .meta-info { font-size: 11.5px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
     .item-desc-cell .dim-pill { 
-      font-size: 10px; 
+      font-size: 10.5px; 
       color: #2F4C2D; 
       background: #EBF3E9; 
       border: 1px solid #D4E3D2;
-      padding: 1px 5px; 
+      padding: 2px 6px; 
       border-radius: 4px; 
       display: inline-block; 
-      margin-top: 2px; 
+      margin-top: 3px; 
       font-weight: 600;
     }
 
     .inv-summary-row {
       display: flex;
       justify-content: space-between;
-      padding: 3px 0;
-      font-size: 12px;
+      padding: 5px 0;
+      font-size: 13px;
       font-weight: 600;
       color: #2E3E2C;
     }
@@ -686,10 +718,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 5px;
-      margin-top: 3px;
+      padding-top: 8px;
+      margin-top: 6px;
       border-top: 1.5px solid var(--border);
-      font-size: 15.5px;
+      font-size: 18px;
       font-weight: 900;
       color: var(--primary-dark);
     }
@@ -697,10 +729,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 4px 0;
+      padding: 8px 0;
       border-top: 1px dashed var(--border);
-      margin-top: 4px;
-      font-size: 12.5px;
+      margin-top: 6px;
+      font-size: 13.5px;
       font-weight: 700;
       color: var(--text);
     }
@@ -708,14 +740,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 5px 9px;
+      padding: 8px 14px;
       background: #FDF2F2;
       border: 1.5px solid #FCA5A5;
-      border-radius: 7px;
-      margin-top: 4px;
+      border-radius: 8px;
+      margin-top: 6px;
       transition: var(--transition);
     }
-    .amount-words { font-size: 11px; font-weight: 600; color: var(--text-muted); font-style: italic; margin-top: 3px; text-align: right; }
+    .amount-words { font-size: 12px; font-weight: 600; color: var(--text-muted); font-style: italic; margin-top: 5px; text-align: right; }
 
     /* ACCESSORIES PILLS */
     .acc-quick-pills { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; margin-bottom: 6px; }
@@ -915,15 +947,168 @@
     }
     .btn-close:hover { color: var(--text); transform: scale(1.1); }
 
-    /* PRINT STYLESHEET */
+    /* ULTRA SLIM PRINT STYLESHEET (ONLY ACTIVE WHILE PRINTING) */
     @media print {
-      body { background: #fff; padding: 0; color: #000; font-size: 11pt; }
-      .container { max-width: 100%; margin: 0; padding: 0; }
-      .app-header, .nav-tabs, .floating-bar, .btn-action-grid, #tab-rooms, .btn-gear, .status-badge, .no-print, .modal-overlay, .btn-add-room, .btn-close-bill, .btn-row-del, .table-entry-row { display: none !important; }
-      #tab-rates { display: block !important; }
-      .card { box-shadow: none; border: none; padding: 0; margin-bottom: 0; }
-      table.bill-table th { background: #EEF3EB !important; -webkit-print-color-adjust: exact; color: #000 !important; }
-      table.bill-table td input { border: none; background: transparent; font-weight: 700; width: auto; }
+      @page {
+        margin: 6mm 7mm 6mm 7mm;
+        size: A4 portrait;
+      }
+      body { 
+        background: #fff !important; 
+        padding: 0 !important; 
+        color: #000 !important; 
+        font-size: 8.5pt !important; 
+        line-height: 1.25 !important;
+      }
+      .container { 
+        max-width: 100% !important; 
+        margin: 0 !important; 
+        padding: 0 !important; 
+      }
+      .app-header, .nav-tabs, .floating-bar, .btn-action-grid, #tab-rooms, 
+      .btn-gear, .status-badge, .no-print, .modal-overlay, .btn-add-room, 
+      .btn-close-bill, .btn-row-del, .table-entry-row, .acc-quick-pills { 
+        display: none !important; 
+      }
+      #tab-rates { 
+        display: block !important; 
+      }
+      .card, #printableInvoiceCard { 
+        box-shadow: none !important; 
+        border: none !important; 
+        padding: 0 !important; 
+        margin-bottom: 0 !important; 
+      }
+      .invoice-header {
+        border-bottom: 1.5px solid #222 !important;
+        padding-bottom: 4px !important;
+        margin-bottom: 6px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+      }
+      .invoice-header div {
+        font-size: 13pt !important;
+      }
+      .inv-print-meta-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px !important;
+        border: 1px solid #CCC !important;
+        padding: 4px 8px !important;
+        border-radius: 4px !important;
+        font-size: 8.5pt !important;
+        margin-bottom: 6px !important;
+      }
+      .inv-print-meta-grid strong {
+        font-size: 8pt !important;
+        text-transform: uppercase !important;
+        color: #444 !important;
+        display: block !important;
+      }
+      .bill-table-responsive {
+        overflow-x: visible !important;
+      }
+      table.bill-table { 
+        width: 100% !important;
+        min-width: 100% !important;
+        border-collapse: collapse !important; 
+        margin-bottom: 4px !important;
+        page-break-inside: auto !important;
+      }
+      table.bill-table tr {
+        page-break-inside: avoid !important;
+      }
+      table.bill-table th { 
+        background: #EFEFEF !important; 
+        -webkit-print-color-adjust: exact !important; 
+        print-color-adjust: exact !important; 
+        color: #000 !important; 
+        padding: 3px 4px !important;
+        font-size: 8pt !important;
+        border-top: 1px solid #222 !important;
+        border-bottom: 1.5px solid #222 !important;
+      }
+      table.bill-table td { 
+        padding: 2.5px 4px !important; 
+        font-size: 8.5pt !important;
+        border-bottom: 1px solid #DDD !important;
+        color: #000 !important;
+      }
+      table.bill-table td input { 
+        border: none !important; 
+        background: transparent !important; 
+        font-weight: 700 !important; 
+        width: auto !important; 
+        height: auto !important;
+        padding: 0 !important;
+        font-size: 8.5pt !important;
+        color: #000 !important;
+        text-align: right !important;
+      }
+      .item-desc-cell .main-name { 
+        font-size: 8.5pt !important; 
+        font-weight: 800 !important;
+        color: #000 !important;
+      }
+      .item-desc-cell .meta-info { 
+        font-size: 7.5pt !important; 
+        color: #333 !important;
+        margin-top: 0 !important;
+      }
+      .item-desc-cell .dim-pill { 
+        font-size: 7pt !important; 
+        border: 0.5px solid #BBB !important; 
+        padding: 0 3px !important; 
+        background: transparent !important; 
+        color: #222 !important; 
+        border-radius: 3px !important;
+        margin-top: 1px !important;
+      }
+      .inv-summary-row {
+        padding: 1.5px 0 !important;
+        font-size: 8.5pt !important;
+      }
+      .inv-summary-total {
+        font-size: 11pt !important;
+        font-weight: 900 !important;
+        padding-top: 3px !important;
+        border-top: 1.5px solid #000 !important;
+        margin-top: 2px !important;
+        color: #000 !important;
+      }
+      .inv-advance-row {
+        font-size: 8.5pt !important;
+        padding: 2px 0 !important;
+        color: #000 !important;
+      }
+      .inv-summary-due-row {
+        background: #F5F5F5 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        border: 1px solid #000 !important;
+        border-radius: 4px !important;
+        padding: 3px 6px !important;
+        margin-top: 2px !important;
+      }
+      .inv-summary-due-row span {
+        font-size: 9.5pt !important;
+        color: #000 !important;
+        font-weight: 800 !important;
+      }
+      .amount-words {
+        font-size: 7.5pt !important;
+        margin-top: 2px !important;
+        color: #333 !important;
+      }
+      .inv-terms {
+        margin-top: 4px !important;
+        padding-top: 3px !important;
+        font-size: 7pt !important;
+        line-height: 1.2 !important;
+        color: #555 !important;
+        border-top: 1px dashed #CCC !important;
+      }
       .print-only { display: block !important; }
     }
     .print-only { display: none; }
@@ -1005,15 +1190,6 @@
           <span class="card-subtitle" id="accCountLabel">0 items</span>
         </div>
         
-        <div class="acc-quick-pills no-print">
-          <span class="acc-pill" onclick="addDirectAccessory('Tile Adhesive (20 Kg)', 'Bag', 450)">+ Tile Adhesive 20kg</span>
-          <span class="acc-pill" onclick="addDirectAccessory('Epoxy Grout (1 Kg)', 'Kg', 350)">+ Epoxy Grout 1kg</span>
-          <span class="acc-pill" onclick="addDirectAccessory('Tile Spacers (Packet)', 'Pkt', 80)">+ Tile Spacers</span>
-          <span class="acc-pill" onclick="addDirectAccessory('Corner Beading (8 Ft)', 'Pc', 120)">+ Corner Beading</span>
-          <span class="acc-pill" onclick="addDirectAccessory('Tile Cleaner (1 Ltr)', 'Btl', 150)">+ Tile Cleaner</span>
-          <span class="acc-pill" onclick="addBlankDirectItem()">+ Custom Item</span>
-        </div>
-
         <div id="accessoriesList"></div>
       </div>
 
@@ -1065,84 +1241,61 @@
           </div>
         </div>
 
-        <!-- ULTRA-COMPACT CUSTOMER & SITE DETAILS BAR (UPPER 20% OF SPACE) -->
-        <div class="inv-compact-meta-bar no-print">
-          <div class="meta-field">
-            <span class="meta-tag">Customer</span>
-            <input type="text" id="invCustNameInput" placeholder="Customer Name" oninput="syncCustomerFromInvoice('name', this.value)" />
-          </div>
-          <div class="meta-field">
-            <span class="meta-tag">Phone</span>
-            <input type="tel" id="invCustPhoneInput" placeholder="Mobile Number" oninput="syncCustomerFromInvoice('phone', this.value)" />
-          </div>
-          <div class="meta-field">
-            <span class="meta-tag">Site / Location</span>
-            <input type="text" id="invCustAddressInput" placeholder="Site Address / Location" oninput="syncCustomerFromInvoice('address', this.value)" />
-          </div>
-          <div class="meta-field">
-            <span class="meta-tag">Date</span>
-            <input type="date" id="invQuoteDateInput" onchange="syncCustomerFromInvoice('date', this.value)" />
-          </div>
-        </div>
-
-        <!-- PRINT-ONLY CUSTOMER DETAILS -->
-        <div class="inv-meta-grid print-only" style="margin-bottom:8px;">
+        <!-- SPACIOUS CUSTOMER & SITE DETAILS (ON-SCREEN VIEW) -->
+        <div class="inv-meta-grid no-print">
           <div class="inv-meta-block">
             <strong>Customer Details</strong>
-            <div style="font-weight:700; color:#000;" id="invCustName">Walk-in Customer</div>
-            <div style="color:#555;" id="invCustPhone">-</div>
+            <div class="inv-meta-fields">
+              <input type="text" id="invCustNameInput" placeholder="Customer Name" oninput="syncCustomerFromInvoice('name', this.value)" />
+              <input type="tel" id="invCustPhoneInput" placeholder="Mobile Number" oninput="syncCustomerFromInvoice('phone', this.value)" />
+            </div>
           </div>
           <div class="inv-meta-block">
             <strong>Site / Delivery Address</strong>
-            <div id="invCustAddress" style="color:#000; font-weight:600;">Site: As specified</div>
+            <div class="inv-meta-fields">
+              <input type="text" id="invCustAddressInput" placeholder="Site Address / Location" oninput="syncCustomerFromInvoice('address', this.value)" />
+              <input type="date" id="invQuoteDateInput" onchange="syncCustomerFromInvoice('date', this.value)" />
+            </div>
+          </div>
+        </div>
+
+        <!-- PRINT-ONLY ULTRA-SLIM CUSTOMER DETAILS -->
+        <div class="inv-print-meta-grid print-only">
+          <div>
+            <strong>Customer Details:</strong>
+            <span id="invCustName" style="font-weight:700;">Walk-in Customer</span>
+            <span id="invCustPhone" style="color:#444; margin-left:6px;">-</span>
+          </div>
+          <div>
+            <strong>Site / Delivery:</strong>
+            <span id="invCustAddress">Site: As specified</span>
           </div>
         </div>
 
         <!-- ITEM DETAILS TABLE (WITH INLINE ENTRY ROW) -->
-        <table class="bill-table">
-          <thead>
-            <tr>
-              <th style="width:25px;">#</th>
-              <th>Item & Wall / Stock Specification</th>
-              <th style="text-align:right; width:65px;">Area (SFT)</th>
-              <th style="text-align:right; width:70px;">Qty</th>
-              <th style="text-align:right; width:88px;">Rate (₹)</th>
-              <th style="text-align:right; width:70px;">Rate/SFT</th>
-              <th style="text-align:right; width:85px;">Total (₹)</th>
-              <th style="width:28px;" class="no-print"></th>
-            </tr>
-          </thead>
-          <tbody id="billItems"></tbody>
-        </table>
-
-        <!-- QUICK ACCESSORIES PILLS UNDER TABLE -->
-        <div class="acc-quick-pills no-print" style="margin-top:10px; margin-bottom:14px; padding-top:8px; border-top:1px dashed var(--border); display:flex; align-items:center; flex-wrap:wrap; gap:6px;">
-          <span style="font-size:11.5px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-right:4px;">+ Quick Add:</span>
-          <span class="acc-pill" onclick="addDirectAccessory('Tile Adhesive (20 Kg)', 'Bag', 450)">+ Tile Adhesive 20kg</span>
-          <span class="acc-pill" onclick="addDirectAccessory('Epoxy Grout (1 Kg)', 'Kg', 350)">+ Epoxy Grout 1kg</span>
-          <span class="acc-pill" onclick="addDirectAccessory('Tile Spacers (Packet)', 'Pkt', 80)">+ Tile Spacers</span>
-          <span class="acc-pill" onclick="addDirectAccessory('Corner Beading (8 Ft)', 'Pc', 120)">+ Corner Beading</span>
-          <span class="acc-pill" onclick="addDirectAccessory('Tile Cleaner (1 Ltr)', 'Btl', 150)">+ Tile Cleaner</span>
-          <span class="acc-pill" onclick="addBlankDirectItem()">+ Custom Item</span>
+        <div class="bill-table-responsive">
+          <table class="bill-table">
+            <thead>
+              <tr>
+                <th style="width:25px;">#</th>
+                <th>Item & Wall / Stock Specification</th>
+                <th style="text-align:right; width:75px;">Area (SFT)</th>
+                <th style="text-align:right; width:75px;">Qty</th>
+                <th style="text-align:right; width:95px;">Rate (₹)</th>
+                <th style="text-align:right; width:75px;">Rate/SFT</th>
+                <th style="text-align:right; width:95px;">Total (₹)</th>
+                <th style="width:32px;" class="no-print"></th>
+              </tr>
+            </thead>
+            <tbody id="billItems"></tbody>
+          </table>
         </div>
 
-        <!-- INVOICE TOTALS & SUMMARY -->
-        <div style="padding-top:8px; border-top:1.5px solid var(--border);">
+        <!-- INVOICE TOTALS & SUMMARY (NO GST) -->
+        <div style="padding-top:10px; border-top:1.5px solid var(--border);">
           <div class="inv-summary-row">
             <span>Subtotal (Boxes/Units: <b id="invTotalBoxes">0</b> • Tile SFT: <b id="invTotalSft">0</b>)</span>
             <span id="invSubTotal" style="font-weight:700;">₹ 0</span>
-          </div>
-
-          <div class="inv-summary-row">
-            <span style="display:flex; align-items:center; gap:8px;">
-              <span>GST Option:</span>
-              <select id="taxSelector" class="no-print" onchange="updateInvoiceTotalsOnly()" style="height:26px; width:auto; font-size:11.5px; padding:0 6px;">
-                <option value="0">None (Quotation / Estimate)</option>
-                <option value="18">18% GST (CGST 9% + SGST 9%)</option>
-              </select>
-              <span class="print-only" id="taxPrintLabel">GST (0%):</span>
-            </span>
-            <span id="invTaxAmount" style="font-weight:700;">₹ 0</span>
           </div>
 
           <div class="inv-summary-total">
@@ -1153,26 +1306,26 @@
           <!-- ADVANCE AMOUNT FIELD -->
           <div class="inv-advance-row">
             <span>Advance Paid / Received:</span>
-            <div class="no-print" style="display:flex; align-items:center; gap:4px;">
-              <span style="font-size:12px; font-weight:700; color:var(--text-muted);">₹</span>
+            <div class="no-print" style="display:flex; align-items:center; gap:6px;">
+              <span style="font-size:13px; font-weight:700; color:var(--text-muted);">₹</span>
               <input type="number" id="invAdvanceInput" min="0" step="100" placeholder="0" value="0"
                 oninput="handleAdvanceInput(this.value)"
-                style="width:96px; height:27px; text-align:right; font-weight:800; font-size:12.5px; border:1.5px solid var(--primary-light); border-radius:5px; padding:0 6px;" />
+                style="width:115px; height:34px; text-align:right; font-weight:800; font-size:13.5px; border:1.5px solid var(--primary-light); border-radius:6px; padding:0 8px;" />
             </div>
             <span class="print-only" id="invAdvancePrint" style="font-weight:700;">₹ 0</span>
           </div>
 
           <!-- DUE AMOUNT FIELD -->
           <div class="inv-summary-due-row" id="invDueRow">
-            <span id="invDueLabel" style="font-size:12.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.3px; color:#991B1B;">Balance Due Amount:</span>
-            <span id="invDueAmount" style="font-size:16px; font-weight:900; color:#B91C1C;">₹ 0</span>
+            <span id="invDueLabel" style="font-size:13.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.3px; color:#991B1B;">Balance Due Amount:</span>
+            <span id="invDueAmount" style="font-size:18px; font-weight:900; color:#B91C1C;">₹ 0</span>
           </div>
 
           <div class="amount-words" id="invAmountInWords">Rupees Zero Only</div>
         </div>
 
         <!-- TERMS -->
-        <div style="margin-top:22px; padding-top:12px; border-top:1px dashed var(--border); font-size:11px; color:var(--text-muted); line-height:1.5;">
+        <div class="inv-terms" style="margin-top:22px; padding-top:12px; border-top:1px dashed var(--border); font-size:11px; color:var(--text-muted); line-height:1.5;">
           <b>Terms & Conditions:</b><br />
           1. Rates are valid for 7 days from quote date.<br />
           2. Check tile shade/batch and size before fixing. No claims entertained after tiles are laid.<br />
@@ -1299,20 +1452,11 @@
     window.inlineStockBadgeHtml = '';
     window.selectedDirectStockItem = null;
 
-    // INITIALIZATION
+    // INITIALIZATION (ALWAYS OPENS AFRESH WITH A CLEAR SLATE)
     window.addEventListener('DOMContentLoaded', () => {
-      const today = new Date().toISOString().split('T')[0];
-      document.getElementById('quoteDate').value = today;
-      document.getElementById('invQuoteDateInput').value = today;
-
-      const loaded = loadDraft();
-      if (!loaded || rooms.length === 0) {
-        addRoom('Room 1');
-      } else {
-        renderAllRooms();
-        renderAccessoriesList();
-        calculateAll();
-      }
+      // Clear any leftover saved state
+      localStorage.removeItem('tile_estimator_multi_draft_v3');
+      startNewCustomer(true);
 
       // Initial Stock Sync
       syncTallyStock(false);
@@ -1449,7 +1593,7 @@
 
     // Auto-scroll whenever user focuses any table/invoice input
     document.addEventListener('focusin', (e) => {
-      if (e.target && (e.target.closest('#billItems') || e.target.closest('.bill-table') || e.target.closest('.inv-compact-meta-bar') || e.target.id === 'invAdvanceInput')) {
+      if (e.target && (e.target.closest('#billItems') || e.target.closest('.bill-table') || e.target.closest('.inv-meta-grid') || e.target.id === 'invAdvanceInput')) {
         setTimeout(() => scrollCursorIntoView(e.target), 60);
       }
     });
@@ -1459,6 +1603,7 @@
       window.inlineSearchDraft = val;
       const cleanQ = (val || '').trim().toLowerCase();
       let item = tallyStock.find(i => i.name.toLowerCase() === cleanQ);
+      const isExact = !!item;
       if (!item && cleanQ.length >= 2) {
         item = tallyStock.find(i => i.name.toLowerCase().startsWith(cleanQ));
       }
@@ -1468,15 +1613,28 @@
 
       if (item) {
         window.selectedDirectStockItem = item;
-        window.inlineRateDraft = item.rate || '';
+        // Default rates MUST be blank as requested
+        window.inlineRateDraft = '';
         window.inlineUnitDraft = item.unit || 'bx';
-        window.inlineStockBadgeHtml = `In Stock: <b>${item.stockBoxes} ${item.unit || 'bx'}</b> &bull; Rate: <b>₹${item.rate}</b> &bull; ${escapeHtml(item.parent || 'General')}`;
+        window.inlineStockBadgeHtml = `In Stock: <b>${item.stockBoxes} ${item.unit || 'bx'}</b> &bull; Tally Ref: <b>₹${item.rate}</b> &bull; ${escapeHtml(item.parent || 'General')}`;
 
-        if (rateInput) rateInput.value = item.rate || '';
+        if (rateInput) rateInput.value = '';
         if (unitLabel) unitLabel.innerText = item.unit || 'bx';
         if (badge) {
           badge.style.display = 'block';
           badge.innerHTML = window.inlineStockBadgeHtml;
+        }
+
+        // Auto shift to next field (Quantity tab) on item selection
+        if (isExact) {
+          const qtyEl = document.getElementById('inlineItemQty');
+          if (qtyEl) {
+            setTimeout(() => {
+              qtyEl.focus();
+              qtyEl.select();
+              scrollCursorIntoView(qtyEl);
+            }, 60);
+          }
         }
       } else {
         window.selectedDirectStockItem = null;
@@ -1484,7 +1642,6 @@
         if (badge) badge.style.display = 'none';
       }
       updateInlineTotalDisplay();
-      scrollCursorIntoView(document.getElementById('inlineItemSearch'));
     }
 
     function onInlineQtyChange(val) {
@@ -1507,21 +1664,48 @@
     }
 
     function onInlineKeyDown(e, field) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
+      if (e.key === 'Enter' || e.key === 'Tab') {
         if (field === 'name') {
-          const rateInput = document.getElementById('inlineItemRate');
-          if (rateInput && rateInput.value) {
-            commitInlineRow();
-          } else {
-            const qtyEl = document.getElementById('inlineItemQty');
-            if (qtyEl) {
-              qtyEl.focus();
-              scrollCursorIntoView(qtyEl);
+          e.preventDefault();
+          const searchEl = document.getElementById('inlineItemSearch');
+          const cleanQ = (searchEl ? searchEl.value : '').trim().toLowerCase();
+          const item = tallyStock.find(i => i.name.toLowerCase() === cleanQ) ||
+                       (cleanQ.length >= 2 ? tallyStock.find(i => i.name.toLowerCase().startsWith(cleanQ)) : null);
+          if (item) {
+            window.selectedDirectStockItem = item;
+            if (searchEl) searchEl.value = item.name;
+            window.inlineSearchDraft = item.name;
+            window.inlineUnitDraft = item.unit || 'bx';
+            window.inlineRateDraft = '';
+            const rateInput = document.getElementById('inlineItemRate');
+            if (rateInput) rateInput.value = '';
+            const badge = document.getElementById('inlineStockBadge');
+            if (badge) {
+              badge.style.display = 'block';
+              badge.innerHTML = `In Stock: <b>${item.stockBoxes} ${item.unit || 'bx'}</b> &bull; Tally Ref: <b>₹${item.rate}</b> &bull; ${escapeHtml(item.parent || 'General')}`;
             }
           }
-        } else {
-          commitInlineRow();
+          const qtyEl = document.getElementById('inlineItemQty');
+          if (qtyEl) {
+            qtyEl.focus();
+            qtyEl.select();
+            scrollCursorIntoView(qtyEl);
+          }
+        } else if (field === 'qty') {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            const rateEl = document.getElementById('inlineItemRate');
+            if (rateEl) {
+              rateEl.focus();
+              rateEl.select();
+              scrollCursorIntoView(rateEl);
+            }
+          }
+        } else if (field === 'rate') {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            commitInlineRow();
+          }
         }
       }
     }
@@ -1537,7 +1721,7 @@
       const qty = parseFloat(window.inlineQtyDraft || (qtyEl ? qtyEl.value : 1)) || 1;
 
       const rateEl = document.getElementById('inlineItemRate');
-      const rate = parseFloat(window.inlineRateDraft || (rateEl ? rateEl.value : 0)) || 0;
+      const rate = parseFloat(window.inlineRateDraft || (rateEl ? rateEl.value : '')) || 0;
       const unit = window.inlineUnitDraft || 'bx';
 
       let stockItem = window.selectedDirectStockItem;
@@ -1557,7 +1741,7 @@
         stockBoxes: stockItem ? stockItem.stockBoxes : null,
         qty: qty,
         unit: stockItem && stockItem.unit ? stockItem.unit : unit,
-        rate: rate > 0 ? rate : (stockItem && stockItem.rate ? stockItem.rate : 0),
+        rate: rate > 0 ? rate : '',
         isStock: !!stockItem
       });
 
@@ -1879,7 +2063,7 @@
     }
 
     function formatTileMeta(item) {
-      return `🏷️ <b>${escapeHtml(item.parent || 'General')}</b> &bull; In Stock: <b>${item.stockBoxes}</b> ${escapeHtml(item.unit || 'bx')} &bull; Rate: <b>₹${item.rate}</b>`;
+      return `🏷️ <b>${escapeHtml(item.parent || 'General')}</b> &bull; In Stock: <b>${item.stockBoxes}</b> ${escapeHtml(item.unit || 'bx')} &bull; Tally Ref: <b>₹${item.rate}</b>`;
     }
 
     // UPDATE ROOM FIELDS
@@ -1950,9 +2134,7 @@
       const item = tallyStock.find(i => i.name.toLowerCase() === cleanQ);
       if (item) {
         room[tileKey + 'Item'] = item;
-        if (item.rate && (!room[tileKey + 'Rate'] || room[tileKey + 'Rate'] === '0')) {
-          room[tileKey + 'Rate'] = item.rate;
-        }
+        // Default rates MUST be blank as requested: do NOT auto-populate item.rate!
         if (metaEl) {
           metaEl.style.display = 'block';
           metaEl.innerHTML = formatTileMeta(item);
@@ -2241,7 +2423,7 @@
               <td style="text-align: right; font-weight:700;">${item.sft > 0 ? item.sft.toFixed(1) : '-'}</td>
               <td style="text-align: right; font-weight:700;">${item.qty} ${item.unit}</td>
               <td style="text-align: right;">
-                <input type="number" class="bill-rate-input" value="${item.rate}" placeholder="₹ / bx" step="0.5" 
+                <input type="number" class="bill-rate-input" value="${item.rate || ''}" placeholder="₹ / bx" step="0.5" 
                   oninput="handleTileRateInput(this, '${item.sourceId}', '${item.tileKey}')" />
               </td>
               <td class="rate-sft-cell" style="text-align: right; color:var(--text-muted); font-size:12px;">
@@ -2274,7 +2456,7 @@
                 </div>
               </td>
               <td style="text-align: right;">
-                <input type="number" class="bill-rate-input" value="${item.rate}" placeholder="₹ / unit" step="1" 
+                <input type="number" class="bill-rate-input" value="${item.rate || ''}" placeholder="₹ / unit" step="1" 
                   oninput="handleDirectRateInput(this, '${item.sourceId}')" />
               </td>
               <td class="rate-sft-cell" style="text-align: right; color:var(--text-light); font-size:12px;">-</td>
@@ -2297,40 +2479,40 @@
 
       html += `
         <tr class="table-entry-row no-print" style="background:#FAFDF9; border-top:1.5px dashed var(--primary-light);">
-          <td style="text-align:center; font-weight:800; color:var(--primary); font-size:12px;">${nextNum}</td>
+          <td style="text-align:center; font-weight:800; color:var(--primary); font-size:13px;">${nextNum}</td>
           <td class="item-desc-cell">
-            <div style="display:flex; flex-direction:column; gap:2px;">
-              <input type="text" id="inlineItemSearch" list="tallyList" placeholder="🔍 Click / Type item name (auto-populates stock & price)..." 
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <input type="text" id="inlineItemSearch" list="tallyList" placeholder="🔍 Click / Type item name (auto-populates stock)..." 
                 value="${escapeHtml(window.inlineSearchDraft || '')}"
                 oninput="onInlineItemSearch(this.value)" onkeydown="onInlineKeyDown(event, 'name')" autocomplete="off"
-                style="height:29px; width:100%; border:1.5px solid var(--primary-light); background:#FFFFFF; border-radius:5px; padding:0 8px; font-weight:700; color:var(--text); font-size:12.5px;" />
-              <div id="inlineStockBadge" style="display:${window.inlineStockBadgeHtml ? 'block' : 'none'}; font-size:10.5px; font-weight:700; color:#234821; background:#E2EFE0; border:1px solid #C4D9C2; border-radius:4px; padding:1px 6px;">
+                style="height:38px; width:100%; border:1.5px solid var(--primary-light); background:#FFFFFF; border-radius:7px; padding:0 12px; font-weight:700; color:var(--text); font-size:13.5px;" />
+              <div id="inlineStockBadge" style="display:${window.inlineStockBadgeHtml ? 'block' : 'none'}; font-size:11px; font-weight:700; color:#234821; background:#E2EFE0; border:1px solid #C4D9C2; border-radius:5px; padding:2px 8px;">
                 ${window.inlineStockBadgeHtml || ''}
               </div>
             </div>
           </td>
-          <td style="text-align:right; color:var(--text-light); font-size:11px;">-</td>
+          <td style="text-align:right; color:var(--text-light); font-size:12px;">-</td>
           <td style="text-align:right;">
-            <div style="display:flex; align-items:center; justify-content:flex-end; gap:2px;">
+            <div style="display:flex; align-items:center; justify-content:flex-end; gap:3px;">
               <input type="number" id="inlineItemQty" value="${window.inlineQtyDraft || 1}" min="1" step="1" 
                 oninput="onInlineQtyChange(this.value)" onkeydown="onInlineKeyDown(event, 'qty')" 
-                style="width:52px; height:29px; text-align:right; font-weight:700; font-size:12px;" placeholder="Qty" />
-              <span id="inlineItemUnitLabel" style="font-size:10.5px; font-weight:700; color:var(--text-muted);">${escapeHtml(window.inlineUnitDraft || 'bx')}</span>
+                style="width:58px; height:38px; text-align:right; font-weight:700; font-size:13px;" placeholder="Qty" />
+              <span id="inlineItemUnitLabel" style="font-size:11px; font-weight:700; color:var(--text-muted);">${escapeHtml(window.inlineUnitDraft || 'bx')}</span>
             </div>
           </td>
           <td style="text-align:right;">
             <input type="number" id="inlineItemRate" placeholder="Rate" step="0.5" 
-              value="${window.inlineRateDraft !== undefined ? window.inlineRateDraft : ''}"
+              value="${window.inlineRateDraft !== undefined && window.inlineRateDraft !== '' ? window.inlineRateDraft : ''}"
               oninput="onInlineRateChange(this.value)" onkeydown="onInlineKeyDown(event, 'rate')" 
-              style="width:74px; height:29px; text-align:right; font-weight:700; font-size:12px;" />
+              style="width:85px; height:38px; text-align:right; font-weight:700; font-size:13px;" />
           </td>
-          <td class="rate-sft-cell" style="text-align:right; color:var(--text-light); font-size:11px;">-</td>
-          <td class="line-total-cell" style="text-align:right; font-weight:800; font-size:12.5px; color:var(--primary-dark);">
+          <td class="rate-sft-cell" style="text-align:right; color:var(--text-light); font-size:12px;">-</td>
+          <td class="line-total-cell" style="text-align:right; font-weight:800; font-size:13.5px; color:var(--primary-dark);">
             <span id="inlineItemTotal">₹ ${currentDraftTotal.toLocaleString('en-IN')}</span>
           </td>
           <td class="no-print" style="text-align:center;">
             <button type="button" class="btn btn-primary" onclick="commitInlineRow()" 
-              style="padding:3px 8px; font-size:12px; height:27px; border-radius:5px; font-weight:800;" title="Add to bill (or press Enter)">
+              style="padding:0 12px; font-size:14px; height:38px; border-radius:7px; font-weight:800;" title="Add to bill (or press Enter)">
               ➕
             </button>
           </td>
@@ -2452,9 +2634,7 @@
         }
       });
 
-      const taxRate = parseFloat(document.getElementById('taxSelector').value) || 0;
-      const taxAmount = Math.round((subTotal * taxRate) / 100);
-      const grandTotal = Math.round(subTotal + taxAmount);
+      const grandTotal = Math.round(subTotal);
 
       const advanceInput = document.getElementById('invAdvanceInput');
       const advanceVal = advanceInput ? (parseFloat(advanceInput.value) || 0) : (window.currentAdvanceAmount || 0);
@@ -2465,8 +2645,6 @@
       document.getElementById('invTotalBoxes').innerText = totalBoxesCount;
       document.getElementById('invTotalSft').innerText = totalTileSft.toFixed(1);
       document.getElementById('invSubTotal').innerText = `₹ ${Math.round(subTotal).toLocaleString('en-IN')}`;
-      document.getElementById('invTaxAmount').innerText = taxRate > 0 ? `₹ ${taxAmount.toLocaleString('en-IN')}` : '₹ 0';
-      document.getElementById('taxPrintLabel').innerText = `GST (${taxRate}%):`;
       document.getElementById('billTotal').innerText = `₹ ${grandTotal.toLocaleString('en-IN')}`;
       document.getElementById('barGrandTotal').innerText = `₹ ${grandTotal.toLocaleString('en-IN')}`;
 
@@ -2547,10 +2725,10 @@
         customerPhone: custPhone,
         siteAddress: custAddress,
         items: exportItems,
-        subTotal,
-        taxRate,
-        taxAmount,
-        grandTotal,
+        subTotal: subTotal,
+        taxRate: 0,
+        taxAmount: 0,
+        grandTotal: grandTotal,
         advanceAmount: advanceVal,
         dueAmount: dueAmount
       };
@@ -2787,58 +2965,17 @@
       }, 3500);
     }
 
-    // LOCAL DRAFT SAVING (TEMPORARY BROWSER CRASH RESILIENCE ONLY)
+    // PERSISTENCE (DISABLED: APP ALWAYS OPENS AFRESH WITH A CLEAR SLATE)
     function saveDraft() {
-      const draft = {
-        name: document.getElementById('custName').value,
-        phone: document.getElementById('custPhone').value,
-        address: document.getElementById('custAddress').value,
-        date: document.getElementById('quoteDate').value,
-        rooms: rooms,
-        directBillItems: directBillItems,
-        advance: window.currentAdvanceAmount || 0
-      };
-      localStorage.setItem('tile_estimator_multi_draft_v3', JSON.stringify(draft));
+      // Persistence intentionally disabled per user request: bills are not saved
     }
 
     function loadDraft() {
-      const saved = localStorage.getItem('tile_estimator_multi_draft_v3');
-      if (!saved) {
-        const randId = Math.floor(1000 + Math.random() * 9000);
-        document.getElementById('quoteRefLabel').innerText = `Quote #EST-${randId}`;
-        return false;
-      }
-      try {
-        const d = JSON.parse(saved);
-        if (d.name) {
-          document.getElementById('custName').value = d.name;
-          document.getElementById('invCustNameInput').value = d.name;
-        }
-        if (d.phone) {
-          document.getElementById('custPhone').value = d.phone;
-          document.getElementById('invCustPhoneInput').value = d.phone;
-        }
-        if (d.address) {
-          document.getElementById('custAddress').value = d.address;
-          document.getElementById('invCustAddressInput').value = d.address;
-        }
-        if (d.date) {
-          document.getElementById('quoteDate').value = d.date;
-          document.getElementById('invQuoteDateInput').value = d.date;
-        }
-        if (d.directBillItems && Array.isArray(d.directBillItems)) {
-          directBillItems = d.directBillItems;
-        }
-        if (d.advance !== undefined) {
-          window.currentAdvanceAmount = parseFloat(d.advance) || 0;
-          const advEl = document.getElementById('invAdvanceInput');
-          if (advEl) advEl.value = d.advance || 0;
-        }
-        if (d.rooms && Array.isArray(d.rooms) && d.rooms.length > 0) {
-          rooms = d.rooms;
-          return true;
-        }
-      } catch (e) {}
+      localStorage.removeItem('tile_estimator_multi_draft_v3');
+      const randId = Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('quoteRefLabel').innerText = `Quote #EST-${randId}`;
+      const invRef = document.getElementById('invRefNum');
+      if (invRef) invRef.innerText = `#EST-${randId}`;
       return false;
     }
 

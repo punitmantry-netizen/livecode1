@@ -53,8 +53,14 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
     }
 
+    html {
+      scroll-padding-bottom: 65px;
+      scroll-padding-top: 45px;
+      scroll-behavior: smooth;
+    }
+
     /* CUSTOM SUBTLE SCROLLBAR */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: var(--surface-muted); }
     ::-webkit-scrollbar-thumb { background: #CAD6C5; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--primary-light); }
@@ -62,31 +68,34 @@
     body { 
       background: var(--bg); 
       color: var(--text); 
-      padding: 16px 20px; 
-      padding-bottom: 140px; 
+      padding: 6px 12px; 
+      padding-bottom: 60px; 
       -webkit-font-smoothing: antialiased; 
       min-height: 100vh;
     }
     @media (max-width: 650px) {
       body {
-        padding: 10px 10px;
-        padding-bottom: 130px;
+        padding: 4px 6px;
+        padding-bottom: 60px;
       }
     }
 
-    .container { max-width: 940px; margin: 0 auto; width: 100%; }
+    .container { max-width: 980px; margin: 0 auto; width: 100%; }
 
-    /* HEADER */
+    /* COMPACT HEADER */
     .app-header {
       background: linear-gradient(135deg, #263824 0%, #354E33 55%, #4A6746 100%);
       color: #fff;
-      padding: 14px 20px;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
+      padding: 6px 12px;
+      border-radius: 8px;
+      box-shadow: var(--shadow-xs);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 6px;
+      position: relative;
+      overflow: hidden;
+    }
       position: relative;
       overflow: hidden;
     }
@@ -104,34 +113,34 @@
     }
 
     .app-header h1 { 
-      font-size: 18px; 
+      font-size: 14.5px; 
       font-weight: 800; 
       letter-spacing: -0.2px; 
       color: #FFFFFF;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       margin: 0;
     }
 
     .app-header p { 
-      display: block;
-      font-size: 12px; 
+      display: inline-block;
+      font-size: 11px; 
       color: #D3E0D1; 
-      margin: 3px 0 0 0; 
+      margin: 0 0 0 8px; 
       font-weight: 500; 
       letter-spacing: 0.1px;
     }
 
     @media (max-width: 650px) {
       .app-header {
-        padding: 12px 14px;
+        padding: 6px 10px;
       }
       .app-header h1 {
-        font-size: 15.5px;
+        font-size: 13.5px;
       }
       .app-header p {
-        font-size: 11px;
+        display: none;
       }
     }
 
@@ -203,33 +212,32 @@
       transform: rotate(45deg) scale(1.05); 
     }
 
-    /* TABS */
+    /* TABS (COMPACT) */
     .nav-tabs { 
       display: flex; 
       background: #EAEFE6; 
-      padding: 5px; 
-      border-radius: 10px; 
-      margin-bottom: 14px; 
+      padding: 3px; 
+      border-radius: 7px; 
+      margin-bottom: 6px; 
       border: 1px solid var(--border);
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       flex-wrap: wrap;
     }
     
     .tab-btn {
       flex: 1;
-      min-width: 130px;
-      padding: 10px 14px;
+      min-width: 105px;
+      padding: 6px 10px;
       border: none;
-      border-radius: 7px;
-      font-size: 13.5px;
+      border-radius: 5px;
+      font-size: 12.5px;
       font-weight: 700;
       color: var(--text-muted);
       background: transparent;
       cursor: pointer;
       transition: var(--transition);
       text-align: center;
-      letter-spacing: -0.1px;
     }
     .tab-btn:hover {
       color: var(--text);
@@ -238,29 +246,28 @@
     .tab-btn.active {
       background: var(--surface);
       color: var(--primary-dark);
-      box-shadow: 0 1px 4px rgba(35, 52, 33, 0.08);
+      box-shadow: 0 1px 3px rgba(35, 52, 33, 0.08);
     }
 
     /* NEW CUSTOMER TAB BUTTON */
     .tab-btn-new-cust {
       background: #E1EBE0;
       color: #2D4C2B;
-      border: 1.5px dashed #4A6746;
+      border: 1px dashed #4A6746;
       font-weight: 800;
       flex: 0 0 auto;
-      padding: 9px 15px;
-      font-size: 13px;
-      border-radius: 7px;
+      padding: 5px 11px;
+      font-size: 12px;
+      border-radius: 5px;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
     }
     .tab-btn-new-cust:hover {
       background: var(--primary);
       color: #FFFFFF;
       border-style: solid;
       transform: translateY(-1px);
-      box-shadow: 0 3px 8px rgba(74, 103, 70, 0.25);
     }
     .tab-btn-new-cust:active { transform: scale(0.97); }
 
@@ -319,67 +326,66 @@
       to { transform: translate(-50%, 0); opacity: 1; }
     }
 
-    /* CARDS & INPUTS */
+    /* CARDS & INPUTS (COMPACT) */
     .card {
       background: var(--surface);
-      border-radius: var(--radius);
-      padding: 18px 20px;
-      box-shadow: var(--shadow);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      box-shadow: var(--shadow-xs);
       border: 1px solid var(--border);
-      margin-bottom: 16px;
+      margin-bottom: 8px;
       transition: var(--transition);
     }
     .card:hover {
       border-color: var(--border-hover);
-      box-shadow: var(--shadow-hover);
     }
 
     .card-title {
-      font-size: 15px;
+      font-size: 13.5px;
       font-weight: 800;
       color: #192618;
-      margin-bottom: 14px;
+      margin-bottom: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      letter-spacing: -0.2px;
+      letter-spacing: -0.1px;
     }
     .card-subtitle { 
-      font-size: 11.5px; 
+      font-size: 11px; 
       font-weight: 700; 
       color: var(--primary); 
       background: var(--primary-tint);
-      padding: 3px 9px;
-      border-radius: 20px;
+      padding: 2px 7px;
+      border-radius: 12px;
       border: 1px solid #D6E4D3;
     }
 
-    .field-group { margin-bottom: 12px; }
+    .field-group { margin-bottom: 6px; }
     .field-group:last-child { margin-bottom: 0; }
     
     label { 
       display: block; 
-      font-size: 11.5px; 
+      font-size: 10.5px; 
       font-weight: 700; 
       color: var(--text-muted); 
       text-transform: uppercase; 
-      letter-spacing: 0.4px; 
-      margin-bottom: 6px; 
+      letter-spacing: 0.3px; 
+      margin-bottom: 3px; 
     }
     
     input, select, textarea {
       width: 100%;
-      height: 42px;
-      padding: 0 13px;
-      border: 1.5px solid var(--border);
-      border-radius: 9px;
-      font-size: 14px;
+      height: 31px;
+      padding: 0 9px;
+      border: 1.2px solid var(--border);
+      border-radius: 6px;
+      font-size: 12.5px;
       font-weight: 600;
       color: var(--text);
       background: #FFFFFF;
       transition: var(--transition);
     }
-    textarea { height: 64px; padding: 10px 13px; resize: vertical; line-height: 1.4; }
+    textarea { height: 48px; padding: 6px 9px; resize: vertical; line-height: 1.3; }
     
     input:hover, select:hover, textarea:hover {
       border-color: var(--border-hover);
@@ -483,22 +489,262 @@
       margin-top: 8px;
     }
 
-    .toggle-card {
-      background: var(--surface-muted);
-      border: 1.5px dashed var(--border-dark);
-      border-radius: 10px;
-      padding: 13px;
-      margin-bottom: 12px;
-      transition: var(--transition);
+    /* COMPACT CLIENT BAR (SINGLE LINE, ZERO WASTE) */
+    .compact-client-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 6px 10px;
+      margin-bottom: 8px;
+      box-shadow: var(--shadow-xs);
     }
-    .toggle-card:hover {
-      border-color: var(--border-hover);
+    .compact-client-bar input {
+      height: 30px;
+      padding: 0 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      border-radius: 5px;
     }
-    .toggle-card.active { 
-      background: #FFFFFF; 
-      border-color: var(--primary); 
-      border-style: solid; 
+    @media (max-width: 650px) {
+      .compact-client-bar {
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .compact-client-bar > div {
+        flex: 1 1 45% !important;
+      }
+    }
+
+    /* ROOM SHEET CARD & COMPACT TABLE (NO BOXES, NO REPETITIVE TEXTS) */
+    .room-sheet-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--primary);
+      border-radius: 9px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
       box-shadow: 0 2px 8px rgba(74, 103, 70, 0.08);
+    }
+    .room-sheet-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--border);
+    }
+    .room-pill-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: #FFFFFF;
+      background: var(--primary);
+      padding: 2px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .room-name-compact-input {
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      height: 27px !important;
+      padding: 0 8px !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 5px !important;
+      max-width: 220px;
+      background: #FAFCF9 !important;
+    }
+    .btn-compact-ghost {
+      padding: 4px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: #FFF;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .btn-compact-ghost:hover {
+      background: var(--surface-muted);
+      color: var(--text);
+    }
+    .btn-compact-del {
+      padding: 4px 8px;
+      font-size: 11px;
+      color: #B91C1C;
+      background: #FDF2F2;
+      border: 1px solid #F8D7DA;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn-compact-del:hover {
+      background: #F8D7DA;
+    }
+
+    /* SHEET ENTRY TABLE */
+    .room-table-container {
+      overflow-x: auto;
+    }
+    .room-entry-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .room-entry-table thead th {
+      background: var(--surface-muted);
+      color: var(--text-muted);
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      padding: 5px 6px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    .room-entry-table tbody tr {
+      border-bottom: 1px solid #EDF2EB;
+      transition: background 0.12s ease;
+    }
+    .room-entry-table tbody tr:hover {
+      background: #F8FAF6;
+    }
+    .room-entry-table tbody tr.tr-active {
+      background: #F3F7F1;
+    }
+    .room-entry-table tbody td {
+      padding: 4px 5px;
+      vertical-align: middle;
+    }
+    .td-section {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .compact-chk-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      user-select: none;
+      font-size: 12px;
+    }
+    .compact-chk-label input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      accent-color: var(--primary);
+      cursor: pointer;
+      margin: 0;
+    }
+    .table-input {
+      height: 28px !important;
+      padding: 0 7px !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 4px !important;
+      background: #FFFFFF !important;
+      width: 100%;
+    }
+    .table-input:focus {
+      border-color: var(--primary) !important;
+      box-shadow: 0 0 0 2px rgba(74, 103, 70, 0.15) !important;
+    }
+    .table-select {
+      height: 28px !important;
+      padding: 0 5px !important;
+      font-size: 11.5px !important;
+      font-weight: 600 !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 4px !important;
+      background: #FFFFFF !important;
+      width: 100%;
+    }
+    .table-readonly-box {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: var(--primary-tint);
+      padding: 4px 6px;
+      border-radius: 4px;
+      text-align: center;
+      border: 1px solid #D1DFCF;
+      white-space: nowrap;
+    }
+    .compact-res-pill {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      background: var(--primary-tint);
+      padding: 3px 7px;
+      border-radius: 10px;
+      white-space: nowrap;
+      display: inline-block;
+      border: 1px solid #D1DFCF;
+    }
+    .table-tile-meta {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      background: var(--primary-subtle);
+      border: 1px solid #D1DFCF;
+      border-radius: 4px;
+      padding: 2px 5px;
+      margin-top: 2px;
+    }
+
+    /* SLIM MINIMISED ROOM BAR (HEIGHT: 30px) */
+    .room-card-minimised {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 10px;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-xs);
+    }
+    .room-card-minimised:hover {
+      border-color: var(--primary);
+      background: var(--surface-muted);
+    }
+    .btn-final-save {
+      background: #2E7D32 !important;
+      color: #FFFFFF !important;
+      font-weight: 700 !important;
+      border: none !important;
+      box-shadow: 0 2px 6px rgba(46, 125, 50, 0.25) !important;
+      cursor: pointer;
+    }
+    .btn-final-save:hover {
+      background: #1B5E20 !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(46, 125, 50, 0.35) !important;
+    }
+    .autosave-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .autosave-pill .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #2E7D32;
     }
     
     .chk-label { 
@@ -880,28 +1126,29 @@
       transform: scale(1.15);
     }
 
-    /* FLOATING BOTTOM BAR */
+    /* FLOATING BOTTOM BAR (COMPACT) */
     .floating-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(248, 250, 246, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(248, 250, 246, 0.98);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border-top: 1px solid var(--border);
-      padding: 11px 20px;
+      padding: 5px 14px;
+      height: 46px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 -4px 16px rgba(35, 52, 33, 0.06);
+      box-shadow: 0 -2px 10px rgba(35, 52, 33, 0.06);
       z-index: 100;
     }
-    .bar-stats { display: flex; gap: 16px; align-items: center; }
-    .stat-pill { display: flex; flex-direction: column; }
-    .stat-pill span:first-child { font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; }
-    .stat-pill span:last-child { font-size: 16.5px; font-weight: 800; color: var(--text); }
-    .stat-pill.primary span:last-child { color: var(--primary-dark); }
+    .bar-stats { display: flex; gap: 12px; align-items: center; }
+    .stat-pill { display: flex; align-items: baseline; gap: 4px; }
+    .stat-pill span:first-child { font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
+    .stat-pill span:last-child { font-size: 13.5px; font-weight: 800; color: var(--text); }
+    .stat-pill.primary span:last-child { color: var(--primary-dark); font-size: 15px; }
 
     /* MODAL */
     .modal-overlay {
@@ -1140,6 +1387,9 @@
       <button class="tab-btn tab-btn-new-cust no-print" id="btnNewCustomer" onclick="startNewCustomer()" title="Start clean bill for next customer">
         <span>➕</span> New Customer
       </button>
+      <button class="tab-btn no-print" id="btnSavedBills" onclick="openSavedBillsModal()" title="View Final Saved Bills" style="background:#fff; border:1.5px solid var(--border); margin-left:auto;">
+        <span>📁</span> Saved Bills <span id="savedBillsCountBadge" style="background:var(--primary-subtle); color:var(--primary); font-size:11px; padding:2px 7px; border-radius:10px; margin-left:4px; font-weight:800;">0</span>
+      </button>
     </nav>
 
     <!-- ========================================== -->
@@ -1147,70 +1397,54 @@
     <!-- ========================================== -->
     <div id="tab-rooms">
       
-      <!-- CLIENT, SITE & DATE DETAILS (SHARED) -->
-      <div class="card">
-        <div class="card-title">
-          <span>Client & Project Details</span>
-          <span class="card-subtitle" id="quoteRefLabel">Quote #EST-1001</span>
+      <!-- COMPACT CLIENT & PROJECT BAR (SINGLE LINE, ZERO WASTE) -->
+      <div class="compact-client-bar no-print">
+        <div style="flex: 1.3;">
+          <input type="text" id="custName" placeholder="Customer Name" oninput="syncCustomerFromRooms('name', this.value)" />
         </div>
-        <div class="grid-2">
-          <div class="field-group">
-            <label>Customer Name</label>
-            <input type="text" id="custName" placeholder="Customer Name" oninput="syncCustomerFromRooms('name', this.value)" />
-          </div>
-          <div class="field-group">
-            <label>Mobile Number</label>
-            <input type="tel" id="custPhone" placeholder="Mobile Number" oninput="syncCustomerFromRooms('phone', this.value)" />
-          </div>
+        <div style="flex: 1;">
+          <input type="tel" id="custPhone" placeholder="Mobile Number" oninput="syncCustomerFromRooms('phone', this.value)" />
         </div>
-        <div class="grid-2" style="margin-top:12px;">
-          <div class="field-group">
-            <label>Site / Delivery Address</label>
-            <input type="text" id="custAddress" placeholder="Site Address / Location" oninput="syncCustomerFromRooms('address', this.value)" />
-          </div>
-          <div class="field-group">
-            <label>Quotation Date</label>
-            <input type="date" id="quoteDate" onchange="syncCustomerFromRooms('date', this.value)" />
-          </div>
+        <div style="flex: 1.6;">
+          <input type="text" id="custAddress" placeholder="Site Address / Location" oninput="syncCustomerFromRooms('address', this.value)" />
         </div>
+        <div style="flex: 0.9;">
+          <input type="date" id="quoteDate" onchange="syncCustomerFromRooms('date', this.value)" />
+        </div>
+        <span class="card-subtitle" id="quoteRefLabel" style="white-space:nowrap; font-size:11px; padding:3px 7px;">Quote #EST-1001</span>
       </div>
 
       <!-- DYNAMIC ROOMS CONTAINER -->
       <div id="roomsContainer"></div>
 
-      <!-- ADD ROOM BUTTON -->
-      <button type="button" class="btn btn-add-room no-print" onclick="addRoom()">
-        ➕ Add Another Room / Area
-      </button>
-
-      <!-- ACCESSORIES & EXTRA MATERIALS ON ROOMS PAGE -->
-      <div class="card">
-        <div class="card-title">
-          <span>Accessories & Extra Items</span>
-          <span class="card-subtitle" id="accCountLabel">0 items</span>
-        </div>
-        
-        <div id="accessoriesList"></div>
+      <!-- ACTIONS BAR: ADD ROOM & EXTRA ITEMS -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin:6px 0 10px 0;" class="no-print">
+        <button type="button" class="btn btn-add-room" onclick="addRoom()" style="padding:6px 15px; font-size:12px; border-radius:6px; margin:0;">
+          ➕ Add Room
+        </button>
+        <button type="button" class="btn btn-outline" onclick="toggleAccessoriesCollapse()" style="padding:5px 12px; font-size:11.5px; border-radius:6px; background:#fff; color:var(--text-muted); border:1px solid var(--border);">
+          <span>📦</span> <span id="accToggleLabel">Extra Materials (0)</span>
+        </button>
       </div>
 
-      <!-- OVERALL TOTAL MEASUREMENTS CARD -->
-      <div class="card">
-        <div class="card-title">
-          <span>Overall All-Rooms Summary</span>
-          <span class="card-subtitle" id="totalCoverageLabel">0 SFT total</span>
-        </div>
-        <div class="summary-badge-grid">
-          <div class="badge-card badge-lt">
-            <span>Wall Total</span>
-            <span class="num"><span id="outTotalWallBoxes">0</span> Boxes</span>
-            <span class="sub-detail" id="outTotalWallSft">0 SFT</span>
+      <!-- COLLAPSIBLE ACCESSORIES DRAWER -->
+      <div id="accessoriesCollapsible" style="display:none; margin-bottom:8px;">
+        <div class="card" style="margin-bottom:0; padding:8px 12px;">
+          <div class="card-title" style="margin-bottom:6px; font-size:12.5px;">
+            <span>Accessories & Extra Items</span>
+            <span class="card-subtitle" id="accCountLabel">0 items</span>
           </div>
-          <div class="badge-card badge-fl">
-            <span>Floor Total</span>
-            <span class="num"><span id="outTotalFloorBoxes">0</span> Boxes</span>
-            <span class="sub-detail" id="outTotalFloorSft">0 SFT</span>
-          </div>
+          <div id="accessoriesList"></div>
         </div>
+      </div>
+
+      <!-- HIDDEN METRICS HOLDER TO KEEP CALCULATION REFERENCES STABLE -->
+      <div style="display:none;">
+        <span id="outTotalWallBoxes">0</span>
+        <span id="outTotalWallSft">0 SFT</span>
+        <span id="outTotalFloorBoxes">0</span>
+        <span id="outTotalFloorSft">0 SFT</span>
+        <span id="totalCoverageLabel">0 SFT total</span>
       </div>
     </div>
 
@@ -1229,9 +1463,12 @@
             <div style="font-size:12px; font-weight:800; color:var(--primary);" id="invRefNum">#EST-1001</div>
           </div>
           
-          <!-- RIGHT ACTIONS: DATE & CLOSE BILL CROSS (DOES NOT CLOSE APP) -->
-          <div style="display:flex; align-items:center; gap:10px;" class="no-print">
+          <!-- RIGHT ACTIONS: DATE, FINAL SAVE & CLOSE BILL CROSS (DOES NOT CLOSE APP) -->
+          <div style="display:flex; align-items:center; gap:8px;" class="no-print">
             <div style="font-size:11.5px; font-weight:700; color:var(--text-muted);" id="invDate">Date: 03/11/2026</div>
+            <button type="button" class="btn btn-final-save" onclick="finalSaveBill()" title="Final save this quotation in records" style="padding:6px 12px; font-size:12px;">
+              <span>💾</span> Final Save
+            </button>
             <button type="button" class="btn-close-bill" onclick="closeInvoiceBill()" title="Close current bill and clear for next customer (stays in app)">
               <span style="font-size:14px; font-weight:900; line-height:1;">✕</span> Close Bill
             </button>
@@ -1241,21 +1478,19 @@
           </div>
         </div>
 
-        <!-- SPACIOUS CUSTOMER & SITE DETAILS (ON-SCREEN VIEW) -->
-        <div class="inv-meta-grid no-print">
-          <div class="inv-meta-block">
-            <strong>Customer Details</strong>
-            <div class="inv-meta-fields">
-              <input type="text" id="invCustNameInput" placeholder="Customer Name" oninput="syncCustomerFromInvoice('name', this.value)" />
-              <input type="tel" id="invCustPhoneInput" placeholder="Mobile Number" oninput="syncCustomerFromInvoice('phone', this.value)" />
-            </div>
+        <!-- COMPACT CUSTOMER & SITE DETAILS (SINGLE LINE) -->
+        <div class="compact-client-bar no-print" style="margin-bottom:6px; padding:4px 8px;">
+          <div style="flex: 1.3;">
+            <input type="text" id="invCustNameInput" placeholder="Customer Name" oninput="syncCustomerFromInvoice('name', this.value)" />
           </div>
-          <div class="inv-meta-block">
-            <strong>Site / Delivery Address</strong>
-            <div class="inv-meta-fields">
-              <input type="text" id="invCustAddressInput" placeholder="Site Address / Location" oninput="syncCustomerFromInvoice('address', this.value)" />
-              <input type="date" id="invQuoteDateInput" onchange="syncCustomerFromInvoice('date', this.value)" />
-            </div>
+          <div style="flex: 1;">
+            <input type="tel" id="invCustPhoneInput" placeholder="Mobile Number" oninput="syncCustomerFromInvoice('phone', this.value)" />
+          </div>
+          <div style="flex: 1.6;">
+            <input type="text" id="invCustAddressInput" placeholder="Site Address / Location" oninput="syncCustomerFromInvoice('address', this.value)" />
+          </div>
+          <div style="flex: 0.9;">
+            <input type="date" id="invQuoteDateInput" onchange="syncCustomerFromInvoice('date', this.value)" />
           </div>
         </div>
 
@@ -1333,8 +1568,11 @@
         </div>
       </div>
 
-      <!-- ACTION BUTTONS: PRINT, WHATSAPP, TALLY -->
-      <div class="btn-action-grid no-print">
+      <!-- ACTION BUTTONS: FINAL SAVE, PRINT, WHATSAPP, TALLY -->
+      <div class="btn-action-grid no-print" style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));">
+        <button class="btn btn-final-save" onclick="finalSaveBill()">
+          <span>💾</span> Final Save Bill
+        </button>
         <button class="btn btn-wa" onclick="shareOnWhatsApp()">
           <span>📲</span> Share on WhatsApp
         </button>
@@ -1374,8 +1612,15 @@
         <span style="color:#DC2626; font-weight:800;">Due Amount</span>
         <span id="barDueAmount" style="color:#B91C1C; font-weight:900;">₹ 0</span>
       </div>
+      <div class="autosave-pill" id="barAutosavePill" title="Continuous Autosave active">
+        <span class="dot"></span>
+        <span id="barAutosaveText">Autosaved</span>
+      </div>
     </div>
-    <div>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <button type="button" class="btn btn-final-save" onclick="finalSaveBill()" title="Final Save Quotation" style="padding:10px 14px; font-size:12.5px;">
+        <span>💾</span> Final Save
+      </button>
       <button class="btn btn-primary" id="btnBottomSwitch" onclick="toggleViewTab()">Invoice →</button>
     </div>
   </div>
@@ -1399,7 +1644,7 @@
       </div>
       <div class="field-group">
         <label>Party / Customer Ledger</label>
-        <input type="text" id="tallyPartyLedger" value="Cash" placeholder="e.g. Cash or Sundry Debtor name" />
+        <input type="text" id="tallyPartyLedger" value="Cash" placeholder="Cash or Sundry Debtor name" />
       </div>
       <div class="field-group">
         <label>Order Narration</label>
@@ -1411,6 +1656,29 @@
         <button type="button" class="btn btn-tally" id="btnConfirmTally" onclick="executeTallyPush()">
           🚀 Confirm & Push
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: FINAL SAVED BILLS LEDGER -->
+  <div class="modal-overlay" id="savedBillsModal" style="display:none;">
+    <div class="modal-card" style="max-width:820px; width:95%; max-height:85vh; display:flex; flex-direction:column;">
+      <div class="modal-title">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span>📁</span>
+          <span>Final Saved Bills Records</span>
+        </div>
+        <button type="button" class="btn-close" onclick="closeSavedBillsModal()">&times;</button>
+      </div>
+      <div style="margin-bottom:12px; display:flex; gap:10px;">
+        <input type="text" id="savedBillsSearch" placeholder="🔍 Search saved bills by customer, phone, or bill #..." oninput="renderSavedBillsList(this.value)" style="flex:1; padding:9px 12px; font-size:13px; border:1px solid var(--border); border-radius:8px;" />
+      </div>
+      <div id="savedBillsListContainer" style="overflow-y:auto; flex:1; min-height:160px; max-height:480px; padding-right:4px;">
+        <!-- Dynamically rendered bills list -->
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding-top:12px; border-top:1px solid var(--border);">
+        <span style="font-size:12.5px; font-weight:700; color:var(--text-muted);" id="savedBillsTotalCount">Total: 0 bills</span>
+        <button type="button" class="btn" style="background:var(--surface-muted); color:var(--text); border:1px solid var(--border);" onclick="closeSavedBillsModal()">Close</button>
       </div>
     </div>
   </div>
@@ -1442,6 +1710,7 @@
 
     // DATA STATE
     let rooms = [];
+    let activeRoomId = null; // Tracks current room open for data entry; others are minimized
     let directBillItems = []; // Direct stock items & accessories added on invoice
     
     // INLINE TABLE DRAFT STATE
@@ -1452,11 +1721,13 @@
     window.inlineStockBadgeHtml = '';
     window.selectedDirectStockItem = null;
 
-    // INITIALIZATION (ALWAYS OPENS AFRESH WITH A CLEAR SLATE)
+    // INITIALIZATION (RESTORES AUTOSAVE OR STARTS FRESH SLATE)
     window.addEventListener('DOMContentLoaded', () => {
-      // Clear any leftover saved state
-      localStorage.removeItem('tile_estimator_multi_draft_v3');
-      startNewCustomer(true);
+      const restored = loadDraft();
+      if (!restored) {
+        startNewCustomer(true);
+      }
+      updateSavedBillsCount();
 
       // Initial Stock Sync
       syncTallyStock(false);
@@ -1512,12 +1783,10 @@
       return {
         id: 'room_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
         name: name || `Room ${rooms.length + 1}`,
-        wRft: '',
-        wHt: '',
-        // Highlighter
+        wallSize: '',       // Single field for Total Wall: Length * Width (e.g. 30 * 7)
+        // Highlighter (HL)
         chkHl: false,
-        hlRft: '',
-        hlHt: '',
+        hlSizeDim: '',      // Single field for HL: Length * Width (e.g. 6 * 7)
         hlSize: '4x2',
         hlCoverage: 16.00,
         hlName: '',
@@ -1525,22 +1794,20 @@
         hlRate: '',
         // Dark
         chkDk: false,
-        dkRft: '',
-        dkHt: '',
+        dkSizeDim: '',      // Single field for Dark: Length * Width (e.g. 10 * 3)
         dkSize: '4x2',
         dkCoverage: 16.00,
         dkName: '',
         dkItem: null,
         dkRate: '',
-        // Light Base
+        // Plain / Light Base Wall
         ltSize: '4x2',
         ltCoverage: 16.00,
         ltName: '',
         ltItem: null,
         ltRate: '',
         // Floor
-        fLen: '',
-        fWid: '',
+        flSizeDim: '',      // Single field for Floor: Length * Width (e.g. 10 * 12)
         flSize: '4x2',
         flCoverage: 16.00,
         flName: '',
@@ -1549,12 +1816,32 @@
       };
     }
 
+    // PARSE SINGLE SIZE FIELD (e.g. "30 * 7", "30x7", "30 X 7", or direct sqft "210")
+    function parseDimensionInput(val) {
+      if (!val) return { sft: 0, l: 0, w: 0, raw: '' };
+      const str = String(val).trim().replace(/×/g, '*').replace(/X/gi, '*').replace(/x/g, '*');
+      if (str.includes('*')) {
+        const parts = str.split('*').map(p => parseFloat(p.trim()) || 0);
+        const l = parts[0] || 0;
+        const w = parts[1] || 0;
+        return { sft: l * w, l: l, w: w, raw: val };
+      } else {
+        const num = parseFloat(str) || 0;
+        return { sft: num, l: num, w: 1, raw: val };
+      }
+    }
+
     function addRoom(name) {
       const room = createRoomObj(name);
       rooms.push(room);
+      activeRoomId = room.id; // New room is active/open, previous rooms automatically minimize!
       renderAllRooms();
       calculateAll();
       saveDraft();
+      const card = document.getElementById(`card_${room.id}`);
+      if (card) {
+        setTimeout(() => scrollCursorIntoView(card), 60);
+      }
     }
 
     function removeRoom(roomId) {
@@ -1563,22 +1850,43 @@
         return;
       }
       rooms = rooms.filter(r => r.id !== roomId);
+      if (activeRoomId === roomId) {
+        activeRoomId = rooms[rooms.length - 1].id;
+      }
       renderAllRooms();
       calculateAll();
       saveDraft();
     }
 
-    // SMOOTH AUTO-SCROLL WITH CURSOR (PREVENT FLOATING BAR OVERLAP)
+    function maximizeRoom(roomId) {
+      activeRoomId = roomId;
+      renderAllRooms();
+      calculateAll();
+      saveDraft();
+      const card = document.getElementById(`card_${roomId}`);
+      if (card) {
+        setTimeout(() => scrollCursorIntoView(card), 60);
+      }
+    }
+
+    function minimizeCurrentRoom(roomId) {
+      activeRoomId = null;
+      renderAllRooms();
+      calculateAll();
+      saveDraft();
+    }
+
+    // SMOOTH AUTO-SCROLL WITH CURSOR (PREVENT FLOATING BAR OVERLAP ON TAB / CLICK)
     function scrollCursorIntoView(targetEl) {
       const el = targetEl || document.activeElement;
       if (!el || typeof el.getBoundingClientRect !== 'function') return;
 
-      const targetBlock = (el.closest && (el.closest('tr') || el.closest('.inv-compact-meta-bar') || el.closest('.inv-summary-row') || el.closest('.inv-summary-due-row'))) || el;
+      const targetBlock = (el.closest && (el.closest('tr') || el.closest('.room-section-box') || el.closest('.field-group') || el.closest('.inv-meta-grid') || el.closest('.inv-summary-row') || el.closest('.inv-summary-due-row'))) || el;
       const rect = targetBlock.getBoundingClientRect();
       const bottomBar = document.querySelector('.floating-bar');
-      const bottomBarHeight = bottomBar ? bottomBar.offsetHeight : 64;
+      const bottomBarHeight = (bottomBar && getComputedStyle(bottomBar).display !== 'none') ? bottomBar.offsetHeight : 0;
       const safeBottomMargin = bottomBarHeight + 35; // margin above floating bar
-      const safeTopMargin = 55; // margin below sticky/top elements
+      const safeTopMargin = 70; // margin below sticky/top elements
 
       const viewportHeight = window.innerHeight;
 
@@ -1586,15 +1894,26 @@
         const delta = rect.bottom - (viewportHeight - safeBottomMargin) + 25;
         window.scrollBy({ top: delta, behavior: 'smooth' });
       } else if (rect.top < safeTopMargin) {
-        const delta = safeTopMargin - rect.top + 15;
+        const delta = safeTopMargin - rect.top + 20;
         window.scrollBy({ top: -delta, behavior: 'smooth' });
       }
     }
 
-    // Auto-scroll whenever user focuses any table/invoice input
+    // Auto-scroll whenever user focuses ANY input, select or textarea across both tabs
     document.addEventListener('focusin', (e) => {
-      if (e.target && (e.target.closest('#billItems') || e.target.closest('.bill-table') || e.target.closest('.inv-meta-grid') || e.target.id === 'invAdvanceInput')) {
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) {
         setTimeout(() => scrollCursorIntoView(e.target), 60);
+      }
+    });
+
+    // Auto-scroll on Tab / Shift+Tab keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        setTimeout(() => {
+          if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'SELECT' || document.activeElement.tagName === 'TEXTAREA')) {
+            scrollCursorIntoView(document.activeElement);
+          }
+        }, 50);
       }
     });
 
@@ -1616,13 +1935,13 @@
         // Default rates MUST be blank as requested
         window.inlineRateDraft = '';
         window.inlineUnitDraft = item.unit || 'bx';
-        window.inlineStockBadgeHtml = `In Stock: <b>${item.stockBoxes} ${item.unit || 'bx'}</b> &bull; Tally Ref: <b>₹${item.rate}</b> &bull; ${escapeHtml(item.parent || 'General')}`;
+        window.inlineStockBadgeHtml = '';
 
         if (rateInput) rateInput.value = '';
         if (unitLabel) unitLabel.innerText = item.unit || 'bx';
         if (badge) {
-          badge.style.display = 'block';
-          badge.innerHTML = window.inlineStockBadgeHtml;
+          badge.style.display = 'none';
+          badge.innerHTML = '';
         }
 
         // Auto shift to next field (Quantity tab) on item selection
@@ -1681,8 +2000,8 @@
             if (rateInput) rateInput.value = '';
             const badge = document.getElementById('inlineStockBadge');
             if (badge) {
-              badge.style.display = 'block';
-              badge.innerHTML = `In Stock: <b>${item.stockBoxes} ${item.unit || 'bx'}</b> &bull; Tally Ref: <b>₹${item.rate}</b> &bull; ${escapeHtml(item.parent || 'General')}`;
+              badge.style.display = 'none';
+              badge.innerHTML = '';
             }
           }
           const qtyEl = document.getElementById('inlineItemQty');
@@ -1817,10 +2136,26 @@
       saveDraft();
     }
 
+    function toggleAccessoriesCollapse() {
+      const el = document.getElementById('accessoriesCollapsible');
+      if (!el) return;
+      const isHidden = (el.style.display === 'none' || !el.style.display);
+      el.style.display = isHidden ? 'block' : 'none';
+      const label = document.getElementById('accToggleLabel');
+      if (label) {
+        label.innerText = isHidden ? `Hide Materials (${directBillItems.length})` : `Extra Materials (${directBillItems.length})`;
+      }
+    }
+
     function renderAccessoriesList() {
       const container = document.getElementById('accessoriesList');
       if (!container) return;
       document.getElementById('accCountLabel').innerText = `${directBillItems.length} items`;
+      const toggleLbl = document.getElementById('accToggleLabel');
+      if (toggleLbl) {
+        const isShown = document.getElementById('accessoriesCollapsible') && document.getElementById('accessoriesCollapsible').style.display !== 'none';
+        toggleLbl.innerText = isShown ? `Hide Materials (${directBillItems.length})` : `Extra Materials (${directBillItems.length})`;
+      }
 
       if (directBillItems.length === 0) {
         container.innerHTML = `<p style="font-size:12.5px; color:var(--text-muted); font-style:italic; padding:6px 2px;">No items added yet. Type directly in the table on the Invoice tab or click any quick pill.</p>`;
@@ -1860,210 +2195,206 @@
       }
     }
 
-    // RENDER ALL ROOMS HTML
+    // RENDER ALL ROOMS HTML (ACCORDING TO EXCEL WORKFLOW)
     function renderAllRooms() {
       const container = document.getElementById('roomsContainer');
-      container.innerHTML = rooms.map((room, idx) => `
-        <div class="room-card" id="card_${room.id}">
-          <div class="room-card-header">
-            <input type="text" class="room-name-input" value="${escapeHtml(room.name)}" 
-              onchange="updateRoomField('${room.id}', 'name', this.value)" title="Click to rename room" />
-            ${rooms.length > 1 ? `<button type="button" class="btn-remove-room" onclick="removeRoom('${room.id}')">🗑️ Remove Room</button>` : ''}
-          </div>
+      if (!activeRoomId && rooms.length > 0) {
+        activeRoomId = rooms[rooms.length - 1].id;
+      }
 
-          <!-- WALL DIMENSIONS -->
-          <div class="card" style="box-shadow:none; border:1px solid var(--border); margin-bottom:12px; padding:14px;">
-            <div class="card-title">
-              <span>Wall Dimensions & Tiles</span>
-              <span class="card-subtitle" id="grossWall_${room.id}">Gross: 0 SFT</span>
-            </div>
-            <div class="grid-2">
-              <div class="field-group">
-                <label>Wall Running Feet (RFT)</label>
-                <input type="number" value="${room.wRft}" placeholder="e.g. 30" step="0.1" 
-                  oninput="updateRoomField('${room.id}', 'wRft', this.value)" />
+      container.innerHTML = rooms.map((room, idx) => {
+        const isOpen = (room.id === activeRoomId);
+
+        // MINIMISED VIEW: JUST SHOW ROOM NAME WITH DROP DOWN TO MAXIMISE
+        if (!isOpen) {
+          return `
+            <div class="room-card-minimised" id="card_${room.id}" onclick="maximizeRoom('${room.id}')" title="Click to edit ${escapeHtml(room.name)}">
+              <div style="display:flex; align-items:center; gap:8px; flex:1;">
+                <span class="room-pill-badge">Room ${idx + 1}</span>
+                <span style="font-size:13px; font-weight:800; color:var(--text);">${escapeHtml(room.name)}</span>
+                <span class="card-subtitle" id="min_summary_${room.id}" style="font-size:11px; margin-left:4px;"></span>
               </div>
-              <div class="field-group">
-                <label>Wall Height (Feet)</label>
-                <input type="number" value="${room.wHt}" placeholder="e.g. 7" step="0.1" 
-                  oninput="updateRoomField('${room.id}', 'wHt', this.value)" />
+              <div style="display:flex; align-items:center; gap:6px;">
+                <button type="button" class="btn-compact-ghost" onclick="event.stopPropagation(); maximizeRoom('${room.id}')" title="Maximise room details">
+                  <span>▼</span> Maximise
+                </button>
+                ${rooms.length > 1 ? `<button type="button" class="btn-compact-del" onclick="event.stopPropagation(); removeRoom('${room.id}')" title="Remove Room">🗑️</button>` : ''}
               </div>
             </div>
+          `;
+        }
 
-            <!-- HIGHLIGHTER ACCENT -->
-            <div class="toggle-card ${room.chkHl ? 'active' : ''}" id="hlCard_${room.id}" style="margin-top:12px;">
-              <label class="chk-label">
-                <input type="checkbox" ${room.chkHl ? 'checked' : ''} 
-                  onchange="toggleRoomHl('${room.id}', this.checked)" />
-                <span>Highlighter (HL) Accent Wall</span>
-              </label>
-              <div class="sub-panel" id="hlPanel_${room.id}" style="display:${room.chkHl ? 'block' : 'none'};">
-                <div class="grid-2">
-                  <div class="field-group">
-                    <label>HL Running Ft</label>
-                    <input type="number" value="${room.hlRft}" placeholder="RFT" step="0.1" 
-                      oninput="updateRoomField('${room.id}', 'hlRft', this.value)" />
-                  </div>
-                  <div class="field-group">
-                    <label>HL Height (Ft)</label>
-                    <input type="number" value="${room.hlHt}" placeholder="Height" step="0.1" 
-                      oninput="updateRoomField('${room.id}', 'hlHt', this.value)" />
-                  </div>
-                </div>
-                <div class="tile-spec-box">
-                  <div class="grid-2">
-                    <div class="field-group">
-                      <label>Tile Size</label>
-                      <select onchange="updateRoomSize('${room.id}', 'hl', this.value)">
+        // CURRENT OPEN ROOM (EXCEL-STYLE COMPACT SINGLE VIEW, ZERO WASTED SPACE)
+        return `
+          <div class="room-sheet-card" id="card_${room.id}">
+            <!-- ROOM TOP BAR -->
+            <div class="room-sheet-top">
+              <div style="display:flex; align-items:center; gap:8px; flex:1;">
+                <span class="room-pill-badge">Room ${idx + 1}</span>
+                <input type="text" class="room-name-compact-input" value="${escapeHtml(room.name)}" 
+                  placeholder="Room Name"
+                  oninput="updateRoomField('${room.id}', 'name', this.value)" 
+                  title="Rename room" />
+              </div>
+              <div style="display:flex; align-items:center; gap:6px;">
+                ${rooms.length > 1 ? `
+                  <button type="button" class="btn-compact-ghost" onclick="minimizeCurrentRoom('${room.id}')" title="Minimise room">
+                    <span>▲</span> Minimise
+                  </button>
+                  <button type="button" class="btn-compact-del" onclick="removeRoom('${room.id}')" title="Remove Room">🗑️</button>
+                ` : ''}
+              </div>
+            </div>
+
+            <!-- EXCEL-LIKE COMPACT TABLE: 5 ROWS -->
+            <div class="room-table-container">
+              <table class="room-entry-table">
+                <thead>
+                  <tr>
+                    <th style="width:23%;">Layer / Section</th>
+                    <th style="width:21%;">Size (L × W)</th>
+                    <th style="width:28%;">Tile Name</th>
+                    <th style="width:14%;">Tile Size</th>
+                    <th style="width:14%; text-align:right;">Result</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- ROW 1: TOTAL WALL SIZE -->
+                  <tr id="tr_wall_${room.id}">
+                    <td class="td-section">
+                      <span style="font-weight:700; color:var(--text);">🧱 Total Wall</span>
+                    </td>
+                    <td>
+                      <input type="text" class="table-input" value="${escapeHtml(room.wallSize || '')}" placeholder="Length * Width" 
+                        oninput="updateRoomField('${room.id}', 'wallSize', this.value)" />
+                    </td>
+                    <td style="color:var(--text-muted); font-size:11px; font-style:italic;">Full perimeter</td>
+                    <td style="color:var(--text-muted); font-size:11px; text-align:center;">—</td>
+                    <td style="text-align:right;">
+                      <span id="grossWall_${room.id}" class="compact-res-pill">0 SFT</span>
+                    </td>
+                  </tr>
+
+                  <!-- ROW 2: HIGHLIGHTER (HL) WALL -->
+                  <tr id="tr_hl_${room.id}" class="${room.chkHl ? 'tr-active' : ''}">
+                    <td class="td-section">
+                      <label class="compact-chk-label" title="Check to enable Highlighter Wall">
+                        <input type="checkbox" id="chk_hl_${room.id}" ${room.chkHl ? 'checked' : ''} 
+                          onchange="toggleRoomHl('${room.id}', this.checked)" />
+                        <span>✨ HL Wall</span>
+                      </label>
+                    </td>
+                    <td>
+                      <input type="text" class="table-input" id="inp_hl_size_${room.id}" value="${escapeHtml(room.hlSizeDim || '')}" 
+                        placeholder="${room.chkHl ? 'Length * Width' : 'Check to enable'}" 
+                        ${room.chkHl ? '' : 'disabled style="opacity:0.4;"'}
+                        oninput="updateRoomField('${room.id}', 'hlSizeDim', this.value)" />
+                    </td>
+                    <td>
+                      <input type="text" class="table-input" id="inp_hl_name_${room.id}" list="tallyList" value="${escapeHtml(room.hlName || '')}" 
+                        placeholder="${room.chkHl ? 'Type tile...' : 'Check to enable'}" 
+                        ${room.chkHl ? '' : 'disabled style="opacity:0.4;"'}
+                        oninput="onTileSearchInput('${room.id}', 'hl', this.value)" autocomplete="off" />
+                    </td>
+                    <td>
+                      <select class="table-select" id="inp_hl_sz_${room.id}" ${room.chkHl ? '' : 'disabled style="opacity:0.4;"'} 
+                        onchange="updateRoomSize('${room.id}', 'hl', this.value)">
                         ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.hlSize ? 'selected' : ''}>${s.label}</option>`).join('')}
                       </select>
-                    </div>
-                    <div class="field-group">
-                      <label>Sq.Ft / Box</label>
-                      <input type="number" value="${room.hlCoverage}" step="0.01" 
-                        oninput="updateRoomField('${room.id}', 'hlCoverage', this.value)" />
-                    </div>
-                  </div>
-                  <div class="field-group" style="margin-top:8px;">
-                    <label>Highlighter Tile Item (Type to auto-populate)</label>
-                    <input type="text" list="tallyList" value="${escapeHtml(room.hlName)}" placeholder="🔍 Type tile or group..." 
-                      oninput="onTileSearchInput('${room.id}', 'hl', this.value)" autocomplete="off" />
-                    <div id="meta_hl_${room.id}" class="tile-meta" style="${room.hlItem ? '' : 'display:none;'}">
-                      ${room.hlItem ? formatTileMeta(room.hlItem) : ''}
-                    </div>
-                  </div>
-                  <div id="calc_hl_${room.id}" class="measurement-pill" style="display:none;"></div>
-                </div>
-              </div>
-            </div>
+                    </td>
+                    <td style="text-align:right;">
+                      <span id="calc_hl_${room.id}" class="compact-res-pill" style="${room.chkHl ? '' : 'display:none;'}"></span>
+                    </td>
+                  </tr>
 
-            <!-- DARK COLOR ACCENT -->
-            <div class="toggle-card ${room.chkDk ? 'active' : ''}" id="dkCard_${room.id}">
-              <label class="chk-label">
-                <input type="checkbox" ${room.chkDk ? 'checked' : ''} 
-                  onchange="toggleRoomDk('${room.id}', this.checked)" />
-                <span>Dark Color Accent / Dado</span>
-              </label>
-              <div class="sub-panel" id="dkPanel_${room.id}" style="display:${room.chkDk ? 'block' : 'none'};">
-                <div class="grid-2">
-                  <div class="field-group">
-                    <label>Dark Running Ft</label>
-                    <input type="number" value="${room.dkRft}" placeholder="RFT" step="0.1" 
-                      oninput="updateRoomField('${room.id}', 'dkRft', this.value)" />
-                  </div>
-                  <div class="field-group">
-                    <label>Dark Height (Ft)</label>
-                    <input type="number" value="${room.dkHt}" placeholder="Height" step="0.1" 
-                      oninput="updateRoomField('${room.id}', 'dkHt', this.value)" />
-                  </div>
-                </div>
-                <div class="tile-spec-box">
-                  <div class="grid-2">
-                    <div class="field-group">
-                      <label>Tile Size</label>
-                      <select onchange="updateRoomSize('${room.id}', 'dk', this.value)">
+                  <!-- ROW 3: DARK WALL -->
+                  <tr id="tr_dk_${room.id}" class="${room.chkDk ? 'tr-active' : ''}">
+                    <td class="td-section">
+                      <label class="compact-chk-label" title="Check to enable Dark Wall">
+                        <input type="checkbox" id="chk_dk_${room.id}" ${room.chkDk ? 'checked' : ''} 
+                          onchange="toggleRoomDk('${room.id}', this.checked)" />
+                        <span>🔲 Dark Wall</span>
+                      </label>
+                    </td>
+                    <td>
+                      <input type="text" class="table-input" id="inp_dk_size_${room.id}" value="${escapeHtml(room.dkSizeDim || '')}" 
+                        placeholder="${room.chkDk ? 'Length * Width' : 'Check to enable'}" 
+                        ${room.chkDk ? '' : 'disabled style="opacity:0.4;"'}
+                        oninput="updateRoomField('${room.id}', 'dkSizeDim', this.value)" />
+                    </td>
+                    <td>
+                      <input type="text" class="table-input" id="inp_dk_name_${room.id}" list="tallyList" value="${escapeHtml(room.dkName || '')}" 
+                        placeholder="${room.chkDk ? 'Type tile...' : 'Check to enable'}" 
+                        ${room.chkDk ? '' : 'disabled style="opacity:0.4;"'}
+                        oninput="onTileSearchInput('${room.id}', 'dk', this.value)" autocomplete="off" />
+                    </td>
+                    <td>
+                      <select class="table-select" id="inp_dk_sz_${room.id}" ${room.chkDk ? '' : 'disabled style="opacity:0.4;"'} 
+                        onchange="updateRoomSize('${room.id}', 'dk', this.value)">
                         ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.dkSize ? 'selected' : ''}>${s.label}</option>`).join('')}
                       </select>
-                    </div>
-                    <div class="field-group">
-                      <label>Sq.Ft / Box</label>
-                      <input type="number" value="${room.dkCoverage}" step="0.01" 
-                        oninput="updateRoomField('${room.id}', 'dkCoverage', this.value)" />
-                    </div>
-                  </div>
-                  <div class="field-group" style="margin-top:8px;">
-                    <label>Dark Tile Item (Type to auto-populate)</label>
-                    <input type="text" list="tallyList" value="${escapeHtml(room.dkName)}" placeholder="🔍 Type tile or group..." 
-                      oninput="onTileSearchInput('${room.id}', 'dk', this.value)" autocomplete="off" />
-                    <div id="meta_dk_${room.id}" class="tile-meta" style="${room.dkItem ? '' : 'display:none;'}">
-                      ${room.dkItem ? formatTileMeta(room.dkItem) : ''}
-                    </div>
-                  </div>
-                  <div id="calc_dk_${room.id}" class="measurement-pill" style="display:none;"></div>
-                </div>
-              </div>
-            </div>
+                    </td>
+                    <td style="text-align:right;">
+                      <span id="calc_dk_${room.id}" class="compact-res-pill" style="${room.chkDk ? '' : 'display:none;'}"></span>
+                    </td>
+                  </tr>
 
-            <!-- LIGHT BASE WALL TILE -->
-            <div style="margin-top:12px;">
-              <label style="font-weight:800; color:var(--text);">Main Light Base Tile (Remaining Wall)</label>
-              <div class="tile-spec-box" style="margin-top:6px;">
-                <div class="grid-2">
-                  <div class="field-group">
-                    <label>Tile Size</label>
-                    <select onchange="updateRoomSize('${room.id}', 'lt', this.value)">
-                      ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.ltSize ? 'selected' : ''}>${s.label}</option>`).join('')}
-                    </select>
-                  </div>
-                  <div class="field-group">
-                    <label>Sq.Ft / Box</label>
-                    <input type="number" value="${room.ltCoverage}" step="0.01" 
-                      oninput="updateRoomField('${room.id}', 'ltCoverage', this.value)" />
-                  </div>
-                </div>
-                <div class="field-group" style="margin-top:8px;">
-                  <label>Light Base Tile Item (Type to auto-populate)</label>
-                  <input type="text" list="tallyList" value="${escapeHtml(room.ltName)}" placeholder="🔍 Type tile or group..." 
-                    oninput="onTileSearchInput('${room.id}', 'lt', this.value)" autocomplete="off" />
-                  <div id="meta_lt_${room.id}" class="tile-meta" style="${room.ltItem ? '' : 'display:none;'}">
-                    ${room.ltItem ? formatTileMeta(room.ltItem) : ''}
-                  </div>
-                </div>
-                <div id="calc_lt_${room.id}" class="measurement-pill" style="display:none;"></div>
-              </div>
+                  <!-- ROW 4: PLAIN BASE TILE (REMAINING WALL) -->
+                  <tr id="tr_lt_${room.id}">
+                    <td class="td-section">
+                      <span style="font-weight:700; color:var(--text);">⬜ Plain Base</span>
+                    </td>
+                    <td>
+                      <div id="netLtArea_${room.id}" class="table-readonly-box">Net: 0 SFT</div>
+                    </td>
+                    <td>
+                      <input type="text" class="table-input" list="tallyList" value="${escapeHtml(room.ltName || '')}" 
+                        placeholder="Type tile..." 
+                        oninput="onTileSearchInput('${room.id}', 'lt', this.value)" autocomplete="off" />
+                    </td>
+                    <td>
+                      <select class="table-select" onchange="updateRoomSize('${room.id}', 'lt', this.value)">
+                        ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.ltSize ? 'selected' : ''}>${s.label}</option>`).join('')}
+                      </select>
+                    </td>
+                    <td style="text-align:right;">
+                      <span id="calc_lt_${room.id}" class="compact-res-pill" style="display:none;"></span>
+                    </td>
+                  </tr>
+
+                  <!-- ROW 5: FLOOR TILE -->
+                  <tr id="tr_fl_${room.id}">
+                    <td class="td-section">
+                      <span style="font-weight:700; color:var(--text);">📐 Floor Tile</span>
+                    </td>
+                    <td>
+                      <input type="text" class="table-input" value="${escapeHtml(room.flSizeDim || '')}" placeholder="Length * Width" 
+                        oninput="updateRoomField('${room.id}', 'flSizeDim', this.value)" />
+                    </td>
+                    <td>
+                      <input type="text" class="table-input" list="tallyList" value="${escapeHtml(room.flName || '')}" 
+                        placeholder="Type tile..." 
+                        oninput="onTileSearchInput('${room.id}', 'fl', this.value)" autocomplete="off" />
+                    </td>
+                    <td>
+                      <select class="table-select" onchange="updateRoomSize('${room.id}', 'fl', this.value)">
+                        ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.flSize ? 'selected' : ''}>${s.label}</option>`).join('')}
+                      </select>
+                    </td>
+                    <td style="text-align:right;">
+                      <span id="calc_fl_${room.id}" class="compact-res-pill" style="display:none;"></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-
-          <!-- FLOOR DIMENSIONS -->
-          <div class="card" style="box-shadow:none; border:1px solid var(--border); margin-bottom:0; padding:14px;">
-            <div class="card-title">
-              <span>Floor Dimensions & Tile</span>
-              <span class="card-subtitle" id="grossFloor_${room.id}">Area: 0 SFT</span>
-            </div>
-            <div class="grid-2">
-              <div class="field-group">
-                <label>Floor Length (Feet)</label>
-                <input type="number" value="${room.fLen}" placeholder="e.g. 10" step="0.1" 
-                  oninput="updateRoomField('${room.id}', 'fLen', this.value)" />
-              </div>
-              <div class="field-group">
-                <label>Floor Width (Feet)</label>
-                <input type="number" value="${room.fWid}" placeholder="e.g. 12" step="0.1" 
-                  oninput="updateRoomField('${room.id}', 'fWid', this.value)" />
-              </div>
-            </div>
-
-            <div class="tile-spec-box">
-              <div class="grid-2">
-                <div class="field-group">
-                  <label>Tile Size</label>
-                  <select onchange="updateRoomSize('${room.id}', 'fl', this.value)">
-                    ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.flSize ? 'selected' : ''}>${s.label}</option>`).join('')}
-                  </select>
-                </div>
-                <div class="field-group">
-                  <label>Sq.Ft / Box</label>
-                  <input type="number" value="${room.flCoverage}" step="0.01" 
-                    oninput="updateRoomField('${room.id}', 'flCoverage', this.value)" />
-                </div>
-              </div>
-              <div class="field-group" style="margin-top:8px;">
-                <label>Floor Tile Item (Type to auto-populate)</label>
-                <input type="text" list="tallyList" value="${escapeHtml(room.flName)}" placeholder="🔍 Type tile or group..." 
-                  oninput="onTileSearchInput('${room.id}', 'fl', this.value)" autocomplete="off" />
-                <div id="meta_fl_${room.id}" class="tile-meta" style="${room.flItem ? '' : 'display:none;'}">
-                  ${room.flItem ? formatTileMeta(room.flItem) : ''}
-                </div>
-              </div>
-              <div id="calc_fl_${room.id}" class="measurement-pill" style="display:none;"></div>
-            </div>
-          </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     function formatTileMeta(item) {
-      return `🏷️ <b>${escapeHtml(item.parent || 'General')}</b> &bull; In Stock: <b>${item.stockBoxes}</b> ${escapeHtml(item.unit || 'bx')} &bull; Tally Ref: <b>₹${item.rate}</b>`;
+      return '';
     }
 
     // UPDATE ROOM FIELDS
@@ -2094,15 +2425,31 @@
       const room = rooms.find(r => r.id === roomId);
       if (room) {
         room.chkHl = checked;
-        const panel = document.getElementById(`hlPanel_${roomId}`);
-        const card = document.getElementById(`hlCard_${roomId}`);
-        if (panel) panel.style.display = checked ? 'block' : 'none';
-        if (card) {
-          if (checked) card.classList.add('active');
-          else card.classList.remove('active');
+        const tr = document.getElementById(`tr_hl_${roomId}`);
+        if (tr) {
+          if (checked) tr.classList.add('tr-active');
+          else tr.classList.remove('tr-active');
         }
+        const inpSize = document.getElementById(`inp_hl_size_${roomId}`);
+        const inpName = document.getElementById(`inp_hl_name_${roomId}`);
+        const inpSz = document.getElementById(`inp_hl_sz_${roomId}`);
+        [inpSize, inpName, inpSz].forEach(el => {
+          if (el) {
+            el.disabled = !checked;
+            el.style.opacity = checked ? '1' : '0.4';
+          }
+        });
+        if (inpSize) inpSize.placeholder = checked ? 'Length * Width' : 'Check to enable';
+        if (inpName) inpName.placeholder = checked ? 'Type tile...' : 'Check to enable';
+
         calculateAll();
         saveDraft();
+        if (checked && inpSize) {
+          setTimeout(() => {
+            inpSize.focus();
+            scrollCursorIntoView(inpSize);
+          }, 50);
+        }
       }
     }
 
@@ -2110,15 +2457,31 @@
       const room = rooms.find(r => r.id === roomId);
       if (room) {
         room.chkDk = checked;
-        const panel = document.getElementById(`dkPanel_${roomId}`);
-        const card = document.getElementById(`dkCard_${roomId}`);
-        if (panel) panel.style.display = checked ? 'block' : 'none';
-        if (card) {
-          if (checked) card.classList.add('active');
-          else card.classList.remove('active');
+        const tr = document.getElementById(`tr_dk_${roomId}`);
+        if (tr) {
+          if (checked) tr.classList.add('tr-active');
+          else tr.classList.remove('tr-active');
         }
+        const inpSize = document.getElementById(`inp_dk_size_${roomId}`);
+        const inpName = document.getElementById(`inp_dk_name_${roomId}`);
+        const inpSz = document.getElementById(`inp_dk_sz_${roomId}`);
+        [inpSize, inpName, inpSz].forEach(el => {
+          if (el) {
+            el.disabled = !checked;
+            el.style.opacity = checked ? '1' : '0.4';
+          }
+        });
+        if (inpSize) inpSize.placeholder = checked ? 'Length * Width' : 'Check to enable';
+        if (inpName) inpName.placeholder = checked ? 'Type tile...' : 'Check to enable';
+
         calculateAll();
         saveDraft();
+        if (checked && inpSize) {
+          setTimeout(() => {
+            inpSize.focus();
+            scrollCursorIntoView(inpSize);
+          }, 50);
+        }
       }
     }
 
@@ -2128,27 +2491,20 @@
       if (!room) return;
 
       room[tileKey + 'Name'] = query;
-      const metaEl = document.getElementById(`meta_${tileKey}_${roomId}`);
       const cleanQ = (query || '').trim().toLowerCase();
 
       const item = tallyStock.find(i => i.name.toLowerCase() === cleanQ);
       if (item) {
         room[tileKey + 'Item'] = item;
-        // Default rates MUST be blank as requested: do NOT auto-populate item.rate!
-        if (metaEl) {
-          metaEl.style.display = 'block';
-          metaEl.innerHTML = formatTileMeta(item);
-        }
       } else {
         room[tileKey + 'Item'] = null;
-        if (metaEl) metaEl.style.display = 'none';
       }
 
       calculateAll();
       saveDraft();
     }
 
-    // CALCULATE ALL ROOMS
+    // CALCULATE ALL ROOMS (USING PARSED SINGLE DIMENSION FIELDS)
     function calculateAll() {
       let grandTotalWallSft = 0;
       let grandTotalWallBoxes = 0;
@@ -2159,33 +2515,29 @@
 
       rooms.forEach(room => {
         // Wall
-        const wRft = parseFloat(room.wRft) || 0;
-        const wHt = parseFloat(room.wHt) || 0;
-        const grossWallArea = wRft * wHt;
+        const wallDim = parseDimensionInput(room.wallSize);
+        const grossWallArea = wallDim.sft;
 
-        // HL
-        const hlRft = parseFloat(room.hlRft) || 0;
-        const hlHt = parseFloat(room.hlHt) || 0;
-        const hlArea = room.chkHl ? (hlRft * hlHt) : 0;
+        // HL (Calculates only when checked)
+        const hlDim = parseDimensionInput(room.hlSizeDim);
+        const hlArea = room.chkHl ? hlDim.sft : 0;
         const hlCov = parseFloat(room.hlCoverage) || 16;
         const bHl = (room.chkHl && hlArea > 0) ? Math.ceil(hlArea / hlCov) : 0;
 
-        // DK
-        const dkRft = parseFloat(room.dkRft) || 0;
-        const dkHt = parseFloat(room.dkHt) || 0;
-        const dkArea = room.chkDk ? (dkRft * dkHt) : 0;
+        // DK (Calculates only when checked)
+        const dkDim = parseDimensionInput(room.dkSizeDim);
+        const dkArea = room.chkDk ? dkDim.sft : 0;
         const dkCov = parseFloat(room.dkCoverage) || 16;
         const bDk = (room.chkDk && dkArea > 0) ? Math.ceil(dkArea / dkCov) : 0;
 
-        // LT
+        // LT (Plain Remaining Wall)
         const ltArea = Math.max(0, grossWallArea - hlArea - dkArea);
         const ltCov = parseFloat(room.ltCoverage) || 16;
-        const bLt = ltArea > 0 ? Math.ceil(ltArea / ltCov) : 0;
+        const bLt = (grossWallArea > 0 && ltArea > 0) ? Math.ceil(ltArea / ltCov) : 0;
 
         // Floor
-        const fLen = parseFloat(room.fLen) || 0;
-        const fWid = parseFloat(room.fWid) || 0;
-        const flArea = fLen * fWid;
+        const flDim = parseDimensionInput(room.flSizeDim);
+        const flArea = flDim.sft;
         const flCov = parseFloat(room.flCoverage) || 16;
         const bFl = flArea > 0 ? Math.ceil(flArea / flCov) : 0;
 
@@ -2196,16 +2548,27 @@
 
         // Update live indicators on room card
         const grossWallEl = document.getElementById(`grossWall_${room.id}`);
-        if (grossWallEl) grossWallEl.innerText = `Gross: ${grossWallArea.toFixed(1)} SFT`;
+        if (grossWallEl) grossWallEl.innerText = `${grossWallArea.toFixed(1)} SFT`;
 
-        const grossFloorEl = document.getElementById(`grossFloor_${room.id}`);
-        if (grossFloorEl) grossFloorEl.innerText = `Area: ${flArea.toFixed(1)} SFT`;
+        const netLtEl = document.getElementById(`netLtArea_${room.id}`);
+        if (netLtEl) netLtEl.innerText = `Net: ${ltArea.toFixed(1)} SFT`;
+
+        const minSumEl = document.getElementById(`min_summary_${room.id}`);
+        if (minSumEl) {
+          const totSft = grossWallArea + flArea;
+          const totBx = bHl + bDk + bLt + bFl;
+          if (totSft > 0) {
+            minSumEl.innerText = `• ${totSft.toFixed(0)} SFT (${totBx} Bx)`;
+          } else {
+            minSumEl.innerText = '';
+          }
+        }
 
         const calcHlEl = document.getElementById(`calc_hl_${room.id}`);
         if (calcHlEl) {
           if (room.chkHl && hlArea > 0) {
-            calcHlEl.style.display = 'inline-flex';
-            calcHlEl.innerHTML = `HL: <b>${hlRft}′ × ${hlHt}′ = ${hlArea.toFixed(1)} SFT</b> → Req: <b>${bHl} Bx</b> (@${hlCov} sft/bx)`;
+            calcHlEl.style.display = 'inline-block';
+            calcHlEl.innerHTML = `<b>${hlArea.toFixed(1)}</b> SFT <span style="opacity:0.8;">(${bHl} Bx)</span>`;
           } else {
             calcHlEl.style.display = 'none';
           }
@@ -2214,8 +2577,8 @@
         const calcDkEl = document.getElementById(`calc_dk_${room.id}`);
         if (calcDkEl) {
           if (room.chkDk && dkArea > 0) {
-            calcDkEl.style.display = 'inline-flex';
-            calcDkEl.innerHTML = `Dark: <b>${dkRft}′ × ${dkHt}′ = ${dkArea.toFixed(1)} SFT</b> → Req: <b>${bDk} Bx</b> (@${dkCov} sft/bx)`;
+            calcDkEl.style.display = 'inline-block';
+            calcDkEl.innerHTML = `<b>${dkArea.toFixed(1)}</b> SFT <span style="opacity:0.8;">(${bDk} Bx)</span>`;
           } else {
             calcDkEl.style.display = 'none';
           }
@@ -2223,9 +2586,9 @@
 
         const calcLtEl = document.getElementById(`calc_lt_${room.id}`);
         if (calcLtEl) {
-          if (grossWallArea > 0) {
-            calcLtEl.style.display = 'inline-flex';
-            calcLtEl.innerHTML = `Light Base: <b>${ltArea.toFixed(1)} SFT</b> → Req: <b>${bLt} Bx</b> (@${ltCov} sft/bx)`;
+          if (grossWallArea > 0 && ltArea > 0) {
+            calcLtEl.style.display = 'inline-block';
+            calcLtEl.innerHTML = `<b>${ltArea.toFixed(1)}</b> SFT <span style="opacity:0.8;">(${bLt} Bx)</span>`;
           } else {
             calcLtEl.style.display = 'none';
           }
@@ -2234,8 +2597,8 @@
         const calcFlEl = document.getElementById(`calc_fl_${room.id}`);
         if (calcFlEl) {
           if (flArea > 0) {
-            calcFlEl.style.display = 'inline-flex';
-            calcFlEl.innerHTML = `Floor: <b>${fLen}′ × ${fWid}′ = ${flArea.toFixed(1)} SFT</b> → Req: <b>${bFl} Bx</b> (@${flCov} sft/bx)`;
+            calcFlEl.style.display = 'inline-block';
+            calcFlEl.innerHTML = `<b>${flArea.toFixed(1)}</b> SFT <span style="opacity:0.8;">(${bFl} Bx)</span>`;
           } else {
             calcFlEl.style.display = 'none';
           }
@@ -2243,11 +2606,11 @@
 
         window.calculatedRooms.push({
           room,
-          wRft, wHt, grossWallArea,
-          hlRft, hlHt, bHl, hlArea, hlCov,
-          dkRft, dkHt, bDk, dkArea, dkCov,
+          wL: wallDim.l, wW: wallDim.w, grossWallArea,
+          hlL: hlDim.l, hlW: hlDim.w, bHl, hlArea, hlCov,
+          dkL: dkDim.l, dkW: dkDim.w, bDk, dkArea, dkCov,
           bLt, ltArea, ltCov,
-          fLen, fWid, bFl, flArea, flCov
+          fL: flDim.l, fW: flDim.w, bFl, flArea, flCov
         });
       });
 
@@ -2291,9 +2654,12 @@
           const r = cr.room;
           const rName = r.name || 'Room';
 
-          // Highlighter
+          // Highlighter (Only if checked & calculated)
           if (r.chkHl && cr.bHl > 0) {
             const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.hlSize);
+            const dimText = (cr.hlL > 0 && cr.hlW > 1) 
+              ? `Wall: ${cr.hlL}′ × ${cr.hlW}′ = ${cr.hlArea.toFixed(1)} sq.ft` 
+              : `Wall: ${cr.hlArea.toFixed(1)} sq.ft`;
             billItemsList.push({
               type: 'room_tile',
               sourceId: r.id,
@@ -2303,7 +2669,7 @@
               name: r.hlName || 'Highlighter Tile',
               stockBoxes: r.hlItem ? r.hlItem.stockBoxes : null,
               sizeText: sizeObj ? sizeObj.label : '4×2 ft',
-              dimText: `Wall: ${cr.hlRft}′ × ${cr.hlHt}′ = ${cr.hlArea.toFixed(1)} sq.ft`,
+              dimText: dimText,
               sft: cr.hlArea,
               coverage: cr.hlCov,
               qty: cr.bHl,
@@ -2312,9 +2678,12 @@
             });
           }
 
-          // Dark
+          // Dark (Only if checked & calculated)
           if (r.chkDk && cr.bDk > 0) {
             const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.dkSize);
+            const dimText = (cr.dkL > 0 && cr.dkW > 1)
+              ? `Dado: ${cr.dkL}′ × ${cr.dkW}′ = ${cr.dkArea.toFixed(1)} sq.ft`
+              : `Dado: ${cr.dkArea.toFixed(1)} sq.ft`;
             billItemsList.push({
               type: 'room_tile',
               sourceId: r.id,
@@ -2324,7 +2693,7 @@
               name: r.dkName || 'Dark Accent Tile',
               stockBoxes: r.dkItem ? r.dkItem.stockBoxes : null,
               sizeText: sizeObj ? sizeObj.label : '4×2 ft',
-              dimText: `Dado: ${cr.dkRft}′ × ${cr.dkHt}′ = ${cr.dkArea.toFixed(1)} sq.ft`,
+              dimText: dimText,
               sft: cr.dkArea,
               coverage: cr.dkCov,
               qty: cr.bDk,
@@ -2336,6 +2705,9 @@
           // Light Base
           if (cr.bLt > 0) {
             const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.ltSize);
+            const dimText = (cr.wL > 0 && cr.wW > 1)
+              ? `Wall: (${cr.wL}′ × ${cr.wW}′) Net Area = ${cr.ltArea.toFixed(1)} sq.ft`
+              : `Wall: Net Area = ${cr.ltArea.toFixed(1)} sq.ft`;
             billItemsList.push({
               type: 'room_tile',
               sourceId: r.id,
@@ -2345,7 +2717,7 @@
               name: r.ltName || 'Light Wall Tile',
               stockBoxes: r.ltItem ? r.ltItem.stockBoxes : null,
               sizeText: sizeObj ? sizeObj.label : '4×2 ft',
-              dimText: `Wall: (${cr.wRft}′ × ${cr.wHt}′) Net Area = ${cr.ltArea.toFixed(1)} sq.ft`,
+              dimText: dimText,
               sft: cr.ltArea,
               coverage: cr.ltCov,
               qty: cr.bLt,
@@ -2357,6 +2729,9 @@
           // Floor
           if (cr.bFl > 0) {
             const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.flSize);
+            const dimText = (cr.fL > 0 && cr.fW > 1)
+              ? `Floor: ${cr.fL}′ × ${cr.fW}′ = ${cr.flArea.toFixed(1)} sq.ft`
+              : `Floor: ${cr.flArea.toFixed(1)} sq.ft`;
             billItemsList.push({
               type: 'room_tile',
               sourceId: r.id,
@@ -2366,7 +2741,7 @@
               name: r.flName || 'Floor Tile',
               stockBoxes: r.flItem ? r.flItem.stockBoxes : null,
               sizeText: sizeObj ? sizeObj.label : '4×2 ft',
-              dimText: `Floor: ${cr.fLen}′ × ${cr.fWid}′ = ${cr.flArea.toFixed(1)} sq.ft`,
+              dimText: dimText,
               sft: cr.flArea,
               coverage: cr.flCov,
               qty: cr.bFl,
@@ -2384,11 +2759,11 @@
           sourceId: item.id,
           roomName: '',
           tileKey: '',
-          label: item.isStock ? (item.parent ? `Stock • ${item.parent}` : 'Stock Item') : 'Material / Accessory',
-          name: item.name || 'Stock Item',
-          stockBoxes: item.stockBoxes,
+          label: '', // No tile group or label under item
+          name: item.name || 'Item',
+          stockBoxes: null,
           sizeText: '',
-          dimText: item.isStock ? `Tally Item (${item.parent || 'General'})` : `Quantity: ${item.qty} ${item.unit}`,
+          dimText: '',
           sft: 0,
           coverage: 0,
           qty: parseFloat(item.qty) || 1,
@@ -2403,9 +2778,7 @@
         const lineTotal = rateNum * item.qty;
         const rateSft = item.coverage > 0 ? (rateNum / item.coverage) : 0;
 
-        const stockBadge = (item.stockBoxes !== null && item.stockBoxes !== undefined)
-          ? `<span style="background:#E2EFE0; color:#254623; border:1px solid #C4D9C2; font-size:11px; padding:1px 6px; border-radius:4px; font-weight:700; margin-left:6px;" title="Available stock in Tally">In Stock: ${item.stockBoxes}</span>`
-          : '';
+        const stockBadge = ''; // No stock badge shown after item selection
 
         if (item.type === 'room_tile') {
           html += `
@@ -2415,7 +2788,6 @@
                 <div class="main-name">
                   ${escapeHtml(item.name)} 
                   <span style="font-size:12px; color:var(--text-muted); font-weight:600;">(${escapeHtml(item.sizeText)})</span>
-                  ${stockBadge}
                 </div>
                 <div class="meta-info"><b>${escapeHtml(item.roomName)}</b> &bull; ${escapeHtml(item.label)}</div>
                 <div class="dim-pill">📐 ${escapeHtml(item.dimText)}</div>
@@ -2443,9 +2815,8 @@
               <td class="item-desc-cell">
                 <div class="main-name">
                   ${escapeHtml(item.name)}
-                  ${stockBadge}
                 </div>
-                <div class="meta-info" style="color:var(--primary);">${escapeHtml(item.label)}</div>
+                ${item.label ? `<div class="meta-info" style="color:var(--primary);">${escapeHtml(item.label)}</div>` : ''}
               </td>
               <td style="text-align: right; color:var(--text-light);">-</td>
               <td style="text-align: right;">
@@ -2482,7 +2853,7 @@
           <td style="text-align:center; font-weight:800; color:var(--primary); font-size:13px;">${nextNum}</td>
           <td class="item-desc-cell">
             <div style="display:flex; flex-direction:column; gap:3px;">
-              <input type="text" id="inlineItemSearch" list="tallyList" placeholder="🔍 Click / Type item name (auto-populates stock)..." 
+              <input type="text" id="inlineItemSearch" list="tallyList" placeholder="🔍 Click / Type item name to add..." 
                 value="${escapeHtml(window.inlineSearchDraft || '')}"
                 oninput="onInlineItemSearch(this.value)" onkeydown="onInlineKeyDown(event, 'name')" autocomplete="off"
                 style="height:38px; width:100%; border:1.5px solid var(--primary-light); background:#FFFFFF; border-radius:7px; padding:0 12px; font-weight:700; color:var(--text); font-size:13.5px;" />
@@ -2878,7 +3249,7 @@
 
     // NEW CUSTOMER & CLOSE BILL (NO SAVING OF BILLS)
     function startNewCustomer(bypassConfirm = false) {
-      const hasData = (rooms.some(r => (parseFloat(r.wRft) > 0 && parseFloat(r.wHt) > 0) || (parseFloat(r.fLen) > 0 && parseFloat(r.fWid) > 0))) || 
+      const hasData = (rooms.some(r => parseDimensionInput(r.wallSize).sft > 0 || parseDimensionInput(r.flSizeDim).sft > 0)) || 
                       (document.getElementById('custName').value.trim() !== '') ||
                       directBillItems.length > 0;
 
@@ -2907,7 +3278,9 @@
 
       // Reset rooms to 1 fresh room and reset direct items
       roomCounter = 1;
-      rooms = [ createRoomObj('Room 1') ];
+      const initialRoom = createRoomObj('Room 1');
+      rooms = [ initialRoom ];
+      activeRoomId = initialRoom.id;
       directBillItems = [];
 
       // Clear inline draft
@@ -2922,7 +3295,7 @@
       if (advInput) advInput.value = '0';
 
       // Clear draft in localStorage
-      localStorage.removeItem('tile_estimator_multi_draft_v3');
+      localStorage.removeItem('tile_estimator_autosave_draft_v1');
 
       // Re-render
       renderAllRooms();
@@ -2933,7 +3306,7 @@
     }
 
     function closeInvoiceBill() {
-      const hasData = (rooms.some(r => (parseFloat(r.wRft) > 0 && parseFloat(r.wHt) > 0) || (parseFloat(r.fLen) > 0 && parseFloat(r.fWid) > 0))) || 
+      const hasData = (rooms.some(r => parseDimensionInput(r.wallSize).sft > 0 || parseDimensionInput(r.flSizeDim).sft > 0)) || 
                       (document.getElementById('custName').value.trim() !== '') ||
                       directBillItems.length > 0;
 
@@ -2965,18 +3338,306 @@
       }, 3500);
     }
 
-    // PERSISTENCE (DISABLED: APP ALWAYS OPENS AFRESH WITH A CLEAR SLATE)
+    // CONTINUOUS AUTOSAVE
     function saveDraft() {
-      // Persistence intentionally disabled per user request: bills are not saved
+      try {
+        const draft = {
+          rooms: rooms,
+          activeRoomId: activeRoomId,
+          directBillItems: directBillItems,
+          custName: document.getElementById('custName') ? document.getElementById('custName').value : '',
+          custPhone: document.getElementById('custPhone') ? document.getElementById('custPhone').value : '',
+          custAddress: document.getElementById('custAddress') ? document.getElementById('custAddress').value : '',
+          quoteDate: document.getElementById('quoteDate') ? document.getElementById('quoteDate').value : '',
+          quoteRef: document.getElementById('quoteRefLabel') ? document.getElementById('quoteRefLabel').innerText : '',
+          advanceAmount: window.currentAdvanceAmount || 0,
+          timestamp: Date.now()
+        };
+        localStorage.setItem('tile_estimator_autosave_draft_v1', JSON.stringify(draft));
+        updateAutosaveIndicator();
+      } catch (e) {
+        console.warn('Autosave error:', e);
+      }
+    }
+
+    function updateAutosaveIndicator() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+      const el = document.getElementById('barAutosaveText');
+      if (el) el.innerText = `Autosaved (${timeStr})`;
     }
 
     function loadDraft() {
-      localStorage.removeItem('tile_estimator_multi_draft_v3');
-      const randId = Math.floor(1000 + Math.random() * 9000);
-      document.getElementById('quoteRefLabel').innerText = `Quote #EST-${randId}`;
-      const invRef = document.getElementById('invRefNum');
-      if (invRef) invRef.innerText = `#EST-${randId}`;
-      return false;
+      try {
+        const raw = localStorage.getItem('tile_estimator_autosave_draft_v1');
+        if (!raw) return false;
+        const draft = JSON.parse(raw);
+        if (!draft || !draft.rooms || !draft.rooms.length) return false;
+
+        rooms = draft.rooms;
+        activeRoomId = draft.activeRoomId || rooms[rooms.length - 1].id;
+        directBillItems = draft.directBillItems || [];
+
+        if (document.getElementById('custName')) document.getElementById('custName').value = draft.custName || '';
+        if (document.getElementById('custPhone')) document.getElementById('custPhone').value = draft.custPhone || '';
+        if (document.getElementById('custAddress')) document.getElementById('custAddress').value = draft.custAddress || '';
+        if (document.getElementById('quoteDate')) document.getElementById('quoteDate').value = draft.quoteDate || '';
+        
+        if (draft.quoteRef) {
+          if (document.getElementById('quoteRefLabel')) document.getElementById('quoteRefLabel').innerText = draft.quoteRef;
+          const cleanId = draft.quoteRef.replace('Quote ', '');
+          if (document.getElementById('invRefNum')) document.getElementById('invRefNum').innerText = cleanId;
+        }
+
+        window.currentAdvanceAmount = parseFloat(draft.advanceAmount) || 0;
+        const advInput = document.getElementById('invAdvanceInput');
+        if (advInput) advInput.value = window.currentAdvanceAmount;
+
+        syncCustomerFromRooms('name', draft.custName || '');
+        syncCustomerFromRooms('phone', draft.custPhone || '');
+        syncCustomerFromRooms('address', draft.custAddress || '');
+        syncCustomerFromRooms('date', draft.quoteDate || '');
+
+        renderAllRooms();
+        renderAccessoriesList();
+        calculateAll();
+        updateAutosaveIndicator();
+        return true;
+      } catch (e) {
+        console.warn('Draft load error:', e);
+        return false;
+      }
+    }
+
+    // FINAL SAVE BILL
+    function finalSaveBill() {
+      const custName = (document.getElementById('custName').value || '').trim() || 'Walk-in Customer';
+      const custPhone = (document.getElementById('custPhone').value || '').trim() || '';
+      const custAddress = (document.getElementById('custAddress').value || '').trim() || '';
+      const quoteDate = document.getElementById('quoteDate').value || new Date().toISOString().split('T')[0];
+      const refNum = (document.getElementById('invRefNum') ? document.getElementById('invRefNum').innerText : '#EST-1001').trim();
+
+      // Check if there is data
+      const hasRooms = rooms.some(r => parseDimensionInput(r.wallSize).sft > 0 || parseDimensionInput(r.flSizeDim).sft > 0);
+      const hasDirect = directBillItems.length > 0;
+      if (!hasRooms && !hasDirect) {
+        alert("Please enter measurements or add at least one item before final saving.");
+        return;
+      }
+
+      const totalSft = document.getElementById('barTotalSft') ? document.getElementById('barTotalSft').innerText : '0 SFT';
+      const totalBoxes = document.getElementById('barTotalBoxes') ? document.getElementById('barTotalBoxes').innerText : '0 Bx';
+      const grandTotal = document.getElementById('barGrandTotal') ? document.getElementById('barGrandTotal').innerText : '₹ 0';
+      const advance = window.currentAdvanceAmount || 0;
+      const grandTotalNum = window.invoiceData ? window.invoiceData.grandTotal : 0;
+      const dueAmount = Math.max(0, grandTotalNum - advance);
+
+      const billRecord = {
+        id: refNum,
+        date: quoteDate,
+        savedAt: new Date().toISOString(),
+        savedTimeFormatted: new Date().toLocaleString('en-IN', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit', hour12:true }),
+        customer: {
+          name: custName,
+          phone: custPhone,
+          address: custAddress,
+          date: quoteDate
+        },
+        rooms: JSON.parse(JSON.stringify(rooms)),
+        activeRoomId: activeRoomId,
+        directBillItems: JSON.parse(JSON.stringify(directBillItems)),
+        items: window.invoiceData ? JSON.parse(JSON.stringify(window.invoiceData.items)) : [],
+        summary: {
+          totalSft,
+          totalBoxes,
+          grandTotal,
+          grandTotalNum,
+          advance,
+          dueAmount
+        }
+      };
+
+      try {
+        const raw = localStorage.getItem('tile_estimator_saved_bills_v1');
+        let bills = raw ? JSON.parse(raw) : [];
+        const existingIdx = bills.findIndex(b => b.id === refNum);
+        if (existingIdx >= 0) {
+          bills[existingIdx] = billRecord;
+        } else {
+          bills.unshift(billRecord);
+        }
+        localStorage.setItem('tile_estimator_saved_bills_v1', JSON.stringify(bills));
+        updateSavedBillsCount();
+        saveDraft();
+
+        showToast(`💾 <b>Bill ${refNum} Final Saved!</b> Saved in records.`);
+      } catch (err) {
+        console.error('Final Save error:', err);
+        alert('Error saving bill: ' + err.message);
+      }
+    }
+
+    // SAVED BILLS MODAL & MANAGEMENT
+    function updateSavedBillsCount() {
+      try {
+        const raw = localStorage.getItem('tile_estimator_saved_bills_v1');
+        const bills = raw ? JSON.parse(raw) : [];
+        const badge = document.getElementById('savedBillsCountBadge');
+        if (badge) badge.innerText = bills.length;
+        const totalCount = document.getElementById('savedBillsTotalCount');
+        if (totalCount) totalCount.innerText = `Total: ${bills.length} saved bills`;
+      } catch (e) {}
+    }
+
+    function openSavedBillsModal() {
+      const modal = document.getElementById('savedBillsModal');
+      if (modal) {
+        modal.style.display = 'flex';
+        renderSavedBillsList('');
+        const searchInput = document.getElementById('savedBillsSearch');
+        if (searchInput) {
+          searchInput.value = '';
+          searchInput.focus();
+        }
+      }
+    }
+
+    function closeSavedBillsModal() {
+      const modal = document.getElementById('savedBillsModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function renderSavedBillsList(query) {
+      const container = document.getElementById('savedBillsListContainer');
+      if (!container) return;
+
+      const raw = localStorage.getItem('tile_estimator_saved_bills_v1');
+      const bills = raw ? JSON.parse(raw) : [];
+      updateSavedBillsCount();
+
+      const q = (query || '').trim().toLowerCase();
+      const filtered = bills.filter(b => {
+        if (!q) return true;
+        const idMatch = (b.id || '').toLowerCase().includes(q);
+        const nameMatch = (b.customer && b.customer.name && b.customer.name.toLowerCase().includes(q));
+        const phoneMatch = (b.customer && b.customer.phone && b.customer.phone.toLowerCase().includes(q));
+        return idMatch || nameMatch || phoneMatch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:32px 16px; color:var(--text-muted);">
+            <div style="font-size:32px; margin-bottom:8px;">📁</div>
+            <div style="font-weight:700; font-size:14px;">No saved bills found</div>
+            <div style="font-size:12px; margin-top:4px;">Click "Final Save" on any quotation to record it here.</div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(b => `
+        <div style="background:#fff; border:1px solid var(--border); border-radius:10px; padding:12px 14px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; gap:12px; transition:var(--transition); box-shadow:var(--shadow-xs);">
+          <div style="flex:1;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-weight:900; font-size:14px; color:var(--primary);">${escapeHtml(b.id)}</span>
+              <span style="font-size:11px; font-weight:700; color:var(--text-muted); background:var(--surface-muted); padding:2px 7px; border-radius:4px;">${escapeHtml(b.savedTimeFormatted || b.date)}</span>
+            </div>
+            <div style="font-size:13.5px; font-weight:700; color:var(--text); margin-top:4px;">
+              👤 ${escapeHtml((b.customer && b.customer.name) || 'Walk-in Customer')}
+              ${(b.customer && b.customer.phone) ? `<span style="font-weight:600; font-size:12px; color:var(--text-muted); margin-left:6px;">(${escapeHtml(b.customer.phone)})</span>` : ''}
+            </div>
+            <div style="font-size:12px; color:var(--text-muted); margin-top:3px;">
+              ${b.summary ? `<span>Boxes: <b>${b.summary.totalBoxes}</b> • Area: <b>${b.summary.totalSft}</b></span>` : ''}
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:15px; font-weight:900; color:var(--primary);">${b.summary ? b.summary.grandTotal : '₹ 0'}</div>
+            ${(b.summary && b.summary.dueAmount > 0) ? `<div style="font-size:11px; font-weight:800; color:#B91C1C;">Due: ₹ ${b.summary.dueAmount.toLocaleString('en-IN')}</div>` : ''}
+            <div style="display:flex; gap:6px; margin-top:6px; justify-content:flex-end;">
+              <button type="button" class="btn btn-outline" onclick="loadSavedBill('${b.id}')" title="Load into editor" style="padding:4px 9px; font-size:11.5px; font-weight:700; color:var(--primary);">
+                📂 Open
+              </button>
+              <button type="button" class="btn btn-outline" onclick="printSavedBill('${b.id}')" title="Print this bill" style="padding:4px 8px; font-size:11.5px;">
+                🖨️
+              </button>
+              <button type="button" class="btn-remove-room" onclick="deleteSavedBill('${b.id}', event)" title="Delete bill" style="padding:4px 8px; font-size:11.5px;">
+                🗑️
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function loadSavedBill(billId) {
+      try {
+        const raw = localStorage.getItem('tile_estimator_saved_bills_v1');
+        if (!raw) return;
+        const bills = JSON.parse(raw);
+        const bill = bills.find(b => b.id === billId);
+        if (!bill) return;
+
+        rooms = bill.rooms || [ createRoomObj('Room 1') ];
+        activeRoomId = bill.activeRoomId || rooms[rooms.length - 1].id;
+        directBillItems = bill.directBillItems || [];
+
+        if (bill.customer) {
+          if (document.getElementById('custName')) document.getElementById('custName').value = bill.customer.name || '';
+          if (document.getElementById('custPhone')) document.getElementById('custPhone').value = bill.customer.phone || '';
+          if (document.getElementById('custAddress')) document.getElementById('custAddress').value = bill.customer.address || '';
+          if (document.getElementById('quoteDate')) document.getElementById('quoteDate').value = bill.customer.date || '';
+          syncCustomerFromRooms('name', bill.customer.name || '');
+          syncCustomerFromRooms('phone', bill.customer.phone || '');
+          syncCustomerFromRooms('address', bill.customer.address || '');
+          syncCustomerFromRooms('date', bill.customer.date || '');
+        }
+
+        if (bill.id) {
+          document.getElementById('quoteRefLabel').innerText = `Quote ${bill.id}`;
+          const invRef = document.getElementById('invRefNum');
+          if (invRef) invRef.innerText = bill.id;
+        }
+
+        window.currentAdvanceAmount = bill.summary ? bill.summary.advance : 0;
+        const advInput = document.getElementById('invAdvanceInput');
+        if (advInput) advInput.value = window.currentAdvanceAmount;
+
+        renderAllRooms();
+        renderAccessoriesList();
+        calculateAll();
+        saveDraft();
+        closeSavedBillsModal();
+
+        showToast(`📂 <b>Bill ${bill.id} loaded!</b>`);
+      } catch (err) {
+        console.error('Load saved bill error:', err);
+        alert('Could not load bill: ' + err.message);
+      }
+    }
+
+    function printSavedBill(billId) {
+      loadSavedBill(billId);
+      switchTab('rates');
+      setTimeout(() => {
+        window.print();
+      }, 300);
+    }
+
+    function deleteSavedBill(billId, event) {
+      if (event) event.stopPropagation();
+      if (!confirm(`Delete saved bill ${billId} from records?`)) return;
+      try {
+        const raw = localStorage.getItem('tile_estimator_saved_bills_v1');
+        if (!raw) return;
+        let bills = JSON.parse(raw);
+        bills = bills.filter(b => b.id !== billId);
+        localStorage.setItem('tile_estimator_saved_bills_v1', JSON.stringify(bills));
+        updateSavedBillsCount();
+        renderSavedBillsList(document.getElementById('savedBillsSearch') ? document.getElementById('savedBillsSearch').value : '');
+        showToast(`🗑️ Bill ${billId} deleted.`);
+      } catch (e) {
+        console.error('Delete error:', e);
+      }
     }
 
     // TAB NAVIGATION

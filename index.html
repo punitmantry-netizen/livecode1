@@ -532,9 +532,43 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
       margin-bottom: 6px;
       padding-bottom: 5px;
       border-bottom: 1px solid var(--border);
+    }
+    .room-top-meta-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+    .room-dim-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #F4F7F2;
+      border: 1px solid #D6E3D3;
+      border-radius: 5px;
+      padding: 2px 7px;
+    }
+    .room-dim-chip-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      white-space: nowrap;
+    }
+    .room-dim-chip-input {
+      height: 25px !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      padding: 0 6px !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 4px !important;
+      background: #FFFFFF !important;
+      width: 105px !important;
     }
     .room-pill-badge {
       font-size: 11px;
@@ -1194,18 +1228,94 @@
     }
     .btn-close:hover { color: var(--text); transform: scale(1.1); }
 
-    /* ULTRA SLIM PRINT STYLESHEET (ONLY ACTIVE WHILE PRINTING) */
+    /* COLLAPSED SINGLE PHOTO PRINT & PREVIEW SYSTEM */
+    .invoice-collapsed table.bill-table th {
+      padding: 3px 5px !important;
+      font-size: 11px !important;
+    }
+    .invoice-collapsed table.bill-table td {
+      padding: 2.5px 5px !important;
+      font-size: 11.5px !important;
+    }
+    .invoice-collapsed table.bill-table td input {
+      height: 25px !important;
+      font-size: 11.5px !important;
+      padding: 0 4px !important;
+    }
+    .invoice-collapsed .item-desc-cell .main-name {
+      font-size: 11.5px !important;
+      font-weight: 800 !important;
+      line-height: 1.2 !important;
+    }
+    .invoice-collapsed .item-desc-cell .meta-info {
+      font-size: 10px !important;
+      margin-top: 1px !important;
+    }
+    .invoice-collapsed .item-desc-cell .dim-pill {
+      font-size: 9.5px !important;
+      padding: 1px 4px !important;
+      margin-top: 1px !important;
+    }
+    .invoice-collapsed .compact-client-bar {
+      padding: 3px 6px !important;
+      margin-bottom: 4px !important;
+    }
+    .invoice-collapsed .compact-client-bar input {
+      height: 25px !important;
+      font-size: 11px !important;
+    }
+    .invoice-collapsed .invoice-header {
+      padding-bottom: 4px !important;
+      margin-bottom: 4px !important;
+    }
+    .invoice-collapsed .inv-summary-row {
+      padding: 2px 0 !important;
+      font-size: 11.5px !important;
+    }
+    .invoice-collapsed .inv-summary-total {
+      font-size: 14.5px !important;
+      padding-top: 4px !important;
+      margin-top: 3px !important;
+    }
+    .invoice-collapsed .inv-advance-row {
+      padding: 3px 0 !important;
+      margin-top: 3px !important;
+      font-size: 12px !important;
+    }
+    .invoice-collapsed .inv-advance-row input {
+      height: 26px !important;
+      font-size: 12px !important;
+    }
+    .invoice-collapsed .inv-summary-due-row {
+      padding: 4px 10px !important;
+      margin-top: 3px !important;
+    }
+    .invoice-collapsed .inv-summary-due-row #invDueAmount {
+      font-size: 14px !important;
+    }
+    .invoice-collapsed .amount-words {
+      font-size: 10px !important;
+      margin-top: 2px !important;
+    }
+    .invoice-collapsed .inv-terms {
+      margin-top: 6px !important;
+      padding-top: 4px !important;
+      font-size: 9.5px !important;
+      line-height: 1.25 !important;
+    }
+
+    /* ULTRA SLIM PRINT STYLESHEET (COLLAPSED FOR 1-PAGE PHOTO/PDF) */
     @media print {
       @page {
-        margin: 6mm 7mm 6mm 7mm;
+        margin: 5mm 6mm 5mm 6mm;
         size: A4 portrait;
       }
       body { 
         background: #fff !important; 
         padding: 0 !important; 
         color: #000 !important; 
-        font-size: 8.5pt !important; 
-        line-height: 1.25 !important;
+        font-size: 8pt !important; 
+        line-height: 1.2 !important;
       }
       .container { 
         max-width: 100% !important; 
@@ -1228,27 +1338,27 @@
       }
       .invoice-header {
         border-bottom: 1.5px solid #222 !important;
-        padding-bottom: 4px !important;
-        margin-bottom: 6px !important;
+        padding-bottom: 3px !important;
+        margin-bottom: 4px !important;
         display: flex !important;
         justify-content: space-between !important;
         align-items: center !important;
       }
       .invoice-header div {
-        font-size: 13pt !important;
+        font-size: 12pt !important;
       }
       .inv-print-meta-grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 6px !important;
+        gap: 4px !important;
         border: 1px solid #CCC !important;
-        padding: 4px 8px !important;
+        padding: 3px 6px !important;
         border-radius: 4px !important;
-        font-size: 8.5pt !important;
-        margin-bottom: 6px !important;
+        font-size: 8pt !important;
+        margin-bottom: 4px !important;
       }
       .inv-print-meta-grid strong {
-        font-size: 8pt !important;
+        font-size: 7.5pt !important;
         text-transform: uppercase !important;
         color: #444 !important;
         display: block !important;
@@ -1260,7 +1370,7 @@
         width: 100% !important;
         min-width: 100% !important;
         border-collapse: collapse !important; 
-        margin-bottom: 4px !important;
+        margin-bottom: 3px !important;
         page-break-inside: auto !important;
       }
       table.bill-table tr {
@@ -1271,14 +1381,14 @@
         -webkit-print-color-adjust: exact !important; 
         print-color-adjust: exact !important; 
         color: #000 !important; 
-        padding: 3px 4px !important;
-        font-size: 8pt !important;
+        padding: 2.5px 4px !important;
+        font-size: 7.5pt !important;
         border-top: 1px solid #222 !important;
         border-bottom: 1.5px solid #222 !important;
       }
       table.bill-table td { 
-        padding: 2.5px 4px !important; 
-        font-size: 8.5pt !important;
+        padding: 2px 4px !important; 
+        font-size: 8pt !important;
         border-bottom: 1px solid #DDD !important;
         color: #000 !important;
       }
@@ -1289,44 +1399,44 @@
         width: auto !important; 
         height: auto !important;
         padding: 0 !important;
-        font-size: 8.5pt !important;
+        font-size: 8pt !important;
         color: #000 !important;
         text-align: right !important;
       }
       .item-desc-cell .main-name { 
-        font-size: 8.5pt !important; 
+        font-size: 8pt !important; 
         font-weight: 800 !important;
         color: #000 !important;
       }
       .item-desc-cell .meta-info { 
-        font-size: 7.5pt !important; 
+        font-size: 7pt !important; 
         color: #333 !important;
         margin-top: 0 !important;
       }
       .item-desc-cell .dim-pill { 
-        font-size: 7pt !important; 
+        font-size: 6.5pt !important; 
         border: 0.5px solid #BBB !important; 
         padding: 0 3px !important; 
         background: transparent !important; 
         color: #222 !important; 
         border-radius: 3px !important;
-        margin-top: 1px !important;
+        margin-top: 0 !important;
       }
       .inv-summary-row {
-        padding: 1.5px 0 !important;
-        font-size: 8.5pt !important;
+        padding: 1px 0 !important;
+        font-size: 8pt !important;
       }
       .inv-summary-total {
-        font-size: 11pt !important;
+        font-size: 10.5pt !important;
         font-weight: 900 !important;
-        padding-top: 3px !important;
+        padding-top: 2px !important;
         border-top: 1.5px solid #000 !important;
         margin-top: 2px !important;
         color: #000 !important;
       }
       .inv-advance-row {
-        font-size: 8.5pt !important;
-        padding: 2px 0 !important;
+        font-size: 8pt !important;
+        padding: 1.5px 0 !important;
         color: #000 !important;
       }
       .inv-summary-due-row {
@@ -1335,24 +1445,24 @@
         print-color-adjust: exact !important;
         border: 1px solid #000 !important;
         border-radius: 4px !important;
-        padding: 3px 6px !important;
+        padding: 2.5px 6px !important;
         margin-top: 2px !important;
       }
       .inv-summary-due-row span {
-        font-size: 9.5pt !important;
+        font-size: 9pt !important;
         color: #000 !important;
         font-weight: 800 !important;
       }
       .amount-words {
-        font-size: 7.5pt !important;
-        margin-top: 2px !important;
+        font-size: 7pt !important;
+        margin-top: 1px !important;
         color: #333 !important;
       }
       .inv-terms {
-        margin-top: 4px !important;
-        padding-top: 3px !important;
-        font-size: 7pt !important;
-        line-height: 1.2 !important;
+        margin-top: 3px !important;
+        padding-top: 2px !important;
+        font-size: 6.5pt !important;
+        line-height: 1.15 !important;
         color: #555 !important;
         border-top: 1px dashed #CCC !important;
       }
@@ -1463,9 +1573,15 @@
             <div style="font-size:12px; font-weight:800; color:var(--primary);" id="invRefNum">#EST-1001</div>
           </div>
           
-          <!-- RIGHT ACTIONS: DATE, FINAL SAVE & CLOSE BILL CROSS (DOES NOT CLOSE APP) -->
-          <div style="display:flex; align-items:center; gap:8px;" class="no-print">
+          <!-- RIGHT ACTIONS: DATE, COLLAPSE VIEW, PREVIEW, FINAL SAVE & CLOSE BILL CROSS -->
+          <div style="display:flex; align-items:center; gap:6px;" class="no-print">
             <div style="font-size:11.5px; font-weight:700; color:var(--text-muted);" id="invDate">Date: 03/11/2026</div>
+            <button type="button" class="btn btn-outline" id="btnToggleInvoiceCollapse" onclick="toggleInvoiceCollapseView()" title="Toggle collapsed single-screen photo view" style="padding:5px 9px; font-size:11px; font-weight:700; background:#FFF; border:1px solid var(--border); border-radius:6px; color:var(--primary-dark); display:inline-flex; align-items:center; gap:4px;">
+              <span>⊞</span> <span id="collapseViewLabel">Collapsed View</span>
+            </button>
+            <button type="button" class="btn btn-preview" onclick="openPrintPreviewModal()" title="Preview collapsed single photo to copy or print" style="padding:5px 10px; font-size:11.5px; font-weight:800; background:#2D4C2B; color:#FFF; border-radius:6px; border:none; display:inline-flex; align-items:center; gap:4px; cursor:pointer;">
+              <span>📸</span> Photo Preview
+            </button>
             <button type="button" class="btn btn-final-save" onclick="finalSaveBill()" title="Final save this quotation in records" style="padding:6px 12px; font-size:12px;">
               <span>💾</span> Final Save
             </button>
@@ -1568,10 +1684,13 @@
         </div>
       </div>
 
-      <!-- ACTION BUTTONS: FINAL SAVE, PRINT, WHATSAPP, TALLY -->
+      <!-- ACTION BUTTONS: FINAL SAVE, PHOTO PREVIEW, PRINT, WHATSAPP, TALLY -->
       <div class="btn-action-grid no-print" style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));">
         <button class="btn btn-final-save" onclick="finalSaveBill()">
           <span>💾</span> Final Save Bill
+        </button>
+        <button class="btn btn-preview" onclick="openPrintPreviewModal()" style="background:#2D4C2B; color:#FFFFFF; font-weight:800;" title="Collapsed single-photo print preview">
+          <span>📸</span> Single Photo Preview
         </button>
         <button class="btn btn-wa" onclick="shareOnWhatsApp()">
           <span>📲</span> Share on WhatsApp
@@ -1679,6 +1798,47 @@
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding-top:12px; border-top:1px solid var(--border);">
         <span style="font-size:12.5px; font-weight:700; color:var(--text-muted);" id="savedBillsTotalCount">Total: 0 bills</span>
         <button type="button" class="btn" style="background:var(--surface-muted); color:var(--text); border:1px solid var(--border);" onclick="closeSavedBillsModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: COLLAPSED SINGLE PHOTO PRINT PREVIEW -->
+  <div class="modal-overlay" id="printPreviewModal" style="display:none;">
+    <div class="modal-card" style="max-width:820px; width:96%; max-height:92vh; display:flex; flex-direction:column; padding:16px;">
+      <div class="modal-title" style="margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid var(--border);">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:18px;">📸</span>
+          <div>
+            <div style="font-size:15px; font-weight:800; color:var(--text);">Single Photo Print Preview</div>
+            <div style="font-size:11px; color:var(--text-muted); font-weight:600;">Collapsed single-sheet view formatted to send as a clear single photo on WhatsApp or 1-page print</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button type="button" class="btn btn-wa" onclick="copyEstimatePhoto()" title="Copy single photo to clipboard (Ctrl+V in WhatsApp)" style="padding:6px 12px; font-size:12px; background:#25D366; color:#FFF; font-weight:800; border:none; display:inline-flex; align-items:center; gap:5px;">
+            <span>📸</span> Copy Photo
+          </button>
+          <button type="button" class="btn btn-outline" onclick="downloadEstimatePhoto()" title="Download as PNG image file" style="padding:6px 11px; font-size:12px; font-weight:700; background:#FFF; border:1px solid var(--border); display:inline-flex; align-items:center; gap:4px;">
+            <span>💾</span> Save PNG
+          </button>
+          <button type="button" class="btn btn-print" onclick="window.print()" title="Print single page" style="padding:6px 11px; font-size:12px; font-weight:700;">
+            <span>🖨️</span> Print
+          </button>
+          <button type="button" class="btn-close" onclick="closePrintPreviewModal()">&times;</button>
+        </div>
+      </div>
+
+      <!-- SCROLLABLE PREVIEW CANVAS / CONTAINER -->
+      <div style="overflow-y:auto; flex:1; background:#EBF0E9; padding:12px; border-radius:8px; display:flex; flex-direction:column; align-items:center;">
+        <!-- Clean Collapsed White Sheet -->
+        <div id="collapsedPreviewCard" style="background:#FFFFFF; border:1.5px solid #CCD8CA; border-radius:8px; width:100%; max-width:720px; padding:14px 18px; box-shadow:0 4px 14px rgba(0,0,0,0.06); font-family:system-ui, -apple-system, sans-serif;">
+          <!-- Dynamically populated collapsed estimate content -->
+        </div>
+      </div>
+
+      <!-- FOOTER NOTE -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; font-size:11.5px; color:var(--text-muted);">
+        <span>💡 <b>Tip:</b> Click <b>Copy Photo</b> and paste directly into WhatsApp chat (Ctrl+V), or download PNG image.</span>
+        <button type="button" class="btn" style="background:var(--surface-muted); color:var(--text); border:1px solid var(--border); padding:5px 14px; font-size:12px;" onclick="closePrintPreviewModal()">Close</button>
       </div>
     </div>
   </div>
@@ -2227,15 +2387,37 @@
         // CURRENT OPEN ROOM (EXCEL-STYLE COMPACT SINGLE VIEW, ZERO WASTED SPACE)
         return `
           <div class="room-sheet-card" id="card_${room.id}">
-            <!-- ROOM TOP BAR -->
+            <!-- ROOM TOP BAR (ROOM NAME + WALL SIZE + FLOOR SIZE) -->
             <div class="room-sheet-top">
-              <div style="display:flex; align-items:center; gap:8px; flex:1;">
-                <span class="room-pill-badge">Room ${idx + 1}</span>
-                <input type="text" class="room-name-compact-input" value="${escapeHtml(room.name)}" 
-                  placeholder="Room Name"
-                  oninput="updateRoomField('${room.id}', 'name', this.value)" 
-                  title="Rename room" />
+              <div class="room-top-meta-group">
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <span class="room-pill-badge">Room ${idx + 1}</span>
+                  <input type="text" class="room-name-compact-input" value="${escapeHtml(room.name)}" 
+                    placeholder="Room Name"
+                    oninput="updateRoomField('${room.id}', 'name', this.value)" 
+                    title="Rename room" />
+                </div>
+
+                <!-- WALL SIZE RIGHT NEAR ROOM NAME -->
+                <div class="room-dim-chip" title="Total Wall Dimensions (Length × Height / Width)">
+                  <span class="room-dim-chip-label">🧱 Wall:</span>
+                  <input type="text" class="room-dim-chip-input" id="inp_wall_size_${room.id}" value="${escapeHtml(room.wallSize || '')}" 
+                    placeholder="Length * Width" 
+                    oninput="updateRoomField('${room.id}', 'wallSize', this.value)" />
+                  <span id="grossWall_${room.id}" class="compact-res-pill">0 SFT</span>
+                </div>
+
+                <!-- FLOOR SIZE RIGHT NEAR ROOM NAME -->
+                <div class="room-dim-chip" title="Floor Dimensions (Length × Width)">
+                  <span class="room-dim-chip-label">📐 Floor:</span>
+                  <input type="text" class="room-dim-chip-input" id="inp_fl_size_${room.id}" value="${escapeHtml(room.flSizeDim || '')}" 
+                    placeholder="Length * Width" 
+                    oninput="updateRoomField('${room.id}', 'flSizeDim', this.value)" />
+                  <span id="grossFloor_${room.id}" class="compact-res-pill">0 SFT</span>
+                </div>
               </div>
+
+              <!-- ACTIONS: MINIMISE & REMOVE -->
               <div style="display:flex; align-items:center; gap:6px;">
                 ${rooms.length > 1 ? `
                   <button type="button" class="btn-compact-ghost" onclick="minimizeCurrentRoom('${room.id}')" title="Minimise room">
@@ -2246,7 +2428,7 @@
               </div>
             </div>
 
-            <!-- EXCEL-LIKE COMPACT TABLE: 5 ROWS -->
+            <!-- EXCEL-LIKE COMPACT TABLE: 4 TILE LAYERS -->
             <div class="room-table-container">
               <table class="room-entry-table">
                 <thead>
@@ -2259,23 +2441,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- ROW 1: TOTAL WALL SIZE -->
-                  <tr id="tr_wall_${room.id}">
-                    <td class="td-section">
-                      <span style="font-weight:700; color:var(--text);">🧱 Total Wall</span>
-                    </td>
-                    <td>
-                      <input type="text" class="table-input" value="${escapeHtml(room.wallSize || '')}" placeholder="Length * Width" 
-                        oninput="updateRoomField('${room.id}', 'wallSize', this.value)" />
-                    </td>
-                    <td style="color:var(--text-muted); font-size:11px; font-style:italic;">Full perimeter</td>
-                    <td style="color:var(--text-muted); font-size:11px; text-align:center;">—</td>
-                    <td style="text-align:right;">
-                      <span id="grossWall_${room.id}" class="compact-res-pill">0 SFT</span>
-                    </td>
-                  </tr>
-
-                  <!-- ROW 2: HIGHLIGHTER (HL) WALL -->
+                  <!-- ROW 1: HIGHLIGHTER (HL) WALL -->
                   <tr id="tr_hl_${room.id}" class="${room.chkHl ? 'tr-active' : ''}">
                     <td class="td-section">
                       <label class="compact-chk-label" title="Check to enable Highlighter Wall">
@@ -2307,7 +2473,7 @@
                     </td>
                   </tr>
 
-                  <!-- ROW 3: DARK WALL -->
+                  <!-- ROW 2: DARK WALL -->
                   <tr id="tr_dk_${room.id}" class="${room.chkDk ? 'tr-active' : ''}">
                     <td class="td-section">
                       <label class="compact-chk-label" title="Check to enable Dark Wall">
@@ -2339,7 +2505,7 @@
                     </td>
                   </tr>
 
-                  <!-- ROW 4: PLAIN BASE TILE (REMAINING WALL) -->
+                  <!-- ROW 3: PLAIN BASE TILE (REMAINING WALL) -->
                   <tr id="tr_lt_${room.id}">
                     <td class="td-section">
                       <span style="font-weight:700; color:var(--text);">⬜ Plain Base</span>
@@ -2362,14 +2528,13 @@
                     </td>
                   </tr>
 
-                  <!-- ROW 5: FLOOR TILE -->
+                  <!-- ROW 4: FLOOR TILE -->
                   <tr id="tr_fl_${room.id}">
                     <td class="td-section">
                       <span style="font-weight:700; color:var(--text);">📐 Floor Tile</span>
                     </td>
                     <td>
-                      <input type="text" class="table-input" value="${escapeHtml(room.flSizeDim || '')}" placeholder="Length * Width" 
-                        oninput="updateRoomField('${room.id}', 'flSizeDim', this.value)" />
+                      <div id="flAreaBadge_${room.id}" class="table-readonly-box">0 SFT</div>
                     </td>
                     <td>
                       <input type="text" class="table-input" list="tallyList" value="${escapeHtml(room.flName || '')}" 
@@ -2550,8 +2715,14 @@
         const grossWallEl = document.getElementById(`grossWall_${room.id}`);
         if (grossWallEl) grossWallEl.innerText = `${grossWallArea.toFixed(1)} SFT`;
 
+        const grossFloorEl = document.getElementById(`grossFloor_${room.id}`);
+        if (grossFloorEl) grossFloorEl.innerText = `${flArea.toFixed(1)} SFT`;
+
         const netLtEl = document.getElementById(`netLtArea_${room.id}`);
         if (netLtEl) netLtEl.innerText = `Net: ${ltArea.toFixed(1)} SFT`;
+
+        const flAreaBadge = document.getElementById(`flAreaBadge_${room.id}`);
+        if (flAreaBadge) flAreaBadge.innerText = `${flArea.toFixed(1)} SFT`;
 
         const minSumEl = document.getElementById(`min_summary_${room.id}`);
         if (minSumEl) {
@@ -3637,6 +3808,565 @@
         showToast(`🗑️ Bill ${billId} deleted.`);
       } catch (e) {
         console.error('Delete error:', e);
+      }
+    }
+
+    // ==========================================
+    // COLLAPSED PRINT PREVIEW & SINGLE PHOTO SYSTEM
+    // ==========================================
+    function toggleInvoiceCollapseView() {
+      const card = document.getElementById('printableInvoiceCard');
+      const btn = document.getElementById('btnToggleInvoiceCollapse');
+      if (!card) return;
+      const isCollapsed = card.classList.toggle('invoice-collapsed');
+      if (btn) {
+        btn.innerHTML = isCollapsed ? '<span>⊞</span> Standard View' : '<span>⊞</span> Collapsed View';
+        btn.title = isCollapsed ? 'Switch back to standard spacious invoice view' : 'Toggle collapsed single-screen photo view';
+      }
+      showToast(isCollapsed ? '⊞ <b>Collapsed Single-Page View</b> active.' : '📄 <b>Standard Spacious View</b> restored.');
+    }
+
+    function openPrintPreviewModal() {
+      const modal = document.getElementById('printPreviewModal');
+      const container = document.getElementById('collapsedPreviewCard');
+      if (!modal || !container) return;
+
+      const data = getCleanInvoiceData();
+      container.innerHTML = renderCollapsedEstimateHtml(data);
+      modal.style.display = 'flex';
+    }
+
+    function closePrintPreviewModal() {
+      const modal = document.getElementById('printPreviewModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function getCleanInvoiceData() {
+      updateInvoiceTotalsOnly();
+      const refLabel = document.getElementById('quoteRefLabel');
+      const rawRef = refLabel ? refLabel.innerText.replace(/^Quote\s*/i, '').replace(/^#\s*/, '').trim() : 'EST-1001';
+      const refNo = rawRef.startsWith('EST-') ? rawRef : (rawRef ? `EST-${rawRef}` : 'EST-1001');
+      const custName = (document.getElementById('custName') ? document.getElementById('custName').value : '') || 'Walk-in Customer';
+      const custPhone = (document.getElementById('custPhone') ? document.getElementById('custPhone').value : '') || '-';
+      const custAddress = (document.getElementById('custAddress') ? document.getElementById('custAddress').value : '') || 'Site: As Specified';
+      const quoteDate = (document.getElementById('quoteDate') ? document.getElementById('quoteDate').value : '') || new Date().toISOString().split('T')[0];
+      const advanceVal = window.currentAdvanceAmount || 0;
+
+      const items = [];
+      let totalBoxes = 0;
+      let totalSft = 0;
+      let subTotal = 0;
+
+      const rows = document.querySelectorAll('#billItems tr');
+      rows.forEach((tr) => {
+        if (tr.classList.contains('table-entry-row')) return;
+        const rateInput = tr.querySelector('.bill-rate-input');
+        if (!rateInput) return;
+
+        const nameEl = tr.querySelector('.main-name');
+        const metaEl = tr.querySelector('.meta-info');
+        const dimEl = tr.querySelector('.dim-pill');
+        const sftCell = tr.children[2];
+        const sftVal = sftCell ? (parseFloat(sftCell.innerText) || 0) : 0;
+        const qty = parseFloat(tr.dataset.qty) || 0;
+        const rate = parseFloat(rateInput.value) || 0;
+        const amount = Math.round(qty * rate);
+
+        let mainTitle = nameEl ? nameEl.innerText.replace(/In Stock:[^]+/, '').trim() : 'Item';
+        let subtitle = metaEl ? metaEl.innerText.trim() : '';
+        let dimText = dimEl ? dimEl.innerText.replace('📐', '').trim() : '';
+
+        subTotal += amount;
+        totalBoxes += qty;
+        totalSft += sftVal;
+
+        const isDirect = tr.dataset.rowType === 'direct';
+        const unitEl = tr.querySelector('.bill-qty-input ~ span');
+        const unit = isDirect ? (unitEl ? unitEl.innerText.trim() : 'unit') : 'bx';
+
+        items.push({
+          num: items.length + 1,
+          name: mainTitle,
+          subtitle: subtitle,
+          dimText: dimText,
+          sft: sftVal,
+          qty: qty,
+          unit: unit,
+          rate: rate,
+          amount: amount
+        });
+      });
+
+      const grandTotal = Math.round(subTotal);
+      const dueAmount = Math.max(0, grandTotal - advanceVal);
+
+      return {
+        refNo: refNo,
+        date: quoteDate,
+        customerName: custName,
+        customerPhone: custPhone,
+        siteAddress: custAddress,
+        items: items,
+        totalBoxes: totalBoxes,
+        totalSft: totalSft,
+        subTotal: subTotal,
+        grandTotal: grandTotal,
+        advanceAmount: advanceVal,
+        dueAmount: dueAmount,
+        amountInWords: numberToIndianWords(grandTotal)
+      };
+    }
+
+    function renderCollapsedEstimateHtml(data) {
+      if (!data.items || data.items.length === 0) {
+        return `
+          <div style="text-align:center; padding:30px 16px; color:#64748B;">
+            <div style="font-size:32px; margin-bottom:8px;">📄</div>
+            <div style="font-weight:800; font-size:15px; color:#1E293B;">No items added yet</div>
+            <div style="font-size:12px; margin-top:4px;">Add room measurements or direct stock items to preview the collapsed estimate.</div>
+          </div>
+        `;
+      }
+
+      const rowsHtml = data.items.map((item, idx) => {
+        const isAlt = idx % 2 === 1;
+        const bg = isAlt ? '#F8FAFC' : '#FFFFFF';
+        return `
+          <tr style="background:${bg}; border-bottom:1px solid #E2E8F0;">
+            <td style="padding:4px 6px; text-align:center; font-weight:700; color:#64748B; font-size:11px;">${idx + 1}</td>
+            <td style="padding:4px 6px;">
+              <div style="font-weight:800; color:#0F172A; font-size:12px; line-height:1.2;">
+                ${escapeHtml(item.name)}
+              </div>
+              ${item.subtitle ? `<div style="font-size:10px; color:#475569; font-weight:600; margin-top:1px;">${escapeHtml(item.subtitle)} ${item.dimText ? `• <span style="color:#0284C7;">${escapeHtml(item.dimText)}</span>` : ''}</div>` : ''}
+            </td>
+            <td style="padding:4px 6px; text-align:right; font-weight:600; color:#334155; font-size:11.5px;">
+              ${item.sft > 0 ? `${item.sft.toFixed(1)}` : '-'}
+            </td>
+            <td style="padding:4px 6px; text-align:right; font-weight:800; color:#0F172A; font-size:11.5px;">
+              ${item.qty} <span style="font-size:10px; font-weight:600; color:#64748B;">${escapeHtml(item.unit)}</span>
+            </td>
+            <td style="padding:4px 6px; text-align:right; font-weight:600; color:#334155; font-size:11.5px;">
+              ${item.rate > 0 ? `₹ ${item.rate}` : '-'}
+            </td>
+            <td style="padding:4px 6px; text-align:right; font-weight:900; color:#0F172A; font-size:12px;">
+              ₹ ${item.amount.toLocaleString('en-IN')}
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      return `
+        <div style="font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color:#1E293B; line-height:1.35;">
+          <!-- TOP HEADER -->
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #2D4C2B; padding-bottom:6px; margin-bottom:8px;">
+            <div>
+              <div style="font-size:18px; font-weight:900; color:#1E293B; letter-spacing:0.5px;">ESTIMATE / QUOTATION</div>
+              <div style="font-size:11px; font-weight:700; color:#2D4C2B; margin-top:1px;">Tile Estimator &amp; Billing Pro</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:14px; font-weight:900; color:#2D4C2B;">#${escapeHtml(data.refNo)}</div>
+              <div style="font-size:11px; font-weight:600; color:#64748B;">Date: ${formatIndianDate(data.date)}</div>
+            </div>
+          </div>
+
+          <!-- CUSTOMER STRIP -->
+          <div style="background:#F4F8F3; border:1px solid #D2E4D0; border-radius:6px; padding:5px 9px; margin-bottom:8px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; font-size:11px;">
+            <div><span style="font-weight:700; color:#2D4C2B;">Customer:</span> <span style="font-weight:800; color:#0F172A;">${escapeHtml(data.customerName)}</span></div>
+            ${data.customerPhone !== '-' ? `<div><span style="font-weight:700; color:#2D4C2B;">Phone:</span> <span style="font-weight:800; color:#0F172A;">${escapeHtml(data.customerPhone)}</span></div>` : ''}
+            <div><span style="font-weight:700; color:#2D4C2B;">Site:</span> <span style="font-weight:600; color:#334155;">${escapeHtml(data.siteAddress)}</span></div>
+          </div>
+
+          <!-- COMPACT TABLE -->
+          <table style="width:100%; border-collapse:collapse; margin-bottom:8px; font-size:11px;">
+            <thead>
+              <tr style="background:#2D4C2B; color:#FFFFFF; font-weight:800; text-align:left;">
+                <th style="padding:4px 6px; width:26px; text-align:center;">#</th>
+                <th style="padding:4px 6px;">Item &amp; Specification</th>
+                <th style="padding:4px 6px; text-align:right; width:65px;">Area (SFT)</th>
+                <th style="padding:4px 6px; text-align:right; width:55px;">Qty</th>
+                <th style="padding:4px 6px; text-align:right; width:70px;">Rate (₹)</th>
+                <th style="padding:4px 6px; text-align:right; width:85px;">Amount (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rowsHtml}
+            </tbody>
+          </table>
+
+          <!-- SUMMARY & DUE AMOUNT -->
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; border-top:1.5px solid #CBD5E1; padding-top:6px; gap:10px;">
+            <div style="flex:1;">
+              <div style="font-size:10.5px; color:#334155;"><b>In words:</b> <span style="font-weight:700; color:#0F172A;">${escapeHtml(data.amountInWords)}</span></div>
+              <div style="font-size:9.5px; color:#94A3B8; margin-top:3px;">* Non-GST Quotation / Estimate • Subject to stock confirmation.</div>
+            </div>
+            <div style="min-width:220px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:6px; padding:6px 9px; font-size:11px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:#475569;">
+                <span>Total Units:</span>
+                <span style="font-weight:800; color:#0F172A;">${data.totalBoxes} Bx ${data.totalSft > 0 ? `(${data.totalSft.toFixed(1)} SFT)` : ''}</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:2px; font-size:13px; font-weight:900; color:#0F172A; border-top:1px dashed #CBD5E1; padding-top:3px;">
+                <span>Grand Total:</span>
+                <span style="color:#2D4C2B;">₹ ${data.grandTotal.toLocaleString('en-IN')}</span>
+              </div>
+              ${data.advanceAmount > 0 ? `
+                <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:#059669; font-weight:700;">
+                  <span>Advance Paid:</span>
+                  <span>₹ ${Math.round(data.advanceAmount).toLocaleString('en-IN')}</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-weight:900; color:#B91C1C; border-top:1px solid #FECACA; padding-top:2px; font-size:12px;">
+                  <span>Balance Due:</span>
+                  <span>₹ ${Math.round(data.dueAmount).toLocaleString('en-IN')}</span>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderEstimateCanvasElement(data) {
+      const logicalWidth = 740;
+      let rowsHeight = 0;
+      (data.items || []).forEach(it => {
+        rowsHeight += it.subtitle ? 30 : 22;
+      });
+      const totalsBoxHeight = data.advanceAmount > 0 ? 76 : 52;
+      const logicalHeight = Math.max(340, 56 + 36 + 24 + rowsHeight + totalsBoxHeight + 34);
+
+      const canvas = document.createElement('canvas');
+      const scale = 2; // 2x Retina resolution for razor-sharp text on mobile WhatsApp
+      canvas.width = Math.round(logicalWidth * scale);
+      canvas.height = Math.round(logicalHeight * scale);
+
+      const ctx = canvas.getContext('2d');
+      ctx.scale(scale, scale);
+
+      // Clean white background
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, logicalWidth, logicalHeight);
+
+      // Outer neat frame
+      ctx.strokeStyle = '#2D4C2B';
+      ctx.lineWidth = 1.5;
+      drawCanvasRoundedRect(ctx, 8, 8, logicalWidth - 16, logicalHeight - 16, 6, false, true);
+
+      // TOP HEADER
+      ctx.fillStyle = '#1E293B';
+      ctx.font = '900 17px system-ui, -apple-system, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('ESTIMATE / QUOTATION', 20, 32);
+
+      ctx.fillStyle = '#2D4C2B';
+      ctx.font = '700 11px system-ui, -apple-system, sans-serif';
+      ctx.fillText('Tile Estimator & Billing Pro', 20, 46);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#2D4C2B';
+      ctx.font = '900 14px system-ui, -apple-system, sans-serif';
+      ctx.fillText('#' + (data.refNo || 'EST-1001'), logicalWidth - 20, 32);
+
+      ctx.fillStyle = '#64748B';
+      ctx.font = '600 11px system-ui, -apple-system, sans-serif';
+      ctx.fillText('Date: ' + formatIndianDate(data.date), logicalWidth - 20, 46);
+
+      // Header bottom green rule
+      ctx.strokeStyle = '#2D4C2B';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(18, 54);
+      ctx.lineTo(logicalWidth - 18, 54);
+      ctx.stroke();
+
+      // CUSTOMER BAR
+      ctx.fillStyle = '#F4F8F3';
+      ctx.strokeStyle = '#D2E4D0';
+      ctx.lineWidth = 1;
+      drawCanvasRoundedRect(ctx, 18, 60, logicalWidth - 36, 28, 4, true, true);
+
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#2D4C2B';
+      ctx.font = '700 10.5px system-ui, -apple-system, sans-serif';
+      ctx.fillText('Customer:', 26, 78);
+
+      ctx.fillStyle = '#0F172A';
+      ctx.font = '800 11px system-ui, -apple-system, sans-serif';
+      ctx.fillText(data.customerName || 'Walk-in Customer', 82, 78);
+
+      if (data.customerPhone && data.customerPhone !== '-') {
+        ctx.fillStyle = '#2D4C2B';
+        ctx.font = '700 10.5px system-ui, -apple-system, sans-serif';
+        ctx.fillText('Phone:', 285, 78);
+
+        ctx.fillStyle = '#0F172A';
+        ctx.font = '800 11px system-ui, -apple-system, sans-serif';
+        ctx.fillText(data.customerPhone, 325, 78);
+      }
+
+      ctx.fillStyle = '#2D4C2B';
+      ctx.font = '700 10.5px system-ui, -apple-system, sans-serif';
+      ctx.fillText('Site:', 450, 78);
+
+      ctx.fillStyle = '#334155';
+      ctx.font = '600 10.5px system-ui, -apple-system, sans-serif';
+      const maxSiteWidth = logicalWidth - 36 - 485;
+      let siteStr = data.siteAddress || 'Site: As Specified';
+      if (ctx.measureText(siteStr).width > maxSiteWidth) {
+        while (siteStr.length > 5 && ctx.measureText(siteStr + '...').width > maxSiteWidth) {
+          siteStr = siteStr.slice(0, -1);
+        }
+        siteStr += '...';
+      }
+      ctx.fillText(siteStr, 480, 78);
+
+      // TABLE HEADER
+      const tableTop = 96;
+      ctx.fillStyle = '#2D4C2B';
+      ctx.fillRect(18, tableTop, logicalWidth - 36, 22);
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '800 10px system-ui, -apple-system, sans-serif';
+
+      ctx.textAlign = 'center';
+      ctx.fillText('#', 30, tableTop + 15);
+
+      ctx.textAlign = 'left';
+      ctx.fillText('Item & Specification', 46, tableTop + 15);
+
+      ctx.textAlign = 'right';
+      ctx.fillText('Area (SFT)', 440, tableTop + 15);
+      ctx.fillText('Qty', 505, tableTop + 15);
+      ctx.fillText('Rate (₹)', 585, tableTop + 15);
+      ctx.fillText('Amount (₹)', logicalWidth - 26, tableTop + 15);
+
+      // TABLE ROWS
+      let currY = tableTop + 22;
+      (data.items || []).forEach((item, idx) => {
+        const rowH = item.subtitle ? 30 : 22;
+        const isAlt = idx % 2 === 1;
+
+        // Background
+        ctx.fillStyle = isAlt ? '#F8FAFC' : '#FFFFFF';
+        ctx.fillRect(18, currY, logicalWidth - 36, rowH);
+
+        // Thin bottom border
+        ctx.strokeStyle = '#E2E8F0';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(18, currY + rowH);
+        ctx.lineTo(logicalWidth - 18, currY + rowH);
+        ctx.stroke();
+
+        // Col: #
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#64748B';
+        ctx.font = '700 10px system-ui, -apple-system, sans-serif';
+        ctx.fillText(String(idx + 1), 30, currY + 14);
+
+        // Col: Item & Specification
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#0F172A';
+        ctx.font = '800 11px system-ui, -apple-system, sans-serif';
+        if (item.subtitle) {
+          ctx.fillText(item.name, 46, currY + 13);
+          ctx.font = '600 9px system-ui, -apple-system, sans-serif';
+          ctx.fillStyle = '#475569';
+          const subText = item.subtitle + (item.dimText ? ' • ' + item.dimText : '');
+          ctx.fillText(subText, 46, currY + 24);
+        } else {
+          ctx.fillText(item.name, 46, currY + 15);
+        }
+
+        // Col: Area
+        ctx.textAlign = 'right';
+        ctx.font = '600 10.5px system-ui, -apple-system, sans-serif';
+        ctx.fillStyle = '#334155';
+        ctx.fillText(item.sft > 0 ? item.sft.toFixed(1) : '-', 440, currY + 15);
+
+        // Col: Qty
+        ctx.textAlign = 'right';
+        ctx.font = '800 10.5px system-ui, -apple-system, sans-serif';
+        ctx.fillStyle = '#0F172A';
+        ctx.fillText(`${item.qty} ${item.unit}`, 505, currY + 15);
+
+        // Col: Rate
+        ctx.textAlign = 'right';
+        ctx.font = '600 10.5px system-ui, -apple-system, sans-serif';
+        ctx.fillStyle = '#334155';
+        ctx.fillText(item.rate > 0 ? `₹ ${item.rate}` : '-', 585, currY + 15);
+
+        // Col: Amount
+        ctx.textAlign = 'right';
+        ctx.font = '900 11px system-ui, -apple-system, sans-serif';
+        ctx.fillStyle = '#0F172A';
+        ctx.fillText(`₹ ${item.amount.toLocaleString('en-IN')}`, logicalWidth - 26, currY + 15);
+
+        currY += rowH;
+      });
+
+      // BOTTOM SUMMARY SECTION
+      currY += 8;
+      // Top divider
+      ctx.strokeStyle = '#CBD5E1';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(18, currY);
+      ctx.lineTo(logicalWidth - 18, currY);
+      ctx.stroke();
+
+      currY += 6;
+
+      // Left: In Words & Terms
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#334155';
+      ctx.font = '700 10px system-ui, -apple-system, sans-serif';
+      ctx.fillText('In words: ', 20, currY + 12);
+      ctx.font = '800 10.5px system-ui, -apple-system, sans-serif';
+      ctx.fillStyle = '#0F172A';
+
+      // Simple wrap for long amount in words
+      const wordsStr = data.amountInWords || 'Rupees Zero Only';
+      const maxWordsW = logicalWidth - 270;
+      if (ctx.measureText(wordsStr).width > maxWordsW) {
+        const words = wordsStr.split(' ');
+        let line1 = '', line2 = '';
+        words.forEach(w => {
+          if (ctx.measureText(line1 + ' ' + w).width < maxWordsW) line1 += (line1 ? ' ' : '') + w;
+          else line2 += (line2 ? ' ' : '') + w;
+        });
+        ctx.fillText(line1, 75, currY + 12);
+        if (line2) ctx.fillText(line2, 20, currY + 24);
+      } else {
+        ctx.fillText(wordsStr, 75, currY + 12);
+      }
+
+      ctx.fillStyle = '#94A3B8';
+      ctx.font = '600 9px system-ui, -apple-system, sans-serif';
+      ctx.fillText('* Non-GST Quotation / Estimate • Subject to stock confirmation', 20, currY + 38);
+
+      // Right: Compact Summary Card
+      const boxW = 220;
+      const boxX = logicalWidth - 18 - boxW;
+      const boxH = data.advanceAmount > 0 ? 66 : 44;
+
+      ctx.fillStyle = '#F8FAFC';
+      ctx.strokeStyle = '#E2E8F0';
+      ctx.lineWidth = 1;
+      drawCanvasRoundedRect(ctx, boxX, currY, boxW, boxH, 4, true, true);
+
+      // Total Units
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#64748B';
+      ctx.font = '600 10px system-ui, -apple-system, sans-serif';
+      ctx.fillText('Total Units:', boxX + 8, currY + 14);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#0F172A';
+      ctx.font = '800 10.5px system-ui, -apple-system, sans-serif';
+      const unitSummary = `${data.totalBoxes} Bx ${data.totalSft > 0 ? `(${data.totalSft.toFixed(1)} SFT)` : ''}`;
+      ctx.fillText(unitSummary, boxX + boxW - 8, currY + 14);
+
+      // Grand Total
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#0F172A';
+      ctx.font = '900 11.5px system-ui, -apple-system, sans-serif';
+      ctx.fillText('Grand Total:', boxX + 8, currY + 31);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#2D4C2B';
+      ctx.font = '900 12.5px system-ui, -apple-system, sans-serif';
+      ctx.fillText(`₹ ${data.grandTotal.toLocaleString('en-IN')}`, boxX + boxW - 8, currY + 31);
+
+      // Advance & Due (if advance > 0)
+      if (data.advanceAmount > 0) {
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#059669';
+        ctx.font = '700 10px system-ui, -apple-system, sans-serif';
+        ctx.fillText('Advance Paid:', boxX + 8, currY + 47);
+
+        ctx.textAlign = 'right';
+        ctx.fillText(`₹ ${Math.round(data.advanceAmount).toLocaleString('en-IN')}`, boxX + boxW - 8, currY + 47);
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#B91C1C';
+        ctx.font = '900 10.5px system-ui, -apple-system, sans-serif';
+        ctx.fillText('Balance Due:', boxX + 8, currY + 61);
+
+        ctx.textAlign = 'right';
+        ctx.fillText(`₹ ${Math.round(data.dueAmount).toLocaleString('en-IN')}`, boxX + boxW - 8, currY + 61);
+      }
+
+      return canvas;
+    }
+
+    function drawCanvasRoundedRect(ctx, x, y, w, h, r, fill, stroke) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+      if (fill) ctx.fill();
+      if (stroke) ctx.stroke();
+    }
+
+    async function copyEstimatePhoto() {
+      try {
+        const data = getCleanInvoiceData();
+        if (!data.items || data.items.length === 0) {
+          showToast('⚠️ No items to generate estimate photo.');
+          return;
+        }
+        const canvas = renderEstimateCanvasElement(data);
+        canvas.toBlob(async (blob) => {
+          if (!blob) {
+            downloadEstimatePhoto();
+            return;
+          }
+          try {
+            if (navigator.clipboard && navigator.clipboard.write) {
+              await navigator.clipboard.write([
+                new ClipboardItem({ 'image/png': blob })
+              ]);
+              showToast('📸 <b>Estimate Photo Copied!</b> Paste in WhatsApp (Ctrl+V)');
+            } else {
+              downloadEstimatePhoto();
+            }
+          } catch (clipErr) {
+            console.warn('Clipboard image write not permitted, downloading PNG:', clipErr);
+            downloadEstimatePhoto();
+          }
+        }, 'image/png');
+      } catch (err) {
+        console.error('Copy photo error:', err);
+        downloadEstimatePhoto();
+      }
+    }
+
+    function downloadEstimatePhoto() {
+      try {
+        const data = getCleanInvoiceData();
+        if (!data.items || data.items.length === 0) {
+          showToast('⚠️ No items to save estimate photo.');
+          return;
+        }
+        const canvas = renderEstimateCanvasElement(data);
+        const link = document.createElement('a');
+        const filename = `Estimate_${data.refNo || 'Bill'}.png`;
+        link.download = filename;
+        link.href = canvas.toDataURL('image/png');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        showToast('💾 <b>Estimate photo saved as PNG!</b>');
+      } catch (e) {
+        console.error('Download photo error:', e);
+        showToast('❌ Could not save photo: ' + e.message);
       }
     }
 

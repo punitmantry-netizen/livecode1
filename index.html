@@ -50,7 +50,8 @@
       box-sizing: border-box; 
       margin: 0; 
       padding: 0; 
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+      font-family: Arial, Helvetica, sans-serif; 
+      font-weight: normal;
     }
 
     html {
@@ -72,6 +73,7 @@
       padding-bottom: 60px; 
       -webkit-font-smoothing: antialiased; 
       min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
     }
     @media (max-width: 650px) {
       body {
@@ -96,9 +98,6 @@
       position: relative;
       overflow: hidden;
     }
-      position: relative;
-      overflow: hidden;
-    }
 
     .app-header::after {
       content: "";
@@ -114,7 +113,7 @@
 
     .app-header h1 { 
       font-size: 14.5px; 
-      font-weight: 800; 
+      font-weight: 600; 
       letter-spacing: -0.2px; 
       color: #FFFFFF;
       display: inline-flex;
@@ -128,19 +127,59 @@
       font-size: 11px; 
       color: #D3E0D1; 
       margin: 0 0 0 8px; 
-      font-weight: 500; 
+      font-weight: normal; 
       letter-spacing: 0.1px;
     }
 
     @media (max-width: 650px) {
       .app-header {
-        padding: 6px 10px;
+        padding: 5px 8px;
+        gap: 6px;
       }
       .app-header h1 {
-        font-size: 13.5px;
+        font-size: 13px;
+        white-space: nowrap;
       }
       .app-header p {
         display: none;
+      }
+      .status-badge {
+        padding: 3px 7px;
+        font-size: 10px;
+      }
+      .badge-actions {
+        gap: 5px;
+      }
+      .btn-gear {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+      }
+      .nav-tabs {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 4px !important;
+        padding: 4px !important;
+      }
+      .tab-btn {
+        min-width: 0 !important;
+        padding: 7px 4px !important;
+        font-size: 11.5px !important;
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+      }
+      .tab-btn-new-cust {
+        flex: unset !important;
+        width: 100% !important;
+        justify-content: center !important;
+      }
+      #btnSavedBills {
+        margin-left: 0 !important;
+        width: 100% !important;
+        justify-content: center !important;
       }
     }
 
@@ -254,7 +293,7 @@
       background: #E1EBE0;
       color: #2D4C2B;
       border: 1px dashed #4A6746;
-      font-weight: 800;
+      font-weight: 600;
       flex: 0 0 auto;
       padding: 5px 11px;
       font-size: 12px;
@@ -278,8 +317,8 @@
       border: 1px solid #F8D7DA;
       border-radius: 7px;
       padding: 6px 12px;
-      font-size: 12.5px;
-      font-weight: 800;
+      font-size: 12px;
+      font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -291,13 +330,6 @@
       border-color: #F5C2C7;
       transform: translateY(-1px);
       box-shadow: 0 2px 6px rgba(185, 28, 28, 0.16);
-    }
-    .btn-close-bill:active { transform: scale(0.97); }
-    .btn-close-bill:hover {
-      background: #FCE8E8;
-      border-color: #F5C2C7;
-      transform: translateY(-1px);
-      box-shadow: 0 3px 10px rgba(185, 28, 28, 0.16);
     }
     .btn-close-bill:active { transform: scale(0.97); }
 
@@ -313,7 +345,7 @@
       border-radius: 30px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
       font-size: 13.5px;
-      font-weight: 700;
+      font-weight: 600;
       display: flex;
       align-items: center;
       gap: 9px;
@@ -342,7 +374,7 @@
 
     .card-title {
       font-size: 13.5px;
-      font-weight: 800;
+      font-weight: 600;
       color: #192618;
       margin-bottom: 8px;
       display: flex;
@@ -426,7 +458,7 @@
     
     .room-name-input {
       font-size: 16.5px;
-      font-weight: 800;
+      font-weight: 600;
       color: var(--text);
       border: 1.5px solid transparent;
       padding: 5px 10px;
@@ -511,11 +543,26 @@
     }
     @media (max-width: 650px) {
       .compact-client-bar {
-        flex-wrap: wrap;
-        gap: 6px;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px !important;
+        padding: 6px 8px !important;
       }
       .compact-client-bar > div {
-        flex: 1 1 45% !important;
+        flex: unset !important;
+        width: 100% !important;
+      }
+      .compact-client-bar input {
+        width: 100% !important;
+        height: 32px !important;
+        font-size: 12px !important;
+      }
+      #quoteRefLabel {
+        grid-column: span 2 !important;
+        text-align: center !important;
+        width: fit-content !important;
+        margin: 0 auto !important;
+        padding: 3px 12px !important;
       }
     }
 
@@ -527,6 +574,7 @@
       padding: 8px 10px;
       margin-bottom: 8px;
       box-shadow: 0 2px 8px rgba(74, 103, 70, 0.08);
+      font-family: Arial, Helvetica, sans-serif;
     }
     .room-sheet-top {
       display: flex;
@@ -541,9 +589,42 @@
     .room-top-meta-group {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
       flex: 1;
+    }
+    .room-wall-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .room-chk-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11.5px;
+      font-weight: normal;
+      color: var(--text);
+      cursor: pointer;
+      user-select: none;
+      background: #F4F7F2;
+      border: 1px solid #D6E3D3;
+      padding: 2px 7px;
+      border-radius: 5px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .room-chk-label:hover {
+      border-color: var(--primary);
+      background: #EBF2E8;
+    }
+    .room-chk-label input[type="checkbox"] {
+      width: 14px;
+      height: 14px;
+      accent-color: var(--primary);
+      cursor: pointer;
+      margin: 0;
     }
     .room-dim-chip {
       display: inline-flex;
@@ -556,14 +637,14 @@
     }
     .room-dim-chip-label {
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 600;
       color: var(--primary-dark);
       white-space: nowrap;
     }
     .room-dim-chip-input {
       height: 25px !important;
       font-size: 12px !important;
-      font-weight: 700 !important;
+      font-weight: normal !important;
       padding: 0 6px !important;
       border: 1px solid var(--border) !important;
       border-radius: 4px !important;
@@ -572,7 +653,7 @@
     }
     .room-pill-badge {
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 600;
       color: #FFFFFF;
       background: var(--primary);
       padding: 2px 7px;
@@ -581,7 +662,7 @@
     }
     .room-name-compact-input {
       font-size: 13px !important;
-      font-weight: 700 !important;
+      font-weight: 600 !important;
       height: 27px !important;
       padding: 0 8px !important;
       border: 1px solid var(--border) !important;
@@ -592,7 +673,7 @@
     .btn-compact-ghost {
       padding: 4px 9px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: normal;
       color: var(--text-muted);
       border: 1px solid var(--border);
       border-radius: 4px;
@@ -619,6 +700,95 @@
       background: #F8D7DA;
     }
 
+    .room-top-name-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+    .room-top-meta-dims {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 650px) {
+      .room-sheet-top {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 6px !important;
+      }
+      .room-top-meta-group {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 6px !important;
+        width: 100% !important;
+      }
+      .room-top-name-row {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 6px !important;
+        width: 100% !important;
+      }
+      .room-top-meta-dims {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 6px !important;
+        width: 100% !important;
+      }
+      .room-wall-group {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        width: 100% !important;
+        flex-wrap: wrap !important;
+      }
+      .room-wall-group .room-dim-chip {
+        flex: 1 !important;
+        min-width: 140px !important;
+      }
+      .room-dim-chip {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        padding: 3px 6px !important;
+      }
+      .room-dim-chip-input {
+        width: 55px !important;
+        flex: 1 !important;
+        margin: 0 4px !important;
+        min-width: 40px !important;
+      }
+      .room-name-compact-input {
+        max-width: none !important;
+        flex: 1 !important;
+      }
+      .room-table-container {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        margin: 0 -4px !important;
+        padding: 0 4px !important;
+      }
+      .room-entry-table {
+        width: 100% !important;
+        min-width: 340px !important;
+      }
+      .room-entry-table th, .room-entry-table td {
+        padding: 4px 3px !important;
+      }
+      .room-entry-table .table-input {
+        height: 28px !important;
+        font-size: 11.5px !important;
+      }
+      .room-entry-table .table-select {
+        height: 28px !important;
+        font-size: 11px !important;
+      }
+    }
+
     /* SHEET ENTRY TABLE */
     .room-table-container {
       overflow-x: auto;
@@ -627,12 +797,13 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 12px;
+      font-family: Arial, Helvetica, sans-serif;
     }
     .room-entry-table thead th {
       background: var(--surface-muted);
       color: var(--text-muted);
       font-size: 10.5px;
-      font-weight: 800;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.3px;
       padding: 5px 6px;
@@ -652,24 +823,26 @@
     .room-entry-table tbody td {
       padding: 4px 5px;
       vertical-align: middle;
+      font-weight: normal;
     }
     .td-section {
       font-size: 12px;
       white-space: nowrap;
+      font-weight: normal;
     }
     .compact-chk-label {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-weight: 700;
+      font-weight: normal;
       color: var(--text);
       cursor: pointer;
       user-select: none;
       font-size: 12px;
     }
     .compact-chk-label input[type="checkbox"] {
-      width: 15px;
-      height: 15px;
+      width: 14px;
+      height: 14px;
       accent-color: var(--primary);
       cursor: pointer;
       margin: 0;
@@ -678,7 +851,7 @@
       height: 28px !important;
       padding: 0 7px !important;
       font-size: 12px !important;
-      font-weight: 600 !important;
+      font-weight: normal !important;
       border: 1px solid var(--border) !important;
       border-radius: 4px !important;
       background: #FFFFFF !important;
@@ -692,7 +865,7 @@
       height: 28px !important;
       padding: 0 5px !important;
       font-size: 11.5px !important;
-      font-weight: 600 !important;
+      font-weight: normal !important;
       border: 1px solid var(--border) !important;
       border-radius: 4px !important;
       background: #FFFFFF !important;
@@ -700,7 +873,7 @@
     }
     .table-readonly-box {
       font-size: 11px;
-      font-weight: 700;
+      font-weight: normal;
       color: var(--primary-dark);
       background: var(--primary-tint);
       padding: 4px 6px;
@@ -711,7 +884,7 @@
     }
     .compact-res-pill {
       font-size: 10.5px;
-      font-weight: 800;
+      font-weight: normal;
       color: var(--primary-dark);
       background: var(--primary-tint);
       padding: 3px 7px;
@@ -835,8 +1008,8 @@
     .badge-card:hover {
       transform: translateY(-1.5px);
     }
-    .badge-card .num { font-size: 17px; font-weight: 800; }
-    .badge-card .sub-detail { font-size: 11px; opacity: 0.85; font-weight: 700; }
+    .badge-card .num { font-size: 17px; font-weight: 600; }
+    .badge-card .sub-detail { font-size: 11px; opacity: 0.85; font-weight: normal; }
     
     .badge-lt { 
       background: #EEF4EC; 
@@ -849,75 +1022,79 @@
       border-color: #C6DFC4; 
     }
 
-    /* INVOICE & BILL TABLE */
+    /* INVOICE & BILL TABLE - SINGLE VIEW OPTIMIZED (ARIAL, NO BOLD) */
     #printableInvoiceCard {
-      padding: 20px 22px;
-      margin-bottom: 18px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      font-family: Arial, Helvetica, sans-serif !important;
+    }
+    #printableInvoiceCard * {
+      font-family: Arial, Helvetica, sans-serif !important;
     }
     @media (max-width: 650px) {
       .card, #printableInvoiceCard {
-        padding: 14px 12px;
-        border-radius: 12px;
-        margin-bottom: 14px;
+        padding: 8px 8px;
+        border-radius: 8px;
+        margin-bottom: 8px;
       }
     }
 
     .invoice-header {
-      border-bottom: 1.5px solid var(--border);
-      padding-bottom: 12px;
-      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 5px;
+      margin-bottom: 6px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 6px;
     }
 
     .inv-meta-grid { 
       display: grid; 
       grid-template-columns: 1fr 1fr; 
-      gap: 12px; 
-      font-size: 13px; 
-      margin-bottom: 16px; 
+      gap: 8px; 
+      font-size: 12px; 
+      margin-bottom: 8px; 
     }
     .inv-meta-block { 
       background: var(--surface-muted); 
       border: 1px solid var(--border); 
-      border-radius: 10px; 
-      padding: 12px 14px; 
+      border-radius: 6px; 
+      padding: 6px 10px; 
     }
     .inv-meta-block strong { 
       display: block; 
-      font-size: 11px; 
+      font-size: 10.5px; 
       color: var(--text-muted); 
       text-transform: uppercase; 
-      letter-spacing: 0.4px; 
-      margin-bottom: 8px; 
-      font-weight: 800; 
+      letter-spacing: 0.3px; 
+      margin-bottom: 4px; 
+      font-weight: 600; 
     }
     .inv-meta-fields {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 6px;
     }
     .inv-meta-fields input {
-      height: 38px;
-      padding: 0 10px;
-      font-size: 13.5px;
-      font-weight: 600;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
+      height: 30px;
+      padding: 0 8px;
+      font-size: 12px;
+      font-weight: normal;
+      border: 1px solid var(--border);
+      border-radius: 5px;
       background: #FFFFFF;
       width: 100%;
     }
     @media (max-width: 650px) {
       .inv-meta-grid {
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 6px;
       }
       .inv-meta-fields {
         grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 6px;
       }
     }
 
@@ -925,31 +1102,31 @@
       width: 100%;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     table.bill-table { 
       width: 100%; 
-      min-width: 660px;
       border-collapse: collapse; 
       margin-bottom: 4px; 
+      font-family: Arial, Helvetica, sans-serif;
     }
     table.bill-table th {
       background: #EEF3EB;
-      padding: 9px 8px;
+      padding: 5px 6px;
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
       color: #384F36;
       text-align: left;
       border-bottom: 1.5px solid #D5E1D3;
     }
     table.bill-table td {
-      padding: 8px 8px;
-      font-size: 13px;
+      padding: 3px 6px;
+      font-size: 12px;
       border-bottom: 1px solid var(--border);
-      font-weight: 600;
+      font-weight: normal;
       vertical-align: middle;
       transition: background 0.15s ease;
     }
@@ -960,74 +1137,223 @@
       background: #FAFDF9 !important;
     }
     table.bill-table td input {
-      height: 34px;
-      padding: 0 8px;
-      font-size: 13px;
-      font-weight: 700;
-      border: 1.5px solid var(--border);
-      border-radius: 6px;
+      height: 26px;
+      padding: 0 6px;
+      font-size: 12px;
+      font-weight: normal;
+      border: 1px solid var(--border);
+      border-radius: 4px;
       background: #FFFFFF;
       transition: var(--transition);
     }
     table.bill-table td input:hover { border-color: var(--border-hover); }
     table.bill-table td input:focus { border-color: var(--primary); box-shadow: var(--focus-ring); }
     
-    .item-desc-cell .main-name { font-weight: 800; color: var(--text); font-size: 13px; line-height: 1.3; }
-    .item-desc-cell .meta-info { font-size: 11.5px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+    .item-desc-cell .main-name { font-weight: normal; color: var(--text); font-size: 12px; line-height: 1.25; }
+    .item-desc-cell .meta-info { font-size: 10.5px; color: var(--text-muted); font-weight: normal; margin-top: 1px; }
     .item-desc-cell .dim-pill { 
-      font-size: 10.5px; 
+      font-size: 10px; 
       color: #2F4C2D; 
       background: #EBF3E9; 
       border: 1px solid #D4E3D2;
-      padding: 2px 6px; 
-      border-radius: 4px; 
+      padding: 1px 5px; 
+      border-radius: 3px; 
       display: inline-block; 
-      margin-top: 3px; 
-      font-weight: 600;
+      margin-top: 2px; 
+      font-weight: normal;
     }
 
+    /* COMPACT SIDE-BY-SIDE SUMMARY (SINGLE VIEW) */
+    .inv-summary-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+    }
+    .inv-summary-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .inv-summary-card {
+      min-width: 260px;
+      background: #F8FAF6;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+    }
     .inv-summary-row {
       display: flex;
       justify-content: space-between;
-      padding: 5px 0;
-      font-size: 13px;
-      font-weight: 600;
+      padding: 2px 0;
+      font-size: 11.5px;
+      font-weight: normal;
       color: #2E3E2C;
     }
     .inv-summary-total {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 8px;
-      margin-top: 6px;
-      border-top: 1.5px solid var(--border);
-      font-size: 18px;
-      font-weight: 900;
+      padding-top: 4px;
+      margin-top: 3px;
+      border-top: 1px solid var(--border);
+      font-size: 14px;
+      font-weight: 600;
       color: var(--primary-dark);
     }
     .inv-advance-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 0;
+      padding: 3px 0;
       border-top: 1px dashed var(--border);
-      margin-top: 6px;
-      font-size: 13.5px;
-      font-weight: 700;
+      margin-top: 3px;
+      font-size: 11.5px;
+      font-weight: normal;
       color: var(--text);
     }
     .inv-summary-due-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 14px;
+      padding: 3px 6px;
       background: #FDF2F2;
-      border: 1.5px solid #FCA5A5;
-      border-radius: 8px;
-      margin-top: 6px;
+      border: 1px solid #FCA5A5;
+      border-radius: 4px;
+      margin-top: 3px;
+    }
+    .inv-charge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.5px 0;
+      font-size: 11.5px;
+      color: #374151;
+    }
+    .inv-charge-input {
+      width: 78px;
+      height: 22px;
+      text-align: right;
+      font-size: 11px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0 5px;
+      background: #FFFFFF;
+      font-family: Arial, sans-serif;
       transition: var(--transition);
     }
-    .amount-words { font-size: 12px; font-weight: 600; color: var(--text-muted); font-style: italic; margin-top: 5px; text-align: right; }
+    .inv-charge-input:focus {
+      border-color: var(--primary);
+      box-shadow: var(--focus-ring);
+      outline: none;
+    }
+    .inv-summary-final-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 4px;
+      margin-top: 3px;
+      border-top: 1.5px solid var(--border);
+      font-size: 13.5px;
+      color: var(--text);
+    }
+    .room-section-badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: #F0F6EF;
+      color: #2D4C2B;
+      border: 1px solid #D6E5D4;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    .room-section-badge.direct {
+      background: #F3F4F6;
+      color: #4B5563;
+      border-color: #E5E7EB;
+    }
+    .amount-words { font-size: 11px; font-weight: normal; color: var(--text-muted); font-style: italic; margin-top: 2px; }
+    .inv-terms {
+      margin-top: 4px;
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.3;
+      border-top: 1px dashed var(--border);
+      padding-top: 3px;
+    }
+
+    @media (max-width: 650px) {
+      /* MOBILE FRIENDLY BILL TABLE - 100% WIDTH, NO HORIZONTAL SCROLL */
+      table.bill-table {
+        min-width: 100% !important;
+        width: 100% !important;
+      }
+      .col-area, .col-ratesft {
+        display: none !important;
+      }
+      .col-sno {
+        width: 20px !important;
+        padding: 4px 2px !important;
+        font-size: 11px !important;
+      }
+      .col-item {
+        width: auto !important;
+        padding: 4px 4px !important;
+        font-size: 11.5px !important;
+      }
+      .col-qty {
+        width: 48px !important;
+        padding: 4px 2px !important;
+        font-size: 11.5px !important;
+      }
+      .col-rate {
+        width: 58px !important;
+        padding: 4px 2px !important;
+      }
+      .col-total {
+        width: 65px !important;
+        padding: 4px 2px !important;
+        font-size: 11.5px !important;
+      }
+      .col-action {
+        width: 22px !important;
+        padding: 4px 2px !important;
+      }
+      table.bill-table td input {
+        height: 26px !important;
+        font-size: 11px !important;
+        padding: 0 3px !important;
+      }
+      .bill-rate-input {
+        width: 52px !important;
+      }
+      .bill-qty-input {
+        width: 32px !important;
+      }
+      #inlineItemSearch {
+        height: 28px !important;
+        font-size: 11.5px !important;
+      }
+      #inlineItemQty {
+        width: 34px !important;
+        height: 28px !important;
+      }
+      #inlineItemRate {
+        width: 52px !important;
+        height: 28px !important;
+      }
+      .inv-summary-container {
+        flex-direction: column !important;
+        gap: 6px !important;
+      }
+      .inv-summary-card {
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+    }
 
     /* ACCESSORIES PILLS */
     .acc-quick-pills { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; margin-bottom: 6px; }
@@ -1148,7 +1474,7 @@
       border: none;
       color: #DC2626;
       font-size: 17px;
-      font-weight: 800;
+      font-weight: normal;
       cursor: pointer;
       padding: 2px 6px;
       border-radius: 4px;
@@ -1171,18 +1497,19 @@
       -webkit-backdrop-filter: blur(8px);
       border-top: 1px solid var(--border);
       padding: 5px 14px;
-      height: 46px;
+      height: 42px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       box-shadow: 0 -2px 10px rgba(35, 52, 33, 0.06);
       z-index: 100;
+      font-family: Arial, Helvetica, sans-serif;
     }
     .bar-stats { display: flex; gap: 12px; align-items: center; }
     .stat-pill { display: flex; align-items: baseline; gap: 4px; }
-    .stat-pill span:first-child { font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
-    .stat-pill span:last-child { font-size: 13.5px; font-weight: 800; color: var(--text); }
-    .stat-pill.primary span:last-child { color: var(--primary-dark); font-size: 15px; }
+    .stat-pill span:first-child { font-size: 10px; color: var(--text-muted); font-weight: normal; text-transform: uppercase; }
+    .stat-pill span:last-child { font-size: 13px; font-weight: 600; color: var(--text); }
+    .stat-pill.primary span:last-child { color: var(--primary-dark); font-size: 14px; }
 
     /* MODAL */
     .modal-overlay {
@@ -1200,17 +1527,18 @@
     .modal-card {
       background: #FFFFFF;
       border-radius: var(--radius-lg);
-      padding: 22px;
+      padding: 18px;
       max-width: 480px;
       width: 100%;
       max-height: 85vh;
       overflow-y: auto;
       box-shadow: var(--shadow-lg);
       border: 1px solid var(--border);
+      font-family: Arial, Helvetica, sans-serif;
     }
     .modal-title { 
-      font-size: 16.5px; 
-      font-weight: 800; 
+      font-size: 15px; 
+      font-weight: 600; 
       color: var(--text); 
       margin-bottom: 12px; 
       display: flex; 
@@ -1232,19 +1560,22 @@
     .invoice-collapsed table.bill-table th {
       padding: 3px 5px !important;
       font-size: 11px !important;
+      font-weight: 600 !important;
     }
     .invoice-collapsed table.bill-table td {
       padding: 2.5px 5px !important;
       font-size: 11.5px !important;
+      font-weight: normal !important;
     }
     .invoice-collapsed table.bill-table td input {
       height: 25px !important;
       font-size: 11.5px !important;
+      font-weight: normal !important;
       padding: 0 4px !important;
     }
     .invoice-collapsed .item-desc-cell .main-name {
       font-size: 11.5px !important;
-      font-weight: 800 !important;
+      font-weight: normal !important;
       line-height: 1.2 !important;
     }
     .invoice-collapsed .item-desc-cell .meta-info {
@@ -1395,7 +1726,7 @@
       table.bill-table td input { 
         border: none !important; 
         background: transparent !important; 
-        font-weight: 700 !important; 
+        font-weight: 600 !important; 
         width: auto !important; 
         height: auto !important;
         padding: 0 !important;
@@ -1405,7 +1736,7 @@
       }
       .item-desc-cell .main-name { 
         font-size: 8pt !important; 
-        font-weight: 800 !important;
+        font-weight: 600 !important;
         color: #000 !important;
       }
       .item-desc-cell .meta-info { 
@@ -1428,7 +1759,7 @@
       }
       .inv-summary-total {
         font-size: 10.5pt !important;
-        font-weight: 900 !important;
+        font-weight: 600 !important;
         padding-top: 2px !important;
         border-top: 1.5px solid #000 !important;
         margin-top: 2px !important;
@@ -1451,7 +1782,7 @@
       .inv-summary-due-row span {
         font-size: 9pt !important;
         color: #000 !important;
-        font-weight: 800 !important;
+        font-weight: 600 !important;
       }
       .amount-words {
         font-size: 7pt !important;
@@ -1498,7 +1829,7 @@
         <span>➕</span> New Customer
       </button>
       <button class="tab-btn no-print" id="btnSavedBills" onclick="openSavedBillsModal()" title="View Final Saved Bills" style="background:#fff; border:1.5px solid var(--border); margin-left:auto;">
-        <span>📁</span> Saved Bills <span id="savedBillsCountBadge" style="background:var(--primary-subtle); color:var(--primary); font-size:11px; padding:2px 7px; border-radius:10px; margin-left:4px; font-weight:800;">0</span>
+        <span>📁</span> Saved Bills <span id="savedBillsCountBadge" style="background:var(--primary-subtle); color:var(--primary); font-size:11px; padding:2px 7px; border-radius:10px; margin-left:4px; font-weight:600;">0</span>
       </button>
     </nav>
 
@@ -1563,34 +1894,43 @@
     <!-- ========================================== -->
     <div id="tab-rates" style="display: none;">
       
-      <!-- INVOICE CARD FOR DISPLAY & PRINT -->
+      <!-- INVOICE CARD FOR DISPLAY & PRINT (SINGLE VIEW, ARIAL, NO BOLD) -->
       <div class="card" id="printableInvoiceCard">
         
-        <!-- INVOICE HEADER (NO SHOP NAME + CLOSE BILL CROSS) -->
+        <!-- INVOICE HEADER (TITLE, REF, DATE & ACTIONS IN SINGLE SLEEK LINE) -->
         <div class="invoice-header">
-          <div style="display:flex; align-items:baseline; gap:8px;">
-            <div style="font-size:15px; font-weight:900; color:var(--text); letter-spacing:0.2px;">ESTIMATE / QUOTATION</div>
-            <div style="font-size:12px; font-weight:800; color:var(--primary);" id="invRefNum">#EST-1001</div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:14px; font-weight:600; color:var(--text); letter-spacing:0.2px;">ESTIMATE / QUOTATION</span>
+            <span style="font-size:12px; font-weight:600; color:var(--primary);" id="invRefNum">#EST-1001</span>
           </div>
           
-          <!-- RIGHT ACTIONS: DATE, COLLAPSE VIEW, PREVIEW, FINAL SAVE & CLOSE BILL CROSS -->
-          <div style="display:flex; align-items:center; gap:6px;" class="no-print">
-            <div style="font-size:11.5px; font-weight:700; color:var(--text-muted);" id="invDate">Date: 03/11/2026</div>
-            <button type="button" class="btn btn-outline" id="btnToggleInvoiceCollapse" onclick="toggleInvoiceCollapseView()" title="Toggle collapsed single-screen photo view" style="padding:5px 9px; font-size:11px; font-weight:700; background:#FFF; border:1px solid var(--border); border-radius:6px; color:var(--primary-dark); display:inline-flex; align-items:center; gap:4px;">
+          <!-- RIGHT ACTIONS: DATE & SINGLE-ROW TOOLBAR -->
+          <div style="display:flex; align-items:center; gap:5px; flex-wrap:wrap;" class="no-print">
+            <span style="font-size:11.5px; color:var(--text-muted); margin-right:4px;" id="invDate">Date: 03/11/2026</span>
+            <button type="button" class="btn btn-outline" id="btnToggleInvoiceCollapse" onclick="toggleInvoiceCollapseView()" title="Toggle collapsed single-screen photo view" style="padding:4px 8px; font-size:11px; background:#FFF; border:1px solid var(--border); border-radius:5px; color:var(--primary-dark); cursor:pointer;">
               <span>⊞</span> <span id="collapseViewLabel">Collapsed View</span>
             </button>
-            <button type="button" class="btn btn-preview" onclick="openPrintPreviewModal()" title="Preview collapsed single photo to copy or print" style="padding:5px 10px; font-size:11.5px; font-weight:800; background:#2D4C2B; color:#FFF; border-radius:6px; border:none; display:inline-flex; align-items:center; gap:4px; cursor:pointer;">
+            <button type="button" class="btn btn-preview" onclick="openPrintPreviewModal()" title="Preview collapsed single photo to copy or print" style="padding:4px 9px; font-size:11px; background:#2D4C2B; color:#FFF; border-radius:5px; border:none; cursor:pointer;">
               <span>📸</span> Photo Preview
             </button>
-            <button type="button" class="btn btn-final-save" onclick="finalSaveBill()" title="Final save this quotation in records" style="padding:6px 12px; font-size:12px;">
+            <button type="button" class="btn btn-final-save" onclick="finalSaveBill()" title="Final save this quotation in records" style="padding:4px 10px; font-size:11px; border-radius:5px;">
               <span>💾</span> Final Save
             </button>
-            <button type="button" class="btn-close-bill" onclick="closeInvoiceBill()" title="Close current bill and clear for next customer (stays in app)">
-              <span style="font-size:14px; font-weight:900; line-height:1;">✕</span> Close Bill
+            <button type="button" class="btn btn-wa" onclick="shareOnWhatsApp()" style="padding:4px 9px; font-size:11px; border-radius:5px;">
+              <span>📲</span> WhatsApp
+            </button>
+            <button type="button" class="btn btn-print" onclick="window.print()" style="padding:4px 9px; font-size:11px; border-radius:5px;">
+              <span>🖨️</span> Print
+            </button>
+            <button type="button" class="btn btn-tally" onclick="openTallyModal()" style="padding:4px 9px; font-size:11px; border-radius:5px;">
+              <span>📤</span> Tally
+            </button>
+            <button type="button" class="btn-close-bill" onclick="closeInvoiceBill()" title="Close current bill for next customer" style="padding:4px 9px; font-size:11px; border-radius:5px;">
+              <span>✕</span> Close Bill
             </button>
           </div>
           <div class="print-only" style="text-align: right;">
-            <div style="font-size:11.5px; font-weight:700; color:#333;" id="invDatePrint">Date: 03/11/2026</div>
+            <div style="font-size:11px; color:#333;" id="invDatePrint">Date: 03/11/2026</div>
           </div>
         </div>
 
@@ -1614,7 +1954,7 @@
         <div class="inv-print-meta-grid print-only">
           <div>
             <strong>Customer Details:</strong>
-            <span id="invCustName" style="font-weight:700;">Walk-in Customer</span>
+            <span id="invCustName">Walk-in Customer</span>
             <span id="invCustPhone" style="color:#444; margin-left:6px;">-</span>
           </div>
           <div>
@@ -1628,86 +1968,97 @@
           <table class="bill-table">
             <thead>
               <tr>
-                <th style="width:25px;">#</th>
-                <th>Item & Wall / Stock Specification</th>
-                <th style="text-align:right; width:75px;">Area (SFT)</th>
-                <th style="text-align:right; width:75px;">Qty</th>
-                <th style="text-align:right; width:95px;">Rate (₹)</th>
-                <th style="text-align:right; width:75px;">Rate/SFT</th>
-                <th style="text-align:right; width:95px;">Total (₹)</th>
-                <th style="width:32px;" class="no-print"></th>
+                <th style="width:25px;" class="col-sno">#</th>
+                <th class="col-item">Item Name</th>
+                <th class="col-section" style="width:115px;">Room / Section</th>
+                <th style="text-align:right; width:80px;" class="col-area">Area</th>
+                <th style="text-align:right; width:65px;" class="col-qty">Qty</th>
+                <th style="text-align:right; width:85px;" class="col-rate">Rate (₹)</th>
+                <th style="text-align:right; width:70px;" class="col-ratesft rate-sft-cell">Rate/SFT</th>
+                <th style="text-align:right; width:90px;" class="col-total line-total-cell">Total (₹)</th>
+                <th style="width:30px;" class="col-action no-print"></th>
               </tr>
             </thead>
             <tbody id="billItems"></tbody>
           </table>
         </div>
 
-        <!-- INVOICE TOTALS & SUMMARY (NO GST) -->
-        <div style="padding-top:10px; border-top:1.5px solid var(--border);">
-          <div class="inv-summary-row">
-            <span>Subtotal (Boxes/Units: <b id="invTotalBoxes">0</b> • Tile SFT: <b id="invTotalSft">0</b>)</span>
-            <span id="invSubTotal" style="font-weight:700;">₹ 0</span>
-          </div>
-
-          <div class="inv-summary-total">
-            <span>Grand Total</span>
-            <span id="billTotal">₹ 0</span>
-          </div>
-
-          <!-- ADVANCE AMOUNT FIELD -->
-          <div class="inv-advance-row">
-            <span>Advance Paid / Received:</span>
-            <div class="no-print" style="display:flex; align-items:center; gap:6px;">
-              <span style="font-size:13px; font-weight:700; color:var(--text-muted);">₹</span>
-              <input type="number" id="invAdvanceInput" min="0" step="100" placeholder="0" value="0"
-                oninput="handleAdvanceInput(this.value)"
-                style="width:115px; height:34px; text-align:right; font-weight:800; font-size:13.5px; border:1.5px solid var(--primary-light); border-radius:6px; padding:0 8px;" />
+        <!-- INVOICE TOTALS & SUMMARY: COMPACT SIDE-BY-SIDE (NO SCROLLING) -->
+        <div class="inv-summary-container">
+          <div class="inv-summary-left">
+            <div class="amount-words" id="invAmountInWords">Rupees Zero Only</div>
+            <div class="inv-terms">
+              <span><b>Terms:</b> Rates valid 7 days. Check tile shade & size before fixing. Breakage in transport at customer risk.</span>
             </div>
-            <span class="print-only" id="invAdvancePrint" style="font-weight:700;">₹ 0</span>
           </div>
 
-          <!-- DUE AMOUNT FIELD -->
-          <div class="inv-summary-due-row" id="invDueRow">
-            <span id="invDueLabel" style="font-size:13.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.3px; color:#991B1B;">Balance Due Amount:</span>
-            <span id="invDueAmount" style="font-size:18px; font-weight:900; color:#B91C1C;">₹ 0</span>
+          <div class="inv-summary-card">
+            <div class="inv-summary-row">
+              <span>Subtotal (<span id="invTotalBoxes">0</span> Bx • <span id="invTotalSft">0</span> SFT):</span>
+              <span id="invSubTotal">₹ 0</span>
+            </div>
+
+            <div class="inv-summary-total">
+              <span>Grand Total:</span>
+              <span id="billTotal" style="color:var(--primary-dark); font-weight:600;">₹ 0</span>
+            </div>
+
+            <!-- AUTO, LABOUR, GST CHARGES AFTER GRAND TOTAL -->
+            <div class="inv-charge-row">
+              <span style="display:inline-flex; align-items:center; gap:4px;">🚚 Auto Charges:</span>
+              <div class="no-print" style="display:flex; align-items:center; gap:3px;">
+                <span style="font-size:11px; color:var(--text-muted);">₹</span>
+                <input type="number" id="invAutoInput" min="0" step="50" placeholder="0" value="0"
+                  oninput="handleChargeInput('auto', this.value)"
+                  class="inv-charge-input" />
+              </div>
+              <span class="print-only" id="invAutoPrint">₹ 0</span>
+            </div>
+
+            <div class="inv-charge-row">
+              <span style="display:inline-flex; align-items:center; gap:4px;">👷 Labour Charges:</span>
+              <div class="no-print" style="display:flex; align-items:center; gap:3px;">
+                <span style="font-size:11px; color:var(--text-muted);">₹</span>
+                <input type="number" id="invLabourInput" min="0" step="50" placeholder="0" value="0"
+                  oninput="handleChargeInput('labour', this.value)"
+                  class="inv-charge-input" />
+              </div>
+              <span class="print-only" id="invLabourPrint">₹ 0</span>
+            </div>
+
+            <div class="inv-charge-row">
+              <span style="display:inline-flex; align-items:center; gap:4px;">🏛️ GST Charges:</span>
+              <div class="no-print" style="display:flex; align-items:center; gap:3px;">
+                <span style="font-size:11px; color:var(--text-muted);">₹</span>
+                <input type="number" id="invGstInput" min="0" step="50" placeholder="0" value="0"
+                  oninput="handleChargeInput('gst', this.value)"
+                  class="inv-charge-input" />
+              </div>
+              <span class="print-only" id="invGstPrint">₹ 0</span>
+            </div>
+
+            <div class="inv-summary-final-row" id="invFinalTotalRow">
+              <span style="font-weight:600;">Total Payable:</span>
+              <span id="invPayableTotal" style="font-weight:600; color:var(--primary-dark);">₹ 0</span>
+            </div>
+
+            <div class="inv-advance-row">
+              <span>Advance Paid:</span>
+              <div class="no-print" style="display:flex; align-items:center; gap:4px;">
+                <span style="font-size:11.5px; color:var(--text-muted);">₹</span>
+                <input type="number" id="invAdvanceInput" min="0" step="100" placeholder="0" value="0"
+                  oninput="handleAdvanceInput(this.value)"
+                  style="width:78px; height:22px; text-align:right; font-size:11.5px; border:1px solid var(--primary-light); border-radius:4px; padding:0 4px;" />
+              </div>
+              <span class="print-only" id="invAdvancePrint">₹ 0</span>
+            </div>
+
+            <div class="inv-summary-due-row" id="invDueRow">
+              <span id="invDueLabel" style="font-size:11.5px; color:#991B1B;">Balance Due:</span>
+              <span id="invDueAmount" style="font-size:13px; font-weight:600; color:#B91C1C;">₹ 0</span>
+            </div>
           </div>
-
-          <div class="amount-words" id="invAmountInWords">Rupees Zero Only</div>
         </div>
-
-        <!-- TERMS -->
-        <div class="inv-terms" style="margin-top:22px; padding-top:12px; border-top:1px dashed var(--border); font-size:11px; color:var(--text-muted); line-height:1.5;">
-          <b>Terms & Conditions:</b><br />
-          1. Rates are valid for 7 days from quote date.<br />
-          2. Check tile shade/batch and size before fixing. No claims entertained after tiles are laid.<br />
-          3. Breakage in transportation at customer risk.
-        </div>
-      </div>
-
-      <!-- ACTION BUTTONS: FINAL SAVE, PHOTO PREVIEW, PRINT, WHATSAPP, TALLY -->
-      <div class="btn-action-grid no-print" style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));">
-        <button class="btn btn-final-save" onclick="finalSaveBill()">
-          <span>💾</span> Final Save Bill
-        </button>
-        <button class="btn btn-preview" onclick="openPrintPreviewModal()" style="background:#2D4C2B; color:#FFFFFF; font-weight:800;" title="Collapsed single-photo print preview">
-          <span>📸</span> Single Photo Preview
-        </button>
-        <button class="btn btn-wa" onclick="shareOnWhatsApp()">
-          <span>📲</span> Share on WhatsApp
-        </button>
-        <button class="btn btn-print" onclick="window.print()">
-          <span>🖨️</span> Print / Save PDF
-        </button>
-        <button class="btn btn-tally" onclick="openTallyModal()">
-          <span>📤</span> Push to Tally
-        </button>
-      </div>
-
-      <!-- SECONDARY ACTIONS -->
-      <div style="margin-top:12px;" class="no-print">
-        <button type="button" class="btn btn-close-bill" style="width:100%; justify-content:center; padding:12px;" onclick="closeInvoiceBill()">
-          <span>✕</span> Close Current Bill for Next Customer
-        </button>
       </div>
     </div>
   </div>
@@ -1728,8 +2079,8 @@
         <span id="barGrandTotal">₹ 0</span>
       </div>
       <div class="stat-pill" id="barDuePill" style="display:none;">
-        <span style="color:#DC2626; font-weight:800;">Due Amount</span>
-        <span id="barDueAmount" style="color:#B91C1C; font-weight:900;">₹ 0</span>
+        <span style="color:#DC2626; font-weight:600;">Due Amount</span>
+        <span id="barDueAmount" style="color:#B91C1C; font-weight:600;">₹ 0</span>
       </div>
       <div class="autosave-pill" id="barAutosavePill" title="Continuous Autosave active">
         <span class="dot"></span>
@@ -1785,10 +2136,29 @@
       <div class="modal-title">
         <div style="display:flex; align-items:center; gap:8px;">
           <span>📁</span>
-          <span>Final Saved Bills Records</span>
+          <span>Saved Bills Records (Documents & Local)</span>
         </div>
         <button type="button" class="btn-close" onclick="closeSavedBillsModal()">&times;</button>
       </div>
+
+      <!-- LOCATION & BACKUP ACTIONS BAR -->
+      <div style="font-size:11.5px; color:#234821; background:#EBF4EA; border:1px solid #CDE2C9; border-radius:6px; padding:6px 10px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span>💾</span>
+          <span>Folder: <b>Documents\CRM\records\</b></span>
+          <span id="recordsFolderStatusBadge" style="background:#2E7D32; color:#fff; font-size:10px; padding:1px 6px; border-radius:10px;">Synced</span>
+        </div>
+        <div style="display:flex; gap:6px;">
+          <button type="button" class="btn btn-outline" onclick="exportAllBillsJson()" title="Download backup of all saved records as JSON" style="padding:3px 8px; font-size:11px; background:#fff; font-weight:normal;">
+            📥 Export Backup
+          </button>
+          <label class="btn btn-outline" title="Open or import a previously saved bill from Documents / PC" style="padding:3px 8px; font-size:11px; background:#fff; cursor:pointer; margin:0; font-weight:normal;">
+            📂 Import File
+            <input type="file" id="importBillFileInput" accept=".json" style="display:none;" onchange="importBillFile(event)" />
+          </label>
+        </div>
+      </div>
+
       <div style="margin-bottom:12px; display:flex; gap:10px;">
         <input type="text" id="savedBillsSearch" placeholder="🔍 Search saved bills by customer, phone, or bill #..." oninput="renderSavedBillsList(this.value)" style="flex:1; padding:9px 12px; font-size:13px; border:1px solid var(--border); border-radius:8px;" />
       </div>
@@ -1796,7 +2166,7 @@
         <!-- Dynamically rendered bills list -->
       </div>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding-top:12px; border-top:1px solid var(--border);">
-        <span style="font-size:12.5px; font-weight:700; color:var(--text-muted);" id="savedBillsTotalCount">Total: 0 bills</span>
+        <span style="font-size:12.5px; font-weight:600; color:var(--text-muted);" id="savedBillsTotalCount">Total: 0 bills</span>
         <button type="button" class="btn" style="background:var(--surface-muted); color:var(--text); border:1px solid var(--border);" onclick="closeSavedBillsModal()">Close</button>
       </div>
     </div>
@@ -1804,40 +2174,43 @@
 
   <!-- MODAL: COLLAPSED SINGLE PHOTO PRINT PREVIEW -->
   <div class="modal-overlay" id="printPreviewModal" style="display:none;">
-    <div class="modal-card" style="max-width:820px; width:96%; max-height:92vh; display:flex; flex-direction:column; padding:16px;">
-      <div class="modal-title" style="margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid var(--border);">
-        <div style="display:flex; align-items:center; gap:8px;">
-          <span style="font-size:18px;">📸</span>
-          <div>
-            <div style="font-size:15px; font-weight:800; color:var(--text);">Single Photo Print Preview</div>
-            <div style="font-size:11px; color:var(--text-muted); font-weight:600;">Collapsed single-sheet view formatted to send as a clear single photo on WhatsApp or 1-page print</div>
+    <div class="modal-card preview-modal-card" style="max-width:820px; width:96%; max-height:92vh; display:flex; flex-direction:column; padding:16px;">
+      <div class="preview-modal-header">
+        <div class="preview-modal-title-row">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:18px;">📸</span>
+            <div>
+              <div style="font-size:15px; font-weight:600; color:var(--text);">Single Photo Print Preview</div>
+              <div class="preview-modal-subtitle" style="font-size:11px; color:var(--text-muted); font-weight:normal;">Collapsed single-sheet view for WhatsApp &amp; 1-page print</div>
+            </div>
           </div>
+          <button type="button" class="btn-close mobile-only" onclick="closePrintPreviewModal()">&times;</button>
         </div>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <button type="button" class="btn btn-wa" onclick="copyEstimatePhoto()" title="Copy single photo to clipboard (Ctrl+V in WhatsApp)" style="padding:6px 12px; font-size:12px; background:#25D366; color:#FFF; font-weight:800; border:none; display:inline-flex; align-items:center; gap:5px;">
+        <div class="preview-modal-actions">
+          <button type="button" class="btn btn-wa" onclick="copyEstimatePhoto()" title="Copy single photo to clipboard (Ctrl+V in WhatsApp)" style="padding:6px 12px; font-size:12px; background:#25D366; color:#FFF; font-weight:600; border:none; display:inline-flex; align-items:center; gap:5px;">
             <span>📸</span> Copy Photo
           </button>
-          <button type="button" class="btn btn-outline" onclick="downloadEstimatePhoto()" title="Download as PNG image file" style="padding:6px 11px; font-size:12px; font-weight:700; background:#FFF; border:1px solid var(--border); display:inline-flex; align-items:center; gap:4px;">
+          <button type="button" class="btn btn-outline" onclick="downloadEstimatePhoto()" title="Download as PNG image file" style="padding:6px 11px; font-size:12px; font-weight:600; background:#FFF; border:1px solid var(--border); display:inline-flex; align-items:center; gap:4px;">
             <span>💾</span> Save PNG
           </button>
-          <button type="button" class="btn btn-print" onclick="window.print()" title="Print single page" style="padding:6px 11px; font-size:12px; font-weight:700;">
+          <button type="button" class="btn btn-print" onclick="window.print()" title="Print single page" style="padding:6px 11px; font-size:12px; font-weight:600;">
             <span>🖨️</span> Print
           </button>
-          <button type="button" class="btn-close" onclick="closePrintPreviewModal()">&times;</button>
+          <button type="button" class="btn-close desktop-only" onclick="closePrintPreviewModal()">&times;</button>
         </div>
       </div>
 
       <!-- SCROLLABLE PREVIEW CANVAS / CONTAINER -->
-      <div style="overflow-y:auto; flex:1; background:#EBF0E9; padding:12px; border-radius:8px; display:flex; flex-direction:column; align-items:center;">
+      <div style="overflow-y:auto; flex:1; background:#EBF0E9; padding:8px; border-radius:8px; display:flex; flex-direction:column; align-items:center;">
         <!-- Clean Collapsed White Sheet -->
-        <div id="collapsedPreviewCard" style="background:#FFFFFF; border:1.5px solid #CCD8CA; border-radius:8px; width:100%; max-width:720px; padding:14px 18px; box-shadow:0 4px 14px rgba(0,0,0,0.06); font-family:system-ui, -apple-system, sans-serif;">
+        <div id="collapsedPreviewCard" style="background:#FFFFFF; border:1.5px solid #CCD8CA; border-radius:8px; width:100%; max-width:720px; padding:12px 14px; box-shadow:0 4px 14px rgba(0,0,0,0.06); font-family:system-ui, -apple-system, sans-serif; box-sizing:border-box;">
           <!-- Dynamically populated collapsed estimate content -->
         </div>
       </div>
 
       <!-- FOOTER NOTE -->
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; font-size:11.5px; color:var(--text-muted);">
-        <span>💡 <b>Tip:</b> Click <b>Copy Photo</b> and paste directly into WhatsApp chat (Ctrl+V), or download PNG image.</span>
+        <span>💡 <b>Tip:</b> Tap <b>Copy Photo</b> to paste in WhatsApp, or <b>Save PNG</b>.</span>
         <button type="button" class="btn" style="background:var(--surface-muted); color:var(--text); border:1px solid var(--border); padding:5px 14px; font-size:12px;" onclick="closePrintPreviewModal()">Close</button>
       </div>
     </div>
@@ -1872,6 +2245,7 @@
     let rooms = [];
     let activeRoomId = null; // Tracks current room open for data entry; others are minimized
     let directBillItems = []; // Direct stock items & accessories added on invoice
+    window.invoiceCharges = { auto: 0, labour: 0, gst: 0 }; // Auto, Labour, GST charges
     
     // INLINE TABLE DRAFT STATE
     window.inlineSearchDraft = '';
@@ -1888,6 +2262,7 @@
         startNewCustomer(true);
       }
       updateSavedBillsCount();
+      syncSavedBillsFromDocuments();
 
       // Initial Stock Sync
       syncTallyStock(false);
@@ -2371,7 +2746,7 @@
             <div class="room-card-minimised" id="card_${room.id}" onclick="maximizeRoom('${room.id}')" title="Click to edit ${escapeHtml(room.name)}">
               <div style="display:flex; align-items:center; gap:8px; flex:1;">
                 <span class="room-pill-badge">Room ${idx + 1}</span>
-                <span style="font-size:13px; font-weight:800; color:var(--text);">${escapeHtml(room.name)}</span>
+                <span style="font-size:13px; font-weight:600; color:var(--text);">${escapeHtml(room.name)}</span>
                 <span class="card-subtitle" id="min_summary_${room.id}" style="font-size:11px; margin-left:4px;"></span>
               </div>
               <div style="display:flex; align-items:center; gap:6px;">
@@ -2384,86 +2759,104 @@
           `;
         }
 
+        const wallDim = parseDimensionInput(room.wallSize);
+        const grossWallArea = wallDim.sft;
+        const flDim = parseDimensionInput(room.flSizeDim);
+        const flArea = flDim.sft;
+        const hasAnyActive = (room.chkHl || room.chkDk || grossWallArea > 0 || flArea > 0);
+
         // CURRENT OPEN ROOM (EXCEL-STYLE COMPACT SINGLE VIEW, ZERO WASTED SPACE)
         return `
           <div class="room-sheet-card" id="card_${room.id}">
-            <!-- ROOM TOP BAR (ROOM NAME + WALL SIZE + FLOOR SIZE) -->
+            <!-- ROOM TOP BAR (ROOM NAME + WALL SIZE + CHECKBOXES + FLOOR SIZE) -->
             <div class="room-sheet-top">
               <div class="room-top-meta-group">
-                <div style="display:flex; align-items:center; gap:6px;">
-                  <span class="room-pill-badge">Room ${idx + 1}</span>
-                  <input type="text" class="room-name-compact-input" value="${escapeHtml(room.name)}" 
-                    placeholder="Room Name"
-                    oninput="updateRoomField('${room.id}', 'name', this.value)" 
-                    title="Rename room" />
+                <div class="room-top-name-row">
+                  <div style="display:flex; align-items:center; gap:6px; flex:1;">
+                    <span class="room-pill-badge">Room ${idx + 1}</span>
+                    <input type="text" class="room-name-compact-input" value="${escapeHtml(room.name)}" 
+                      placeholder="Room Name"
+                      oninput="updateRoomField('${room.id}', 'name', this.value)" 
+                      title="Rename room" />
+                  </div>
+                  <!-- ACTIONS: MINIMISE & REMOVE -->
+                  <div style="display:flex; align-items:center; gap:5px;">
+                    ${rooms.length > 1 ? `
+                      <button type="button" class="btn-compact-ghost" onclick="minimizeCurrentRoom('${room.id}')" title="Minimise room">
+                        <span>▲</span> Minimise
+                      </button>
+                      <button type="button" class="btn-compact-del" onclick="removeRoom('${room.id}')" title="Remove Room">🗑️</button>
+                    ` : ''}
+                  </div>
                 </div>
 
-                <!-- WALL SIZE RIGHT NEAR ROOM NAME -->
-                <div class="room-dim-chip" title="Total Wall Dimensions (Length × Height / Width)">
-                  <span class="room-dim-chip-label">🧱 Wall:</span>
-                  <input type="text" class="room-dim-chip-input" id="inp_wall_size_${room.id}" value="${escapeHtml(room.wallSize || '')}" 
-                    placeholder="Length * Width" 
-                    oninput="updateRoomField('${room.id}', 'wallSize', this.value)" />
-                  <span id="grossWall_${room.id}" class="compact-res-pill">0 SFT</span>
-                </div>
+                <div class="room-top-meta-dims">
+                  <!-- WALL SIZE + HL & DARK CHECKBOXES IN SAME ROW -->
+                  <div class="room-wall-group">
+                    <div class="room-dim-chip" title="Total Wall Dimensions (Length × Height / Width)">
+                      <span class="room-dim-chip-label">🧱 Wall:</span>
+                      <input type="text" class="room-dim-chip-input" id="inp_wall_size_${room.id}" value="${escapeHtml(room.wallSize || '')}" 
+                        placeholder="Length * Width" 
+                        oninput="updateRoomField('${room.id}', 'wallSize', this.value)" />
+                      <span id="grossWall_${room.id}" class="compact-res-pill">0 SFT</span>
+                    </div>
 
-                <!-- FLOOR SIZE RIGHT NEAR ROOM NAME -->
-                <div class="room-dim-chip" title="Floor Dimensions (Length × Width)">
-                  <span class="room-dim-chip-label">📐 Floor:</span>
-                  <input type="text" class="room-dim-chip-input" id="inp_fl_size_${room.id}" value="${escapeHtml(room.flSizeDim || '')}" 
-                    placeholder="Length * Width" 
-                    oninput="updateRoomField('${room.id}', 'flSizeDim', this.value)" />
-                  <span id="grossFloor_${room.id}" class="compact-res-pill">0 SFT</span>
-                </div>
-              </div>
+                    <!-- CHECKBOXES IN SAME ROW WHERE WALL SIZE IS ASKED -->
+                    <label class="room-chk-label" title="Check to add Highlighter (HL) Wall">
+                      <input type="checkbox" id="chk_hl_${room.id}" ${room.chkHl ? 'checked' : ''} 
+                        onchange="toggleRoomHl('${room.id}', this.checked)" />
+                      <span>✨ HL</span>
+                    </label>
 
-              <!-- ACTIONS: MINIMISE & REMOVE -->
-              <div style="display:flex; align-items:center; gap:6px;">
-                ${rooms.length > 1 ? `
-                  <button type="button" class="btn-compact-ghost" onclick="minimizeCurrentRoom('${room.id}')" title="Minimise room">
-                    <span>▲</span> Minimise
-                  </button>
-                  <button type="button" class="btn-compact-del" onclick="removeRoom('${room.id}')" title="Remove Room">🗑️</button>
-                ` : ''}
+                    <label class="room-chk-label" title="Check to add Dark Wall">
+                      <input type="checkbox" id="chk_dk_${room.id}" ${room.chkDk ? 'checked' : ''} 
+                        onchange="toggleRoomDk('${room.id}', this.checked)" />
+                      <span>🔲 Dark</span>
+                    </label>
+                  </div>
+
+                  <!-- FLOOR SIZE -->
+                  <div class="room-dim-chip" title="Floor Dimensions (Length × Width)">
+                    <span class="room-dim-chip-label">📐 Floor:</span>
+                    <input type="text" class="room-dim-chip-input" id="inp_fl_size_${room.id}" value="${escapeHtml(room.flSizeDim || '')}" 
+                      placeholder="Length * Width" 
+                      oninput="updateRoomField('${room.id}', 'flSizeDim', this.value)" />
+                    <span id="grossFloor_${room.id}" class="compact-res-pill">0 SFT</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- EXCEL-LIKE COMPACT TABLE: 4 TILE LAYERS -->
-            <div class="room-table-container">
+            <!-- EXCEL-LIKE COMPACT TABLE: DYNAMIC ROWS (SHOWN ONLY WHEN CHECKED OR SIZE ENTERED) -->
+            <div class="room-table-container" id="tbl_container_${room.id}" style="${hasAnyActive ? '' : 'display:none;'}">
               <table class="room-entry-table">
                 <thead>
                   <tr>
-                    <th style="width:23%;">Layer / Section</th>
-                    <th style="width:21%;">Size (L × W)</th>
-                    <th style="width:28%;">Tile Name</th>
+                    <th style="width:20%;">Layer / Section</th>
+                    <th style="width:20%;">Size (L × W)</th>
+                    <th style="width:32%;">Tile Name</th>
                     <th style="width:14%;">Tile Size</th>
                     <th style="width:14%; text-align:right;">Result</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- ROW 1: HIGHLIGHTER (HL) WALL -->
-                  <tr id="tr_hl_${room.id}" class="${room.chkHl ? 'tr-active' : ''}">
+                  <!-- ROW 1: HIGHLIGHTER (HL) WALL (SHOWN ONLY IF CHECKED) -->
+                  <tr id="tr_hl_${room.id}" style="${room.chkHl ? '' : 'display:none;'}">
                     <td class="td-section">
-                      <label class="compact-chk-label" title="Check to enable Highlighter Wall">
-                        <input type="checkbox" id="chk_hl_${room.id}" ${room.chkHl ? 'checked' : ''} 
-                          onchange="toggleRoomHl('${room.id}', this.checked)" />
-                        <span>✨ HL Wall</span>
-                      </label>
+                      <span>✨ HL Wall</span>
                     </td>
                     <td>
                       <input type="text" class="table-input" id="inp_hl_size_${room.id}" value="${escapeHtml(room.hlSizeDim || '')}" 
-                        placeholder="${room.chkHl ? 'Length * Width' : 'Check to enable'}" 
-                        ${room.chkHl ? '' : 'disabled style="opacity:0.4;"'}
+                        placeholder="Length * Width" 
                         oninput="updateRoomField('${room.id}', 'hlSizeDim', this.value)" />
                     </td>
                     <td>
                       <input type="text" class="table-input" id="inp_hl_name_${room.id}" list="tallyList" value="${escapeHtml(room.hlName || '')}" 
-                        placeholder="${room.chkHl ? 'Type tile...' : 'Check to enable'}" 
-                        ${room.chkHl ? '' : 'disabled style="opacity:0.4;"'}
+                        placeholder="Type tile..." 
                         oninput="onTileSearchInput('${room.id}', 'hl', this.value)" autocomplete="off" />
                     </td>
                     <td>
-                      <select class="table-select" id="inp_hl_sz_${room.id}" ${room.chkHl ? '' : 'disabled style="opacity:0.4;"'} 
+                      <select class="table-select" id="inp_hl_sz_${room.id}" 
                         onchange="updateRoomSize('${room.id}', 'hl', this.value)">
                         ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.hlSize ? 'selected' : ''}>${s.label}</option>`).join('')}
                       </select>
@@ -2473,29 +2866,23 @@
                     </td>
                   </tr>
 
-                  <!-- ROW 2: DARK WALL -->
-                  <tr id="tr_dk_${room.id}" class="${room.chkDk ? 'tr-active' : ''}">
+                  <!-- ROW 2: DARK WALL (SHOWN ONLY IF CHECKED) -->
+                  <tr id="tr_dk_${room.id}" style="${room.chkDk ? '' : 'display:none;'}">
                     <td class="td-section">
-                      <label class="compact-chk-label" title="Check to enable Dark Wall">
-                        <input type="checkbox" id="chk_dk_${room.id}" ${room.chkDk ? 'checked' : ''} 
-                          onchange="toggleRoomDk('${room.id}', this.checked)" />
-                        <span>🔲 Dark Wall</span>
-                      </label>
+                      <span>🔲 Dark Wall</span>
                     </td>
                     <td>
                       <input type="text" class="table-input" id="inp_dk_size_${room.id}" value="${escapeHtml(room.dkSizeDim || '')}" 
-                        placeholder="${room.chkDk ? 'Length * Width' : 'Check to enable'}" 
-                        ${room.chkDk ? '' : 'disabled style="opacity:0.4;"'}
+                        placeholder="Length * Width" 
                         oninput="updateRoomField('${room.id}', 'dkSizeDim', this.value)" />
                     </td>
                     <td>
                       <input type="text" class="table-input" id="inp_dk_name_${room.id}" list="tallyList" value="${escapeHtml(room.dkName || '')}" 
-                        placeholder="${room.chkDk ? 'Type tile...' : 'Check to enable'}" 
-                        ${room.chkDk ? '' : 'disabled style="opacity:0.4;"'}
+                        placeholder="Type tile..." 
                         oninput="onTileSearchInput('${room.id}', 'dk', this.value)" autocomplete="off" />
                     </td>
                     <td>
-                      <select class="table-select" id="inp_dk_sz_${room.id}" ${room.chkDk ? '' : 'disabled style="opacity:0.4;"'} 
+                      <select class="table-select" id="inp_dk_sz_${room.id}" 
                         onchange="updateRoomSize('${room.id}', 'dk', this.value)">
                         ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.dkSize ? 'selected' : ''}>${s.label}</option>`).join('')}
                       </select>
@@ -2505,10 +2892,10 @@
                     </td>
                   </tr>
 
-                  <!-- ROW 3: PLAIN BASE TILE (REMAINING WALL) -->
-                  <tr id="tr_lt_${room.id}">
+                  <!-- ROW 3: PLAIN BASE TILE (SHOWN ONLY IF WALL SIZE ENTERED) -->
+                  <tr id="tr_lt_${room.id}" style="${grossWallArea > 0 ? '' : 'display:none;'}">
                     <td class="td-section">
-                      <span style="font-weight:700; color:var(--text);">⬜ Plain Base</span>
+                      <span>⬜ Plain Base</span>
                     </td>
                     <td>
                       <div id="netLtArea_${room.id}" class="table-readonly-box">Net: 0 SFT</div>
@@ -2528,10 +2915,10 @@
                     </td>
                   </tr>
 
-                  <!-- ROW 4: FLOOR TILE -->
-                  <tr id="tr_fl_${room.id}">
+                  <!-- ROW 4: FLOOR TILE (SHOWN ONLY IF FLOOR SIZE ENTERED) -->
+                  <tr id="tr_fl_${room.id}" style="${flArea > 0 ? '' : 'display:none;'}">
                     <td class="td-section">
-                      <span style="font-weight:700; color:var(--text);">📐 Floor Tile</span>
+                      <span>📐 Floor Tile</span>
                     </td>
                     <td>
                       <div id="flAreaBadge_${room.id}" class="table-readonly-box">0 SFT</div>
@@ -2590,30 +2977,16 @@
       const room = rooms.find(r => r.id === roomId);
       if (room) {
         room.chkHl = checked;
-        const tr = document.getElementById(`tr_hl_${roomId}`);
-        if (tr) {
-          if (checked) tr.classList.add('tr-active');
-          else tr.classList.remove('tr-active');
-        }
-        const inpSize = document.getElementById(`inp_hl_size_${roomId}`);
-        const inpName = document.getElementById(`inp_hl_name_${roomId}`);
-        const inpSz = document.getElementById(`inp_hl_sz_${roomId}`);
-        [inpSize, inpName, inpSz].forEach(el => {
-          if (el) {
-            el.disabled = !checked;
-            el.style.opacity = checked ? '1' : '0.4';
-          }
-        });
-        if (inpSize) inpSize.placeholder = checked ? 'Length * Width' : 'Check to enable';
-        if (inpName) inpName.placeholder = checked ? 'Type tile...' : 'Check to enable';
-
         calculateAll();
         saveDraft();
-        if (checked && inpSize) {
-          setTimeout(() => {
-            inpSize.focus();
-            scrollCursorIntoView(inpSize);
-          }, 50);
+        if (checked) {
+          const inpSize = document.getElementById(`inp_hl_size_${roomId}`);
+          if (inpSize) {
+            setTimeout(() => {
+              inpSize.focus();
+              scrollCursorIntoView(inpSize);
+            }, 50);
+          }
         }
       }
     }
@@ -2622,30 +2995,16 @@
       const room = rooms.find(r => r.id === roomId);
       if (room) {
         room.chkDk = checked;
-        const tr = document.getElementById(`tr_dk_${roomId}`);
-        if (tr) {
-          if (checked) tr.classList.add('tr-active');
-          else tr.classList.remove('tr-active');
-        }
-        const inpSize = document.getElementById(`inp_dk_size_${roomId}`);
-        const inpName = document.getElementById(`inp_dk_name_${roomId}`);
-        const inpSz = document.getElementById(`inp_dk_sz_${roomId}`);
-        [inpSize, inpName, inpSz].forEach(el => {
-          if (el) {
-            el.disabled = !checked;
-            el.style.opacity = checked ? '1' : '0.4';
-          }
-        });
-        if (inpSize) inpSize.placeholder = checked ? 'Length * Width' : 'Check to enable';
-        if (inpName) inpName.placeholder = checked ? 'Type tile...' : 'Check to enable';
-
         calculateAll();
         saveDraft();
-        if (checked && inpSize) {
-          setTimeout(() => {
-            inpSize.focus();
-            scrollCursorIntoView(inpSize);
-          }, 50);
+        if (checked) {
+          const inpSize = document.getElementById(`inp_dk_size_${roomId}`);
+          if (inpSize) {
+            setTimeout(() => {
+              inpSize.focus();
+              scrollCursorIntoView(inpSize);
+            }, 50);
+          }
         }
       }
     }
@@ -2726,20 +3085,39 @@
 
         const minSumEl = document.getElementById(`min_summary_${room.id}`);
         if (minSumEl) {
-          const totSft = grossWallArea + flArea;
           const totBx = bHl + bDk + bLt + bFl;
-          if (totSft > 0) {
-            minSumEl.innerText = `• ${totSft.toFixed(0)} SFT (${totBx} Bx)`;
+          if (totBx > 0) {
+            minSumEl.innerText = `• ${totBx} Bx`;
           } else {
             minSumEl.innerText = '';
           }
+        }
+
+        // DYNAMIC ROW & CONTAINER VISIBILITY
+        const trHl = document.getElementById(`tr_hl_${room.id}`);
+        if (trHl) trHl.style.display = room.chkHl ? '' : 'none';
+
+        const trDk = document.getElementById(`tr_dk_${room.id}`);
+        if (trDk) trDk.style.display = room.chkDk ? '' : 'none';
+
+        const trLt = document.getElementById(`tr_lt_${room.id}`);
+        if (trLt) trLt.style.display = grossWallArea > 0 ? '' : 'none';
+
+        const trFl = document.getElementById(`tr_fl_${room.id}`);
+        if (trFl) trFl.style.display = flArea > 0 ? '' : 'none';
+
+        const tblContainer = document.getElementById(`tbl_container_${room.id}`);
+        if (tblContainer) {
+          const hasAny = (room.chkHl || room.chkDk || grossWallArea > 0 || flArea > 0);
+          tblContainer.style.display = hasAny ? '' : 'none';
         }
 
         const calcHlEl = document.getElementById(`calc_hl_${room.id}`);
         if (calcHlEl) {
           if (room.chkHl && hlArea > 0) {
             calcHlEl.style.display = 'inline-block';
-            calcHlEl.innerHTML = `<b>${hlArea.toFixed(1)}</b> SFT <span style="opacity:0.8;">(${bHl} Bx)</span>`;
+            calcHlEl.innerText = `${bHl} Bx`;
+            calcHlEl.title = `${hlArea.toFixed(1)} SFT`;
           } else {
             calcHlEl.style.display = 'none';
           }
@@ -2749,7 +3127,8 @@
         if (calcDkEl) {
           if (room.chkDk && dkArea > 0) {
             calcDkEl.style.display = 'inline-block';
-            calcDkEl.innerHTML = `<b>${dkArea.toFixed(1)}</b> SFT <span style="opacity:0.8;">(${bDk} Bx)</span>`;
+            calcDkEl.innerText = `${bDk} Bx`;
+            calcDkEl.title = `${dkArea.toFixed(1)} SFT`;
           } else {
             calcDkEl.style.display = 'none';
           }
@@ -2759,7 +3138,8 @@
         if (calcLtEl) {
           if (grossWallArea > 0 && ltArea > 0) {
             calcLtEl.style.display = 'inline-block';
-            calcLtEl.innerHTML = `<b>${ltArea.toFixed(1)}</b> SFT <span style="opacity:0.8;">(${bLt} Bx)</span>`;
+            calcLtEl.innerText = `${bLt} Bx`;
+            calcLtEl.title = `${ltArea.toFixed(1)} SFT`;
           } else {
             calcLtEl.style.display = 'none';
           }
@@ -2769,7 +3149,8 @@
         if (calcFlEl) {
           if (flArea > 0) {
             calcFlEl.style.display = 'inline-block';
-            calcFlEl.innerHTML = `<b>${flArea.toFixed(1)}</b> SFT <span style="opacity:0.8;">(${bFl} Bx)</span>`;
+            calcFlEl.innerText = `${bFl} Bx`;
+            calcFlEl.title = `${flArea.toFixed(1)} SFT`;
           } else {
             calcFlEl.style.display = 'none';
           }
@@ -2828,19 +3209,17 @@
           // Highlighter (Only if checked & calculated)
           if (r.chkHl && cr.bHl > 0) {
             const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.hlSize);
-            const dimText = (cr.hlL > 0 && cr.hlW > 1) 
-              ? `Wall: ${cr.hlL}′ × ${cr.hlW}′ = ${cr.hlArea.toFixed(1)} sq.ft` 
-              : `Wall: ${cr.hlArea.toFixed(1)} sq.ft`;
+            const rawSize = (r.hlSizeDim || '').trim() || (cr.hlArea > 0 ? `${cr.hlArea.toFixed(1)} SFT` : '-');
             billItemsList.push({
               type: 'room_tile',
               sourceId: r.id,
               roomName: rName,
               tileKey: 'hl',
-              label: 'Highlighter (HL)',
+              roomSectionText: `${rName} • Highlighter`,
+              rawSize: rawSize,
               name: r.hlName || 'Highlighter Tile',
               stockBoxes: r.hlItem ? r.hlItem.stockBoxes : null,
               sizeText: sizeObj ? sizeObj.label : '4×2 ft',
-              dimText: dimText,
               sft: cr.hlArea,
               coverage: cr.hlCov,
               qty: cr.bHl,
@@ -2852,19 +3231,17 @@
           // Dark (Only if checked & calculated)
           if (r.chkDk && cr.bDk > 0) {
             const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.dkSize);
-            const dimText = (cr.dkL > 0 && cr.dkW > 1)
-              ? `Dado: ${cr.dkL}′ × ${cr.dkW}′ = ${cr.dkArea.toFixed(1)} sq.ft`
-              : `Dado: ${cr.dkArea.toFixed(1)} sq.ft`;
+            const rawSize = (r.dkSizeDim || '').trim() || (cr.dkArea > 0 ? `${cr.dkArea.toFixed(1)} SFT` : '-');
             billItemsList.push({
               type: 'room_tile',
               sourceId: r.id,
               roomName: rName,
               tileKey: 'dk',
-              label: 'Dark Accent',
+              roomSectionText: `${rName} • Dark`,
+              rawSize: rawSize,
               name: r.dkName || 'Dark Accent Tile',
               stockBoxes: r.dkItem ? r.dkItem.stockBoxes : null,
               sizeText: sizeObj ? sizeObj.label : '4×2 ft',
-              dimText: dimText,
               sft: cr.dkArea,
               coverage: cr.dkCov,
               qty: cr.bDk,
@@ -2873,22 +3250,20 @@
             });
           }
 
-          // Light Base
+          // Light / Plain Base
           if (cr.bLt > 0) {
             const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.ltSize);
-            const dimText = (cr.wL > 0 && cr.wW > 1)
-              ? `Wall: (${cr.wL}′ × ${cr.wW}′) Net Area = ${cr.ltArea.toFixed(1)} sq.ft`
-              : `Wall: Net Area = ${cr.ltArea.toFixed(1)} sq.ft`;
+            const rawSize = (r.wallSize || '').trim() || (cr.ltArea > 0 ? `${cr.ltArea.toFixed(1)} SFT` : '-');
             billItemsList.push({
               type: 'room_tile',
               sourceId: r.id,
               roomName: rName,
               tileKey: 'lt',
-              label: 'Light Base Wall',
-              name: r.ltName || 'Light Wall Tile',
+              roomSectionText: `${rName} • Plain`,
+              rawSize: rawSize,
+              name: r.ltName || 'Plain Wall Tile',
               stockBoxes: r.ltItem ? r.ltItem.stockBoxes : null,
               sizeText: sizeObj ? sizeObj.label : '4×2 ft',
-              dimText: dimText,
               sft: cr.ltArea,
               coverage: cr.ltCov,
               qty: cr.bLt,
@@ -2900,19 +3275,17 @@
           // Floor
           if (cr.bFl > 0) {
             const sizeObj = STANDARD_TILE_SIZES.find(s => s.id === r.flSize);
-            const dimText = (cr.fL > 0 && cr.fW > 1)
-              ? `Floor: ${cr.fL}′ × ${cr.fW}′ = ${cr.flArea.toFixed(1)} sq.ft`
-              : `Floor: ${cr.flArea.toFixed(1)} sq.ft`;
+            const rawSize = (r.flSizeDim || '').trim() || (cr.flArea > 0 ? `${cr.flArea.toFixed(1)} SFT` : '-');
             billItemsList.push({
               type: 'room_tile',
               sourceId: r.id,
               roomName: rName,
               tileKey: 'fl',
-              label: 'Floor Tile',
+              roomSectionText: `${rName} • Floor`,
+              rawSize: rawSize,
               name: r.flName || 'Floor Tile',
               stockBoxes: r.flItem ? r.flItem.stockBoxes : null,
               sizeText: sizeObj ? sizeObj.label : '4×2 ft',
-              dimText: dimText,
               sft: cr.flArea,
               coverage: cr.flCov,
               qty: cr.bFl,
@@ -2930,11 +3303,11 @@
           sourceId: item.id,
           roomName: '',
           tileKey: '',
-          label: '', // No tile group or label under item
+          roomSectionText: item.label ? `General • ${item.label}` : 'Direct',
+          rawSize: '-',
           name: item.name || 'Item',
           stockBoxes: null,
           sizeText: '',
-          dimText: '',
           sft: 0,
           coverage: 0,
           qty: parseFloat(item.qty) || 1,
@@ -2949,63 +3322,61 @@
         const lineTotal = rateNum * item.qty;
         const rateSft = item.coverage > 0 ? (rateNum / item.coverage) : 0;
 
-        const stockBadge = ''; // No stock badge shown after item selection
-
         if (item.type === 'room_tile') {
           html += `
-            <tr data-row-type="room_tile" data-room-id="${item.sourceId}" data-tile-key="${item.tileKey}" data-qty="${item.qty}" data-coverage="${item.coverage}">
-              <td>${idx + 1}</td>
-              <td class="item-desc-cell">
-                <div class="main-name">
-                  ${escapeHtml(item.name)} 
-                  <span style="font-size:12px; color:var(--text-muted); font-weight:600;">(${escapeHtml(item.sizeText)})</span>
-                </div>
-                <div class="meta-info"><b>${escapeHtml(item.roomName)}</b> &bull; ${escapeHtml(item.label)}</div>
-                <div class="dim-pill">📐 ${escapeHtml(item.dimText)}</div>
+            <tr data-row-type="room_tile" data-room-id="${item.sourceId}" data-tile-key="${item.tileKey}" data-qty="${item.qty}" data-sft="${item.sft}" data-coverage="${item.coverage}">
+              <td class="col-sno">${idx + 1}</td>
+              <td class="item-desc-cell col-item">
+                <div class="main-name">${escapeHtml(item.name)}</div>
               </td>
-              <td style="text-align: right; font-weight:700;">${item.sft > 0 ? item.sft.toFixed(1) : '-'}</td>
-              <td style="text-align: right; font-weight:700;">${item.qty} ${item.unit}</td>
-              <td style="text-align: right;">
+              <td class="col-section">
+                <span class="room-section-badge">${escapeHtml(item.roomSectionText)}</span>
+              </td>
+              <td class="col-area" style="text-align: right;" title="${item.sft > 0 ? item.sft.toFixed(1) + ' SFT' : ''}">
+                ${escapeHtml(item.rawSize)}
+              </td>
+              <td class="col-qty" style="text-align: right;">${item.qty} ${item.unit}</td>
+              <td class="col-rate" style="text-align: right;">
                 <input type="number" class="bill-rate-input" value="${item.rate || ''}" placeholder="₹ / bx" step="0.5" 
                   oninput="handleTileRateInput(this, '${item.sourceId}', '${item.tileKey}')" />
               </td>
-              <td class="rate-sft-cell" style="text-align: right; color:var(--text-muted); font-size:12px;">
+              <td class="rate-sft-cell col-ratesft" style="text-align: right; color:var(--text-muted); font-size:11.5px;">
                 ${rateSft > 0 ? `₹ ${rateSft.toFixed(1)}` : '-'}
               </td>
-              <td class="line-total-cell" style="text-align: right; font-weight:800; color:var(--text);">
+              <td class="line-total-cell col-total" style="text-align: right; font-weight:600; color:var(--text);">
                 ₹ ${Math.round(lineTotal).toLocaleString('en-IN')}
               </td>
-              <td class="no-print" style="text-align:center;"></td>
+              <td class="no-print col-action" style="text-align:center;"></td>
             </tr>
           `;
         } else {
           // Direct item / accessory row
           html += `
-            <tr data-row-type="direct" data-direct-id="${item.sourceId}" data-qty="${item.qty}" data-coverage="0">
-              <td>${idx + 1}</td>
-              <td class="item-desc-cell">
-                <div class="main-name">
-                  ${escapeHtml(item.name)}
-                </div>
-                ${item.label ? `<div class="meta-info" style="color:var(--primary);">${escapeHtml(item.label)}</div>` : ''}
+            <tr data-row-type="direct" data-direct-id="${item.sourceId}" data-qty="${item.qty}" data-sft="0" data-coverage="0">
+              <td class="col-sno">${idx + 1}</td>
+              <td class="item-desc-cell col-item">
+                <div class="main-name">${escapeHtml(item.name)}</div>
               </td>
-              <td style="text-align: right; color:var(--text-light);">-</td>
-              <td style="text-align: right;">
+              <td class="col-section">
+                <span class="room-section-badge direct">${escapeHtml(item.roomSectionText)}</span>
+              </td>
+              <td class="col-area" style="text-align: right; color:var(--text-light);">-</td>
+              <td class="col-qty" style="text-align: right;">
                 <div style="display:flex; align-items:center; justify-content:flex-end; gap:2px;">
                   <input type="number" class="bill-qty-input" value="${item.qty}" min="1" step="1" 
-                    style="width:58px; text-align:right;" oninput="handleDirectQtyInput(this, '${item.sourceId}')" />
-                  <span style="font-size:11px; font-weight:700; color:var(--text-muted);">${item.unit}</span>
+                    style="width:52px; text-align:right;" oninput="handleDirectQtyInput(this, '${item.sourceId}')" />
+                  <span style="font-size:11px; color:var(--text-muted);">${item.unit}</span>
                 </div>
               </td>
-              <td style="text-align: right;">
+              <td class="col-rate" style="text-align: right;">
                 <input type="number" class="bill-rate-input" value="${item.rate || ''}" placeholder="₹ / unit" step="1" 
                   oninput="handleDirectRateInput(this, '${item.sourceId}')" />
               </td>
-              <td class="rate-sft-cell" style="text-align: right; color:var(--text-light); font-size:12px;">-</td>
-              <td class="line-total-cell" style="text-align: right; font-weight:800; color:var(--text);">
+              <td class="rate-sft-cell col-ratesft" style="text-align: right; color:var(--text-light); font-size:11.5px;">-</td>
+              <td class="line-total-cell col-total" style="text-align: right; font-weight:600; color:var(--text);">
                 ₹ ${Math.round(lineTotal).toLocaleString('en-IN')}
               </td>
-              <td class="no-print" style="text-align:center;">
+              <td class="no-print col-action" style="text-align:center;">
                 <button type="button" class="btn-row-del" onclick="removeDirectItem('${item.sourceId}')" title="Remove item">&times;</button>
               </td>
             </tr>
@@ -3020,41 +3391,44 @@
       const currentDraftTotal = Math.round(currentDraftQty * currentDraftRate);
 
       html += `
-        <tr class="table-entry-row no-print" style="background:#FAFDF9; border-top:1.5px dashed var(--primary-light);">
-          <td style="text-align:center; font-weight:800; color:var(--primary); font-size:13px;">${nextNum}</td>
-          <td class="item-desc-cell">
-            <div style="display:flex; flex-direction:column; gap:3px;">
+        <tr class="table-entry-row no-print" style="background:#FAFDF9; border-top:1px dashed var(--primary-light);">
+          <td class="col-sno" style="text-align:center; color:var(--primary); font-size:12px;">${nextNum}</td>
+          <td class="item-desc-cell col-item">
+            <div style="display:flex; flex-direction:column; gap:2px;">
               <input type="text" id="inlineItemSearch" list="tallyList" placeholder="🔍 Click / Type item name to add..." 
                 value="${escapeHtml(window.inlineSearchDraft || '')}"
                 oninput="onInlineItemSearch(this.value)" onkeydown="onInlineKeyDown(event, 'name')" autocomplete="off"
-                style="height:38px; width:100%; border:1.5px solid var(--primary-light); background:#FFFFFF; border-radius:7px; padding:0 12px; font-weight:700; color:var(--text); font-size:13.5px;" />
-              <div id="inlineStockBadge" style="display:${window.inlineStockBadgeHtml ? 'block' : 'none'}; font-size:11px; font-weight:700; color:#234821; background:#E2EFE0; border:1px solid #C4D9C2; border-radius:5px; padding:2px 8px;">
+                style="height:28px; width:100%; border:1px solid var(--primary-light); background:#FFFFFF; border-radius:5px; padding:0 8px; font-weight:normal; color:var(--text); font-size:12px;" />
+              <div id="inlineStockBadge" style="display:${window.inlineStockBadgeHtml ? 'block' : 'none'}; font-size:10.5px; color:#234821; background:#E2EFE0; border:1px solid #C4D9C2; border-radius:4px; padding:1px 6px;">
                 ${window.inlineStockBadgeHtml || ''}
               </div>
             </div>
           </td>
-          <td style="text-align:right; color:var(--text-light); font-size:12px;">-</td>
-          <td style="text-align:right;">
-            <div style="display:flex; align-items:center; justify-content:flex-end; gap:3px;">
+          <td class="col-section" style="text-align:center; color:var(--text-muted); font-size:11px;">
+            <span class="room-section-badge direct">Direct</span>
+          </td>
+          <td class="col-area" style="text-align:right; color:var(--text-light); font-size:11px;">-</td>
+          <td class="col-qty" style="text-align:right;">
+            <div style="display:flex; align-items:center; justify-content:flex-end; gap:2px;">
               <input type="number" id="inlineItemQty" value="${window.inlineQtyDraft || 1}" min="1" step="1" 
                 oninput="onInlineQtyChange(this.value)" onkeydown="onInlineKeyDown(event, 'qty')" 
-                style="width:58px; height:38px; text-align:right; font-weight:700; font-size:13px;" placeholder="Qty" />
-              <span id="inlineItemUnitLabel" style="font-size:11px; font-weight:700; color:var(--text-muted);">${escapeHtml(window.inlineUnitDraft || 'bx')}</span>
+                style="width:52px; height:28px; text-align:right; font-size:12px;" placeholder="Qty" />
+              <span id="inlineItemUnitLabel" style="font-size:10.5px; color:var(--text-muted);">${escapeHtml(window.inlineUnitDraft || 'bx')}</span>
             </div>
           </td>
-          <td style="text-align:right;">
+          <td class="col-rate" style="text-align:right;">
             <input type="number" id="inlineItemRate" placeholder="Rate" step="0.5" 
               value="${window.inlineRateDraft !== undefined && window.inlineRateDraft !== '' ? window.inlineRateDraft : ''}"
               oninput="onInlineRateChange(this.value)" onkeydown="onInlineKeyDown(event, 'rate')" 
-              style="width:85px; height:38px; text-align:right; font-weight:700; font-size:13px;" />
+              style="width:72px; height:28px; text-align:right; font-size:12px;" />
           </td>
-          <td class="rate-sft-cell" style="text-align:right; color:var(--text-light); font-size:12px;">-</td>
-          <td class="line-total-cell" style="text-align:right; font-weight:800; font-size:13.5px; color:var(--primary-dark);">
+          <td class="rate-sft-cell col-ratesft" style="text-align:right; color:var(--text-light); font-size:11px;">-</td>
+          <td class="line-total-cell col-total" style="text-align:right; font-weight:600; font-size:12px; color:var(--primary-dark);">
             <span id="inlineItemTotal">₹ ${currentDraftTotal.toLocaleString('en-IN')}</span>
           </td>
-          <td class="no-print" style="text-align:center;">
+          <td class="no-print col-action" style="text-align:center;">
             <button type="button" class="btn btn-primary" onclick="commitInlineRow()" 
-              style="padding:0 12px; font-size:14px; height:38px; border-radius:7px; font-weight:800;" title="Add to bill (or press Enter)">
+              style="padding:0 8px; font-size:12px; height:28px; border-radius:5px;" title="Add to bill (or press Enter)">
               ➕
             </button>
           </td>
@@ -3148,6 +3522,13 @@
       scrollCursorIntoView(document.getElementById('invAdvanceInput'));
     }
 
+    function handleChargeInput(chargeType, val) {
+      if (!window.invoiceCharges) window.invoiceCharges = { auto: 0, labour: 0, gst: 0 };
+      window.invoiceCharges[chargeType] = parseFloat(val) || 0;
+      updateInvoiceTotalsOnly();
+      saveDraft();
+    }
+
     // UPDATE TOTALS & TAX WITHOUT RE-RENDERING HTML
     function updateInvoiceTotalsOnly() {
       let subTotal = 0;
@@ -3165,11 +3546,8 @@
 
           if (tr.dataset.rowType === 'room_tile') {
             totalBoxesCount += qty;
-            const sftCell = tr.children[2];
-            if (sftCell) {
-              const parsed = parseFloat(sftCell.innerText) || 0;
-              totalTileSft += parsed;
-            }
+            const sft = parseFloat(tr.dataset.sft) || 0;
+            totalTileSft += sft;
           } else if (tr.dataset.rowType === 'direct') {
             totalBoxesCount += qty;
           }
@@ -3178,17 +3556,45 @@
 
       const grandTotal = Math.round(subTotal);
 
+      // Auto, Labour, GST charges
+      if (!window.invoiceCharges) window.invoiceCharges = { auto: 0, labour: 0, gst: 0 };
+      const autoInput = document.getElementById('invAutoInput');
+      const labourInput = document.getElementById('invLabourInput');
+      const gstInput = document.getElementById('invGstInput');
+
+      const autoVal = autoInput ? (parseFloat(autoInput.value) || 0) : (window.invoiceCharges.auto || 0);
+      const labourVal = labourInput ? (parseFloat(labourInput.value) || 0) : (window.invoiceCharges.labour || 0);
+      const gstVal = gstInput ? (parseFloat(gstInput.value) || 0) : (window.invoiceCharges.gst || 0);
+
+      window.invoiceCharges.auto = autoVal;
+      window.invoiceCharges.labour = labourVal;
+      window.invoiceCharges.gst = gstVal;
+
+      const totalCharges = autoVal + labourVal + gstVal;
+      const payableTotal = Math.round(grandTotal + totalCharges);
+
       const advanceInput = document.getElementById('invAdvanceInput');
       const advanceVal = advanceInput ? (parseFloat(advanceInput.value) || 0) : (window.currentAdvanceAmount || 0);
       window.currentAdvanceAmount = advanceVal;
 
-      const dueAmount = Math.max(0, grandTotal - advanceVal);
+      const dueAmount = Math.max(0, payableTotal - advanceVal);
 
       document.getElementById('invTotalBoxes').innerText = totalBoxesCount;
       document.getElementById('invTotalSft').innerText = totalTileSft.toFixed(1);
       document.getElementById('invSubTotal').innerText = `₹ ${Math.round(subTotal).toLocaleString('en-IN')}`;
       document.getElementById('billTotal').innerText = `₹ ${grandTotal.toLocaleString('en-IN')}`;
-      document.getElementById('barGrandTotal').innerText = `₹ ${grandTotal.toLocaleString('en-IN')}`;
+      
+      const payableEl = document.getElementById('invPayableTotal');
+      if (payableEl) payableEl.innerText = `₹ ${payableTotal.toLocaleString('en-IN')}`;
+      document.getElementById('barGrandTotal').innerText = `₹ ${payableTotal.toLocaleString('en-IN')}`;
+
+      // Update charges in print
+      const autoPrint = document.getElementById('invAutoPrint');
+      if (autoPrint) autoPrint.innerText = `₹ ${Math.round(autoVal).toLocaleString('en-IN')}`;
+      const labourPrint = document.getElementById('invLabourPrint');
+      if (labourPrint) labourPrint.innerText = `₹ ${Math.round(labourVal).toLocaleString('en-IN')}`;
+      const gstPrint = document.getElementById('invGstPrint');
+      if (gstPrint) gstPrint.innerText = `₹ ${Math.round(gstVal).toLocaleString('en-IN')}`;
 
       // Update advance in print
       const advPrint = document.getElementById('invAdvancePrint');
@@ -3230,7 +3636,7 @@
         }
       }
 
-      document.getElementById('invAmountInWords').innerText = grandTotal > 0 ? numberToIndianWords(grandTotal) : 'Rupees Zero Only';
+      document.getElementById('invAmountInWords').innerText = payableTotal > 0 ? numberToIndianWords(payableTotal) : 'Rupees Zero Only';
 
       // Keep invoice data structure updated
       const custName = (document.getElementById('custName').value || '').trim() || 'Walk-in Customer';
@@ -3244,14 +3650,16 @@
         const rateInput = tr.querySelector('.bill-rate-input');
         if (rateInput) {
           const nameEl = tr.querySelector('.main-name');
-          const metaEl = tr.querySelector('.meta-info');
-          const dimEl = tr.querySelector('.dim-pill');
+          const sectionEl = tr.querySelector('.room-section-badge');
+          const areaEl = tr.querySelector('.col-area');
           const qty = parseFloat(tr.dataset.qty) || 0;
           const rate = parseFloat(rateInput.value) || 0;
+          const sft = parseFloat(tr.dataset.sft) || 0;
           exportItems.push({
             name: nameEl ? nameEl.innerText.replace(/In Stock:[^]+/, '').trim() : 'Item',
-            description: metaEl ? metaEl.innerText.trim() : '',
-            dimensions: dimEl ? dimEl.innerText.replace('📐', '').trim() : '',
+            section: sectionEl ? sectionEl.innerText.trim() : '',
+            areaRaw: areaEl ? areaEl.innerText.trim() : (sft > 0 ? `${sft.toFixed(1)}` : '-'),
+            sft: sft,
             qty: qty,
             rate: rate,
             amount: Math.round(qty * rate),
@@ -3261,7 +3669,7 @@
       });
 
       window.invoiceData = {
-        refNo: document.getElementById('quoteRefLabel').innerText.replace('Quote #', ''),
+        refNo: document.getElementById('quoteRefLabel').innerText.replace('Quote #', '').replace('Quote ', ''),
         date: quoteDate,
         customerName: custName,
         customerPhone: custPhone,
@@ -3271,6 +3679,13 @@
         taxRate: 0,
         taxAmount: 0,
         grandTotal: grandTotal,
+        charges: {
+          auto: autoVal,
+          labour: labourVal,
+          gst: gstVal,
+          totalCharges: totalCharges
+        },
+        payableTotal: payableTotal,
         advanceAmount: advanceVal,
         dueAmount: dueAmount
       };
@@ -3317,18 +3732,22 @@
 
       inv.items.forEach((item, i) => {
         msg += `${i + 1}. *${item.name}*\n`;
-        if (item.description) msg += `   • ${item.description}\n`;
-        if (item.dimensions) msg += `   • Area: ${item.dimensions}\n`;
+        if (item.section) msg += `   • Section: ${item.section}\n`;
+        if (item.areaRaw && item.areaRaw !== '-') msg += `   • Area: ${item.areaRaw}\n`;
         msg += `   • Qty: ${item.qty} ${item.unit} @ ₹${item.rate} / ${item.unit}\n`;
         msg += `   • Line Total: ₹${item.amount.toLocaleString('en-IN')}\n\n`;
       });
 
       msg += `------------------------------------\n`;
-      if (inv.taxRate > 0) {
-        msg += `*Subtotal:* ₹${inv.subTotal.toLocaleString('en-IN')}\n`;
-        msg += `*GST (${inv.taxRate}%):* ₹${inv.taxAmount.toLocaleString('en-IN')}\n`;
+      msg += `*Items Total:* ₹${inv.grandTotal.toLocaleString('en-IN')}\n`;
+      if (inv.charges && (inv.charges.auto > 0 || inv.charges.labour > 0 || inv.charges.gst > 0)) {
+        if (inv.charges.auto > 0) msg += `*Auto Charges:* ₹${Math.round(inv.charges.auto).toLocaleString('en-IN')}\n`;
+        if (inv.charges.labour > 0) msg += `*Labour Charges:* ₹${Math.round(inv.charges.labour).toLocaleString('en-IN')}\n`;
+        if (inv.charges.gst > 0) msg += `*GST Charges:* ₹${Math.round(inv.charges.gst).toLocaleString('en-IN')}\n`;
+        msg += `*TOTAL PAYABLE:* ₹${inv.payableTotal.toLocaleString('en-IN')}\n`;
+      } else {
+        msg += `*TOTAL PAYABLE:* ₹${inv.grandTotal.toLocaleString('en-IN')}\n`;
       }
-      msg += `*GRAND TOTAL:* ₹${inv.grandTotal.toLocaleString('en-IN')}\n`;
       if (inv.advanceAmount > 0) {
         msg += `*Advance Paid:* ₹${inv.advanceAmount.toLocaleString('en-IN')}\n`;
         msg += `*BALANCE DUE:* ₹${inv.dueAmount.toLocaleString('en-IN')}\n`;
@@ -3464,6 +3883,10 @@
       window.currentAdvanceAmount = 0;
       const advInput = document.getElementById('invAdvanceInput');
       if (advInput) advInput.value = '0';
+      window.invoiceCharges = { auto: 0, labour: 0, gst: 0 };
+      if (document.getElementById('invAutoInput')) document.getElementById('invAutoInput').value = '0';
+      if (document.getElementById('invLabourInput')) document.getElementById('invLabourInput').value = '0';
+      if (document.getElementById('invGstInput')) document.getElementById('invGstInput').value = '0';
 
       // Clear draft in localStorage
       localStorage.removeItem('tile_estimator_autosave_draft_v1');
@@ -3521,6 +3944,7 @@
           custAddress: document.getElementById('custAddress') ? document.getElementById('custAddress').value : '',
           quoteDate: document.getElementById('quoteDate') ? document.getElementById('quoteDate').value : '',
           quoteRef: document.getElementById('quoteRefLabel') ? document.getElementById('quoteRefLabel').innerText : '',
+          charges: window.invoiceCharges || { auto: 0, labour: 0, gst: 0 },
           advanceAmount: window.currentAdvanceAmount || 0,
           timestamp: Date.now()
         };
@@ -3560,6 +3984,13 @@
           if (document.getElementById('invRefNum')) document.getElementById('invRefNum').innerText = cleanId;
         }
 
+        if (draft.charges) {
+          window.invoiceCharges = draft.charges;
+          if (document.getElementById('invAutoInput')) document.getElementById('invAutoInput').value = draft.charges.auto || 0;
+          if (document.getElementById('invLabourInput')) document.getElementById('invLabourInput').value = draft.charges.labour || 0;
+          if (document.getElementById('invGstInput')) document.getElementById('invGstInput').value = draft.charges.gst || 0;
+        }
+
         window.currentAdvanceAmount = parseFloat(draft.advanceAmount) || 0;
         const advInput = document.getElementById('invAdvanceInput');
         if (advInput) advInput.value = window.currentAdvanceAmount;
@@ -3580,7 +4011,7 @@
       }
     }
 
-    // FINAL SAVE BILL
+    // FINAL SAVE BILL (SAVES TO DOCUMENTS/CRM/RECORDS & LOCALSTORAGE)
     function finalSaveBill() {
       const custName = (document.getElementById('custName').value || '').trim() || 'Walk-in Customer';
       const custPhone = (document.getElementById('custPhone').value || '').trim() || '';
@@ -3623,12 +4054,15 @@
           totalBoxes,
           grandTotal,
           grandTotalNum,
+          charges: window.invoiceCharges || { auto: 0, labour: 0, gst: 0 },
+          payableTotal: window.invoiceData ? window.invoiceData.payableTotal : grandTotalNum,
           advance,
           dueAmount
         }
       };
 
       try {
+        // 1. Save to local storage for instant offline access
         const raw = localStorage.getItem('tile_estimator_saved_bills_v1');
         let bills = raw ? JSON.parse(raw) : [];
         const existingIdx = bills.findIndex(b => b.id === refNum);
@@ -3641,11 +4075,28 @@
         updateSavedBillsCount();
         saveDraft();
 
-        showToast(`💾 <b>Bill ${refNum} Final Saved!</b> Saved in records.`);
+        showToast(`💾 <b>Bill ${refNum} Saved!</b> Saved in Documents/CRM/records/`);
       } catch (err) {
-        console.error('Final Save error:', err);
-        alert('Error saving bill: ' + err.message);
+        console.error('Final Save localStorage error:', err);
       }
+
+      // 2. Persist directly to Documents/CRM/records/ via backend API
+      fetch('/api/records', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(billRecord)
+      }).then(r => r.json()).then(res => {
+        if (res && res.success) {
+          console.log('[Records] Bill saved to documents file:', res.path);
+          const badge = document.getElementById('recordsFolderStatusBadge');
+          if (badge) {
+            badge.innerText = 'Synced';
+            badge.style.background = '#2E7D32';
+          }
+        }
+      }).catch(err => {
+        console.warn('Backend save to file system failed:', err.message);
+      });
     }
 
     // SAVED BILLS MODAL & MANAGEMENT
@@ -3656,8 +4107,38 @@
         const badge = document.getElementById('savedBillsCountBadge');
         if (badge) badge.innerText = bills.length;
         const totalCount = document.getElementById('savedBillsTotalCount');
-        if (totalCount) totalCount.innerText = `Total: ${bills.length} saved bills`;
+        if (totalCount) totalCount.innerText = `Total: ${bills.length} saved records`;
       } catch (e) {}
+    }
+
+    async function syncSavedBillsFromDocuments() {
+      const statusBadge = document.getElementById('recordsFolderStatusBadge');
+      try {
+        const resp = await fetch('/api/records');
+        if (resp.ok) {
+          const serverBills = await resp.json();
+          if (Array.isArray(serverBills)) {
+            const raw = localStorage.getItem('tile_estimator_saved_bills_v1');
+            const localBills = raw ? JSON.parse(raw) : [];
+            const billMap = new Map();
+            localBills.forEach(b => { if (b && b.id) billMap.set(b.id, b); });
+            serverBills.forEach(b => { if (b && b.id) billMap.set(b.id, b); });
+            const merged = Array.from(billMap.values()).sort((a,b) => new Date(b.savedAt || b.date || 0) - new Date(a.savedAt || a.date || 0));
+            localStorage.setItem('tile_estimator_saved_bills_v1', JSON.stringify(merged));
+            updateSavedBillsCount();
+            renderSavedBillsList(document.getElementById('savedBillsSearch') ? document.getElementById('savedBillsSearch').value : '');
+            if (statusBadge) {
+              statusBadge.innerText = `Synced (${serverBills.length} in Documents)`;
+              statusBadge.style.background = '#2E7D32';
+            }
+          }
+        }
+      } catch (e) {
+        if (statusBadge) {
+          statusBadge.innerText = 'Local Only';
+          statusBadge.style.background = '#B45309';
+        }
+      }
     }
 
     function openSavedBillsModal() {
@@ -3670,6 +4151,7 @@
           searchInput.value = '';
           searchInput.focus();
         }
+        syncSavedBillsFromDocuments();
       }
     }
 
@@ -3699,8 +4181,8 @@
         container.innerHTML = `
           <div style="text-align:center; padding:32px 16px; color:var(--text-muted);">
             <div style="font-size:32px; margin-bottom:8px;">📁</div>
-            <div style="font-weight:700; font-size:14px;">No saved bills found</div>
-            <div style="font-size:12px; margin-top:4px;">Click "Final Save" on any quotation to record it here.</div>
+            <div style="font-weight:600; font-size:14px;">No saved bills found</div>
+            <div style="font-size:12px; margin-top:4px;">Click "Final Save" on any quotation to save it directly into Documents/CRM/records/ so you can open &amp; edit it anytime.</div>
           </div>
         `;
         return;
@@ -3710,28 +4192,31 @@
         <div style="background:#fff; border:1px solid var(--border); border-radius:10px; padding:12px 14px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; gap:12px; transition:var(--transition); box-shadow:var(--shadow-xs);">
           <div style="flex:1;">
             <div style="display:flex; align-items:center; gap:8px;">
-              <span style="font-weight:900; font-size:14px; color:var(--primary);">${escapeHtml(b.id)}</span>
-              <span style="font-size:11px; font-weight:700; color:var(--text-muted); background:var(--surface-muted); padding:2px 7px; border-radius:4px;">${escapeHtml(b.savedTimeFormatted || b.date)}</span>
+              <span style="font-weight:600; font-size:14px; color:var(--primary);">${escapeHtml(b.id)}</span>
+              <span style="font-size:11px; font-weight:normal; color:var(--text-muted); background:var(--surface-muted); padding:2px 7px; border-radius:4px;">${escapeHtml(b.savedTimeFormatted || b.date)}</span>
             </div>
-            <div style="font-size:13.5px; font-weight:700; color:var(--text); margin-top:4px;">
+            <div style="font-size:13.5px; font-weight:600; color:var(--text); margin-top:4px;">
               👤 ${escapeHtml((b.customer && b.customer.name) || 'Walk-in Customer')}
-              ${(b.customer && b.customer.phone) ? `<span style="font-weight:600; font-size:12px; color:var(--text-muted); margin-left:6px;">(${escapeHtml(b.customer.phone)})</span>` : ''}
+              ${(b.customer && b.customer.phone) ? `<span style="font-weight:normal; font-size:12px; color:var(--text-muted); margin-left:6px;">(${escapeHtml(b.customer.phone)})</span>` : ''}
             </div>
             <div style="font-size:12px; color:var(--text-muted); margin-top:3px;">
               ${b.summary ? `<span>Boxes: <b>${b.summary.totalBoxes}</b> • Area: <b>${b.summary.totalSft}</b></span>` : ''}
             </div>
           </div>
           <div style="text-align:right;">
-            <div style="font-size:15px; font-weight:900; color:var(--primary);">${b.summary ? b.summary.grandTotal : '₹ 0'}</div>
-            ${(b.summary && b.summary.dueAmount > 0) ? `<div style="font-size:11px; font-weight:800; color:#B91C1C;">Due: ₹ ${b.summary.dueAmount.toLocaleString('en-IN')}</div>` : ''}
-            <div style="display:flex; gap:6px; margin-top:6px; justify-content:flex-end;">
-              <button type="button" class="btn btn-outline" onclick="loadSavedBill('${b.id}')" title="Load into editor" style="padding:4px 9px; font-size:11.5px; font-weight:700; color:var(--primary);">
-                📂 Open
+            <div style="font-size:15px; font-weight:600; color:var(--primary);">${b.summary ? b.summary.grandTotal : '₹ 0'}</div>
+            ${(b.summary && b.summary.dueAmount > 0) ? `<div style="font-size:11px; font-weight:600; color:#B91C1C;">Due: ₹ ${b.summary.dueAmount.toLocaleString('en-IN')}</div>` : ''}
+            <div style="display:flex; gap:6px; margin-top:6px; justify-content:flex-end; flex-wrap:wrap;">
+              <button type="button" class="btn btn-outline" onclick="loadSavedBill('${b.id}')" title="Open this bill for editing anytime" style="padding:4px 10px; font-size:11.5px; font-weight:600; color:var(--primary); background:#F4F8F3; border-color:var(--primary-light);">
+                📂 Open &amp; Edit
+              </button>
+              <button type="button" class="btn btn-outline" onclick="exportBillJson('${b.id}')" title="Download bill JSON file" style="padding:4px 7px; font-size:11.5px;">
+                💾 Export
               </button>
               <button type="button" class="btn btn-outline" onclick="printSavedBill('${b.id}')" title="Print this bill" style="padding:4px 8px; font-size:11.5px;">
                 🖨️
               </button>
-              <button type="button" class="btn-remove-room" onclick="deleteSavedBill('${b.id}', event)" title="Delete bill" style="padding:4px 8px; font-size:11.5px;">
+              <button type="button" class="btn-remove-room" onclick="deleteSavedBill('${b.id}', event)" title="Delete bill from records" style="padding:4px 8px; font-size:11.5px;">
                 🗑️
               </button>
             </div>
@@ -3740,50 +4225,82 @@
       `).join('');
     }
 
-    function loadSavedBill(billId) {
+    async function loadSavedBill(billId) {
       try {
-        const raw = localStorage.getItem('tile_estimator_saved_bills_v1');
-        if (!raw) return;
-        const bills = JSON.parse(raw);
-        const bill = bills.find(b => b.id === billId);
-        if (!bill) return;
+        let bill = null;
+        // Try fetching from server first
+        try {
+          const resp = await fetch(`/api/records/${encodeURIComponent(billId)}`);
+          if (resp.ok) {
+            bill = await resp.json();
+          }
+        } catch (e) {}
 
-        rooms = bill.rooms || [ createRoomObj('Room 1') ];
-        activeRoomId = bill.activeRoomId || rooms[rooms.length - 1].id;
-        directBillItems = bill.directBillItems || [];
-
-        if (bill.customer) {
-          if (document.getElementById('custName')) document.getElementById('custName').value = bill.customer.name || '';
-          if (document.getElementById('custPhone')) document.getElementById('custPhone').value = bill.customer.phone || '';
-          if (document.getElementById('custAddress')) document.getElementById('custAddress').value = bill.customer.address || '';
-          if (document.getElementById('quoteDate')) document.getElementById('quoteDate').value = bill.customer.date || '';
-          syncCustomerFromRooms('name', bill.customer.name || '');
-          syncCustomerFromRooms('phone', bill.customer.phone || '');
-          syncCustomerFromRooms('address', bill.customer.address || '');
-          syncCustomerFromRooms('date', bill.customer.date || '');
+        if (!bill) {
+          const raw = localStorage.getItem('tile_estimator_saved_bills_v1');
+          if (raw) {
+            const bills = JSON.parse(raw);
+            bill = bills.find(b => b.id === billId);
+          }
+        }
+        if (!bill) {
+          alert('Could not find bill ' + billId);
+          return;
         }
 
-        if (bill.id) {
-          document.getElementById('quoteRefLabel').innerText = `Quote ${bill.id}`;
-          const invRef = document.getElementById('invRefNum');
-          if (invRef) invRef.innerText = bill.id;
-        }
-
-        window.currentAdvanceAmount = bill.summary ? bill.summary.advance : 0;
-        const advInput = document.getElementById('invAdvanceInput');
-        if (advInput) advInput.value = window.currentAdvanceAmount;
-
-        renderAllRooms();
-        renderAccessoriesList();
-        calculateAll();
-        saveDraft();
+        loadBillObjectIntoEditor(bill);
         closeSavedBillsModal();
-
-        showToast(`📂 <b>Bill ${bill.id} loaded!</b>`);
+        showToast(`📂 <b>Bill ${bill.id} loaded!</b> You can now edit any details.`);
       } catch (err) {
         console.error('Load saved bill error:', err);
         alert('Could not load bill: ' + err.message);
       }
+    }
+
+    function loadBillObjectIntoEditor(bill) {
+      if (!bill) return;
+
+      rooms = bill.rooms || [ createRoomObj('Room 1') ];
+      activeRoomId = bill.activeRoomId || rooms[rooms.length - 1].id;
+      directBillItems = bill.directBillItems || [];
+
+      if (bill.customer) {
+        if (document.getElementById('custName')) document.getElementById('custName').value = bill.customer.name || '';
+        if (document.getElementById('custPhone')) document.getElementById('custPhone').value = bill.customer.phone || '';
+        if (document.getElementById('custAddress')) document.getElementById('custAddress').value = bill.customer.address || '';
+        if (document.getElementById('quoteDate')) document.getElementById('quoteDate').value = bill.customer.date || '';
+        syncCustomerFromRooms('name', bill.customer.name || '');
+        syncCustomerFromRooms('phone', bill.customer.phone || '');
+        syncCustomerFromRooms('address', bill.customer.address || '');
+        syncCustomerFromRooms('date', bill.customer.date || '');
+      }
+
+      if (bill.id) {
+        document.getElementById('quoteRefLabel').innerText = `Quote ${bill.id}`;
+        const invRef = document.getElementById('invRefNum');
+        if (invRef) invRef.innerText = bill.id;
+      }
+
+      if (bill.summary && bill.summary.charges) {
+        window.invoiceCharges = bill.summary.charges;
+        if (document.getElementById('invAutoInput')) document.getElementById('invAutoInput').value = bill.summary.charges.auto || 0;
+        if (document.getElementById('invLabourInput')) document.getElementById('invLabourInput').value = bill.summary.charges.labour || 0;
+        if (document.getElementById('invGstInput')) document.getElementById('invGstInput').value = bill.summary.charges.gst || 0;
+      } else {
+        window.invoiceCharges = { auto: 0, labour: 0, gst: 0 };
+        if (document.getElementById('invAutoInput')) document.getElementById('invAutoInput').value = 0;
+        if (document.getElementById('invLabourInput')) document.getElementById('invLabourInput').value = 0;
+        if (document.getElementById('invGstInput')) document.getElementById('invGstInput').value = 0;
+      }
+
+      window.currentAdvanceAmount = bill.summary ? bill.summary.advance : 0;
+      const advInput = document.getElementById('invAdvanceInput');
+      if (advInput) advInput.value = window.currentAdvanceAmount;
+
+      renderAllRooms();
+      renderAccessoriesList();
+      calculateAll();
+      saveDraft();
     }
 
     function printSavedBill(billId) {
@@ -3799,16 +4316,85 @@
       if (!confirm(`Delete saved bill ${billId} from records?`)) return;
       try {
         const raw = localStorage.getItem('tile_estimator_saved_bills_v1');
-        if (!raw) return;
-        let bills = JSON.parse(raw);
-        bills = bills.filter(b => b.id !== billId);
-        localStorage.setItem('tile_estimator_saved_bills_v1', JSON.stringify(bills));
+        if (raw) {
+          let bills = JSON.parse(raw);
+          bills = bills.filter(b => b.id !== billId);
+          localStorage.setItem('tile_estimator_saved_bills_v1', JSON.stringify(bills));
+        }
         updateSavedBillsCount();
         renderSavedBillsList(document.getElementById('savedBillsSearch') ? document.getElementById('savedBillsSearch').value : '');
         showToast(`🗑️ Bill ${billId} deleted.`);
+
+        // Delete from Documents/CRM/records on backend
+        fetch(`/api/records/${encodeURIComponent(billId)}`, { method: 'DELETE' }).catch(() => {});
       } catch (e) {
         console.error('Delete error:', e);
       }
+    }
+
+    function exportBillJson(billId) {
+      const raw = localStorage.getItem('tile_estimator_saved_bills_v1');
+      const bills = raw ? JSON.parse(raw) : [];
+      const bill = bills.find(b => b.id === billId);
+      if (!bill) return;
+      const blob = new Blob([JSON.stringify(bill, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${(bill.id || 'bill').replace(/[^a-zA-Z0-9_-]/g, '_')}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function exportAllBillsJson() {
+      const raw = localStorage.getItem('tile_estimator_saved_bills_v1');
+      const bills = raw ? JSON.parse(raw) : [];
+      if (bills.length === 0) {
+        alert('No saved bills to export.');
+        return;
+      }
+      const blob = new Blob([JSON.stringify(bills, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `tile_estimates_backup_${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importBillFile(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (Array.isArray(data)) {
+            // Multi-bill backup
+            const raw = localStorage.getItem('tile_estimator_saved_bills_v1');
+            const bills = raw ? JSON.parse(raw) : [];
+            const billMap = new Map();
+            bills.forEach(b => billMap.set(b.id, b));
+            data.forEach(b => { if (b && b.id) billMap.set(b.id, b); });
+            const merged = Array.from(billMap.values());
+            localStorage.setItem('tile_estimator_saved_bills_v1', JSON.stringify(merged));
+            updateSavedBillsCount();
+            renderSavedBillsList('');
+            showToast(`📥 Imported ${data.length} bills from file!`);
+          } else if (data && data.id) {
+            // Single bill: load directly into editor
+            loadBillObjectIntoEditor(data);
+            closeSavedBillsModal();
+            showToast(`📂 <b>Bill ${data.id} opened from file!</b> Ready to edit.`);
+          } else {
+            alert('Unrecognized JSON format. File must contain bill records.');
+          }
+        } catch (err) {
+          alert('Could not parse JSON file: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
     }
 
     // ==========================================
@@ -3851,6 +4437,7 @@
       const custAddress = (document.getElementById('custAddress') ? document.getElementById('custAddress').value : '') || 'Site: As Specified';
       const quoteDate = (document.getElementById('quoteDate') ? document.getElementById('quoteDate').value : '') || new Date().toISOString().split('T')[0];
       const advanceVal = window.currentAdvanceAmount || 0;
+      const charges = window.invoiceCharges || { auto: 0, labour: 0, gst: 0 };
 
       const items = [];
       let totalBoxes = 0;
@@ -3864,17 +4451,16 @@
         if (!rateInput) return;
 
         const nameEl = tr.querySelector('.main-name');
-        const metaEl = tr.querySelector('.meta-info');
-        const dimEl = tr.querySelector('.dim-pill');
-        const sftCell = tr.children[2];
-        const sftVal = sftCell ? (parseFloat(sftCell.innerText) || 0) : 0;
+        const sectionEl = tr.querySelector('.room-section-badge');
+        const areaEl = tr.querySelector('.col-area');
+        const sftVal = parseFloat(tr.dataset.sft) || 0;
         const qty = parseFloat(tr.dataset.qty) || 0;
         const rate = parseFloat(rateInput.value) || 0;
         const amount = Math.round(qty * rate);
 
         let mainTitle = nameEl ? nameEl.innerText.replace(/In Stock:[^]+/, '').trim() : 'Item';
-        let subtitle = metaEl ? metaEl.innerText.trim() : '';
-        let dimText = dimEl ? dimEl.innerText.replace('📐', '').trim() : '';
+        let sectionText = sectionEl ? sectionEl.innerText.trim() : '';
+        let rawArea = areaEl ? areaEl.innerText.trim() : (sftVal > 0 ? `${sftVal.toFixed(1)}` : '-');
 
         subTotal += amount;
         totalBoxes += qty;
@@ -3887,8 +4473,8 @@
         items.push({
           num: items.length + 1,
           name: mainTitle,
-          subtitle: subtitle,
-          dimText: dimText,
+          section: sectionText,
+          areaRaw: rawArea,
           sft: sftVal,
           qty: qty,
           unit: unit,
@@ -3898,7 +4484,9 @@
       });
 
       const grandTotal = Math.round(subTotal);
-      const dueAmount = Math.max(0, grandTotal - advanceVal);
+      const totalCharges = (parseFloat(charges.auto) || 0) + (parseFloat(charges.labour) || 0) + (parseFloat(charges.gst) || 0);
+      const payableTotal = Math.round(grandTotal + totalCharges);
+      const dueAmount = Math.max(0, payableTotal - advanceVal);
 
       return {
         refNo: refNo,
@@ -3911,19 +4499,22 @@
         totalSft: totalSft,
         subTotal: subTotal,
         grandTotal: grandTotal,
+        charges: charges,
+        totalCharges: totalCharges,
+        payableTotal: payableTotal,
         advanceAmount: advanceVal,
         dueAmount: dueAmount,
-        amountInWords: numberToIndianWords(grandTotal)
+        amountInWords: numberToIndianWords(payableTotal > 0 ? payableTotal : grandTotal)
       };
     }
 
     function renderCollapsedEstimateHtml(data) {
       if (!data.items || data.items.length === 0) {
         return `
-          <div style="text-align:center; padding:30px 16px; color:#64748B;">
+          <div style="text-align:center; padding:30px 16px; color:#64748B; font-family:Arial, sans-serif;">
             <div style="font-size:32px; margin-bottom:8px;">📄</div>
-            <div style="font-weight:800; font-size:15px; color:#1E293B;">No items added yet</div>
-            <div style="font-size:12px; margin-top:4px;">Add room measurements or direct stock items to preview the collapsed estimate.</div>
+            <div style="font-weight:600; font-size:15px; color:#1E293B;">No items added yet</div>
+            <div style="font-size:12px; margin-top:4px;">Add room measurements or direct stock items to preview the estimate.</div>
           </div>
         `;
       }
@@ -3933,23 +4524,27 @@
         const bg = isAlt ? '#F8FAFC' : '#FFFFFF';
         return `
           <tr style="background:${bg}; border-bottom:1px solid #E2E8F0;">
-            <td style="padding:4px 6px; text-align:center; font-weight:700; color:#64748B; font-size:11px;">${idx + 1}</td>
-            <td style="padding:4px 6px;">
-              <div style="font-weight:800; color:#0F172A; font-size:12px; line-height:1.2;">
+            <td style="padding:3px 5px; text-align:center; color:#64748B; font-size:11px;">${idx + 1}</td>
+            <td style="padding:3px 6px;">
+              <div style="font-weight:normal; color:#0F172A; font-size:11.5px; line-height:1.25;">
                 ${escapeHtml(item.name)}
               </div>
-              ${item.subtitle ? `<div style="font-size:10px; color:#475569; font-weight:600; margin-top:1px;">${escapeHtml(item.subtitle)} ${item.dimText ? `• <span style="color:#0284C7;">${escapeHtml(item.dimText)}</span>` : ''}</div>` : ''}
             </td>
-            <td style="padding:4px 6px; text-align:right; font-weight:600; color:#334155; font-size:11.5px;">
-              ${item.sft > 0 ? `${item.sft.toFixed(1)}` : '-'}
+            <td style="padding:3px 6px;">
+              <span style="display:inline-block; font-size:10.5px; padding:1px 5px; border-radius:3px; background:#F1F5F9; color:#334155;">
+                ${escapeHtml(item.section || '-')}
+              </span>
             </td>
-            <td style="padding:4px 6px; text-align:right; font-weight:800; color:#0F172A; font-size:11.5px;">
-              ${item.qty} <span style="font-size:10px; font-weight:600; color:#64748B;">${escapeHtml(item.unit)}</span>
+            <td style="padding:3px 6px; text-align:right; color:#334155; font-size:11.5px;">
+              ${escapeHtml(item.areaRaw || '-')}
             </td>
-            <td style="padding:4px 6px; text-align:right; font-weight:600; color:#334155; font-size:11.5px;">
+            <td style="padding:3px 6px; text-align:right; color:#0F172A; font-size:11.5px;">
+              ${item.qty} <span style="font-size:10px; color:#64748B;">${escapeHtml(item.unit)}</span>
+            </td>
+            <td style="padding:3px 6px; text-align:right; color:#334155; font-size:11.5px;">
               ${item.rate > 0 ? `₹ ${item.rate}` : '-'}
             </td>
-            <td style="padding:4px 6px; text-align:right; font-weight:900; color:#0F172A; font-size:12px;">
+            <td style="padding:3px 6px; text-align:right; font-weight:600; color:#0F172A; font-size:11.5px;">
               ₹ ${item.amount.toLocaleString('en-IN')}
             </td>
           </tr>
@@ -3957,36 +4552,37 @@
       }).join('');
 
       return `
-        <div style="font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color:#1E293B; line-height:1.35;">
+        <div style="font-family:Arial, Helvetica, sans-serif; color:#1E293B; line-height:1.35;">
           <!-- TOP HEADER -->
-          <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #2D4C2B; padding-bottom:6px; margin-bottom:8px;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1.5px solid #2D4C2B; padding-bottom:5px; margin-bottom:6px;">
             <div>
-              <div style="font-size:18px; font-weight:900; color:#1E293B; letter-spacing:0.5px;">ESTIMATE / QUOTATION</div>
-              <div style="font-size:11px; font-weight:700; color:#2D4C2B; margin-top:1px;">Tile Estimator &amp; Billing Pro</div>
+              <div style="font-size:16px; font-weight:600; color:#1E293B; letter-spacing:0.3px;">ESTIMATE / QUOTATION</div>
+              <div style="font-size:11px; color:#2D4C2B; margin-top:1px;">Tile Estimator &amp; Billing Pro</div>
             </div>
             <div style="text-align:right;">
-              <div style="font-size:14px; font-weight:900; color:#2D4C2B;">#${escapeHtml(data.refNo)}</div>
-              <div style="font-size:11px; font-weight:600; color:#64748B;">Date: ${formatIndianDate(data.date)}</div>
+              <div style="font-size:13px; font-weight:600; color:#2D4C2B;">#${escapeHtml(data.refNo)}</div>
+              <div style="font-size:11px; color:#64748B;">Date: ${formatIndianDate(data.date)}</div>
             </div>
           </div>
 
           <!-- CUSTOMER STRIP -->
-          <div style="background:#F4F8F3; border:1px solid #D2E4D0; border-radius:6px; padding:5px 9px; margin-bottom:8px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; font-size:11px;">
-            <div><span style="font-weight:700; color:#2D4C2B;">Customer:</span> <span style="font-weight:800; color:#0F172A;">${escapeHtml(data.customerName)}</span></div>
-            ${data.customerPhone !== '-' ? `<div><span style="font-weight:700; color:#2D4C2B;">Phone:</span> <span style="font-weight:800; color:#0F172A;">${escapeHtml(data.customerPhone)}</span></div>` : ''}
-            <div><span style="font-weight:700; color:#2D4C2B;">Site:</span> <span style="font-weight:600; color:#334155;">${escapeHtml(data.siteAddress)}</span></div>
+          <div style="background:#F4F8F3; border:1px solid #D2E4D0; border-radius:5px; padding:4px 8px; margin-bottom:6px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px; font-size:11px;">
+            <div><span style="color:#2D4C2B;">Customer:</span> <span style="color:#0F172A;">${escapeHtml(data.customerName)}</span></div>
+            ${data.customerPhone !== '-' ? `<div><span style="color:#2D4C2B;">Phone:</span> <span style="color:#0F172A;">${escapeHtml(data.customerPhone)}</span></div>` : ''}
+            <div><span style="color:#2D4C2B;">Site:</span> <span style="color:#334155;">${escapeHtml(data.siteAddress)}</span></div>
           </div>
 
           <!-- COMPACT TABLE -->
-          <table style="width:100%; border-collapse:collapse; margin-bottom:8px; font-size:11px;">
+          <table style="width:100%; border-collapse:collapse; margin-bottom:6px; font-size:11px; font-family:Arial, sans-serif;">
             <thead>
-              <tr style="background:#2D4C2B; color:#FFFFFF; font-weight:800; text-align:left;">
-                <th style="padding:4px 6px; width:26px; text-align:center;">#</th>
-                <th style="padding:4px 6px;">Item &amp; Specification</th>
-                <th style="padding:4px 6px; text-align:right; width:65px;">Area (SFT)</th>
+              <tr style="background:#2D4C2B; color:#FFFFFF; font-weight:600; text-align:left;">
+                <th style="padding:4px 5px; width:26px; text-align:center;">#</th>
+                <th style="padding:4px 6px;">Item Name</th>
+                <th style="padding:4px 6px; width:110px;">Room / Section</th>
+                <th style="padding:4px 6px; text-align:right; width:75px;">Area</th>
                 <th style="padding:4px 6px; text-align:right; width:55px;">Qty</th>
-                <th style="padding:4px 6px; text-align:right; width:70px;">Rate (₹)</th>
-                <th style="padding:4px 6px; text-align:right; width:85px;">Amount (₹)</th>
+                <th style="padding:4px 6px; text-align:right; width:65px;">Rate (₹)</th>
+                <th style="padding:4px 6px; text-align:right; width:80px;">Amount (₹)</th>
               </tr>
             </thead>
             <tbody>
@@ -3997,24 +4593,48 @@
           <!-- SUMMARY & DUE AMOUNT -->
           <div style="display:flex; justify-content:space-between; align-items:flex-start; border-top:1.5px solid #CBD5E1; padding-top:6px; gap:10px;">
             <div style="flex:1;">
-              <div style="font-size:10.5px; color:#334155;"><b>In words:</b> <span style="font-weight:700; color:#0F172A;">${escapeHtml(data.amountInWords)}</span></div>
-              <div style="font-size:9.5px; color:#94A3B8; margin-top:3px;">* Non-GST Quotation / Estimate • Subject to stock confirmation.</div>
+              <div style="font-size:10.5px; color:#334155;">In words: <span style="color:#0F172A;">${escapeHtml(data.amountInWords)}</span></div>
+              <div style="font-size:9.5px; color:#94A3B8; margin-top:2px;">* Non-GST Quotation / Estimate • Subject to stock confirmation.</div>
             </div>
-            <div style="min-width:220px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:6px; padding:6px 9px; font-size:11px;">
+            <div style="min-width:220px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:5px; padding:5px 8px; font-size:11px;">
               <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:#475569;">
                 <span>Total Units:</span>
-                <span style="font-weight:800; color:#0F172A;">${data.totalBoxes} Bx ${data.totalSft > 0 ? `(${data.totalSft.toFixed(1)} SFT)` : ''}</span>
+                <span style="color:#0F172A;">${data.totalBoxes} Bx ${data.totalSft > 0 ? `(${data.totalSft.toFixed(1)} SFT)` : ''}</span>
               </div>
-              <div style="display:flex; justify-content:space-between; margin-bottom:2px; font-size:13px; font-weight:900; color:#0F172A; border-top:1px dashed #CBD5E1; padding-top:3px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:2px; font-size:12px; font-weight:600; color:#0F172A; border-top:1px dashed #CBD5E1; padding-top:2px;">
                 <span>Grand Total:</span>
                 <span style="color:#2D4C2B;">₹ ${data.grandTotal.toLocaleString('en-IN')}</span>
               </div>
+              ${data.charges && data.charges.auto > 0 ? `
+                <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:#475569;">
+                  <span>🚚 Auto Charges:</span>
+                  <span>₹ ${Math.round(data.charges.auto).toLocaleString('en-IN')}</span>
+                </div>
+              ` : ''}
+              ${data.charges && data.charges.labour > 0 ? `
+                <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:#475569;">
+                  <span>👷 Labour Charges:</span>
+                  <span>₹ ${Math.round(data.charges.labour).toLocaleString('en-IN')}</span>
+                </div>
+              ` : ''}
+              ${data.charges && data.charges.gst > 0 ? `
+                <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:#475569;">
+                  <span>🏛️ GST Charges:</span>
+                  <span>₹ ${Math.round(data.charges.gst).toLocaleString('en-IN')}</span>
+                </div>
+              ` : ''}
+              ${data.totalCharges > 0 ? `
+                <div style="display:flex; justify-content:space-between; margin-bottom:2px; font-weight:600; color:#0F172A; border-top:1px dashed #CBD5E1; padding-top:2px;">
+                  <span>Total Payable:</span>
+                  <span style="color:#2D4C2B;">₹ ${data.payableTotal.toLocaleString('en-IN')}</span>
+                </div>
+              ` : ''}
               ${data.advanceAmount > 0 ? `
-                <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:#059669; font-weight:700;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:#059669;">
                   <span>Advance Paid:</span>
                   <span>₹ ${Math.round(data.advanceAmount).toLocaleString('en-IN')}</span>
                 </div>
-                <div style="display:flex; justify-content:space-between; font-weight:900; color:#B91C1C; border-top:1px solid #FECACA; padding-top:2px; font-size:12px;">
+                <div style="display:flex; justify-content:space-between; font-weight:600; color:#B91C1C; border-top:1px solid #FECACA; padding-top:2px; font-size:11.5px;">
                   <span>Balance Due:</span>
                   <span>₹ ${Math.round(data.dueAmount).toLocaleString('en-IN')}</span>
                 </div>
@@ -4029,10 +4649,15 @@
       const logicalWidth = 740;
       let rowsHeight = 0;
       (data.items || []).forEach(it => {
-        rowsHeight += it.subtitle ? 30 : 22;
+        rowsHeight += it.subtitle ? 28 : 20;
       });
-      const totalsBoxHeight = data.advanceAmount > 0 ? 76 : 52;
-      const logicalHeight = Math.max(340, 56 + 36 + 24 + rowsHeight + totalsBoxHeight + 34);
+      let chargesCount = 0;
+      if (data.charges && data.charges.auto > 0) chargesCount++;
+      if (data.charges && data.charges.labour > 0) chargesCount++;
+      if (data.charges && data.charges.gst > 0) chargesCount++;
+      if (data.totalCharges > 0) chargesCount++;
+      const totalsBoxHeight = 40 + (chargesCount * 14) + (data.advanceAmount > 0 ? 28 : 0);
+      const logicalHeight = Math.max(340, 52 + 32 + 22 + rowsHeight + totalsBoxHeight + 28);
 
       const canvas = document.createElement('canvas');
       const scale = 2; // 2x Retina resolution for razor-sharp text on mobile WhatsApp
@@ -4048,67 +4673,67 @@
 
       // Outer neat frame
       ctx.strokeStyle = '#2D4C2B';
-      ctx.lineWidth = 1.5;
-      drawCanvasRoundedRect(ctx, 8, 8, logicalWidth - 16, logicalHeight - 16, 6, false, true);
+      ctx.lineWidth = 1.2;
+      drawCanvasRoundedRect(ctx, 8, 8, logicalWidth - 16, logicalHeight - 16, 5, false, true);
 
       // TOP HEADER
       ctx.fillStyle = '#1E293B';
-      ctx.font = '900 17px system-ui, -apple-system, sans-serif';
+      ctx.font = '600 16px Arial, sans-serif';
       ctx.textAlign = 'left';
-      ctx.fillText('ESTIMATE / QUOTATION', 20, 32);
+      ctx.fillText('ESTIMATE / QUOTATION', 20, 30);
 
       ctx.fillStyle = '#2D4C2B';
-      ctx.font = '700 11px system-ui, -apple-system, sans-serif';
-      ctx.fillText('Tile Estimator & Billing Pro', 20, 46);
+      ctx.font = 'normal 11px Arial, sans-serif';
+      ctx.fillText('Tile Estimator & Billing Pro', 20, 44);
 
       ctx.textAlign = 'right';
       ctx.fillStyle = '#2D4C2B';
-      ctx.font = '900 14px system-ui, -apple-system, sans-serif';
-      ctx.fillText('#' + (data.refNo || 'EST-1001'), logicalWidth - 20, 32);
+      ctx.font = '600 13px Arial, sans-serif';
+      ctx.fillText('#' + (data.refNo || 'EST-1001'), logicalWidth - 20, 30);
 
       ctx.fillStyle = '#64748B';
-      ctx.font = '600 11px system-ui, -apple-system, sans-serif';
-      ctx.fillText('Date: ' + formatIndianDate(data.date), logicalWidth - 20, 46);
+      ctx.font = 'normal 11px Arial, sans-serif';
+      ctx.fillText('Date: ' + formatIndianDate(data.date), logicalWidth - 20, 44);
 
       // Header bottom green rule
       ctx.strokeStyle = '#2D4C2B';
-      ctx.lineWidth = 1.5;
+      ctx.lineWidth = 1.2;
       ctx.beginPath();
-      ctx.moveTo(18, 54);
-      ctx.lineTo(logicalWidth - 18, 54);
+      ctx.moveTo(18, 52);
+      ctx.lineTo(logicalWidth - 18, 52);
       ctx.stroke();
 
       // CUSTOMER BAR
       ctx.fillStyle = '#F4F8F3';
       ctx.strokeStyle = '#D2E4D0';
       ctx.lineWidth = 1;
-      drawCanvasRoundedRect(ctx, 18, 60, logicalWidth - 36, 28, 4, true, true);
+      drawCanvasRoundedRect(ctx, 18, 58, logicalWidth - 36, 26, 4, true, true);
 
       ctx.textAlign = 'left';
       ctx.fillStyle = '#2D4C2B';
-      ctx.font = '700 10.5px system-ui, -apple-system, sans-serif';
-      ctx.fillText('Customer:', 26, 78);
+      ctx.font = 'normal 10.5px Arial, sans-serif';
+      ctx.fillText('Customer:', 26, 75);
 
       ctx.fillStyle = '#0F172A';
-      ctx.font = '800 11px system-ui, -apple-system, sans-serif';
-      ctx.fillText(data.customerName || 'Walk-in Customer', 82, 78);
+      ctx.font = 'normal 11px Arial, sans-serif';
+      ctx.fillText(data.customerName || 'Walk-in Customer', 82, 75);
 
       if (data.customerPhone && data.customerPhone !== '-') {
         ctx.fillStyle = '#2D4C2B';
-        ctx.font = '700 10.5px system-ui, -apple-system, sans-serif';
-        ctx.fillText('Phone:', 285, 78);
+        ctx.font = 'normal 10.5px Arial, sans-serif';
+        ctx.fillText('Phone:', 285, 75);
 
         ctx.fillStyle = '#0F172A';
-        ctx.font = '800 11px system-ui, -apple-system, sans-serif';
-        ctx.fillText(data.customerPhone, 325, 78);
+        ctx.font = 'normal 11px Arial, sans-serif';
+        ctx.fillText(data.customerPhone, 325, 75);
       }
 
       ctx.fillStyle = '#2D4C2B';
-      ctx.font = '700 10.5px system-ui, -apple-system, sans-serif';
-      ctx.fillText('Site:', 450, 78);
+      ctx.font = 'normal 10.5px Arial, sans-serif';
+      ctx.fillText('Site:', 450, 75);
 
       ctx.fillStyle = '#334155';
-      ctx.font = '600 10.5px system-ui, -apple-system, sans-serif';
+      ctx.font = 'normal 10.5px Arial, sans-serif';
       const maxSiteWidth = logicalWidth - 36 - 485;
       let siteStr = data.siteAddress || 'Site: As Specified';
       if (ctx.measureText(siteStr).width > maxSiteWidth) {
@@ -4117,32 +4742,33 @@
         }
         siteStr += '...';
       }
-      ctx.fillText(siteStr, 480, 78);
+      ctx.fillText(siteStr, 480, 75);
 
       // TABLE HEADER
-      const tableTop = 96;
+      const tableTop = 92;
       ctx.fillStyle = '#2D4C2B';
-      ctx.fillRect(18, tableTop, logicalWidth - 36, 22);
+      ctx.fillRect(18, tableTop, logicalWidth - 36, 20);
 
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = '800 10px system-ui, -apple-system, sans-serif';
+      ctx.font = '600 10px Arial, sans-serif';
 
       ctx.textAlign = 'center';
-      ctx.fillText('#', 30, tableTop + 15);
+      ctx.fillText('#', 30, tableTop + 14);
 
       ctx.textAlign = 'left';
-      ctx.fillText('Item & Specification', 46, tableTop + 15);
+      ctx.fillText('Item Name', 46, tableTop + 14);
+      ctx.fillText('Room / Section', 215, tableTop + 14);
 
       ctx.textAlign = 'right';
-      ctx.fillText('Area (SFT)', 440, tableTop + 15);
-      ctx.fillText('Qty', 505, tableTop + 15);
-      ctx.fillText('Rate (₹)', 585, tableTop + 15);
-      ctx.fillText('Amount (₹)', logicalWidth - 26, tableTop + 15);
+      ctx.fillText('Area', 430, tableTop + 14);
+      ctx.fillText('Qty', 495, tableTop + 14);
+      ctx.fillText('Rate (₹)', 575, tableTop + 14);
+      ctx.fillText('Amount (₹)', logicalWidth - 26, tableTop + 14);
 
       // TABLE ROWS
-      let currY = tableTop + 22;
+      let currY = tableTop + 20;
       (data.items || []).forEach((item, idx) => {
-        const rowH = item.subtitle ? 30 : 22;
+        const rowH = 20;
         const isAlt = idx % 2 === 1;
 
         // Background
@@ -4160,73 +4786,82 @@
         // Col: #
         ctx.textAlign = 'center';
         ctx.fillStyle = '#64748B';
-        ctx.font = '700 10px system-ui, -apple-system, sans-serif';
+        ctx.font = 'normal 10px Arial, sans-serif';
         ctx.fillText(String(idx + 1), 30, currY + 14);
 
-        // Col: Item & Specification
+        // Col: Item Name
         ctx.textAlign = 'left';
         ctx.fillStyle = '#0F172A';
-        ctx.font = '800 11px system-ui, -apple-system, sans-serif';
-        if (item.subtitle) {
-          ctx.fillText(item.name, 46, currY + 13);
-          ctx.font = '600 9px system-ui, -apple-system, sans-serif';
-          ctx.fillStyle = '#475569';
-          const subText = item.subtitle + (item.dimText ? ' • ' + item.dimText : '');
-          ctx.fillText(subText, 46, currY + 24);
-        } else {
-          ctx.fillText(item.name, 46, currY + 15);
+        ctx.font = 'normal 11px Arial, sans-serif';
+        let itemName = item.name || 'Item';
+        const maxItemW = 160;
+        if (ctx.measureText(itemName).width > maxItemW) {
+          while (itemName.length > 4 && ctx.measureText(itemName + '...').width > maxItemW) itemName = itemName.slice(0, -1);
+          itemName += '...';
         }
+        ctx.fillText(itemName, 46, currY + 14);
+
+        // Col: Room / Section
+        ctx.fillStyle = '#2D4C2B';
+        ctx.font = 'normal 10px Arial, sans-serif';
+        let sectionStr = item.section || '-';
+        const maxSecW = 170;
+        if (ctx.measureText(sectionStr).width > maxSecW) {
+          while (sectionStr.length > 4 && ctx.measureText(sectionStr + '...').width > maxSecW) sectionStr = sectionStr.slice(0, -1);
+          sectionStr += '...';
+        }
+        ctx.fillText(sectionStr, 215, currY + 14);
 
         // Col: Area
         ctx.textAlign = 'right';
-        ctx.font = '600 10.5px system-ui, -apple-system, sans-serif';
+        ctx.font = 'normal 10.5px Arial, sans-serif';
         ctx.fillStyle = '#334155';
-        ctx.fillText(item.sft > 0 ? item.sft.toFixed(1) : '-', 440, currY + 15);
+        ctx.fillText(item.areaRaw || '-', 430, currY + 14);
 
         // Col: Qty
         ctx.textAlign = 'right';
-        ctx.font = '800 10.5px system-ui, -apple-system, sans-serif';
+        ctx.font = 'normal 10.5px Arial, sans-serif';
         ctx.fillStyle = '#0F172A';
-        ctx.fillText(`${item.qty} ${item.unit}`, 505, currY + 15);
+        ctx.fillText(`${item.qty} ${item.unit}`, 495, currY + 14);
 
         // Col: Rate
         ctx.textAlign = 'right';
-        ctx.font = '600 10.5px system-ui, -apple-system, sans-serif';
+        ctx.font = 'normal 10.5px Arial, sans-serif';
         ctx.fillStyle = '#334155';
-        ctx.fillText(item.rate > 0 ? `₹ ${item.rate}` : '-', 585, currY + 15);
+        ctx.fillText(item.rate > 0 ? `₹ ${item.rate}` : '-', 575, currY + 14);
 
         // Col: Amount
         ctx.textAlign = 'right';
-        ctx.font = '900 11px system-ui, -apple-system, sans-serif';
+        ctx.font = '600 11px Arial, sans-serif';
         ctx.fillStyle = '#0F172A';
-        ctx.fillText(`₹ ${item.amount.toLocaleString('en-IN')}`, logicalWidth - 26, currY + 15);
+        ctx.fillText(`₹ ${item.amount.toLocaleString('en-IN')}`, logicalWidth - 26, currY + 14);
 
         currY += rowH;
       });
 
       // BOTTOM SUMMARY SECTION
-      currY += 8;
+      currY += 6;
       // Top divider
       ctx.strokeStyle = '#CBD5E1';
-      ctx.lineWidth = 1.2;
+      ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(18, currY);
       ctx.lineTo(logicalWidth - 18, currY);
       ctx.stroke();
 
-      currY += 6;
+      currY += 5;
 
       // Left: In Words & Terms
       ctx.textAlign = 'left';
       ctx.fillStyle = '#334155';
-      ctx.font = '700 10px system-ui, -apple-system, sans-serif';
+      ctx.font = 'normal 10px Arial, sans-serif';
       ctx.fillText('In words: ', 20, currY + 12);
-      ctx.font = '800 10.5px system-ui, -apple-system, sans-serif';
+      ctx.font = 'normal 10.5px Arial, sans-serif';
       ctx.fillStyle = '#0F172A';
 
       // Simple wrap for long amount in words
       const wordsStr = data.amountInWords || 'Rupees Zero Only';
-      const maxWordsW = logicalWidth - 270;
+      const maxWordsW = logicalWidth - 260;
       if (ctx.measureText(wordsStr).width > maxWordsW) {
         const words = wordsStr.split(' ');
         let line1 = '', line2 = '';
@@ -4241,59 +4876,106 @@
       }
 
       ctx.fillStyle = '#94A3B8';
-      ctx.font = '600 9px system-ui, -apple-system, sans-serif';
-      ctx.fillText('* Non-GST Quotation / Estimate • Subject to stock confirmation', 20, currY + 38);
+      ctx.font = 'normal 9px Arial, sans-serif';
+      ctx.fillText('* Non-GST Quotation / Estimate • Subject to stock confirmation', 20, currY + 36);
 
       // Right: Compact Summary Card
-      const boxW = 220;
+      const boxW = 215;
       const boxX = logicalWidth - 18 - boxW;
-      const boxH = data.advanceAmount > 0 ? 66 : 44;
+      const boxH = totalsBoxHeight - 6;
 
       ctx.fillStyle = '#F8FAFC';
       ctx.strokeStyle = '#E2E8F0';
       ctx.lineWidth = 1;
       drawCanvasRoundedRect(ctx, boxX, currY, boxW, boxH, 4, true, true);
 
+      let cardLineY = currY + 13;
+
       // Total Units
       ctx.textAlign = 'left';
       ctx.fillStyle = '#64748B';
-      ctx.font = '600 10px system-ui, -apple-system, sans-serif';
-      ctx.fillText('Total Units:', boxX + 8, currY + 14);
+      ctx.font = 'normal 10px Arial, sans-serif';
+      ctx.fillText('Total Units:', boxX + 8, cardLineY);
 
       ctx.textAlign = 'right';
       ctx.fillStyle = '#0F172A';
-      ctx.font = '800 10.5px system-ui, -apple-system, sans-serif';
+      ctx.font = 'normal 10.5px Arial, sans-serif';
       const unitSummary = `${data.totalBoxes} Bx ${data.totalSft > 0 ? `(${data.totalSft.toFixed(1)} SFT)` : ''}`;
-      ctx.fillText(unitSummary, boxX + boxW - 8, currY + 14);
+      ctx.fillText(unitSummary, boxX + boxW - 8, cardLineY);
+      cardLineY += 14;
 
       // Grand Total
       ctx.textAlign = 'left';
       ctx.fillStyle = '#0F172A';
-      ctx.font = '900 11.5px system-ui, -apple-system, sans-serif';
-      ctx.fillText('Grand Total:', boxX + 8, currY + 31);
+      ctx.font = '600 11px Arial, sans-serif';
+      ctx.fillText('Grand Total:', boxX + 8, cardLineY);
 
       ctx.textAlign = 'right';
       ctx.fillStyle = '#2D4C2B';
-      ctx.font = '900 12.5px system-ui, -apple-system, sans-serif';
-      ctx.fillText(`₹ ${data.grandTotal.toLocaleString('en-IN')}`, boxX + boxW - 8, currY + 31);
+      ctx.font = '600 11.5px Arial, sans-serif';
+      ctx.fillText(`₹ ${data.grandTotal.toLocaleString('en-IN')}`, boxX + boxW - 8, cardLineY);
+      cardLineY += 14;
+
+      if (data.charges && data.charges.auto > 0) {
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#64748B';
+        ctx.font = 'normal 10px Arial, sans-serif';
+        ctx.fillText('Auto Charges:', boxX + 8, cardLineY);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#0F172A';
+        ctx.fillText(`₹ ${Math.round(data.charges.auto).toLocaleString('en-IN')}`, boxX + boxW - 8, cardLineY);
+        cardLineY += 14;
+      }
+      if (data.charges && data.charges.labour > 0) {
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#64748B';
+        ctx.font = 'normal 10px Arial, sans-serif';
+        ctx.fillText('Labour Charges:', boxX + 8, cardLineY);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#0F172A';
+        ctx.fillText(`₹ ${Math.round(data.charges.labour).toLocaleString('en-IN')}`, boxX + boxW - 8, cardLineY);
+        cardLineY += 14;
+      }
+      if (data.charges && data.charges.gst > 0) {
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#64748B';
+        ctx.font = 'normal 10px Arial, sans-serif';
+        ctx.fillText('GST Charges:', boxX + 8, cardLineY);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#0F172A';
+        ctx.fillText(`₹ ${Math.round(data.charges.gst).toLocaleString('en-IN')}`, boxX + boxW - 8, cardLineY);
+        cardLineY += 14;
+      }
+      if (data.totalCharges > 0) {
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#0F172A';
+        ctx.font = '600 11px Arial, sans-serif';
+        ctx.fillText('Total Payable:', boxX + 8, cardLineY);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#2D4C2B';
+        ctx.font = '600 11.5px Arial, sans-serif';
+        ctx.fillText(`₹ ${data.payableTotal.toLocaleString('en-IN')}`, boxX + boxW - 8, cardLineY);
+        cardLineY += 14;
+      }
 
       // Advance & Due (if advance > 0)
       if (data.advanceAmount > 0) {
         ctx.textAlign = 'left';
         ctx.fillStyle = '#059669';
-        ctx.font = '700 10px system-ui, -apple-system, sans-serif';
-        ctx.fillText('Advance Paid:', boxX + 8, currY + 47);
+        ctx.font = 'normal 10px Arial, sans-serif';
+        ctx.fillText('Advance Paid:', boxX + 8, cardLineY);
 
         ctx.textAlign = 'right';
-        ctx.fillText(`₹ ${Math.round(data.advanceAmount).toLocaleString('en-IN')}`, boxX + boxW - 8, currY + 47);
+        ctx.fillText(`₹ ${Math.round(data.advanceAmount).toLocaleString('en-IN')}`, boxX + boxW - 8, cardLineY);
+        cardLineY += 14;
 
         ctx.textAlign = 'left';
         ctx.fillStyle = '#B91C1C';
-        ctx.font = '900 10.5px system-ui, -apple-system, sans-serif';
-        ctx.fillText('Balance Due:', boxX + 8, currY + 61);
+        ctx.font = '600 10.5px Arial, sans-serif';
+        ctx.fillText('Balance Due:', boxX + 8, cardLineY);
 
         ctx.textAlign = 'right';
-        ctx.fillText(`₹ ${Math.round(data.dueAmount).toLocaleString('en-IN')}`, boxX + boxW - 8, currY + 61);
+        ctx.fillText(`₹ ${Math.round(data.dueAmount).toLocaleString('en-IN')}`, boxX + boxW - 8, cardLineY);
       }
 
       return canvas;
@@ -4434,7 +5116,7 @@
           const sep = ep.includes('?') ? '&' : '?';
           const url = ep + sep + 't=' + Date.now();
           const controller = new AbortController();
-          const timer = setTimeout(() => controller.abort(), 3500);
+          const timer = setTimeout(() => controller.abort(), 8000);
           const res = await fetch(url, {
             signal: controller.signal,
             headers: { 'ngrok-skip-browser-warning': 'true' }

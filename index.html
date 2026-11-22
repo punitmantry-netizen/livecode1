@@ -774,7 +774,22 @@
       }
       .room-entry-table {
         width: 100% !important;
-        min-width: 340px !important;
+        min-width: 100% !important;
+      }
+      .room-col-size {
+        display: none !important;
+      }
+      .room-col-sec {
+        width: 22% !important;
+      }
+      .room-col-dim {
+        width: 20% !important;
+      }
+      .room-col-item {
+        width: 46% !important;
+      }
+      .room-col-res {
+        width: 12% !important;
       }
       .room-entry-table th, .room-entry-table td {
         padding: 4px 3px !important;
@@ -782,10 +797,23 @@
       .room-entry-table .table-input {
         height: 28px !important;
         font-size: 11.5px !important;
+        width: 100% !important;
       }
       .room-entry-table .table-select {
         height: 28px !important;
         font-size: 11px !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .room-col-size {
+        display: none !important;
+      }
+      .room-col-item {
+        width: 44% !important;
+      }
+      .col-area, .col-ratesft {
+        display: none !important;
       }
     }
 
@@ -1295,26 +1323,40 @@
         display: none !important;
       }
       .col-sno {
-        width: 20px !important;
-        padding: 4px 2px !important;
-        font-size: 11px !important;
+        width: 18px !important;
+        padding: 4px 1px !important;
+        font-size: 10.5px !important;
       }
       .col-item {
         width: auto !important;
         padding: 4px 4px !important;
         font-size: 11.5px !important;
       }
-      .col-qty {
-        width: 48px !important;
+      .col-section {
+        width: 65px !important;
         padding: 4px 2px !important;
-        font-size: 11.5px !important;
+      }
+      .col-section .room-section-badge {
+        font-size: 9px !important;
+        padding: 1px 3px !important;
+        white-space: normal !important;
+        line-height: 1.15 !important;
+        display: inline-block !important;
+      }
+      .col-qty {
+        width: 44px !important;
+        padding: 4px 2px !important;
+        font-size: 11px !important;
       }
       .col-rate {
-        width: 58px !important;
+        width: 52px !important;
         padding: 4px 2px !important;
       }
       .col-total {
-        width: 65px !important;
+        width: 60px !important;
+        padding: 4px 2px !important;
+        font-size: 11.5px !important;
+      }
         padding: 4px 2px !important;
         font-size: 11.5px !important;
       }
@@ -2832,108 +2874,108 @@
               <table class="room-entry-table">
                 <thead>
                   <tr>
-                    <th style="width:20%;">Layer / Section</th>
-                    <th style="width:20%;">Size (L × W)</th>
-                    <th style="width:32%;">Tile Name</th>
-                    <th style="width:14%;">Tile Size</th>
-                    <th style="width:14%; text-align:right;">Result</th>
+                    <th class="room-col-sec" style="width:20%;">Layer / Section</th>
+                    <th class="room-col-dim" style="width:20%;">Size (L × W)</th>
+                    <th class="room-col-item" style="width:32%;">Tile Name</th>
+                    <th class="room-col-size" style="width:14%;">Tile Size</th>
+                    <th class="room-col-res" style="width:14%; text-align:right;">Result</th>
                   </tr>
                 </thead>
                 <tbody>
                   <!-- ROW 1: HIGHLIGHTER (HL) WALL (SHOWN ONLY IF CHECKED) -->
                   <tr id="tr_hl_${room.id}" style="${room.chkHl ? '' : 'display:none;'}">
-                    <td class="td-section">
+                    <td class="td-section room-col-sec">
                       <span>✨ HL Wall</span>
                     </td>
-                    <td>
+                    <td class="room-col-dim">
                       <input type="text" class="table-input" id="inp_hl_size_${room.id}" value="${escapeHtml(room.hlSizeDim || '')}" 
                         placeholder="Length * Width" 
                         oninput="updateRoomField('${room.id}', 'hlSizeDim', this.value)" />
                     </td>
-                    <td>
+                    <td class="room-col-item">
                       <input type="text" class="table-input" id="inp_hl_name_${room.id}" list="tallyList" value="${escapeHtml(room.hlName || '')}" 
                         placeholder="Type tile..." 
                         oninput="onTileSearchInput('${room.id}', 'hl', this.value)" autocomplete="off" />
                     </td>
-                    <td>
+                    <td class="room-col-size">
                       <select class="table-select" id="inp_hl_sz_${room.id}" 
                         onchange="updateRoomSize('${room.id}', 'hl', this.value)">
                         ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.hlSize ? 'selected' : ''}>${s.label}</option>`).join('')}
                       </select>
                     </td>
-                    <td style="text-align:right;">
+                    <td class="room-col-res" style="text-align:right;">
                       <span id="calc_hl_${room.id}" class="compact-res-pill" style="${room.chkHl ? '' : 'display:none;'}"></span>
                     </td>
                   </tr>
 
                   <!-- ROW 2: DARK WALL (SHOWN ONLY IF CHECKED) -->
                   <tr id="tr_dk_${room.id}" style="${room.chkDk ? '' : 'display:none;'}">
-                    <td class="td-section">
+                    <td class="td-section room-col-sec">
                       <span>🔲 Dark Wall</span>
                     </td>
-                    <td>
+                    <td class="room-col-dim">
                       <input type="text" class="table-input" id="inp_dk_size_${room.id}" value="${escapeHtml(room.dkSizeDim || '')}" 
                         placeholder="Length * Width" 
                         oninput="updateRoomField('${room.id}', 'dkSizeDim', this.value)" />
                     </td>
-                    <td>
+                    <td class="room-col-item">
                       <input type="text" class="table-input" id="inp_dk_name_${room.id}" list="tallyList" value="${escapeHtml(room.dkName || '')}" 
                         placeholder="Type tile..." 
                         oninput="onTileSearchInput('${room.id}', 'dk', this.value)" autocomplete="off" />
                     </td>
-                    <td>
+                    <td class="room-col-size">
                       <select class="table-select" id="inp_dk_sz_${room.id}" 
                         onchange="updateRoomSize('${room.id}', 'dk', this.value)">
                         ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.dkSize ? 'selected' : ''}>${s.label}</option>`).join('')}
                       </select>
                     </td>
-                    <td style="text-align:right;">
+                    <td class="room-col-res" style="text-align:right;">
                       <span id="calc_dk_${room.id}" class="compact-res-pill" style="${room.chkDk ? '' : 'display:none;'}"></span>
                     </td>
                   </tr>
 
                   <!-- ROW 3: PLAIN BASE TILE (SHOWN ONLY IF WALL SIZE ENTERED) -->
                   <tr id="tr_lt_${room.id}" style="${grossWallArea > 0 ? '' : 'display:none;'}">
-                    <td class="td-section">
+                    <td class="td-section room-col-sec">
                       <span>⬜ Plain Base</span>
                     </td>
-                    <td>
+                    <td class="room-col-dim">
                       <div id="netLtArea_${room.id}" class="table-readonly-box">Net: 0 SFT</div>
                     </td>
-                    <td>
+                    <td class="room-col-item">
                       <input type="text" class="table-input" list="tallyList" value="${escapeHtml(room.ltName || '')}" 
                         placeholder="Type tile..." 
                         oninput="onTileSearchInput('${room.id}', 'lt', this.value)" autocomplete="off" />
                     </td>
-                    <td>
+                    <td class="room-col-size">
                       <select class="table-select" onchange="updateRoomSize('${room.id}', 'lt', this.value)">
                         ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.ltSize ? 'selected' : ''}>${s.label}</option>`).join('')}
                       </select>
                     </td>
-                    <td style="text-align:right;">
+                    <td class="room-col-res" style="text-align:right;">
                       <span id="calc_lt_${room.id}" class="compact-res-pill" style="display:none;"></span>
                     </td>
                   </tr>
 
                   <!-- ROW 4: FLOOR TILE (SHOWN ONLY IF FLOOR SIZE ENTERED) -->
                   <tr id="tr_fl_${room.id}" style="${flArea > 0 ? '' : 'display:none;'}">
-                    <td class="td-section">
+                    <td class="td-section room-col-sec">
                       <span>📐 Floor Tile</span>
                     </td>
-                    <td>
+                    <td class="room-col-dim">
                       <div id="flAreaBadge_${room.id}" class="table-readonly-box">0 SFT</div>
                     </td>
-                    <td>
+                    <td class="room-col-item">
                       <input type="text" class="table-input" list="tallyList" value="${escapeHtml(room.flName || '')}" 
                         placeholder="Type tile..." 
                         oninput="onTileSearchInput('${room.id}', 'fl', this.value)" autocomplete="off" />
                     </td>
-                    <td>
+                    <td class="room-col-size">
                       <select class="table-select" onchange="updateRoomSize('${room.id}', 'fl', this.value)">
                         ${STANDARD_TILE_SIZES.map(s => `<option value="${s.id}" ${s.id === room.flSize ? 'selected' : ''}>${s.label}</option>`).join('')}
                       </select>
                     </td>
-                    <td style="text-align:right;">
+                    <td class="room-col-res" style="text-align:right;">
                       <span id="calc_fl_${room.id}" class="compact-res-pill" style="display:none;"></span>
                     </td>
                   </tr>
@@ -3800,9 +3842,10 @@
       };
 
       try {
-        const orderUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-          ? 'http://localhost:3001/api/sales-order'
-          : TALLY_ORDER_ENDPOINT;
+        let orderUrl = TALLY_ORDER_ENDPOINT;
+        if (window.location.protocol.startsWith('http')) {
+          orderUrl = `${window.location.origin}/api/sales-order`;
+        }
 
         const res = await fetch(orderUrl, {
           method: 'POST',
@@ -5100,13 +5143,29 @@
         endpointsToTry.push(trimmed.endsWith('/api/stock') ? trimmed : `${trimmed}/api/stock`);
       }
 
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:') {
-        endpointsToTry.push(LOCAL_ENDPOINT);
+      // 1. Same-origin endpoints (direct to whichever server served this web app: Wi-Fi LAN, Ngrok, or Localhost)
+      if (window.location.protocol.startsWith('http')) {
         endpointsToTry.push('/api/stock');
+        if (!endpointsToTry.includes(`${window.location.origin}/api/stock`)) {
+          endpointsToTry.push(`${window.location.origin}/api/stock`);
+        }
       }
 
-      endpointsToTry.push(PERMANENT_ENDPOINT);
-      if (!endpointsToTry.includes(LOCAL_ENDPOINT)) endpointsToTry.push(LOCAL_ENDPOINT);
+      // 2. Direct LAN IP fallback for mobile devices on the same Wi-Fi
+      const lanUrl = 'http://192.168.31.28:3001/api/stock';
+      if (!endpointsToTry.includes(lanUrl)) {
+        endpointsToTry.push(lanUrl);
+      }
+
+      // 3. Permanent Ngrok Tunnel (for mobile on cellular data or outside Wi-Fi)
+      if (!endpointsToTry.includes(PERMANENT_ENDPOINT)) {
+        endpointsToTry.push(PERMANENT_ENDPOINT);
+      }
+
+      // 4. Localhost fallback
+      if (!endpointsToTry.includes(LOCAL_ENDPOINT)) {
+        endpointsToTry.push(LOCAL_ENDPOINT);
+      }
 
       let data = null;
       let connectedUrl = null;

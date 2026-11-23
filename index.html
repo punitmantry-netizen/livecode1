@@ -746,21 +746,23 @@
         flex-wrap: wrap !important;
       }
       .room-wall-group .room-dim-chip {
-        flex: 1 !important;
-        min-width: 140px !important;
+        flex: 1.5 !important;
+        min-width: 175px !important;
       }
       .room-dim-chip {
         display: flex !important;
         justify-content: space-between !important;
         align-items: center !important;
         width: 100% !important;
-        padding: 3px 6px !important;
+        padding: 4px 8px !important;
       }
       .room-dim-chip-input {
-        width: 55px !important;
-        flex: 1 !important;
-        margin: 0 4px !important;
-        min-width: 40px !important;
+        width: 100px !important;
+        flex: 1.5 !important;
+        margin: 0 5px !important;
+        min-width: 85px !important;
+        font-size: 13px !important;
+        height: 29px !important;
       }
       .room-name-compact-input {
         max-width: none !important;
@@ -845,11 +847,11 @@
     }
     .mobile-size-input {
       width: 100%;
-      height: 22px;
-      padding: 0 4px;
+      height: 25px;
+      padding: 0 6px;
       border: 1px solid var(--border);
       border-radius: 4px;
-      font-size: 10.5px;
+      font-size: 11px;
       font-family: Arial, sans-serif;
       background: #FFFFFF;
       box-sizing: border-box;
@@ -866,126 +868,6 @@
       border: 1px solid #d4e3d1;
       padding: 1px 4px;
       border-radius: 3px;
-    }
-
-    /* FLOATING TOUCH-FRIENDLY AUTOCOMPLETE POPUP */
-    .stock-suggest-popup {
-      position: absolute;
-      z-index: 100000;
-      background: #FFFFFF;
-      border: 1.5px solid #2D5A27;
-      border-radius: 8px;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
-      max-height: 250px;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      font-family: Arial, Helvetica, sans-serif;
-      box-sizing: border-box;
-      display: none;
-    }
-    .stock-suggest-header {
-      padding: 6px 10px;
-      background: #F4F8F3;
-      border-bottom: 1px solid #E2ECE0;
-      font-size: 11px;
-      color: #375334;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 2;
-    }
-    .stock-suggest-item {
-      padding: 9px 10px;
-      border-bottom: 1px solid #EEF3ED;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      transition: background 0.12s ease;
-      -webkit-tap-highlight-color: rgba(45, 90, 39, 0.1);
-    }
-    .stock-suggest-item:last-child {
-      border-bottom: none;
-    }
-    .stock-suggest-item:hover, .stock-suggest-item:active, .stock-suggest-item.highlighted {
-      background: #EAF4E8;
-    }
-    .suggest-name-col {
-      flex: 1;
-      min-width: 0;
-    }
-    .suggest-name {
-      font-size: 12.5px;
-      color: #1A2E19;
-      line-height: 1.3;
-      word-break: break-word;
-    }
-    .suggest-meta {
-      font-size: 10.5px;
-      color: #667564;
-      margin-top: 1px;
-    }
-    .suggest-stock-col {
-      flex-shrink: 0;
-      text-align: right;
-    }
-    .suggest-stock-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      font-size: 11px;
-      padding: 2px 7px;
-      border-radius: 12px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    .suggest-stock-badge.in-stock {
-      background: #DCFCE7;
-      color: #166534;
-      border: 1px solid #BBF7D0;
-    }
-    .suggest-stock-badge.out-stock {
-      background: #FEE2E2;
-      color: #991B1B;
-      border: 1px solid #FECACA;
-    }
-    .suggest-rate {
-      font-size: 11px;
-      color: #4B5563;
-      margin-top: 1px;
-    }
-
-    /* ITEM STOCK HINT UNDER TILE INPUT */
-    .item-stock-hint {
-      margin-top: 2px;
-      font-size: 10.5px;
-      line-height: 1.2;
-      display: none;
-    }
-    .item-stock-hint.show {
-      display: block;
-    }
-    .stock-pill-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 1px 6px;
-      border-radius: 4px;
-      font-size: 10.5px;
-      font-family: Arial, sans-serif;
-    }
-    .stock-pill-tag.in-stock {
-      background: #DCFCE7;
-      color: #14532D;
-      border: 1px solid #BBF7D0;
-    }
-    .stock-pill-tag.out-stock {
-      background: #FEE2E2;
-      color: #7F1D1D;
-      border: 1px solid #FECACA;
     }
 
     /* SHEET ENTRY TABLE */
@@ -3025,7 +2907,8 @@
                       <span class="room-dim-chip-label">🧱 Wall:</span>
                       <input type="text" class="room-dim-chip-input" id="inp_wall_size_${room.id}" value="${escapeHtml(room.wallSize || '')}" 
                         placeholder="Length * Width" 
-                        oninput="updateRoomField('${room.id}', 'wallSize', this.value)" />
+                        oninput="updateRoomField('${room.id}', 'wallSize', this.value)" 
+                        onkeydown="if(event.key==='Enter'){ event.preventDefault(); onWallSizeEnter('${room.id}'); }" />
                       <span id="grossWall_${room.id}" class="compact-res-pill">0 SFT</span>
                     </div>
 
@@ -3081,14 +2964,13 @@
                     <td class="room-col-dim">
                       <input type="text" class="table-input" id="inp_hl_size_${room.id}" value="${escapeHtml(room.hlSizeDim || '')}" 
                         placeholder="Length * Width" 
-                        oninput="updateRoomField('${room.id}', 'hlSizeDim', this.value); syncMobDim('${room.id}', 'hl', this.value);" />
+                        oninput="updateRoomField('${room.id}', 'hlSizeDim', this.value); syncMobDim('${room.id}', 'hl', this.value);" 
+                        onkeydown="if(event.key==='Enter'){ event.preventDefault(); document.getElementById('inp_hl_name_${room.id}')?.focus(); }" />
                     </td>
                     <td class="room-col-item">
                       <input type="text" class="table-input" id="inp_hl_name_${room.id}" list="tallyList" value="${escapeHtml(room.hlName || '')}" 
                         placeholder="Type tile..." 
-                        onfocus="openStockSuggest(this, '${room.id}', 'hl')" 
-                        oninput="handleStockInput(this, '${room.id}', 'hl')" autocomplete="off" />
-                      <div class="item-stock-hint" id="hint_hl_${room.id}"></div>
+                        oninput="onTileSearchInput('${room.id}', 'hl', this.value)" autocomplete="off" />
                     </td>
                     <td class="room-col-size">
                       <select class="table-select" id="inp_hl_sz_${room.id}" 
@@ -3114,14 +2996,13 @@
                     <td class="room-col-dim">
                       <input type="text" class="table-input" id="inp_dk_size_${room.id}" value="${escapeHtml(room.dkSizeDim || '')}" 
                         placeholder="Length * Width" 
-                        oninput="updateRoomField('${room.id}', 'dkSizeDim', this.value); syncMobDim('${room.id}', 'dk', this.value);" />
+                        oninput="updateRoomField('${room.id}', 'dkSizeDim', this.value); syncMobDim('${room.id}', 'dk', this.value);" 
+                        onkeydown="if(event.key==='Enter'){ event.preventDefault(); document.getElementById('inp_dk_name_${room.id}')?.focus(); }" />
                     </td>
                     <td class="room-col-item">
                       <input type="text" class="table-input" id="inp_dk_name_${room.id}" list="tallyList" value="${escapeHtml(room.dkName || '')}" 
                         placeholder="Type tile..." 
-                        onfocus="openStockSuggest(this, '${room.id}', 'dk')" 
-                        oninput="handleStockInput(this, '${room.id}', 'dk')" autocomplete="off" />
-                      <div class="item-stock-hint" id="hint_dk_${room.id}"></div>
+                        oninput="onTileSearchInput('${room.id}', 'dk', this.value)" autocomplete="off" />
                     </td>
                     <td class="room-col-size">
                       <select class="table-select" id="inp_dk_sz_${room.id}" 
@@ -3148,9 +3029,7 @@
                     <td class="room-col-item">
                       <input type="text" class="table-input" id="inp_lt_name_${room.id}" list="tallyList" value="${escapeHtml(room.ltName || '')}" 
                         placeholder="Type tile..." 
-                        onfocus="openStockSuggest(this, '${room.id}', 'lt')" 
-                        oninput="handleStockInput(this, '${room.id}', 'lt')" autocomplete="off" />
-                      <div class="item-stock-hint" id="hint_lt_${room.id}"></div>
+                        oninput="onTileSearchInput('${room.id}', 'lt', this.value)" autocomplete="off" />
                     </td>
                     <td class="room-col-size">
                       <select class="table-select" id="inp_lt_sz_${room.id}" onchange="updateRoomSize('${room.id}', 'lt', this.value)">
@@ -3176,9 +3055,7 @@
                     <td class="room-col-item">
                       <input type="text" class="table-input" id="inp_fl_name_${room.id}" list="tallyList" value="${escapeHtml(room.flName || '')}" 
                         placeholder="Type tile..." 
-                        onfocus="openStockSuggest(this, '${room.id}', 'fl')" 
-                        oninput="handleStockInput(this, '${room.id}', 'fl')" autocomplete="off" />
-                      <div class="item-stock-hint" id="hint_fl_${room.id}"></div>
+                        oninput="onTileSearchInput('${room.id}', 'fl', this.value)" autocomplete="off" />
                     </td>
                     <td class="room-col-size">
                       <select class="table-select" id="inp_fl_sz_${room.id}" onchange="updateRoomSize('${room.id}', 'fl', this.value)">
@@ -3235,6 +3112,46 @@
       }
     }
 
+    function getNextFieldForHl(roomId) {
+      const deskSize = document.getElementById(`inp_hl_size_${roomId}`);
+      const tileName = document.getElementById(`inp_hl_name_${roomId}`);
+      if (deskSize && deskSize.offsetParent !== null && window.getComputedStyle(deskSize).display !== 'none') {
+        const td = deskSize.closest('td');
+        if (td && window.getComputedStyle(td).display !== 'none') {
+          return deskSize;
+        }
+      }
+      return tileName;
+    }
+
+    function getNextFieldForDk(roomId) {
+      const deskSize = document.getElementById(`inp_dk_size_${roomId}`);
+      const tileName = document.getElementById(`inp_dk_name_${roomId}`);
+      if (deskSize && deskSize.offsetParent !== null && window.getComputedStyle(deskSize).display !== 'none') {
+        const td = deskSize.closest('td');
+        if (td && window.getComputedStyle(td).display !== 'none') {
+          return deskSize;
+        }
+      }
+      return tileName;
+    }
+
+    function focusNextFieldAfterCheckbox(targetEl) {
+      if (!targetEl) return;
+      scrollCursorIntoView(targetEl);
+      setTimeout(() => {
+        targetEl.focus();
+        if (typeof targetEl.select === 'function') targetEl.select();
+        scrollCursorIntoView(targetEl);
+      }, 70);
+      setTimeout(() => {
+        if (document.activeElement !== targetEl) {
+          targetEl.focus();
+          if (typeof targetEl.select === 'function') targetEl.select();
+        }
+      }, 160);
+    }
+
     function toggleRoomHl(roomId, checked) {
       const room = rooms.find(r => r.id === roomId);
       if (room) {
@@ -3242,15 +3159,8 @@
         calculateAll();
         saveDraft();
         if (checked) {
-          const inpSizeMob = document.getElementById(`inp_hl_size_mob_${roomId}`);
-          const inpSizeDesk = document.getElementById(`inp_hl_size_${roomId}`);
-          const targetInp = (window.innerWidth <= 768 && inpSizeMob) ? inpSizeMob : inpSizeDesk;
-          if (targetInp) {
-            setTimeout(() => {
-              targetInp.focus();
-              scrollCursorIntoView(targetInp);
-            }, 50);
-          }
+          const targetInp = getNextFieldForHl(roomId);
+          if (targetInp) focusNextFieldAfterCheckbox(targetInp);
         }
       }
     }
@@ -3262,189 +3172,42 @@
         calculateAll();
         saveDraft();
         if (checked) {
-          const inpSizeMob = document.getElementById(`inp_dk_size_mob_${roomId}`);
-          const inpSizeDesk = document.getElementById(`inp_dk_size_${roomId}`);
-          const targetInp = (window.innerWidth <= 768 && inpSizeMob) ? inpSizeMob : inpSizeDesk;
-          if (targetInp) {
-            setTimeout(() => {
-              targetInp.focus();
-              scrollCursorIntoView(targetInp);
-            }, 50);
-          }
+          const targetInp = getNextFieldForDk(roomId);
+          if (targetInp) focusNextFieldAfterCheckbox(targetInp);
         }
       }
     }
 
-    // SEARCH AUTO-POPULATION & TOUCH AUTOCOMPLETE
-    let currentSuggestContext = null;
-
-    function ensureSuggestPopup() {
-      let popup = document.getElementById('stockSuggestPopup');
-      if (!popup) {
-        popup = document.createElement('div');
-        popup.id = 'stockSuggestPopup';
-        popup.className = 'stock-suggest-popup';
-        document.body.appendChild(popup);
-        
-        // Close on outside tap or click
-        document.addEventListener('pointerdown', (e) => {
-          if (!popup.contains(e.target) && !e.target.closest('.table-input') && !e.target.closest('#inlineItemSearch')) {
-            closeStockSuggest();
-          }
-        });
-
-        window.addEventListener('resize', closeStockSuggest);
-        window.addEventListener('scroll', () => {
-          if (popup.style.display === 'block' && currentSuggestContext && currentSuggestContext.inputEl) {
-            positionSuggestPopup(currentSuggestContext.inputEl);
-          }
-        }, { passive: true });
-      }
-      return popup;
-    }
-
-    function positionSuggestPopup(inputEl) {
-      const popup = ensureSuggestPopup();
-      const rect = inputEl.getBoundingClientRect();
-      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
-      
-      const viewportWidth = window.innerWidth;
-      const popupWidth = Math.min(360, Math.max(260, rect.width, viewportWidth - 24));
-      
-      let left = rect.left + scrollX;
-      if (left + popupWidth > viewportWidth - 8) {
-        left = viewportWidth - popupWidth - 8;
-      }
-      if (left < 8) left = 8;
-      
-      let top = rect.bottom + scrollY + 4;
-      const spaceBelow = window.innerHeight - rect.bottom;
-      if (spaceBelow < 220 && rect.top > 220) {
-        top = rect.top + scrollY - 245;
-        if (top < scrollY + 8) top = scrollY + 8;
-      }
-
-      popup.style.left = `${left}px`;
-      popup.style.top = `${top}px`;
-      popup.style.width = `${popupWidth}px`;
-    }
-
-    function closeStockSuggest() {
-      const popup = document.getElementById('stockSuggestPopup');
-      if (popup) popup.style.display = 'none';
-      currentSuggestContext = null;
-    }
-
-    function openStockSuggest(inputEl, roomId, tileKey) {
-      currentSuggestContext = { inputEl, roomId, tileKey };
-      renderStockSuggestions(inputEl.value || '', inputEl, roomId, tileKey);
-    }
-
-    function handleStockInput(inputEl, roomId, tileKey) {
-      const val = inputEl.value;
-      onTileSearchInput(roomId, tileKey, val);
-      currentSuggestContext = { inputEl, roomId, tileKey };
-      renderStockSuggestions(val, inputEl, roomId, tileKey);
-    }
-
-    function renderStockSuggestions(query, inputEl, roomId, tileKey) {
-      const popup = ensureSuggestPopup();
-      if (!tallyStock || !tallyStock.length) {
-        try {
-          const cached = localStorage.getItem('cached_tally_stock_v1');
-          if (cached) {
-            const parsed = JSON.parse(cached);
-            if (Array.isArray(parsed) && parsed.length > 0) tallyStock = parsed;
-          }
-        } catch(e) {}
-      }
-
-      if (!tallyStock || !tallyStock.length) {
-        popup.innerHTML = `
-          <div style="padding:12px; font-size:12px; color:#6B7280; text-align:center;">
-            Connecting to Tally ERP stock...
-          </div>
-        `;
-        positionSuggestPopup(inputEl);
-        popup.style.display = 'block';
-        return;
-      }
-
-      const q = (query || '').trim().toLowerCase();
-      const qWords = q.split(/\s+/).filter(Boolean);
-
-      let matches = [];
-      if (qWords.length === 0) {
-        matches = tallyStock.filter(i => (parseFloat(i.stockBoxes) || 0) > 0).slice(0, 25);
-        if (!matches.length) matches = tallyStock.slice(0, 25);
-      } else {
-        matches = tallyStock.filter(item => {
-          const name = (item.name || '').toLowerCase();
-          const parent = (item.parent || '').toLowerCase();
-          const combined = name + ' ' + parent;
-          return qWords.every(word => combined.includes(word));
-        }).slice(0, 30);
-      }
-
-      if (matches.length === 0) {
-        popup.innerHTML = `
-          <div style="padding:10px 12px; font-size:12px; color:#6B7280; text-align:center;">
-            No Tally item matching "<strong>${escapeHtml(query)}</strong>"<br>
-            <span style="font-size:11px; color:#9CA3AF;">Keep typing to use as custom tile</span>
-          </div>
-        `;
-        positionSuggestPopup(inputEl);
-        popup.style.display = 'block';
-        return;
-      }
-
-      popup.innerHTML = `
-        <div class="stock-suggest-header">
-          <span>📦 In-Stock Items (${matches.length})</span>
-          <span style="cursor:pointer; font-weight:bold; padding:2px 6px;" onclick="closeStockSuggest()">✕</span>
-        </div>
-        ${matches.map((item, idx) => {
-          const stock = parseFloat(item.stockBoxes) || 0;
-          const hasStock = stock > 0;
-          return `
-            <div class="stock-suggest-item" onpointerdown="selectStockSuggestItem(${idx}, event)">
-              <div class="suggest-name-col">
-                <div class="suggest-name">${escapeHtml(item.name)}</div>
-                ${item.parent ? `<div class="suggest-meta">${escapeHtml(item.parent)}</div>` : ''}
-              </div>
-              <div class="suggest-stock-col">
-                <span class="suggest-stock-badge ${hasStock ? 'in-stock' : 'out-stock'}">
-                  📦 ${stock} ${escapeHtml(item.unit || 'Bx')}
-                </span>
-                ${item.rate ? `<div class="suggest-rate">₹${item.rate}</div>` : ''}
-              </div>
-            </div>
-          `;
-        }).join('')}
-      `;
-
-      popup._currentMatches = matches;
-      positionSuggestPopup(inputEl);
-      popup.style.display = 'block';
-    }
-
-    function selectStockSuggestItem(matchIndex, evt) {
-      if (evt) {
-        evt.preventDefault();
-        evt.stopPropagation();
-      }
-      const popup = document.getElementById('stockSuggestPopup');
-      if (!popup || !popup._currentMatches || !currentSuggestContext) return;
-      const item = popup._currentMatches[matchIndex];
-      if (!item) return;
-
-      const { inputEl, roomId, tileKey } = currentSuggestContext;
-      if (inputEl) inputEl.value = item.name;
-
+    function onWallSizeEnter(roomId) {
       const room = rooms.find(r => r.id === roomId);
-      if (room) {
-        room[tileKey + 'Name'] = item.name;
+      if (!room) return;
+      if (room.chkHl) {
+        const hlInp = getNextFieldForHl(roomId);
+        if (hlInp) { hlInp.focus(); return; }
+      }
+      if (room.chkDk) {
+        const dkInp = getNextFieldForDk(roomId);
+        if (dkInp) { dkInp.focus(); return; }
+      }
+      const ltInp = document.getElementById(`inp_lt_name_${roomId}`);
+      if (ltInp && ltInp.offsetParent !== null) {
+        ltInp.focus();
+        return;
+      }
+      const flSize = document.getElementById(`inp_fl_size_${roomId}`);
+      if (flSize) flSize.focus();
+    }
+
+    // SEARCH AUTO-POPULATION (SINGLE CLEAN DATALIST AUTOPOP)
+    function onTileSearchInput(roomId, tileKey, query) {
+      const room = rooms.find(r => r.id === roomId);
+      if (!room) return;
+
+      room[tileKey + 'Name'] = query;
+      const cleanQ = (query || '').trim().toLowerCase();
+
+      const item = tallyStock.find(i => i.name.toLowerCase() === cleanQ);
+      if (item) {
         room[tileKey + 'Item'] = item;
 
         // Auto detect standard tile size if mentioned in item name
@@ -3469,57 +3232,10 @@
           const szSelect = document.getElementById(`inp_${tileKey}_sz_${roomId}`);
           if (szSelect) szSelect.value = detectedSize;
         }
-
-        calculateAll();
-        saveDraft();
-      }
-
-      updateStockHint(roomId, tileKey);
-      closeStockSuggest();
-    }
-
-    function updateStockHint(roomId, tileKey) {
-      const room = rooms.find(r => r.id === roomId);
-      const hintEl = document.getElementById(`hint_${tileKey}_${roomId}`);
-      if (!hintEl) return;
-      const item = room ? room[tileKey + 'Item'] : null;
-      const name = room ? (room[tileKey + 'Name'] || '') : '';
-      if (!name.trim()) {
-        hintEl.className = 'item-stock-hint';
-        hintEl.innerHTML = '';
-        return;
-      }
-      if (item) {
-        const stockBx = parseFloat(item.stockBoxes) || 0;
-        const isAvailable = stockBx > 0;
-        hintEl.className = 'item-stock-hint show';
-        hintEl.innerHTML = `
-          <span class="stock-pill-tag ${isAvailable ? 'in-stock' : 'out-stock'}">
-            ${isAvailable ? '✓ In Stock:' : '⚠ Out of Stock:'} ${stockBx} ${escapeHtml(item.unit || 'Bx')}
-            ${item.rate ? `&bull; ₹${item.rate}` : ''}
-          </span>
-        `;
-      } else {
-        hintEl.className = 'item-stock-hint';
-        hintEl.innerHTML = '';
-      }
-    }
-
-    function onTileSearchInput(roomId, tileKey, query) {
-      const room = rooms.find(r => r.id === roomId);
-      if (!room) return;
-
-      room[tileKey + 'Name'] = query;
-      const cleanQ = (query || '').trim().toLowerCase();
-
-      const item = tallyStock.find(i => i.name.toLowerCase() === cleanQ);
-      if (item) {
-        room[tileKey + 'Item'] = item;
       } else {
         room[tileKey + 'Item'] = null;
       }
 
-      updateStockHint(roomId, tileKey);
       calculateAll();
       saveDraft();
     }
@@ -3584,11 +3300,6 @@
 
         const flAreaBadgeMob = document.getElementById(`flAreaBadge_mob_${room.id}`);
         if (flAreaBadgeMob) flAreaBadgeMob.innerText = `${flArea.toFixed(1)} SFT`;
-
-        updateStockHint(room.id, 'hl');
-        updateStockHint(room.id, 'dk');
-        updateStockHint(room.id, 'lt');
-        updateStockHint(room.id, 'fl');
 
         const minSumEl = document.getElementById(`min_summary_${room.id}`);
         if (minSumEl) {
